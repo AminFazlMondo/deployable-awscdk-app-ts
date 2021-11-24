@@ -8,6 +8,13 @@ const project = new JsiiProject({
   projenrcTs: true,
   repositoryUrl: 'https://github.com/amin.fazl/deployable-awscdk-app-ts.git',
   packageManager: NodePackageManager.NPM,
+  deps: [
+    'projen',
+  ],
+  devDeps: [
+    'fs-extra',
+    '@types/fs-extra',
+  ],
 })
 
 new TextFile(project, '.nvmrc', {
