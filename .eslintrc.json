@@ -82,10 +82,7 @@
       "error",
       "consistent"
     ],
-    "object-curly-spacing": [
-      "error",
-      "always"
-    ],
+    "object-curly-spacing": "error",
     "object-curly-newline": [
       "error",
       {
@@ -114,7 +111,7 @@
     ],
     "curly": [
       "error",
-      "multi-line",
+      "multi",
       "consistent"
     ],
     "@typescript-eslint/member-delimiter-style": [
@@ -122,7 +119,7 @@
     ],
     "semi": [
       "error",
-      "always"
+      "never"
     ],
     "max-len": [
       "error",
@@ -219,6 +216,10 @@
           "method"
         ]
       }
+    ],
+    "nonblock-statement-body-position": [
+      "error",
+      "below"
     ]
   },
   "overrides": [
