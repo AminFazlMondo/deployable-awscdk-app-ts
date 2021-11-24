@@ -1,5 +1,7 @@
 import {JsiiProject, NodePackageManager, TextFile} from 'projen'
 
+const nodeVersion = '14.18.1'
+
 const project = new JsiiProject({
   author: 'Amin Fazl',
   authorAddress: 'amin.fazl@mondo.com.au',
@@ -15,10 +17,11 @@ const project = new JsiiProject({
     'fs-extra',
     '@types/fs-extra',
   ],
+  workflowNodeVersion: nodeVersion,
 })
 
 new TextFile(project, '.nvmrc', {
-  lines: ['14.18.1'],
+  lines: [nodeVersion],
 })
 
 project.eslint?.addRules({

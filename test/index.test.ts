@@ -28,6 +28,7 @@ describe('default values', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     outdir,
+    environments: ['dev', 'staging'],
   })
   project.synth()
 
