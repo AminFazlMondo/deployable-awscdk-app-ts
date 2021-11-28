@@ -18,6 +18,9 @@ const project = new JsiiProject({
     '@types/fs-extra',
   ],
   workflowNodeVersion: nodeVersion,
+  depsUpgradeOptions: {
+    ignoreProjen: false,
+  },
 })
 
 new TextFile(project, '.nvmrc', {

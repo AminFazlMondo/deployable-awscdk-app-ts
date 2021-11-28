@@ -16,26 +16,20 @@ export class DeployableAwsCdkTypeScriptApp extends AwsCdkTypeScriptApp {
     })
     this.options = options
 
-    this.addDeployWorkflow()
+    if (release)
+      this.addDeployJobs()
   }
 
-  private addDeployWorkflow() {
-    const workflow = this.github?.addWorkflow('deploy')
-
-    if (!workflow)
-      throw new Error('Failed to add workflow file')
-
-    workflow.on({
-      release: {
-        types: ['published'],
-      },
-    })
+  private addDeployJobs() {
 
     const include = this.options.environments.map((environment) => ({environment}))
 
     const jobDefinition: Job = {
       runsOn: 'ubuntu-latest',
       concurrency: 'deploy',
+      needs: [
+        'release_github',
+      ],
       permissions: {
         contents: JobPermission.READ,
       },
@@ -71,6 +65,14 @@ export class DeployableAwsCdkTypeScriptApp extends AwsCdkTypeScriptApp {
       name: 'Install dependencies',
       run: 'npm ci',
     })
-    workflow.addJobs({deploy: jobDefinition})
+
+    const deployArgument = this.options.stackPattern ? ` ${this.options.stackPattern}`: ''
+
+    jobDefinition.steps.push({
+      name: 'Deployment',
+      run: `npx projen deploy${deployArgument}`,
+    })
+
+    this.release?.addJobs({deploy: jobDefinition})
   }
 }
