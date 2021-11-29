@@ -1,12 +1,13 @@
 import {AwsCdkTypeScriptApp} from 'projen'
 import {Job, JobPermission} from 'projen/lib/github/workflows-model'
-import {DeployableAwsCdkTypeScriptAppOptions} from './types'
+import * as steps from './steps'
+import {DeployableAwsCdkTypeScriptAppOptions, DeployOptions} from './types'
 
 export * from './types'
 
 export class DeployableAwsCdkTypeScriptApp extends AwsCdkTypeScriptApp {
 
-  private readonly options: DeployableAwsCdkTypeScriptAppOptions
+  private readonly deployOptions: DeployOptions
 
   constructor(options: DeployableAwsCdkTypeScriptAppOptions) {
     const release = options.release ?? true
@@ -14,15 +15,15 @@ export class DeployableAwsCdkTypeScriptApp extends AwsCdkTypeScriptApp {
       ...options,
       release,
     })
-    this.options = options
+    this.deployOptions = options.deployOptions
 
     if (release)
-      this.addDeployJobs()
+      this.addDeployJobs(options.workflowNodeVersion)
   }
 
-  private addDeployJobs() {
+  private addDeployJobs(workflowNodeVersion?: string) {
 
-    const include = this.options.environments.map((environment) => ({environment}))
+    const include = this.deployOptions.environments.map((environment) => ({environment}))
 
     const jobDefinition: Job = {
       runsOn: 'ubuntu-latest',
@@ -44,34 +45,15 @@ export class DeployableAwsCdkTypeScriptApp extends AwsCdkTypeScriptApp {
       },
       steps: [],
     }
-    jobDefinition.steps.push({
-      name: 'Checkout',
-      uses: 'actions/checkout@v2',
-      with: {
-        ref: '${{ github.sha }}',
-      },
-    })
 
-    if (this.options.workflowNodeVersion)
-      jobDefinition.steps.push({
-        name: 'Setup Node.js',
-        uses: 'actions/setup-node@v2.2.0',
-        with: {
-          'node-version': this.options.workflowNodeVersion,
-        },
-      })
+    jobDefinition.steps.push(steps.checkoutStep())
 
-    jobDefinition.steps.push({
-      name: 'Install dependencies',
-      run: 'npm ci',
-    })
+    if (workflowNodeVersion)
+      jobDefinition.steps.push(steps.setNodeVersionStep(workflowNodeVersion))
 
-    const deployArgument = this.options.stackPattern ? ` ${this.options.stackPattern}`: ''
-
-    jobDefinition.steps.push({
-      name: 'Deployment',
-      run: `npx projen deploy${deployArgument}`,
-    })
+    jobDefinition.steps.push(steps.installDependenciesStep())
+    jobDefinition.steps.push(steps.setAwsCredentials(this.deployOptions.awsCredentials))
+    jobDefinition.steps.push(steps.deploymentStep(this.deployOptions.stackPattern))
 
     this.release?.addJobs({deploy: jobDefinition})
   }

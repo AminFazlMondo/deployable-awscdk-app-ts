@@ -28,7 +28,15 @@ describe('No stack pattern', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     outdir,
-    environments: ['dev', 'staging'],
+    workflowNodeVersion: '14.18.1',
+    deployOptions: {
+      environments: ['dev', 'staging'],
+      awsCredentials: {
+        accessKeyIdSecretName: 'secret-1',
+        secretAccessKeySecretName: 'secret-2',
+        region: 'aws-region-1',
+      },
+    },
   })
   project.synth()
 
@@ -45,8 +53,68 @@ describe('specific stack', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     outdir,
-    environments: ['dev'],
-    stackPattern: 'myStack',
+    deployOptions: {
+      environments: ['dev'],
+      stackPattern: 'myStack',
+      awsCredentials: {
+        accessKeyId: 'secret-1',
+        secretAccessKey: 'secret-2',
+        region: 'aws-region-1',
+      },
+    },
+  })
+  project.synth()
+
+  test('release workflow', () => {
+    const content = readFile('/.github/workflows/release.yml', project.outdir)
+    expect(content).toMatchSnapshot()
+  })
+})
+
+describe('assume role with default duration', () => {
+  const outdir = mkdtemp()
+  const project = new DeployableAwsCdkTypeScriptApp({
+    name: 'my-test-app',
+    defaultReleaseBranch: 'main',
+    cdkVersion: '1.129.0',
+    outdir,
+    deployOptions: {
+      environments: ['dev'],
+      stackPattern: 'myStack',
+      awsCredentials: {
+        accessKeyIdSecretName: 'secret-1',
+        secretAccessKeySecretName: 'secret-2',
+        region: 'aws-region-1',
+        roleToAssume: 'role-arn-1',
+      },
+    },
+  })
+  project.synth()
+
+  test('release workflow', () => {
+    const content = readFile('/.github/workflows/release.yml', project.outdir)
+    expect(content).toMatchSnapshot()
+  })
+})
+
+describe('assume role with specified duration', () => {
+  const outdir = mkdtemp()
+  const project = new DeployableAwsCdkTypeScriptApp({
+    name: 'my-test-app',
+    defaultReleaseBranch: 'main',
+    cdkVersion: '1.129.0',
+    outdir,
+    deployOptions: {
+      environments: ['dev'],
+      stackPattern: 'myStack',
+      awsCredentials: {
+        accessKeyIdSecretName: 'secret-1',
+        secretAccessKeySecretName: 'secret-2',
+        region: 'aws-region-1',
+        roleToAssume: 'role-arn-1',
+        assumeRoleDurationSeconds: 1200,
+      },
+    },
   })
   project.synth()
 
