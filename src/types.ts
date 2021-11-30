@@ -16,7 +16,7 @@ export interface DeployOptions {
   /**
    * Regex for stacks to be deployed
    *
-   * @default "undefined" - matches all of the stacks in the CDK App.
+   * if not provided matches all of the stacks in the CDK App.
    */
   readonly stackPattern?: string;
 
@@ -26,7 +26,9 @@ export interface DeployOptions {
   readonly awsCredentials: AWSCredentials;
 }
 
-export interface AWSCredentialsGitHubSecrets {
+export type AWSCredentials = AWSCredentialsValues | AWSCredentialsGitHubSecrets
+
+export interface AWSCredentialsGitHubSecrets extends AWSCredentialsBase {
   /**
    * GitHub Secret name for AWS Access Key Id
    */
@@ -38,7 +40,7 @@ export interface AWSCredentialsGitHubSecrets {
   readonly secretAccessKeySecretName: string;
 }
 
-export interface AWSCredentialsValues {
+export interface AWSCredentialsValues extends AWSCredentialsBase {
   /**
    * AWS Access Key Id
    */
@@ -50,7 +52,7 @@ export interface AWSCredentialsValues {
   readonly secretAccessKey: string;
 }
 
-export type AWSCredentials = (AWSCredentialsValues | AWSCredentialsGitHubSecrets) & {
+export interface AWSCredentialsBase {
   /**
    * ARN of AWS role to be assumed
    */

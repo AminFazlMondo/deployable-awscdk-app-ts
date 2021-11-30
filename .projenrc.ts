@@ -13,6 +13,9 @@ const project = new JsiiProject({
   deps: [
     'projen',
   ],
+  peerDeps: [
+    'projen',
+  ],
   devDeps: [
     'fs-extra',
     '@types/fs-extra',
