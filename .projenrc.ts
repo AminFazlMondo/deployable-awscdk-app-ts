@@ -1,4 +1,4 @@
-import {JsiiProject, NodePackageManager, TextFile} from 'projen'
+import {JsiiProject, NodePackageManager, NpmAccess, TextFile} from 'projen'
 
 const nodeVersion = '14.18.1'
 
@@ -7,9 +7,17 @@ const project = new JsiiProject({
   authorAddress: 'amin.fazl@mondo.com.au',
   defaultReleaseBranch: 'main',
   name: 'deployable-awscdk-app-ts',
+  description: 'A projen project for Typescript AWS CDK App',
+  keywords: [
+    'projen',
+    'Typescript',
+    'AWS CDK',
+    'Deployment',
+  ],
   projenrcTs: true,
   repositoryUrl: 'https://github.com/amin.fazl/deployable-awscdk-app-ts.git',
   packageManager: NodePackageManager.NPM,
+  npmAccess: NpmAccess.PUBLIC,
   deps: [
     'projen',
   ],
