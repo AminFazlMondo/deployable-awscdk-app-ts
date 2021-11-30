@@ -1,5 +1,6 @@
 {
   "name": "deployable-awscdk-app-ts",
+  "description": "A projen project for Typescript AWS CDK App",
   "repository": {
     "type": "git",
     "url": "https://github.com/amin.fazl/deployable-awscdk-app-ts.git"
@@ -24,7 +25,6 @@
     "test:watch": "npx projen test:watch",
     "unbump": "npx projen unbump",
     "upgrade": "npx projen upgrade",
-    "upgrade-projen": "npx projen upgrade-projen",
     "watch": "npx projen watch",
     "projen": "npx projen"
   },
@@ -34,6 +34,7 @@
     "organization": false
   },
   "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
     "@types/jest": "*",
     "@types/node": "^14.17.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
@@ -42,21 +43,34 @@
     "eslint-import-resolver-node": "^0.3.6",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.3",
+    "fs-extra": "^9.1.0",
     "jest": "^27.3.1",
     "jest-junit": "^12",
     "jsii": "^1.46.0",
     "jsii-diff": "^1.46.0",
-    "jsii-docgen": "^4.1.7",
+    "jsii-docgen": "^4.1.13",
     "jsii-pacmak": "^1.46.0",
     "json-schema": "^0.4.0",
     "npm-check-updates": "^11",
-    "projen": "^0.34.15",
+    "projen": "^0.34.26",
     "standard-version": "^9",
     "ts-jest": "^27.0.7",
     "ts-node": "^9",
     "typescript": "^4.5.2"
   },
+  "peerDependencies": {
+    "projen": "^0.34.26"
+  },
+  "dependencies": {
+    "projen": "^0.34.26"
+  },
   "bundledDependencies": [],
+  "keywords": [
+    "AWS CDK",
+    "Deployment",
+    "Typescript",
+    "projen"
+  ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
   "version": "0.0.0",
