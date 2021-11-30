@@ -1,5 +1,6 @@
 {
   "name": "deployable-awscdk-app-ts",
+  "description": "A projen project for Typescript AWS CDK App",
   "repository": {
     "type": "git",
     "url": "https://github.com/amin.fazl/deployable-awscdk-app-ts.git"
@@ -64,6 +65,12 @@
     "projen": "^0.34.26"
   },
   "bundledDependencies": [],
+  "keywords": [
+    "AWS CDK",
+    "Deployment",
+    "Typescript",
+    "projen"
+  ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
   "version": "0.0.0",
