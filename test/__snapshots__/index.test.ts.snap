@@ -87,18 +87,26 @@ jobs:
           node-version: 14.18.1
       - name: Install dependencies
         run: npm ci
-      - name: Configure AWS Credentials
+      - if: \${{ matrix.assumeRole == \\"false\\" }}
+        name: Configure AWS Credentials
         run: |-
           
-          accessKeyId='\${{ secrets.secret-1 }}'
-          echo \\"::add-mask::$accessKeyId\\"
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
-          secretAccessKey='\${{ secrets.secret-2 }}'
-          echo \\"::add-mask::$secretAccessKey\\"
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
-          region=aws-region-1
-          echo \\"::add-mask::$region\\"
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
+        env:
+          accessKeyId: \${{ matrix.accessKeyId }}
+          secretAccessKey: \${{ matrix.secretAccessKey }}
+          region: \${{ matrix.region }}
+      - if: \${{ matrix.assumeRole == \\"true\\" }}
+        name: Assume AWS Role
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: \${{ matrix.accessKeyId }}
+          aws-secret-access-key: \${{ matrix.secretAccessKey }}
+          role-to-assume: \${{ matrix.roleToAssume }}
+          aws-region: \${{ matrix.region }}
+          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
         run: npx projen deploy
     strategy:
@@ -106,7 +114,15 @@ jobs:
       matrix:
         include:
           - environment: dev
+            accessKeyId: dev-secret-1
+            secretAccessKey: dev-secret-2
+            region: dev-aws-region-1
+            assumeRole: \\"false\\"
           - environment: staging
+            accessKeyId: staging-secret-1
+            secretAccessKey: staging-secret-2
+            region: staging-aws-region-1
+            assumeRole: \\"false\\"
 "
 `;
 
@@ -189,21 +205,39 @@ jobs:
           ref: \${{ github.sha }}
       - name: Install dependencies
         run: npm ci
-      - name: Configure AWS Credentials
+      - if: \${{ matrix.assumeRole == \\"false\\" }}
+        name: Configure AWS Credentials
+        run: |-
+          
+          echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
+          echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
+          echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
+        env:
+          accessKeyId: \${{ matrix.accessKeyId }}
+          secretAccessKey: \${{ matrix.secretAccessKey }}
+          region: \${{ matrix.region }}
+      - if: \${{ matrix.assumeRole == \\"true\\" }}
+        name: Assume AWS Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: \\"'\${{ secrets.secret-1 }}'\\"
-          aws-secret-access-key: \\"'\${{ secrets.secret-2 }}'\\"
-          role-to-assume: role-arn-1
-          aws-region: aws-region-1
-          role-duration-seconds: 300
+          aws-access-key-id: \${{ matrix.accessKeyId }}
+          aws-secret-access-key: \${{ matrix.secretAccessKey }}
+          role-to-assume: \${{ matrix.roleToAssume }}
+          aws-region: \${{ matrix.region }}
+          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
-        run: npx projen deploy myStack
+        run: npx projen deploy
     strategy:
       max-parallel: 1
       matrix:
         include:
           - environment: dev
+            accessKeyId: dev-secret-1
+            secretAccessKey: dev-secret-2
+            region: dev-aws-region-1
+            assumeRole: \\"true\\"
+            roleToAssume: dev-role
+            assumeRoleDurationSeconds: \\"300\\"
 "
 `;
 
@@ -286,21 +320,39 @@ jobs:
           ref: \${{ github.sha }}
       - name: Install dependencies
         run: npm ci
-      - name: Configure AWS Credentials
+      - if: \${{ matrix.assumeRole == \\"false\\" }}
+        name: Configure AWS Credentials
+        run: |-
+          
+          echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
+          echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
+          echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
+        env:
+          accessKeyId: \${{ matrix.accessKeyId }}
+          secretAccessKey: \${{ matrix.secretAccessKey }}
+          region: \${{ matrix.region }}
+      - if: \${{ matrix.assumeRole == \\"true\\" }}
+        name: Assume AWS Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: \\"'\${{ secrets.secret-1 }}'\\"
-          aws-secret-access-key: \\"'\${{ secrets.secret-2 }}'\\"
-          role-to-assume: role-arn-1
-          aws-region: aws-region-1
-          role-duration-seconds: 1200
+          aws-access-key-id: \${{ matrix.accessKeyId }}
+          aws-secret-access-key: \${{ matrix.secretAccessKey }}
+          role-to-assume: \${{ matrix.roleToAssume }}
+          aws-region: \${{ matrix.region }}
+          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
-        run: npx projen deploy myStack
+        run: npx projen deploy
     strategy:
       max-parallel: 1
       matrix:
         include:
           - environment: dev
+            accessKeyId: dev-secret-1
+            secretAccessKey: dev-secret-2
+            region: dev-aws-region-1
+            assumeRole: \\"true\\"
+            roleToAssume: dev-role
+            assumeRoleDurationSeconds: \\"1200\\"
 "
 `;
 
@@ -383,18 +435,26 @@ jobs:
           ref: \${{ github.sha }}
       - name: Install dependencies
         run: npm ci
-      - name: Configure AWS Credentials
+      - if: \${{ matrix.assumeRole == \\"false\\" }}
+        name: Configure AWS Credentials
         run: |-
           
-          accessKeyId=secret-1
-          echo \\"::add-mask::$accessKeyId\\"
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
-          secretAccessKey=secret-2
-          echo \\"::add-mask::$secretAccessKey\\"
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
-          region=aws-region-1
-          echo \\"::add-mask::$region\\"
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
+        env:
+          accessKeyId: \${{ matrix.accessKeyId }}
+          secretAccessKey: \${{ matrix.secretAccessKey }}
+          region: \${{ matrix.region }}
+      - if: \${{ matrix.assumeRole == \\"true\\" }}
+        name: Assume AWS Role
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: \${{ matrix.accessKeyId }}
+          aws-secret-access-key: \${{ matrix.secretAccessKey }}
+          role-to-assume: \${{ matrix.roleToAssume }}
+          aws-region: \${{ matrix.region }}
+          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
         run: npx projen deploy myStack
     strategy:
@@ -402,5 +462,9 @@ jobs:
       matrix:
         include:
           - environment: dev
+            accessKeyId: dev-secret-1
+            secretAccessKey: dev-secret-2
+            region: dev-aws-region-1
+            assumeRole: \\"false\\"
 "
 `;

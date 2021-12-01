@@ -30,12 +30,24 @@ describe('No stack pattern', () => {
     outdir,
     workflowNodeVersion: '14.18.1',
     deployOptions: {
-      environments: ['dev', 'staging'],
-      awsCredentials: {
-        accessKeyIdSecretName: 'secret-1',
-        secretAccessKeySecretName: 'secret-2',
-        region: 'aws-region-1',
-      },
+      environments: [
+        {
+          name: 'dev',
+          awsCredentials: {
+            accessKeyIdSecretName: 'dev-secret-1',
+            secretAccessKeySecretName: 'dev-secret-2',
+            region: 'dev-aws-region-1',
+          },
+        },
+        {
+          name: 'staging',
+          awsCredentials: {
+            accessKeyIdSecretName: 'staging-secret-1',
+            secretAccessKeySecretName: 'staging-secret-2',
+            region: 'staging-aws-region-1',
+          },
+        },
+      ],
     },
   })
   project.synth()
@@ -54,13 +66,17 @@ describe('specific stack', () => {
     cdkVersion: '1.129.0',
     outdir,
     deployOptions: {
-      environments: ['dev'],
       stackPattern: 'myStack',
-      awsCredentials: {
-        accessKeyId: 'secret-1',
-        secretAccessKey: 'secret-2',
-        region: 'aws-region-1',
-      },
+      environments: [
+        {
+          name: 'dev',
+          awsCredentials: {
+            accessKeyIdSecretName: 'dev-secret-1',
+            secretAccessKeySecretName: 'dev-secret-2',
+            region: 'dev-aws-region-1',
+          },
+        },
+      ],
     },
   })
   project.synth()
@@ -79,14 +95,17 @@ describe('assume role with default duration', () => {
     cdkVersion: '1.129.0',
     outdir,
     deployOptions: {
-      environments: ['dev'],
-      stackPattern: 'myStack',
-      awsCredentials: {
-        accessKeyIdSecretName: 'secret-1',
-        secretAccessKeySecretName: 'secret-2',
-        region: 'aws-region-1',
-        roleToAssume: 'role-arn-1',
-      },
+      environments: [
+        {
+          name: 'dev',
+          awsCredentials: {
+            accessKeyIdSecretName: 'dev-secret-1',
+            secretAccessKeySecretName: 'dev-secret-2',
+            region: 'dev-aws-region-1',
+            roleToAssume: 'dev-role',
+          },
+        },
+      ],
     },
   })
   project.synth()
@@ -105,15 +124,18 @@ describe('assume role with specified duration', () => {
     cdkVersion: '1.129.0',
     outdir,
     deployOptions: {
-      environments: ['dev'],
-      stackPattern: 'myStack',
-      awsCredentials: {
-        accessKeyIdSecretName: 'secret-1',
-        secretAccessKeySecretName: 'secret-2',
-        region: 'aws-region-1',
-        roleToAssume: 'role-arn-1',
-        assumeRoleDurationSeconds: 1200,
-      },
+      environments: [
+        {
+          name: 'dev',
+          awsCredentials: {
+            accessKeyIdSecretName: 'dev-secret-1',
+            secretAccessKeySecretName: 'dev-secret-2',
+            region: 'dev-aws-region-1',
+            roleToAssume: 'dev-role',
+            assumeRoleDurationSeconds: 1200,
+          },
+        },
+      ],
     },
   })
   project.synth()
