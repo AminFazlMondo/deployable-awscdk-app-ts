@@ -1,5 +1,4 @@
 import {JobStep} from 'projen/lib/github/workflows-model'
-import {AWSCredentials} from '.'
 
 export function checkoutStep(): JobStep {
   return {
@@ -37,41 +36,43 @@ export function deploymentStep(stackPattern?: string): JobStep {
   }
 }
 
-export function setAwsCredentials(awsCredentials: AWSCredentials): JobStep {
-  const name = 'Configure AWS Credentials'
-  const accessKeyId = 'accessKeyId' in awsCredentials ? awsCredentials.accessKeyId : `'\${{ secrets.${awsCredentials.accessKeyIdSecretName} }}'`
-  const secretAccessKey = 'secretAccessKey' in awsCredentials ? awsCredentials.secretAccessKey : `'\${{ secrets.${awsCredentials.secretAccessKeySecretName} }}'`
-
-  if (awsCredentials.roleToAssume)
-    return {
-      name,
-      uses: 'aws-actions/configure-aws-credentials@v1',
-      with: {
-        'aws-access-key-id': accessKeyId,
-        'aws-secret-access-key': secretAccessKey,
-        'role-to-assume': awsCredentials.roleToAssume,
-        'aws-region': awsCredentials.region,
-        'role-duration-seconds': awsCredentials.assumeRoleDurationSeconds ?? 300,
-      },
-    }
-
+function setAwsCredentialsInEnvironment(): JobStep {
   const commands = [
-    `accessKeyId=${accessKeyId}`,
-    'echo "::add-mask::$accessKeyId"',
     'echo "AWS_ACCESS_KEY_ID=$accessKeyId" >> $GITHUB_ENV',
-
-    `secretAccessKey=${secretAccessKey}`,
-    'echo "::add-mask::$secretAccessKey"',
     'echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV',
-
-    `region=${awsCredentials.region}`,
-    'echo "::add-mask::$region"',
     'echo "AWS_REGION=$region" >> $GITHUB_ENV',
   ]
 
   return {
-    name,
+    if: '${{ matrix.assumeRole == "false" }}',
+    name: 'Configure AWS Credentials',
     run: `\n${commands.join('\n')}`,
+    env: {
+      accessKeyId: '${{ matrix.accessKeyId }}',
+      secretAccessKey: '${{ matrix.secretAccessKey }}',
+      region: '${{ matrix.region }}',
+    },
   }
+}
 
+function assumeAwsRoleStep(): JobStep {
+  return {
+    if: '${{ matrix.assumeRole == "true" }}',
+    name: 'Assume AWS Role',
+    uses: 'aws-actions/configure-aws-credentials@v1',
+    with: {
+      'aws-access-key-id': '${{ matrix.accessKeyId }}',
+      'aws-secret-access-key': '${{ matrix.secretAccessKey }}',
+      'role-to-assume': '${{ matrix.roleToAssume }}',
+      'aws-region': '${{ matrix.region }}',
+      'role-duration-seconds': '${{ matrix.assumeRoleDurationSeconds }}',
+    },
+  }
+}
+
+export function setAwsCredentialsSteps(): JobStep[] {
+  return [
+    setAwsCredentialsInEnvironment(),
+    assumeAwsRoleStep(),
+  ]
 }

@@ -3,17 +3,17 @@
 
 ## Structs <a name="Structs"></a>
 
-### AWSCredentialsBase <a name="deployable-awscdk-app-ts.AWSCredentialsBase"></a>
+### AWSCredentials <a name="deployable-awscdk-app-ts.AWSCredentials"></a>
 
 #### Initializer <a name="[object Object].Initializer"></a>
 
 ```typescript
-import { AWSCredentialsBase } from 'deployable-awscdk-app-ts'
+import { AWSCredentials } from 'deployable-awscdk-app-ts'
 
-const aWSCredentialsBase: AWSCredentialsBase = { ... }
+const aWSCredentials: AWSCredentials = { ... }
 ```
 
-##### `region`<sup>Required</sup> <a name="deployable-awscdk-app-ts.AWSCredentialsBase.property.region"></a>
+##### `region`<sup>Required</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.region"></a>
 
 ```typescript
 public readonly region: string;
@@ -25,125 +25,20 @@ Default AWS region for the account.
 
 ---
 
-##### `assumeRoleDurationSeconds`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentialsBase.property.assumeRoleDurationSeconds"></a>
-
-```typescript
-public readonly assumeRoleDurationSeconds: number;
-```
-
-- *Type:* `number`
-- *Default:* 300
-
-Duration of assume role session.
-
----
-
-##### `roleToAssume`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentialsBase.property.roleToAssume"></a>
-
-```typescript
-public readonly roleToAssume: string;
-```
-
-- *Type:* `string`
-
-ARN of AWS role to be assumed.
-
----
-
-### AWSCredentialsGitHubSecrets <a name="deployable-awscdk-app-ts.AWSCredentialsGitHubSecrets"></a>
-
-#### Initializer <a name="[object Object].Initializer"></a>
-
-```typescript
-import { AWSCredentialsGitHubSecrets } from 'deployable-awscdk-app-ts'
-
-const aWSCredentialsGitHubSecrets: AWSCredentialsGitHubSecrets = { ... }
-```
-
-##### `region`<sup>Required</sup> <a name="deployable-awscdk-app-ts.AWSCredentialsGitHubSecrets.property.region"></a>
-
-```typescript
-public readonly region: string;
-```
-
-- *Type:* `string`
-
-Default AWS region for the account.
-
----
-
-##### `assumeRoleDurationSeconds`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentialsGitHubSecrets.property.assumeRoleDurationSeconds"></a>
-
-```typescript
-public readonly assumeRoleDurationSeconds: number;
-```
-
-- *Type:* `number`
-- *Default:* 300
-
-Duration of assume role session.
-
----
-
-##### `roleToAssume`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentialsGitHubSecrets.property.roleToAssume"></a>
-
-```typescript
-public readonly roleToAssume: string;
-```
-
-- *Type:* `string`
-
-ARN of AWS role to be assumed.
-
----
-
-##### `accessKeyIdSecretName`<sup>Required</sup> <a name="deployable-awscdk-app-ts.AWSCredentialsGitHubSecrets.property.accessKeyIdSecretName"></a>
+##### `accessKeyIdSecretName`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.accessKeyIdSecretName"></a>
 
 ```typescript
 public readonly accessKeyIdSecretName: string;
 ```
 
 - *Type:* `string`
+- *Default:* "AWS_ACCESS_KEY_ID"
 
 GitHub Secret name for AWS Access Key Id.
 
 ---
 
-##### `secretAccessKeySecretName`<sup>Required</sup> <a name="deployable-awscdk-app-ts.AWSCredentialsGitHubSecrets.property.secretAccessKeySecretName"></a>
-
-```typescript
-public readonly secretAccessKeySecretName: string;
-```
-
-- *Type:* `string`
-
-GitHub Secret name for AWS Secret Access Key.
-
----
-
-### AWSCredentialsValues <a name="deployable-awscdk-app-ts.AWSCredentialsValues"></a>
-
-#### Initializer <a name="[object Object].Initializer"></a>
-
-```typescript
-import { AWSCredentialsValues } from 'deployable-awscdk-app-ts'
-
-const aWSCredentialsValues: AWSCredentialsValues = { ... }
-```
-
-##### `region`<sup>Required</sup> <a name="deployable-awscdk-app-ts.AWSCredentialsValues.property.region"></a>
-
-```typescript
-public readonly region: string;
-```
-
-- *Type:* `string`
-
-Default AWS region for the account.
-
----
-
-##### `assumeRoleDurationSeconds`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentialsValues.property.assumeRoleDurationSeconds"></a>
+##### `assumeRoleDurationSeconds`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.assumeRoleDurationSeconds"></a>
 
 ```typescript
 public readonly assumeRoleDurationSeconds: number;
@@ -156,7 +51,7 @@ Duration of assume role session.
 
 ---
 
-##### `roleToAssume`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentialsValues.property.roleToAssume"></a>
+##### `roleToAssume`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.roleToAssume"></a>
 
 ```typescript
 public readonly roleToAssume: string;
@@ -168,27 +63,16 @@ ARN of AWS role to be assumed.
 
 ---
 
-##### `accessKeyId`<sup>Required</sup> <a name="deployable-awscdk-app-ts.AWSCredentialsValues.property.accessKeyId"></a>
+##### `secretAccessKeySecretName`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.secretAccessKeySecretName"></a>
 
 ```typescript
-public readonly accessKeyId: string;
+public readonly secretAccessKeySecretName: string;
 ```
 
 - *Type:* `string`
+- *Default:* "AWS_SECRET_ACCESS_KEY"
 
-AWS Access Key Id.
-
----
-
-##### `secretAccessKey`<sup>Required</sup> <a name="deployable-awscdk-app-ts.AWSCredentialsValues.property.secretAccessKey"></a>
-
-```typescript
-public readonly secretAccessKey: string;
-```
-
-- *Type:* `string`
-
-AWS Secret Access Key.
+GitHub Secret name for AWS Secret Access Key.
 
 ---
 
@@ -1996,27 +1880,15 @@ import { DeployOptions } from 'deployable-awscdk-app-ts'
 const deployOptions: DeployOptions = { ... }
 ```
 
-##### `awsCredentials`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployOptions.property.awsCredentials"></a>
-
-```typescript
-public readonly awsCredentials: AWSCredentialsGitHubSecrets | AWSCredentialsValues;
-```
-
-- *Type:* [`deployable-awscdk-app-ts.AWSCredentialsGitHubSecrets`](#deployable-awscdk-app-ts.AWSCredentialsGitHubSecrets) | [`deployable-awscdk-app-ts.AWSCredentialsValues`](#deployable-awscdk-app-ts.AWSCredentialsValues)
-
-AWS credential details for deployment.
-
----
-
 ##### `environments`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployOptions.property.environments"></a>
 
 ```typescript
-public readonly environments: string[];
+public readonly environments: EnvironmentOptions[];
 ```
 
-- *Type:* `string`[]
+- *Type:* [`deployable-awscdk-app-ts.EnvironmentOptions`](#deployable-awscdk-app-ts.EnvironmentOptions)[]
 
-Environment names to deploy to.
+Environment settings to deploy to.
 
 ---
 
@@ -2031,6 +1903,40 @@ public readonly stackPattern: string;
 Regex for stacks to be deployed.
 
 if not provided matches all of the stacks in the CDK App.
+
+---
+
+### EnvironmentOptions <a name="deployable-awscdk-app-ts.EnvironmentOptions"></a>
+
+#### Initializer <a name="[object Object].Initializer"></a>
+
+```typescript
+import { EnvironmentOptions } from 'deployable-awscdk-app-ts'
+
+const environmentOptions: EnvironmentOptions = { ... }
+```
+
+##### `awsCredentials`<sup>Required</sup> <a name="deployable-awscdk-app-ts.EnvironmentOptions.property.awsCredentials"></a>
+
+```typescript
+public readonly awsCredentials: AWSCredentials;
+```
+
+- *Type:* [`deployable-awscdk-app-ts.AWSCredentials`](#deployable-awscdk-app-ts.AWSCredentials)
+
+AWS credential details for deployment.
+
+---
+
+##### `name`<sup>Required</sup> <a name="deployable-awscdk-app-ts.EnvironmentOptions.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* `string`
+
+Environment name to deploy to.
 
 ---
 
@@ -2052,6 +1958,13 @@ new DeployableAwsCdkTypeScriptApp(options: DeployableAwsCdkTypeScriptAppOptions)
 
 ---
 
+#### Methods <a name="Methods"></a>
+
+##### `synth` <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.synth"></a>
+
+```typescript
+public synth()
+```
 
 
 

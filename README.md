@@ -29,12 +29,24 @@ const project = new TypeScriptProject({
   cdkVersion: '1.129.0',
   workflowNodeVersion: '14.18.1',
   deployOptions: {
-    environments: ['dev', 'prod'],
-    awsCredentials: {
-      accessKeyIdSecretName: 'secret-1',
-      secretAccessKeySecretName: 'secret-2',
-      region: 'aws-region-1',
-    },
+    environments: [
+      {
+        name: 'dev',
+        awsCredentials: {
+          accessKeyIdSecretName: 'dev-secret-1',
+          secretAccessKeySecretName: 'dev-secret-2',
+          region: 'dev-aws-region-1',
+        },
+      },
+      {
+        name: 'staging',
+        awsCredentials: {
+          accessKeyIdSecretName: 'staging-secret-1',
+          secretAccessKeySecretName: 'staging-secret-2',
+          region: 'staging-aws-region-1',
+        },
+      },
+    ]
   }
 });
 

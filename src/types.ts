@@ -9,9 +9,9 @@ export interface DeployableAwsCdkTypeScriptAppOptions extends AwsCdkTypeScriptAp
 
 export interface DeployOptions {
   /**
-   * Environment names to deploy to
+   * Environment settings to deploy to
    */
-  readonly environments: string[];
+  readonly environments: EnvironmentOptions[];
 
   /**
    * Regex for stacks to be deployed
@@ -19,6 +19,13 @@ export interface DeployOptions {
    * if not provided matches all of the stacks in the CDK App.
    */
   readonly stackPattern?: string;
+}
+
+export interface EnvironmentOptions {
+  /**
+   * Environment name to deploy to
+   */
+  readonly name: string;
 
   /**
    * AWS credential details for deployment
@@ -26,33 +33,19 @@ export interface DeployOptions {
   readonly awsCredentials: AWSCredentials;
 }
 
-export type AWSCredentials = AWSCredentialsValues | AWSCredentialsGitHubSecrets
-
-export interface AWSCredentialsGitHubSecrets extends AWSCredentialsBase {
+export interface AWSCredentials {
   /**
    * GitHub Secret name for AWS Access Key Id
+   * @default "AWS_ACCESS_KEY_ID"
    */
-  readonly accessKeyIdSecretName: string;
+  readonly accessKeyIdSecretName?: string;
 
   /**
    * GitHub Secret name for AWS Secret Access Key
+   * @default "AWS_SECRET_ACCESS_KEY"
    */
-  readonly secretAccessKeySecretName: string;
-}
+  readonly secretAccessKeySecretName?: string;
 
-export interface AWSCredentialsValues extends AWSCredentialsBase {
-  /**
-   * AWS Access Key Id
-   */
-  readonly accessKeyId: string;
-
-  /**
-   * AWS Secret Access Key
-   */
-  readonly secretAccessKey: string;
-}
-
-export interface AWSCredentialsBase {
   /**
    * ARN of AWS role to be assumed
    */
