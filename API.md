@@ -1870,6 +1870,19 @@ Deployment options.
 
 ---
 
+##### `generateNvmrc`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.generateNvmrc"></a>
+
+```typescript
+public readonly generateNvmrc: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* true
+
+Whether to generate nvmrc file for the node version of the project.
+
+---
+
 ### DeployOptions <a name="deployable-awscdk-app-ts.DeployOptions"></a>
 
 #### Initializer <a name="[object Object].Initializer"></a>

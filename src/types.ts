@@ -5,6 +5,12 @@ export interface DeployableAwsCdkTypeScriptAppOptions extends AwsCdkTypeScriptAp
    * Deployment options
    */
   readonly deployOptions: DeployOptions;
+
+  /**
+   * Whether to generate nvmrc file for the node version of the project
+   * @default true
+   */
+  readonly generateNvmrc?: boolean;
 }
 
 export interface DeployOptions {
