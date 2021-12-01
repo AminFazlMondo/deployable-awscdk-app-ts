@@ -1,4 +1,4 @@
-import {AwsCdkTypeScriptApp} from 'projen'
+import {AwsCdkTypeScriptApp, TextFile} from 'projen'
 import {Job, JobPermission} from 'projen/lib/github/workflows-model'
 import * as steps from './steps'
 import {DeployableAwsCdkTypeScriptAppOptions, DeployOptions} from './types'
@@ -8,6 +8,7 @@ export * from './types'
 export class DeployableAwsCdkTypeScriptApp extends AwsCdkTypeScriptApp {
 
   private readonly deployable: boolean
+  private readonly generateNvmrc: boolean
   private readonly workflowNodeVersion?: string
   private readonly deployOptions: DeployOptions
 
@@ -18,16 +19,25 @@ export class DeployableAwsCdkTypeScriptApp extends AwsCdkTypeScriptApp {
       release: deployable,
     })
     this.deployable = deployable
+    this.generateNvmrc = options.generateNvmrc ?? true
     this.workflowNodeVersion = options.workflowNodeVersion
     this.deployOptions = options.deployOptions
 
     if (!deployable)
       console.warn('The project is explicitly set to not release, make sure this is desired setting')
+
+    if (this.generateNvmrc && !this.workflowNodeVersion)
+      throw new Error('workflowNodeVersion is required for nvmrc')
   }
 
   synth() {
     if (this.deployable)
       this.addDeployJobs(this.workflowNodeVersion)
+
+    if (this.generateNvmrc)
+      new TextFile(this, '.nvmrc', {
+        lines: [this.workflowNodeVersion ?? ''],
+      })
 
     super.synth()
   }
