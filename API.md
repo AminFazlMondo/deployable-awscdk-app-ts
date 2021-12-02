@@ -1,11 +1,11 @@
-# API Reference <a name="API Reference"></a>
+# API Reference <a name="API Reference" id="api-reference"></a>
 
 
-## Structs <a name="Structs"></a>
+## Structs <a name="Structs" id="structs"></a>
 
-### AWSCredentials <a name="deployable-awscdk-app-ts.AWSCredentials"></a>
+### AWSCredentials <a name="deployable-awscdk-app-ts.AWSCredentials" id="deployableawscdkapptsawscredentials"></a>
 
-#### Initializer <a name="[object Object].Initializer"></a>
+#### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
 import { AWSCredentials } from 'deployable-awscdk-app-ts'
@@ -13,7 +13,19 @@ import { AWSCredentials } from 'deployable-awscdk-app-ts'
 const aWSCredentials: AWSCredentials = { ... }
 ```
 
-##### `region`<sup>Required</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.region"></a>
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`region`](#deployableawscdkapptsawscredentialspropertyregion)<span title="Required">*</span> | `string` | Default AWS region for the account. |
+| [`accessKeyIdSecretName`](#deployableawscdkapptsawscredentialspropertyaccesskeyidsecretname) | `string` | GitHub Secret name for AWS Access Key Id. |
+| [`assumeRoleDurationSeconds`](#deployableawscdkapptsawscredentialspropertyassumeroledurationseconds) | `number` | Duration of assume role session. |
+| [`roleToAssume`](#deployableawscdkapptsawscredentialspropertyroletoassume) | `string` | ARN of AWS role to be assumed. |
+| [`secretAccessKeySecretName`](#deployableawscdkapptsawscredentialspropertysecretaccesskeysecretname) | `string` | GitHub Secret name for AWS Secret Access Key. |
+
+---
+
+##### `region`<sup>Required</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.region" id="deployableawscdkapptsawscredentialspropertyregion"></a>
 
 ```typescript
 public readonly region: string;
@@ -25,7 +37,7 @@ Default AWS region for the account.
 
 ---
 
-##### `accessKeyIdSecretName`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.accessKeyIdSecretName"></a>
+##### `accessKeyIdSecretName`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.accessKeyIdSecretName" id="deployableawscdkapptsawscredentialspropertyaccesskeyidsecretname"></a>
 
 ```typescript
 public readonly accessKeyIdSecretName: string;
@@ -38,7 +50,7 @@ GitHub Secret name for AWS Access Key Id.
 
 ---
 
-##### `assumeRoleDurationSeconds`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.assumeRoleDurationSeconds"></a>
+##### `assumeRoleDurationSeconds`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.assumeRoleDurationSeconds" id="deployableawscdkapptsawscredentialspropertyassumeroledurationseconds"></a>
 
 ```typescript
 public readonly assumeRoleDurationSeconds: number;
@@ -51,7 +63,7 @@ Duration of assume role session.
 
 ---
 
-##### `roleToAssume`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.roleToAssume"></a>
+##### `roleToAssume`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.roleToAssume" id="deployableawscdkapptsawscredentialspropertyroletoassume"></a>
 
 ```typescript
 public readonly roleToAssume: string;
@@ -63,7 +75,7 @@ ARN of AWS role to be assumed.
 
 ---
 
-##### `secretAccessKeySecretName`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.secretAccessKeySecretName"></a>
+##### `secretAccessKeySecretName`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.AWSCredentials.property.secretAccessKeySecretName" id="deployableawscdkapptsawscredentialspropertysecretaccesskeysecretname"></a>
 
 ```typescript
 public readonly secretAccessKeySecretName: string;
@@ -76,9 +88,9 @@ GitHub Secret name for AWS Secret Access Key.
 
 ---
 
-### DeployableAwsCdkTypeScriptAppOptions <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions"></a>
+### DeployableAwsCdkTypeScriptAppOptions <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptions"></a>
 
-#### Initializer <a name="[object Object].Initializer"></a>
+#### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
 import { DeployableAwsCdkTypeScriptAppOptions } from 'deployable-awscdk-app-ts'
@@ -86,7 +98,149 @@ import { DeployableAwsCdkTypeScriptAppOptions } from 'deployable-awscdk-app-ts'
 const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions = { ... }
 ```
 
-##### `name`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.name"></a>
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`name`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyname)<span title="Required">*</span> | `string` | This is the name of your project. |
+| [`logging`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylogging) | [`projen.LoggerOptions`](#projen.LoggerOptions) | Configure logging options such as verbosity. |
+| [`outdir`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyoutdir) | `string` | The root directory of the project. |
+| [`parent`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyparent) | [`projen.Project`](#projen.Project) | The parent project, if this project is part of a bigger project. |
+| [`projenCommand`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojencommand) | `string` | The shell command to use in order to run the projen CLI. |
+| [`projenrcJson`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjson) | `boolean` | Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation. |
+| [`projenrcJsonOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjsonoptions) | [`projen.json.ProjenrcOptions`](#projen.json.ProjenrcOptions) | Options for .projenrc.json. |
+| [`autoApproveOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveoptions) | [`projen.github.AutoApproveOptions`](#projen.github.AutoApproveOptions) | Enable and configure the 'auto approve' workflow. |
+| [`autoMergeOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautomergeoptions) | [`projen.github.AutoMergeOptions`](#projen.github.AutoMergeOptions) | Configure options for automatic merging on GitHub. |
+| [`clobber`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyclobber) | `boolean` | Add a `clobber` task which resets the repo to origin. |
+| [`devContainer`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydevcontainer) | `boolean` | Add a VSCode development environment (used for GitHub Codespaces). |
+| [`github`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygithub) | `boolean` | Enable GitHub integration. |
+| [`githubOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygithuboptions) | [`projen.github.GitHubOptions`](#projen.github.GitHubOptions) | Options for GitHub integration. |
+| [`gitpod`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygitpod) | `boolean` | Add a Gitpod development environment. |
+| [`mergify`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymergify) | `boolean` | Whether mergify should be enabled on this repository or not. |
+| [`mergifyOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymergifyoptions) | [`projen.github.MergifyOptions`](#projen.github.MergifyOptions) | Options for mergify. |
+| [`projectType`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojecttype) | [`projen.ProjectType`](#projen.ProjectType) | Which type of project this is (library/app). |
+| [`readme`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreadme) | [`projen.SampleReadmeProps`](#projen.SampleReadmeProps) | The README setup. |
+| [`stale`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertystale) | `boolean` | Auto-close of stale issues and pull request. |
+| [`staleOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertystaleoptions) | [`projen.github.StaleOptions`](#projen.github.StaleOptions) | Auto-close stale issues and pull requests. |
+| [`vscode`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyvscode) | `boolean` | Enable VSCode integration. |
+| [`allowLibraryDependencies`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyallowlibrarydependencies) | `boolean` | Allow the project to include `peerDependencies` and `bundledDependencies`. |
+| [`authorEmail`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthoremail) | `string` | Author's e-mail. |
+| [`authorName`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthorname) | `string` | Author's name. |
+| [`authorOrganization`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthororganization) | `boolean` | Author's Organization. |
+| [`authorUrl`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthorurl) | `string` | Author's URL / Website. |
+| [`autoDetectBin`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautodetectbin) | `boolean` | Automatically add all executables under the `bin` directory to your `package.json` file under the `bin` section. |
+| [`bin`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybin) | {[ key: string ]: `string`} | Binary programs vended with your module. |
+| [`bundledDeps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybundleddeps) | `string`[] | List of dependencies to bundle into this module. |
+| [`codeArtifactOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodeartifactoptions) | [`projen.CodeArtifactOptions`](#projen.CodeArtifactOptions) | Options for publishing npm package to AWS CodeArtifact. |
+| [`deps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeps) | `string`[] | Runtime dependencies of this module. |
+| [`description`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydescription) | `string` | The description is just a string that helps people understand the purpose of the package. |
+| [`devDeps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydevdeps) | `string`[] | Build dependencies for this module. |
+| [`entrypoint`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyentrypoint) | `string` | Module entrypoint (`main` in `package.json`). |
+| [`homepage`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyhomepage) | `string` | Package's Homepage / Website. |
+| [`keywords`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertykeywords) | `string`[] | Keywords to include in `package.json`. |
+| [`license`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylicense) | `string` | License's SPDX identifier. |
+| [`licensed`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylicensed) | `boolean` | Indicates if a license should be added. |
+| [`maxNodeVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymaxnodeversion) | `string` | Minimum node.js version to require via `engines` (inclusive). |
+| [`minNodeVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyminnodeversion) | `string` | Minimum Node.js version to require via package.json `engines` (inclusive). |
+| [`npmAccess`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmaccess) | [`projen.NpmAccess`](#projen.NpmAccess) | Access level of the npm package. |
+| [`npmDistTag`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmdisttag) | `string` | Tags can be used to provide an alias instead of version numbers. |
+| [`npmRegistry`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmregistry) | `string` | The host name of the npm registry to publish to. |
+| [`npmRegistryUrl`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmregistryurl) | `string` | The base URL of the npm package registry. |
+| [`npmTokenSecret`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmtokensecret) | `string` | GitHub secret which contains the NPM token to use when publishing packages. |
+| [`packageManager`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackagemanager) | [`projen.NodePackageManager`](#projen.NodePackageManager) | The Node Package Manager used to execute scripts. |
+| [`packageName`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackagename) | `string` | The "name" in package.json. |
+| [`peerDependencyOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypeerdependencyoptions) | [`projen.PeerDependencyOptions`](#projen.PeerDependencyOptions) | Options for `peerDeps`. |
+| [`peerDeps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypeerdeps) | `string`[] | Peer dependencies for this module. |
+| [`repository`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrepository) | `string` | The repository is the location where the actual code for your package lives. |
+| [`repositoryDirectory`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrepositorydirectory) | `string` | If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives. |
+| [`scripts`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyscripts) | {[ key: string ]: `string`} | npm scripts to include. |
+| [`stability`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertystability) | `string` | Package's Stability. |
+| [`antitamper`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyantitamper) | `boolean` | Checks that after build there are no modified files on git. |
+| [`artifactsDirectory`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyartifactsdirectory) | `string` | A directory which will contain artifacts to be published to npm. |
+| [`jsiiReleaseVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjsiireleaseversion) | `string` | Version requirement of `jsii-release` which is used to publish modules to npm. |
+| [`majorVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymajorversion) | `number` | Major version to release from the default branch. |
+| [`postBuildSteps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypostbuildsteps) | [`projen.github.workflows.JobStep`](#projen.github.workflows.JobStep)[] | Steps to execute after build as part of the release workflow. |
+| [`prerelease`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprerelease) | `string` | Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre"). |
+| [`releaseBranches`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasebranches) | {[ key: string ]: [`projen.release.BranchOptions`](#projen.release.BranchOptions)} | Defines additional release branches. |
+| [`releaseEveryCommit`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleaseeverycommit) | `boolean` | Automatically release new versions every commit to one of branches in `releaseBranches`. |
+| [`releaseFailureIssue`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasefailureissue) | `boolean` | Create a github issue on every failed publishing task. |
+| [`releaseFailureIssueLabel`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasefailureissuelabel) | `string` | The label to apply to issues indicating publish failures. |
+| [`releaseSchedule`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleaseschedule) | `string` | CRON schedule to trigger new releases. |
+| [`releaseTagPrefix`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasetagprefix) | `string` | Automatically add the given prefix to release tags. Useful if you are releasing on multiple branches with overlapping version numbers. |
+| [`releaseTrigger`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasetrigger) | [`projen.release.ReleaseTrigger`](#projen.release.ReleaseTrigger) | The release trigger to use. |
+| [`releaseWorkflowName`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleaseworkflowname) | `string` | The name of the default release workflow. |
+| [`releaseWorkflowSetupSteps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleaseworkflowsetupsteps) | [`projen.github.workflows.JobStep`](#projen.github.workflows.JobStep)[] | A set of workflow steps to execute in order to setup the workflow container. |
+| [`versionrcOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyversionrcoptions) | {[ key: string ]: `any`} | Custom configuration used when creating changelog with standard-version package. |
+| [`workflowContainerImage`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflowcontainerimage) | `string` | Container image to use for GitHub workflows. |
+| [`defaultReleaseBranch`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydefaultreleasebranch)<span title="Required">*</span> | `string` | The name of the main release branch. |
+| [`autoApproveProjenUpgrades`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveprojenupgrades) | `boolean` | Automatically approve projen upgrade PRs, allowing them to be merged by mergify (if configued). |
+| [`autoApproveUpgrades`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveupgrades) | `boolean` | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued). |
+| [`buildWorkflow`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybuildworkflow) | `boolean` | Define a GitHub workflow for building PRs. |
+| [`bundlerOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybundleroptions) | [`projen.javascript.BundlerOptions`](#projen.javascript.BundlerOptions) | Options for `Bundler`. |
+| [`codeCov`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodecov) | `boolean` | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v1 A secret is required for private repos. Configured with @codeCovTokenSecret. |
+| [`codeCovTokenSecret`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodecovtokensecret) | `string` | Define the secret name for a specified https://codecov.io/ token A secret is required to send coverage for private repositories. |
+| [`copyrightOwner`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycopyrightowner) | `string` | License copyright owner. |
+| [`copyrightPeriod`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycopyrightperiod) | `string` | The copyright years to put in the LICENSE file. |
+| [`dependabot`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydependabot) | `boolean` | Use dependabot to handle dependency upgrades. |
+| [`dependabotOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydependabotoptions) | [`projen.github.DependabotOptions`](#projen.github.DependabotOptions) | Options for dependabot. |
+| [`depsUpgrade`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydepsupgrade) | `boolean` | Use github workflows to handle dependency upgrades. |
+| [`depsUpgradeOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydepsupgradeoptions) | [`projen.UpgradeDependenciesOptions`](#projen.UpgradeDependenciesOptions) | Options for depsUpgrade. |
+| [`gitignore`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygitignore) | `string`[] | Additional entries to .gitignore. |
+| [`jest`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjest) | `boolean` | Setup jest unit tests. |
+| [`jestOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjestoptions) | [`projen.JestOptions`](#projen.JestOptions) | Jest options. |
+| [`mutableBuild`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymutablebuild) | `boolean` | Automatically update files modified during builds to pull-request branches. |
+| [`npmignore`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmignore) | `string`[] | Additional entries to .npmignore. |
+| [`npmignoreEnabled`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmignoreenabled) | `boolean` | Defines an .npmignore file. Normally this is only needed for libraries that are packaged as tarballs. |
+| [`projenDevDependency`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojendevdependency) | `boolean` | Indicates of "projen" should be installed as a devDependency. |
+| [`projenrcJs`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjs) | `boolean` | Generate (once) .projenrc.js (in JavaScript). Set to `false` in order to disable .projenrc.js generation. |
+| [`projenrcJsOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjsoptions) | [`projen.javascript.ProjenrcOptions`](#projen.javascript.ProjenrcOptions) | Options for .projenrc.js. |
+| [`projenUpgradeAutoMerge`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradeautomerge) | `boolean` | Automatically approve projen upgrade PRs, allowing them to be merged by mergify (if configued). |
+| [`projenUpgradeSchedule`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradeschedule) | `string`[] | Customize the projenUpgrade schedule in cron expression. |
+| [`projenUpgradeSecret`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradesecret) | `string` | Periodically submits a pull request for projen upgrades (executes `yarn projen:upgrade`). |
+| [`projenVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenversion) | `string` | Version of projen to install. |
+| [`pullRequestTemplate`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypullrequesttemplate) | `boolean` | Include a GitHub pull request template. |
+| [`pullRequestTemplateContents`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypullrequesttemplatecontents) | `string`[] | The contents of the pull request template. |
+| [`release`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrelease) | `boolean` | Add release management to this project. |
+| [`releaseToNpm`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasetonpm) | `boolean` | Automatically release to npm when new versions are introduced. |
+| [`releaseWorkflow`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleaseworkflow) | `boolean` | DEPRECATED: renamed to `release`. |
+| [`workflowBootstrapSteps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflowbootstrapsteps) | `any`[] | Workflow steps to use in order to bootstrap this repo. |
+| [`workflowGitIdentity`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflowgitidentity) | [`projen.github.GitIdentity`](#projen.github.GitIdentity) | The git identity to use in workflows. |
+| [`workflowNodeVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflownodeversion) | `string` | The node version to use in GitHub workflows. |
+| [`disableTsconfig`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydisabletsconfig) | `boolean` | Do not generate a `tsconfig.json` file (used by jsii projects since tsconfig.json is generated by the jsii compiler). |
+| [`docgen`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydocgen) | `boolean` | Docgen by Typedoc. |
+| [`docsDirectory`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydocsdirectory) | `string` | Docs directory. |
+| [`entrypointTypes`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyentrypointtypes) | `string` | The .d.ts file that includes the type declarations for this module. |
+| [`eslint`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyeslint) | `boolean` | Setup eslint. |
+| [`eslintOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyeslintoptions) | [`projen.EslintOptions`](#projen.EslintOptions) | Eslint options. |
+| [`libdir`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylibdir) | `string` | Typescript  artifacts output directory. |
+| [`package`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackage) | `boolean` | Defines a `yarn package` command that will produce a tarball and place it under `dist/js`. |
+| [`projenrcTs`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcts) | `boolean` | Use TypeScript for your projenrc file (`.projenrc.ts`). |
+| [`projenrcTsOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrctsoptions) | [`projen.typescript.ProjenrcOptions`](#projen.typescript.ProjenrcOptions) | Options for .projenrc.ts. |
+| [`sampleCode`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertysamplecode) | `boolean` | Generate one-time sample in `src/` and `test/` if there are no files there. |
+| [`srcdir`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertysrcdir) | `string` | Typescript sources directory. |
+| [`testdir`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytestdir) | `string` | Jest tests directory. Tests files should be named `xxx.test.ts`. |
+| [`tsconfig`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytsconfig) | [`projen.TypescriptConfigOptions`](#projen.TypescriptConfigOptions) | Custom TSConfig. |
+| [`tsconfigDev`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytsconfigdev) | [`projen.TypescriptConfigOptions`](#projen.TypescriptConfigOptions) | Custom tsconfig options for the development tsconfig.json file (used for testing). |
+| [`tsconfigDevFile`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytsconfigdevfile) | `string` | The name of the development tsconfig.json file. |
+| [`typescriptVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytypescriptversion) | `string` | TypeScript version to use. |
+| [`cdkout`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkout) | `string` | cdk.out directory. |
+| [`context`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycontext) | {[ key: string ]: `string`} | Additional context to include in `cdk.json`. |
+| [`featureFlags`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyfeatureflags) | `boolean` | Include all feature flags in cdk.json. |
+| [`requireApproval`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrequireapproval) | [`projen.awscdk.ApprovalLevel`](#projen.awscdk.ApprovalLevel) | To protect you against unintended changes that affect your security posture, the AWS CDK Toolkit prompts you to approve security-related changes before deploying them. |
+| [`watchExcludes`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertywatchexcludes) | `string`[] | Glob patterns to exclude from `cdk watch`. |
+| [`watchIncludes`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertywatchincludes) | `string`[] | Glob patterns to include in `cdk watch`. |
+| [`cdkVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkversion)<span title="Required">*</span> | `string` | AWS CDK version to use. |
+| [`appEntrypoint`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyappentrypoint) | `string` | The CDK app's entrypoint (relative to the source directory, which is "src" by default). |
+| [`cdkDependencies`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkdependencies) | `string`[] | Which AWS CDK modules (those that start with "@aws-cdk/") this app uses. |
+| [`cdkVersionPinning`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkversionpinning) | `boolean` | Use pinned version instead of caret version for CDK. |
+| [`lambdaAutoDiscover`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaautodiscover) | `boolean` | Automatically adds an `awscdk.LambdaFunction` for each `.lambda.ts` handler in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project. |
+| [`lambdaOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaoptions) | [`projen.awscdk.LambdaFunctionCommonOptions`](#projen.awscdk.LambdaFunctionCommonOptions) | Common options for all AWS Lambda functions. |
+| [`deployOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeployoptions)<span title="Required">*</span> | [`deployable-awscdk-app-ts.DeployOptions`](#deployable-awscdk-app-ts.DeployOptions) | Deployment options. |
+| [`generateNvmrc`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygeneratenvmrc) | `boolean` | Whether to generate nvmrc file for the node version of the project. |
+
+---
+
+##### `name`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.name" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyname"></a>
 
 ```typescript
 public readonly name: string;
@@ -99,7 +253,7 @@ This is the name of your project.
 
 ---
 
-##### `logging`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.logging"></a>
+##### `logging`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.logging" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylogging"></a>
 
 ```typescript
 public readonly logging: LoggerOptions;
@@ -112,7 +266,7 @@ Configure logging options such as verbosity.
 
 ---
 
-##### `outdir`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.outdir"></a>
+##### `outdir`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.outdir" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyoutdir"></a>
 
 ```typescript
 public readonly outdir: string;
@@ -127,7 +281,7 @@ Relative to this directory, all files are synthesized.  If this project has a pa
 
 ---
 
-##### `parent`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.parent"></a>
+##### `parent`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.parent" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyparent"></a>
 
 ```typescript
 public readonly parent: Project;
@@ -139,7 +293,7 @@ The parent project, if this project is part of a bigger project.
 
 ---
 
-##### `projenCommand`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenCommand"></a>
+##### `projenCommand`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenCommand" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojencommand"></a>
 
 ```typescript
 public readonly projenCommand: string;
@@ -154,7 +308,7 @@ Can be used to customize in special environments.
 
 ---
 
-##### `projenrcJson`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcJson"></a>
+##### `projenrcJson`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcJson" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjson"></a>
 
 ```typescript
 public readonly projenrcJson: boolean;
@@ -167,7 +321,7 @@ Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .pr
 
 ---
 
-##### `projenrcJsonOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcJsonOptions"></a>
+##### `projenrcJsonOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcJsonOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjsonoptions"></a>
 
 ```typescript
 public readonly projenrcJsonOptions: ProjenrcOptions;
@@ -180,7 +334,7 @@ Options for .projenrc.json.
 
 ---
 
-##### `autoApproveOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoApproveOptions"></a>
+##### `autoApproveOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoApproveOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveoptions"></a>
 
 ```typescript
 public readonly autoApproveOptions: AutoApproveOptions;
@@ -193,7 +347,7 @@ Enable and configure the 'auto approve' workflow.
 
 ---
 
-##### `autoMergeOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoMergeOptions"></a>
+##### `autoMergeOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoMergeOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautomergeoptions"></a>
 
 ```typescript
 public readonly autoMergeOptions: AutoMergeOptions;
@@ -208,7 +362,7 @@ Has no effect if `github.mergify` is set to false.
 
 ---
 
-##### `clobber`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.clobber"></a>
+##### `clobber`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.clobber" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyclobber"></a>
 
 ```typescript
 public readonly clobber: boolean;
@@ -221,7 +375,7 @@ Add a `clobber` task which resets the repo to origin.
 
 ---
 
-##### `devContainer`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.devContainer"></a>
+##### `devContainer`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.devContainer" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydevcontainer"></a>
 
 ```typescript
 public readonly devContainer: boolean;
@@ -234,7 +388,7 @@ Add a VSCode development environment (used for GitHub Codespaces).
 
 ---
 
-##### `github`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.github"></a>
+##### `github`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.github" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygithub"></a>
 
 ```typescript
 public readonly github: boolean;
@@ -249,7 +403,7 @@ Enabled by default for root projects. Disabled for non-root projects.
 
 ---
 
-##### `githubOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.githubOptions"></a>
+##### `githubOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.githubOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygithuboptions"></a>
 
 ```typescript
 public readonly githubOptions: GitHubOptions;
@@ -262,7 +416,7 @@ Options for GitHub integration.
 
 ---
 
-##### `gitpod`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.gitpod"></a>
+##### `gitpod`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.gitpod" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygitpod"></a>
 
 ```typescript
 public readonly gitpod: boolean;
@@ -275,7 +429,7 @@ Add a Gitpod development environment.
 
 ---
 
-##### ~~`mergify`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.mergify"></a>
+##### ~~`mergify`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.mergify" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymergify"></a>
 
 - *Deprecated:* use `githubOptions.mergify` instead
 
@@ -290,7 +444,7 @@ Whether mergify should be enabled on this repository or not.
 
 ---
 
-##### ~~`mergifyOptions`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.mergifyOptions"></a>
+##### ~~`mergifyOptions`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.mergifyOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymergifyoptions"></a>
 
 - *Deprecated:* use `githubOptions.mergifyOptions` instead
 
@@ -305,7 +459,7 @@ Options for mergify.
 
 ---
 
-##### ~~`projectType`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projectType"></a>
+##### ~~`projectType`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projectType" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojecttype"></a>
 
 - *Deprecated:* no longer supported at the base project level
 
@@ -320,7 +474,7 @@ Which type of project this is (library/app).
 
 ---
 
-##### `readme`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.readme"></a>
+##### `readme`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.readme" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreadme"></a>
 
 ```typescript
 public readonly readme: SampleReadmeProps;
@@ -333,7 +487,7 @@ The README setup.
 
 ---
 
-##### `stale`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.stale"></a>
+##### `stale`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.stale" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertystale"></a>
 
 ```typescript
 public readonly stale: boolean;
@@ -348,7 +502,7 @@ See `staleOptions` for options.
 
 ---
 
-##### `staleOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.staleOptions"></a>
+##### `staleOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.staleOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertystaleoptions"></a>
 
 ```typescript
 public readonly staleOptions: StaleOptions;
@@ -363,7 +517,7 @@ To disable set `stale` to `false`.
 
 ---
 
-##### `vscode`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.vscode"></a>
+##### `vscode`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.vscode" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyvscode"></a>
 
 ```typescript
 public readonly vscode: boolean;
@@ -378,7 +532,7 @@ Enabled by default for root projects. Disabled for non-root projects.
 
 ---
 
-##### `allowLibraryDependencies`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.allowLibraryDependencies"></a>
+##### `allowLibraryDependencies`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.allowLibraryDependencies" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyallowlibrarydependencies"></a>
 
 ```typescript
 public readonly allowLibraryDependencies: boolean;
@@ -393,7 +547,7 @@ This is normally only allowed for libraries. For apps, there's no meaning for sp
 
 ---
 
-##### `authorEmail`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.authorEmail"></a>
+##### `authorEmail`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.authorEmail" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthoremail"></a>
 
 ```typescript
 public readonly authorEmail: string;
@@ -405,7 +559,7 @@ Author's e-mail.
 
 ---
 
-##### `authorName`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.authorName"></a>
+##### `authorName`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.authorName" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthorname"></a>
 
 ```typescript
 public readonly authorName: string;
@@ -417,7 +571,7 @@ Author's name.
 
 ---
 
-##### `authorOrganization`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.authorOrganization"></a>
+##### `authorOrganization`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.authorOrganization" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthororganization"></a>
 
 ```typescript
 public readonly authorOrganization: boolean;
@@ -429,7 +583,7 @@ Author's Organization.
 
 ---
 
-##### `authorUrl`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.authorUrl"></a>
+##### `authorUrl`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.authorUrl" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthorurl"></a>
 
 ```typescript
 public readonly authorUrl: string;
@@ -441,7 +595,7 @@ Author's URL / Website.
 
 ---
 
-##### `autoDetectBin`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoDetectBin"></a>
+##### `autoDetectBin`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoDetectBin" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautodetectbin"></a>
 
 ```typescript
 public readonly autoDetectBin: boolean;
@@ -454,7 +608,7 @@ Automatically add all executables under the `bin` directory to your `package.jso
 
 ---
 
-##### `bin`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.bin"></a>
+##### `bin`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.bin" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybin"></a>
 
 ```typescript
 public readonly bin: {[ key: string ]: string};
@@ -468,7 +622,7 @@ You can use this option to add/customize how binaries are represented in your `p
 
 ---
 
-##### `bundledDeps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.bundledDeps"></a>
+##### `bundledDeps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.bundledDeps" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybundleddeps"></a>
 
 ```typescript
 public readonly bundledDeps: string[];
@@ -482,7 +636,7 @@ These modules will be added both to the `dependencies` section and `peerDependen
 
 ---
 
-##### `codeArtifactOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.codeArtifactOptions"></a>
+##### `codeArtifactOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.codeArtifactOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodeartifactoptions"></a>
 
 ```typescript
 public readonly codeArtifactOptions: CodeArtifactOptions;
@@ -495,7 +649,7 @@ Options for publishing npm package to AWS CodeArtifact.
 
 ---
 
-##### `deps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.deps"></a>
+##### `deps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.deps" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeps"></a>
 
 ```typescript
 public readonly deps: string[];
@@ -510,7 +664,7 @@ The recommendation is to only specify the module name here (e.g. `express`). Thi
 
 ---
 
-##### `description`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.description"></a>
+##### `description`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.description" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydescription"></a>
 
 ```typescript
 public readonly description: string;
@@ -524,7 +678,7 @@ It can be used when searching for packages in a package manager as well. See htt
 
 ---
 
-##### `devDeps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.devDeps"></a>
+##### `devDeps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.devDeps" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydevdeps"></a>
 
 ```typescript
 public readonly devDeps: string[];
@@ -539,7 +693,7 @@ These dependencies will only be available in your build environment but will not
 
 ---
 
-##### `entrypoint`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.entrypoint"></a>
+##### `entrypoint`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.entrypoint" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyentrypoint"></a>
 
 ```typescript
 public readonly entrypoint: string;
@@ -554,7 +708,7 @@ Set to an empty string to not include `main` in your package.json
 
 ---
 
-##### `homepage`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.homepage"></a>
+##### `homepage`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.homepage" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyhomepage"></a>
 
 ```typescript
 public readonly homepage: string;
@@ -566,7 +720,7 @@ Package's Homepage / Website.
 
 ---
 
-##### `keywords`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.keywords"></a>
+##### `keywords`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.keywords" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertykeywords"></a>
 
 ```typescript
 public readonly keywords: string[];
@@ -578,7 +732,7 @@ Keywords to include in `package.json`.
 
 ---
 
-##### `license`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.license"></a>
+##### `license`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.license" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylicense"></a>
 
 ```typescript
 public readonly license: string;
@@ -593,7 +747,7 @@ See https://github.com/projen/projen/tree/main/license-text for a list of suppor
 
 ---
 
-##### `licensed`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.licensed"></a>
+##### `licensed`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.licensed" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylicensed"></a>
 
 ```typescript
 public readonly licensed: boolean;
@@ -606,7 +760,7 @@ Indicates if a license should be added.
 
 ---
 
-##### `maxNodeVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.maxNodeVersion"></a>
+##### `maxNodeVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.maxNodeVersion" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymaxnodeversion"></a>
 
 ```typescript
 public readonly maxNodeVersion: string;
@@ -619,7 +773,7 @@ Minimum node.js version to require via `engines` (inclusive).
 
 ---
 
-##### `minNodeVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.minNodeVersion"></a>
+##### `minNodeVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.minNodeVersion" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyminnodeversion"></a>
 
 ```typescript
 public readonly minNodeVersion: string;
@@ -632,7 +786,7 @@ Minimum Node.js version to require via package.json `engines` (inclusive).
 
 ---
 
-##### `npmAccess`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmAccess"></a>
+##### `npmAccess`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmAccess" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmaccess"></a>
 
 ```typescript
 public readonly npmAccess: NpmAccess;
@@ -645,7 +799,7 @@ Access level of the npm package.
 
 ---
 
-##### `npmDistTag`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmDistTag"></a>
+##### `npmDistTag`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmDistTag" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmdisttag"></a>
 
 ```typescript
 public readonly npmDistTag: string;
@@ -660,7 +814,7 @@ For example, a project might choose to have multiple streams of development and 
 
 ---
 
-##### ~~`npmRegistry`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmRegistry"></a>
+##### ~~`npmRegistry`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmRegistry" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmregistry"></a>
 
 - *Deprecated:* use `npmRegistryUrl` instead
 
@@ -676,7 +830,7 @@ Cannot be set together with `npmRegistryUrl`.
 
 ---
 
-##### `npmRegistryUrl`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmRegistryUrl"></a>
+##### `npmRegistryUrl`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmRegistryUrl" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmregistryurl"></a>
 
 ```typescript
 public readonly npmRegistryUrl: string;
@@ -691,7 +845,7 @@ Must be a URL (e.g. start with "https://" or "http://")
 
 ---
 
-##### `npmTokenSecret`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmTokenSecret"></a>
+##### `npmTokenSecret`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmTokenSecret" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmtokensecret"></a>
 
 ```typescript
 public readonly npmTokenSecret: string;
@@ -704,7 +858,7 @@ GitHub secret which contains the NPM token to use when publishing packages.
 
 ---
 
-##### `packageManager`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.packageManager"></a>
+##### `packageManager`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.packageManager" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackagemanager"></a>
 
 ```typescript
 public readonly packageManager: NodePackageManager;
@@ -717,7 +871,7 @@ The Node Package Manager used to execute scripts.
 
 ---
 
-##### `packageName`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.packageName"></a>
+##### `packageName`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.packageName" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackagename"></a>
 
 ```typescript
 public readonly packageName: string;
@@ -730,7 +884,7 @@ The "name" in package.json.
 
 ---
 
-##### `peerDependencyOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.peerDependencyOptions"></a>
+##### `peerDependencyOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.peerDependencyOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypeerdependencyoptions"></a>
 
 ```typescript
 public readonly peerDependencyOptions: PeerDependencyOptions;
@@ -742,7 +896,7 @@ Options for `peerDeps`.
 
 ---
 
-##### `peerDeps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.peerDeps"></a>
+##### `peerDeps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.peerDeps" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypeerdeps"></a>
 
 ```typescript
 public readonly peerDeps: string[];
@@ -757,7 +911,7 @@ Dependencies listed here are required to be installed (and satisfied) by the _co
 
 ---
 
-##### `repository`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.repository"></a>
+##### `repository`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.repository" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrepository"></a>
 
 ```typescript
 public readonly repository: string;
@@ -771,7 +925,7 @@ See https://classic.yarnpkg.com/en/docs/package-json/#toc-repository
 
 ---
 
-##### `repositoryDirectory`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.repositoryDirectory"></a>
+##### `repositoryDirectory`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.repositoryDirectory" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrepositorydirectory"></a>
 
 ```typescript
 public readonly repositoryDirectory: string;
@@ -783,7 +937,7 @@ If the package.json for your package is not in the root directory (for example i
 
 ---
 
-##### `scripts`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.scripts"></a>
+##### `scripts`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.scripts" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyscripts"></a>
 
 ```typescript
 public readonly scripts: {[ key: string ]: string};
@@ -798,7 +952,7 @@ If a script has the same name as a standard script, the standard script will be 
 
 ---
 
-##### `stability`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.stability"></a>
+##### `stability`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.stability" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertystability"></a>
 
 ```typescript
 public readonly stability: string;
@@ -810,7 +964,7 @@ Package's Stability.
 
 ---
 
-##### `antitamper`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.antitamper"></a>
+##### `antitamper`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.antitamper" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyantitamper"></a>
 
 ```typescript
 public readonly antitamper: boolean;
@@ -823,7 +977,7 @@ Checks that after build there are no modified files on git.
 
 ---
 
-##### `artifactsDirectory`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.artifactsDirectory"></a>
+##### `artifactsDirectory`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.artifactsDirectory" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyartifactsdirectory"></a>
 
 ```typescript
 public readonly artifactsDirectory: string;
@@ -836,7 +990,7 @@ A directory which will contain artifacts to be published to npm.
 
 ---
 
-##### `jsiiReleaseVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.jsiiReleaseVersion"></a>
+##### `jsiiReleaseVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.jsiiReleaseVersion" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjsiireleaseversion"></a>
 
 ```typescript
 public readonly jsiiReleaseVersion: string;
@@ -849,7 +1003,7 @@ Version requirement of `jsii-release` which is used to publish modules to npm.
 
 ---
 
-##### `majorVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.majorVersion"></a>
+##### `majorVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.majorVersion" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymajorversion"></a>
 
 ```typescript
 public readonly majorVersion: number;
@@ -864,7 +1018,7 @@ If this is specified, we bump the latest version of this major version line. If 
 
 ---
 
-##### `postBuildSteps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.postBuildSteps"></a>
+##### `postBuildSteps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.postBuildSteps" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypostbuildsteps"></a>
 
 ```typescript
 public readonly postBuildSteps: JobStep[];
@@ -877,7 +1031,7 @@ Steps to execute after build as part of the release workflow.
 
 ---
 
-##### `prerelease`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.prerelease"></a>
+##### `prerelease`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.prerelease" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprerelease"></a>
 
 ```typescript
 public readonly prerelease: string;
@@ -890,7 +1044,7 @@ Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pr
 
 ---
 
-##### `releaseBranches`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseBranches"></a>
+##### `releaseBranches`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseBranches" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasebranches"></a>
 
 ```typescript
 public readonly releaseBranches: {[ key: string ]: BranchOptions};
@@ -905,7 +1059,7 @@ A workflow will be created for each release branch which will publish releases f
 
 ---
 
-##### ~~`releaseEveryCommit`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseEveryCommit"></a>
+##### ~~`releaseEveryCommit`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseEveryCommit" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleaseeverycommit"></a>
 
 - *Deprecated:* Use `releaseTrigger: ReleaseTrigger.continuous()` instead
 
@@ -920,7 +1074,7 @@ Automatically release new versions every commit to one of branches in `releaseBr
 
 ---
 
-##### `releaseFailureIssue`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseFailureIssue"></a>
+##### `releaseFailureIssue`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseFailureIssue" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasefailureissue"></a>
 
 ```typescript
 public readonly releaseFailureIssue: boolean;
@@ -933,7 +1087,7 @@ Create a github issue on every failed publishing task.
 
 ---
 
-##### `releaseFailureIssueLabel`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseFailureIssueLabel"></a>
+##### `releaseFailureIssueLabel`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseFailureIssueLabel" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasefailureissuelabel"></a>
 
 ```typescript
 public readonly releaseFailureIssueLabel: string;
@@ -948,7 +1102,7 @@ Only applies if `releaseFailureIssue` is true.
 
 ---
 
-##### ~~`releaseSchedule`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseSchedule"></a>
+##### ~~`releaseSchedule`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseSchedule" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleaseschedule"></a>
 
 - *Deprecated:* Use `releaseTrigger: ReleaseTrigger.scheduled()` instead
 
@@ -963,7 +1117,7 @@ CRON schedule to trigger new releases.
 
 ---
 
-##### `releaseTagPrefix`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseTagPrefix"></a>
+##### `releaseTagPrefix`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseTagPrefix" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasetagprefix"></a>
 
 ```typescript
 public readonly releaseTagPrefix: string;
@@ -978,7 +1132,7 @@ Note: this prefix is used to detect the latest tagged version when bumping, so i
 
 ---
 
-##### `releaseTrigger`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseTrigger"></a>
+##### `releaseTrigger`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseTrigger" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasetrigger"></a>
 
 ```typescript
 public readonly releaseTrigger: ReleaseTrigger;
@@ -991,7 +1145,7 @@ The release trigger to use.
 
 ---
 
-##### `releaseWorkflowName`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseWorkflowName"></a>
+##### `releaseWorkflowName`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseWorkflowName" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleaseworkflowname"></a>
 
 ```typescript
 public readonly releaseWorkflowName: string;
@@ -1004,7 +1158,7 @@ The name of the default release workflow.
 
 ---
 
-##### `releaseWorkflowSetupSteps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseWorkflowSetupSteps"></a>
+##### `releaseWorkflowSetupSteps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseWorkflowSetupSteps" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleaseworkflowsetupsteps"></a>
 
 ```typescript
 public readonly releaseWorkflowSetupSteps: JobStep[];
@@ -1016,7 +1170,7 @@ A set of workflow steps to execute in order to setup the workflow container.
 
 ---
 
-##### `versionrcOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.versionrcOptions"></a>
+##### `versionrcOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.versionrcOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyversionrcoptions"></a>
 
 ```typescript
 public readonly versionrcOptions: {[ key: string ]: any};
@@ -1031,7 +1185,7 @@ Given values either append to default configuration or overwrite values in it.
 
 ---
 
-##### `workflowContainerImage`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowContainerImage"></a>
+##### `workflowContainerImage`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowContainerImage" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflowcontainerimage"></a>
 
 ```typescript
 public readonly workflowContainerImage: string;
@@ -1044,7 +1198,7 @@ Container image to use for GitHub workflows.
 
 ---
 
-##### `defaultReleaseBranch`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.defaultReleaseBranch"></a>
+##### `defaultReleaseBranch`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.defaultReleaseBranch" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydefaultreleasebranch"></a>
 
 ```typescript
 public readonly defaultReleaseBranch: string;
@@ -1057,7 +1211,7 @@ The name of the main release branch.
 
 ---
 
-##### `autoApproveProjenUpgrades`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoApproveProjenUpgrades"></a>
+##### `autoApproveProjenUpgrades`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoApproveProjenUpgrades" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveprojenupgrades"></a>
 
 ```typescript
 public readonly autoApproveProjenUpgrades: boolean;
@@ -1072,7 +1226,7 @@ Throw if set to true but `autoApproveOptions` are not defined.
 
 ---
 
-##### `autoApproveUpgrades`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoApproveUpgrades"></a>
+##### `autoApproveUpgrades`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoApproveUpgrades" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveupgrades"></a>
 
 ```typescript
 public readonly autoApproveUpgrades: boolean;
@@ -1087,7 +1241,7 @@ Throw if set to true but `autoApproveOptions` are not defined.
 
 ---
 
-##### `buildWorkflow`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.buildWorkflow"></a>
+##### `buildWorkflow`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.buildWorkflow" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybuildworkflow"></a>
 
 ```typescript
 public readonly buildWorkflow: boolean;
@@ -1100,7 +1254,7 @@ Define a GitHub workflow for building PRs.
 
 ---
 
-##### `bundlerOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.bundlerOptions"></a>
+##### `bundlerOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.bundlerOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybundleroptions"></a>
 
 ```typescript
 public readonly bundlerOptions: BundlerOptions;
@@ -1112,7 +1266,7 @@ Options for `Bundler`.
 
 ---
 
-##### `codeCov`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.codeCov"></a>
+##### `codeCov`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.codeCov" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodecov"></a>
 
 ```typescript
 public readonly codeCov: boolean;
@@ -1125,7 +1279,7 @@ Define a GitHub workflow step for sending code coverage metrics to https://codec
 
 ---
 
-##### `codeCovTokenSecret`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.codeCovTokenSecret"></a>
+##### `codeCovTokenSecret`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.codeCovTokenSecret" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodecovtokensecret"></a>
 
 ```typescript
 public readonly codeCovTokenSecret: string;
@@ -1138,7 +1292,7 @@ Define the secret name for a specified https://codecov.io/ token A secret is req
 
 ---
 
-##### `copyrightOwner`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.copyrightOwner"></a>
+##### `copyrightOwner`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.copyrightOwner" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycopyrightowner"></a>
 
 ```typescript
 public readonly copyrightOwner: string;
@@ -1151,7 +1305,7 @@ License copyright owner.
 
 ---
 
-##### `copyrightPeriod`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.copyrightPeriod"></a>
+##### `copyrightPeriod`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.copyrightPeriod" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycopyrightperiod"></a>
 
 ```typescript
 public readonly copyrightPeriod: string;
@@ -1164,7 +1318,7 @@ The copyright years to put in the LICENSE file.
 
 ---
 
-##### `dependabot`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.dependabot"></a>
+##### `dependabot`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.dependabot" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydependabot"></a>
 
 ```typescript
 public readonly dependabot: boolean;
@@ -1179,7 +1333,7 @@ Cannot be used in conjunction with `depsUpgrade`.
 
 ---
 
-##### `dependabotOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.dependabotOptions"></a>
+##### `dependabotOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.dependabotOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydependabotoptions"></a>
 
 ```typescript
 public readonly dependabotOptions: DependabotOptions;
@@ -1192,7 +1346,7 @@ Options for dependabot.
 
 ---
 
-##### `depsUpgrade`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.depsUpgrade"></a>
+##### `depsUpgrade`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.depsUpgrade" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydepsupgrade"></a>
 
 ```typescript
 public readonly depsUpgrade: boolean;
@@ -1207,7 +1361,7 @@ Cannot be used in conjunction with `dependabot`.
 
 ---
 
-##### `depsUpgradeOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.depsUpgradeOptions"></a>
+##### `depsUpgradeOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.depsUpgradeOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydepsupgradeoptions"></a>
 
 ```typescript
 public readonly depsUpgradeOptions: UpgradeDependenciesOptions;
@@ -1220,7 +1374,7 @@ Options for depsUpgrade.
 
 ---
 
-##### `gitignore`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.gitignore"></a>
+##### `gitignore`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.gitignore" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygitignore"></a>
 
 ```typescript
 public readonly gitignore: string[];
@@ -1232,7 +1386,7 @@ Additional entries to .gitignore.
 
 ---
 
-##### `jest`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.jest"></a>
+##### `jest`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.jest" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjest"></a>
 
 ```typescript
 public readonly jest: boolean;
@@ -1245,7 +1399,7 @@ Setup jest unit tests.
 
 ---
 
-##### `jestOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.jestOptions"></a>
+##### `jestOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.jestOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjestoptions"></a>
 
 ```typescript
 public readonly jestOptions: JestOptions;
@@ -1258,7 +1412,7 @@ Jest options.
 
 ---
 
-##### `mutableBuild`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.mutableBuild"></a>
+##### `mutableBuild`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.mutableBuild" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymutablebuild"></a>
 
 ```typescript
 public readonly mutableBuild: boolean;
@@ -1273,7 +1427,7 @@ This means that any files synthesized by projen or e.g. test snapshots will alwa
 
 ---
 
-##### ~~`npmignore`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmignore"></a>
+##### ~~`npmignore`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmignore" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmignore"></a>
 
 - *Deprecated:* - use `project.addPackageIgnore`
 
@@ -1287,7 +1441,7 @@ Additional entries to .npmignore.
 
 ---
 
-##### `npmignoreEnabled`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmignoreEnabled"></a>
+##### `npmignoreEnabled`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmignoreEnabled" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmignoreenabled"></a>
 
 ```typescript
 public readonly npmignoreEnabled: boolean;
@@ -1300,7 +1454,7 @@ Defines an .npmignore file. Normally this is only needed for libraries that are 
 
 ---
 
-##### `projenDevDependency`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenDevDependency"></a>
+##### `projenDevDependency`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenDevDependency" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojendevdependency"></a>
 
 ```typescript
 public readonly projenDevDependency: boolean;
@@ -1313,7 +1467,7 @@ Indicates of "projen" should be installed as a devDependency.
 
 ---
 
-##### `projenrcJs`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcJs"></a>
+##### `projenrcJs`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcJs" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjs"></a>
 
 ```typescript
 public readonly projenrcJs: boolean;
@@ -1326,7 +1480,7 @@ Generate (once) .projenrc.js (in JavaScript). Set to `false` in order to disable
 
 ---
 
-##### `projenrcJsOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcJsOptions"></a>
+##### `projenrcJsOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcJsOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjsoptions"></a>
 
 ```typescript
 public readonly projenrcJsOptions: ProjenrcOptions;
@@ -1339,7 +1493,7 @@ Options for .projenrc.js.
 
 ---
 
-##### ~~`projenUpgradeAutoMerge`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenUpgradeAutoMerge"></a>
+##### ~~`projenUpgradeAutoMerge`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenUpgradeAutoMerge" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradeautomerge"></a>
 
 - *Deprecated:* use `autoApproveProjenUpgrades`.
 
@@ -1356,7 +1510,7 @@ Throw if set to true but `autoApproveOptions` are not defined.
 
 ---
 
-##### `projenUpgradeSchedule`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenUpgradeSchedule"></a>
+##### `projenUpgradeSchedule`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenUpgradeSchedule" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradeschedule"></a>
 
 ```typescript
 public readonly projenUpgradeSchedule: string[];
@@ -1369,7 +1523,7 @@ Customize the projenUpgrade schedule in cron expression.
 
 ---
 
-##### `projenUpgradeSecret`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenUpgradeSecret"></a>
+##### `projenUpgradeSecret`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenUpgradeSecret" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradesecret"></a>
 
 ```typescript
 public readonly projenUpgradeSecret: string;
@@ -1384,7 +1538,7 @@ This setting is a GitHub secret name which contains a GitHub Access Token with `
 
 ---
 
-##### `projenVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenVersion"></a>
+##### `projenVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenVersion" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenversion"></a>
 
 ```typescript
 public readonly projenVersion: string;
@@ -1397,7 +1551,7 @@ Version of projen to install.
 
 ---
 
-##### `pullRequestTemplate`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.pullRequestTemplate"></a>
+##### `pullRequestTemplate`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.pullRequestTemplate" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypullrequesttemplate"></a>
 
 ```typescript
 public readonly pullRequestTemplate: boolean;
@@ -1410,7 +1564,7 @@ Include a GitHub pull request template.
 
 ---
 
-##### `pullRequestTemplateContents`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.pullRequestTemplateContents"></a>
+##### `pullRequestTemplateContents`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.pullRequestTemplateContents" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypullrequesttemplatecontents"></a>
 
 ```typescript
 public readonly pullRequestTemplateContents: string[];
@@ -1423,7 +1577,7 @@ The contents of the pull request template.
 
 ---
 
-##### `release`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.release"></a>
+##### `release`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.release" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrelease"></a>
 
 ```typescript
 public readonly release: boolean;
@@ -1436,7 +1590,7 @@ Add release management to this project.
 
 ---
 
-##### `releaseToNpm`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseToNpm"></a>
+##### `releaseToNpm`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseToNpm" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasetonpm"></a>
 
 ```typescript
 public readonly releaseToNpm: boolean;
@@ -1449,7 +1603,7 @@ Automatically release to npm when new versions are introduced.
 
 ---
 
-##### ~~`releaseWorkflow`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseWorkflow"></a>
+##### ~~`releaseWorkflow`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseWorkflow" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleaseworkflow"></a>
 
 - *Deprecated:* see `release`.
 
@@ -1464,7 +1618,7 @@ DEPRECATED: renamed to `release`.
 
 ---
 
-##### `workflowBootstrapSteps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowBootstrapSteps"></a>
+##### `workflowBootstrapSteps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowBootstrapSteps" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflowbootstrapsteps"></a>
 
 ```typescript
 public readonly workflowBootstrapSteps: any[];
@@ -1477,7 +1631,7 @@ Workflow steps to use in order to bootstrap this repo.
 
 ---
 
-##### `workflowGitIdentity`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowGitIdentity"></a>
+##### `workflowGitIdentity`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowGitIdentity" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflowgitidentity"></a>
 
 ```typescript
 public readonly workflowGitIdentity: GitIdentity;
@@ -1490,7 +1644,7 @@ The git identity to use in workflows.
 
 ---
 
-##### `workflowNodeVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowNodeVersion"></a>
+##### `workflowNodeVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowNodeVersion" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflownodeversion"></a>
 
 ```typescript
 public readonly workflowNodeVersion: string;
@@ -1503,7 +1657,7 @@ The node version to use in GitHub workflows.
 
 ---
 
-##### `disableTsconfig`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.disableTsconfig"></a>
+##### `disableTsconfig`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.disableTsconfig" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydisabletsconfig"></a>
 
 ```typescript
 public readonly disableTsconfig: boolean;
@@ -1516,7 +1670,7 @@ Do not generate a `tsconfig.json` file (used by jsii projects since tsconfig.jso
 
 ---
 
-##### `docgen`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.docgen"></a>
+##### `docgen`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.docgen" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydocgen"></a>
 
 ```typescript
 public readonly docgen: boolean;
@@ -1529,7 +1683,7 @@ Docgen by Typedoc.
 
 ---
 
-##### `docsDirectory`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.docsDirectory"></a>
+##### `docsDirectory`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.docsDirectory" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydocsdirectory"></a>
 
 ```typescript
 public readonly docsDirectory: string;
@@ -1542,7 +1696,7 @@ Docs directory.
 
 ---
 
-##### `entrypointTypes`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.entrypointTypes"></a>
+##### `entrypointTypes`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.entrypointTypes" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyentrypointtypes"></a>
 
 ```typescript
 public readonly entrypointTypes: string;
@@ -1555,7 +1709,7 @@ The .d.ts file that includes the type declarations for this module.
 
 ---
 
-##### `eslint`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.eslint"></a>
+##### `eslint`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.eslint" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyeslint"></a>
 
 ```typescript
 public readonly eslint: boolean;
@@ -1568,7 +1722,7 @@ Setup eslint.
 
 ---
 
-##### `eslintOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.eslintOptions"></a>
+##### `eslintOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.eslintOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyeslintoptions"></a>
 
 ```typescript
 public readonly eslintOptions: EslintOptions;
@@ -1581,7 +1735,7 @@ Eslint options.
 
 ---
 
-##### `libdir`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.libdir"></a>
+##### `libdir`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.libdir" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylibdir"></a>
 
 ```typescript
 public readonly libdir: string;
@@ -1594,7 +1748,7 @@ Typescript  artifacts output directory.
 
 ---
 
-##### `package`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.package"></a>
+##### `package`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.package" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackage"></a>
 
 ```typescript
 public readonly package: boolean;
@@ -1607,7 +1761,7 @@ Defines a `yarn package` command that will produce a tarball and place it under 
 
 ---
 
-##### `projenrcTs`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcTs"></a>
+##### `projenrcTs`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcTs" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcts"></a>
 
 ```typescript
 public readonly projenrcTs: boolean;
@@ -1620,7 +1774,7 @@ Use TypeScript for your projenrc file (`.projenrc.ts`).
 
 ---
 
-##### `projenrcTsOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcTsOptions"></a>
+##### `projenrcTsOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcTsOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrctsoptions"></a>
 
 ```typescript
 public readonly projenrcTsOptions: ProjenrcOptions;
@@ -1632,7 +1786,7 @@ Options for .projenrc.ts.
 
 ---
 
-##### `sampleCode`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.sampleCode"></a>
+##### `sampleCode`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.sampleCode" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertysamplecode"></a>
 
 ```typescript
 public readonly sampleCode: boolean;
@@ -1645,7 +1799,7 @@ Generate one-time sample in `src/` and `test/` if there are no files there.
 
 ---
 
-##### `srcdir`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.srcdir"></a>
+##### `srcdir`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.srcdir" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertysrcdir"></a>
 
 ```typescript
 public readonly srcdir: string;
@@ -1658,7 +1812,7 @@ Typescript sources directory.
 
 ---
 
-##### `testdir`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.testdir"></a>
+##### `testdir`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.testdir" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytestdir"></a>
 
 ```typescript
 public readonly testdir: string;
@@ -1673,7 +1827,7 @@ If this directory is under `srcdir` (e.g. `src/test`, `src/__tests__`), then tes
 
 ---
 
-##### `tsconfig`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.tsconfig"></a>
+##### `tsconfig`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.tsconfig" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytsconfig"></a>
 
 ```typescript
 public readonly tsconfig: TypescriptConfigOptions;
@@ -1686,7 +1840,7 @@ Custom TSConfig.
 
 ---
 
-##### `tsconfigDev`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.tsconfigDev"></a>
+##### `tsconfigDev`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.tsconfigDev" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytsconfigdev"></a>
 
 ```typescript
 public readonly tsconfigDev: TypescriptConfigOptions;
@@ -1699,7 +1853,7 @@ Custom tsconfig options for the development tsconfig.json file (used for testing
 
 ---
 
-##### `tsconfigDevFile`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.tsconfigDevFile"></a>
+##### `tsconfigDevFile`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.tsconfigDevFile" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytsconfigdevfile"></a>
 
 ```typescript
 public readonly tsconfigDevFile: string;
@@ -1712,7 +1866,7 @@ The name of the development tsconfig.json file.
 
 ---
 
-##### `typescriptVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.typescriptVersion"></a>
+##### `typescriptVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.typescriptVersion" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytypescriptversion"></a>
 
 ```typescript
 public readonly typescriptVersion: string;
@@ -1727,7 +1881,7 @@ NOTE: Typescript is not semantically versioned and should remain on the same min
 
 ---
 
-##### `cdkout`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkout"></a>
+##### `cdkout`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkout" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkout"></a>
 
 ```typescript
 public readonly cdkout: string;
@@ -1740,7 +1894,7 @@ cdk.out directory.
 
 ---
 
-##### `context`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.context"></a>
+##### `context`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.context" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycontext"></a>
 
 ```typescript
 public readonly context: {[ key: string ]: string};
@@ -1753,7 +1907,7 @@ Additional context to include in `cdk.json`.
 
 ---
 
-##### `featureFlags`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.featureFlags"></a>
+##### `featureFlags`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.featureFlags" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyfeatureflags"></a>
 
 ```typescript
 public readonly featureFlags: boolean;
@@ -1766,7 +1920,7 @@ Include all feature flags in cdk.json.
 
 ---
 
-##### `requireApproval`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.requireApproval"></a>
+##### `requireApproval`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.requireApproval" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrequireapproval"></a>
 
 ```typescript
 public readonly requireApproval: ApprovalLevel;
@@ -1779,7 +1933,33 @@ To protect you against unintended changes that affect your security posture, the
 
 ---
 
-##### `cdkVersion`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkVersion"></a>
+##### `watchExcludes`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.watchExcludes" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertywatchexcludes"></a>
+
+```typescript
+public readonly watchExcludes: string[];
+```
+
+- *Type:* `string`[]
+- *Default:* []
+
+Glob patterns to exclude from `cdk watch`.
+
+---
+
+##### `watchIncludes`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.watchIncludes" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertywatchincludes"></a>
+
+```typescript
+public readonly watchIncludes: string[];
+```
+
+- *Type:* `string`[]
+- *Default:* []
+
+Glob patterns to include in `cdk watch`.
+
+---
+
+##### `cdkVersion`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkVersion" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkversion"></a>
 
 ```typescript
 public readonly cdkVersion: string;
@@ -1792,7 +1972,7 @@ AWS CDK version to use.
 
 ---
 
-##### `appEntrypoint`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.appEntrypoint"></a>
+##### `appEntrypoint`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.appEntrypoint" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyappentrypoint"></a>
 
 ```typescript
 public readonly appEntrypoint: string;
@@ -1805,7 +1985,7 @@ The CDK app's entrypoint (relative to the source directory, which is "src" by de
 
 ---
 
-##### `cdkDependencies`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkDependencies"></a>
+##### `cdkDependencies`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkDependencies" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkdependencies"></a>
 
 ```typescript
 public readonly cdkDependencies: string[];
@@ -1817,7 +1997,7 @@ Which AWS CDK modules (those that start with "@aws-cdk/") this app uses.
 
 ---
 
-##### `cdkVersionPinning`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkVersionPinning"></a>
+##### `cdkVersionPinning`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkVersionPinning" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkversionpinning"></a>
 
 ```typescript
 public readonly cdkVersionPinning: boolean;
@@ -1832,7 +2012,7 @@ You can use this to prevent yarn to mix versions for your CDK dependencies and t
 
 ---
 
-##### `lambdaAutoDiscover`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.lambdaAutoDiscover"></a>
+##### `lambdaAutoDiscover`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.lambdaAutoDiscover" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaautodiscover"></a>
 
 ```typescript
 public readonly lambdaAutoDiscover: boolean;
@@ -1845,7 +2025,7 @@ Automatically adds an `awscdk.LambdaFunction` for each `.lambda.ts` handler in y
 
 ---
 
-##### `lambdaOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.lambdaOptions"></a>
+##### `lambdaOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.lambdaOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaoptions"></a>
 
 ```typescript
 public readonly lambdaOptions: LambdaFunctionCommonOptions;
@@ -1858,7 +2038,7 @@ Common options for all AWS Lambda functions.
 
 ---
 
-##### `deployOptions`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.deployOptions"></a>
+##### `deployOptions`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.deployOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeployoptions"></a>
 
 ```typescript
 public readonly deployOptions: DeployOptions;
@@ -1870,7 +2050,7 @@ Deployment options.
 
 ---
 
-##### `generateNvmrc`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.generateNvmrc"></a>
+##### `generateNvmrc`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.generateNvmrc" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygeneratenvmrc"></a>
 
 ```typescript
 public readonly generateNvmrc: boolean;
@@ -1883,9 +2063,9 @@ Whether to generate nvmrc file for the node version of the project.
 
 ---
 
-### DeployOptions <a name="deployable-awscdk-app-ts.DeployOptions"></a>
+### DeployOptions <a name="deployable-awscdk-app-ts.DeployOptions" id="deployableawscdkapptsdeployoptions"></a>
 
-#### Initializer <a name="[object Object].Initializer"></a>
+#### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
 import { DeployOptions } from 'deployable-awscdk-app-ts'
@@ -1893,7 +2073,16 @@ import { DeployOptions } from 'deployable-awscdk-app-ts'
 const deployOptions: DeployOptions = { ... }
 ```
 
-##### `environments`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployOptions.property.environments"></a>
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`environments`](#deployableawscdkapptsdeployoptionspropertyenvironments)<span title="Required">*</span> | [`deployable-awscdk-app-ts.EnvironmentOptions`](#deployable-awscdk-app-ts.EnvironmentOptions)[] | Environment settings to deploy to. |
+| [`stackPattern`](#deployableawscdkapptsdeployoptionspropertystackpattern) | `string` | Regex for stacks to be deployed. |
+
+---
+
+##### `environments`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployOptions.property.environments" id="deployableawscdkapptsdeployoptionspropertyenvironments"></a>
 
 ```typescript
 public readonly environments: EnvironmentOptions[];
@@ -1905,7 +2094,7 @@ Environment settings to deploy to.
 
 ---
 
-##### `stackPattern`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployOptions.property.stackPattern"></a>
+##### `stackPattern`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployOptions.property.stackPattern" id="deployableawscdkapptsdeployoptionspropertystackpattern"></a>
 
 ```typescript
 public readonly stackPattern: string;
@@ -1919,9 +2108,9 @@ if not provided matches all of the stacks in the CDK App.
 
 ---
 
-### EnvironmentOptions <a name="deployable-awscdk-app-ts.EnvironmentOptions"></a>
+### EnvironmentOptions <a name="deployable-awscdk-app-ts.EnvironmentOptions" id="deployableawscdkapptsenvironmentoptions"></a>
 
-#### Initializer <a name="[object Object].Initializer"></a>
+#### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
 import { EnvironmentOptions } from 'deployable-awscdk-app-ts'
@@ -1929,7 +2118,16 @@ import { EnvironmentOptions } from 'deployable-awscdk-app-ts'
 const environmentOptions: EnvironmentOptions = { ... }
 ```
 
-##### `awsCredentials`<sup>Required</sup> <a name="deployable-awscdk-app-ts.EnvironmentOptions.property.awsCredentials"></a>
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`awsCredentials`](#deployableawscdkapptsenvironmentoptionspropertyawscredentials)<span title="Required">*</span> | [`deployable-awscdk-app-ts.AWSCredentials`](#deployable-awscdk-app-ts.AWSCredentials) | AWS credential details for deployment. |
+| [`name`](#deployableawscdkapptsenvironmentoptionspropertyname)<span title="Required">*</span> | `string` | Environment name to deploy to. |
+
+---
+
+##### `awsCredentials`<sup>Required</sup> <a name="deployable-awscdk-app-ts.EnvironmentOptions.property.awsCredentials" id="deployableawscdkapptsenvironmentoptionspropertyawscredentials"></a>
 
 ```typescript
 public readonly awsCredentials: AWSCredentials;
@@ -1941,7 +2139,7 @@ AWS credential details for deployment.
 
 ---
 
-##### `name`<sup>Required</sup> <a name="deployable-awscdk-app-ts.EnvironmentOptions.property.name"></a>
+##### `name`<sup>Required</sup> <a name="deployable-awscdk-app-ts.EnvironmentOptions.property.name" id="deployableawscdkapptsenvironmentoptionspropertyname"></a>
 
 ```typescript
 public readonly name: string;
@@ -1953,11 +2151,11 @@ Environment name to deploy to.
 
 ---
 
-## Classes <a name="Classes"></a>
+## Classes <a name="Classes" id="classes"></a>
 
-### DeployableAwsCdkTypeScriptApp <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp"></a>
+### DeployableAwsCdkTypeScriptApp <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp" id="deployableawscdkapptsdeployableawscdktypescriptapp"></a>
 
-#### Initializers <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.Initializer"></a>
+#### Initializers <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.Initializer" id="deployableawscdkapptsdeployableawscdktypescriptappinitializer"></a>
 
 ```typescript
 import { DeployableAwsCdkTypeScriptApp } from 'deployable-awscdk-app-ts'
@@ -1965,15 +2163,27 @@ import { DeployableAwsCdkTypeScriptApp } from 'deployable-awscdk-app-ts'
 new DeployableAwsCdkTypeScriptApp(options: DeployableAwsCdkTypeScriptAppOptions)
 ```
 
-##### `options`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.parameter.options"></a>
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`options`](#deployableawscdkapptsdeployableawscdktypescriptappparameteroptions)<span title="Required">*</span> | [`deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions`](#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions) | *No description.* |
+
+---
+
+##### `options`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.parameter.options" id="deployableawscdkapptsdeployableawscdktypescriptappparameteroptions"></a>
 
 - *Type:* [`deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions`](#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions)
 
 ---
 
-#### Methods <a name="Methods"></a>
+#### Methods <a name="Methods" id="methods"></a>
 
-##### `synth` <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.synth"></a>
+| **Name** | **Description** |
+| --- | --- |
+| [`synth`](#deployableawscdkapptsdeployableawscdktypescriptappsynth) | (experimental) Synthesize all project files into `outdir`. |
+
+---
+
+##### `synth` <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.synth" id="deployableawscdkapptsdeployableawscdktypescriptappsynth"></a>
 
 ```typescript
 public synth()
