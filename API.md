@@ -108,7 +108,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`parent`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyparent) | [`projen.Project`](#projen.Project) | The parent project, if this project is part of a bigger project. |
 | [`projenCommand`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojencommand) | `string` | The shell command to use in order to run the projen CLI. |
 | [`projenrcJson`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjson) | `boolean` | Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation. |
-| [`projenrcJsonOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjsonoptions) | [`projen.json.ProjenrcOptions`](#projen.json.ProjenrcOptions) | Options for .projenrc.json. |
+| [`projenrcJsonOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjsonoptions) | [`projen.ProjenrcOptions`](#projen.ProjenrcOptions) | Options for .projenrc.json. |
 | [`autoApproveOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveoptions) | [`projen.github.AutoApproveOptions`](#projen.github.AutoApproveOptions) | Enable and configure the 'auto approve' workflow. |
 | [`autoMergeOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautomergeoptions) | [`projen.github.AutoMergeOptions`](#projen.github.AutoMergeOptions) | Configure options for automatic merging on GitHub. |
 | [`clobber`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyclobber) | `boolean` | Add a `clobber` task which resets the repo to origin. |
@@ -131,7 +131,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`autoDetectBin`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautodetectbin) | `boolean` | Automatically add all executables under the `bin` directory to your `package.json` file under the `bin` section. |
 | [`bin`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybin) | {[ key: string ]: `string`} | Binary programs vended with your module. |
 | [`bundledDeps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybundleddeps) | `string`[] | List of dependencies to bundle into this module. |
-| [`codeArtifactOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodeartifactoptions) | [`projen.CodeArtifactOptions`](#projen.CodeArtifactOptions) | Options for publishing npm package to AWS CodeArtifact. |
+| [`codeArtifactOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodeartifactoptions) | [`projen.javascript.CodeArtifactOptions`](#projen.javascript.CodeArtifactOptions) | Options for publishing npm package to AWS CodeArtifact. |
 | [`deps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeps) | `string`[] | Runtime dependencies of this module. |
 | [`description`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydescription) | `string` | The description is just a string that helps people understand the purpose of the package. |
 | [`devDeps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydevdeps) | `string`[] | Build dependencies for this module. |
@@ -142,14 +142,14 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`licensed`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylicensed) | `boolean` | Indicates if a license should be added. |
 | [`maxNodeVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymaxnodeversion) | `string` | Minimum node.js version to require via `engines` (inclusive). |
 | [`minNodeVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyminnodeversion) | `string` | Minimum Node.js version to require via package.json `engines` (inclusive). |
-| [`npmAccess`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmaccess) | [`projen.NpmAccess`](#projen.NpmAccess) | Access level of the npm package. |
+| [`npmAccess`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmaccess) | [`projen.javascript.NpmAccess`](#projen.javascript.NpmAccess) | Access level of the npm package. |
 | [`npmDistTag`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmdisttag) | `string` | Tags can be used to provide an alias instead of version numbers. |
 | [`npmRegistry`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmregistry) | `string` | The host name of the npm registry to publish to. |
 | [`npmRegistryUrl`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmregistryurl) | `string` | The base URL of the npm package registry. |
 | [`npmTokenSecret`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmtokensecret) | `string` | GitHub secret which contains the NPM token to use when publishing packages. |
-| [`packageManager`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackagemanager) | [`projen.NodePackageManager`](#projen.NodePackageManager) | The Node Package Manager used to execute scripts. |
+| [`packageManager`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackagemanager) | [`projen.javascript.NodePackageManager`](#projen.javascript.NodePackageManager) | The Node Package Manager used to execute scripts. |
 | [`packageName`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackagename) | `string` | The "name" in package.json. |
-| [`peerDependencyOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypeerdependencyoptions) | [`projen.PeerDependencyOptions`](#projen.PeerDependencyOptions) | Options for `peerDeps`. |
+| [`peerDependencyOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypeerdependencyoptions) | [`projen.javascript.PeerDependencyOptions`](#projen.javascript.PeerDependencyOptions) | Options for `peerDeps`. |
 | [`peerDeps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypeerdeps) | `string`[] | Peer dependencies for this module. |
 | [`repository`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrepository) | `string` | The repository is the location where the actual code for your package lives. |
 | [`repositoryDirectory`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrepositorydirectory) | `string` | If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives. |
@@ -184,10 +184,10 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`dependabot`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydependabot) | `boolean` | Use dependabot to handle dependency upgrades. |
 | [`dependabotOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydependabotoptions) | [`projen.github.DependabotOptions`](#projen.github.DependabotOptions) | Options for dependabot. |
 | [`depsUpgrade`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydepsupgrade) | `boolean` | Use github workflows to handle dependency upgrades. |
-| [`depsUpgradeOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydepsupgradeoptions) | [`projen.UpgradeDependenciesOptions`](#projen.UpgradeDependenciesOptions) | Options for depsUpgrade. |
+| [`depsUpgradeOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydepsupgradeoptions) | [`projen.javascript.UpgradeDependenciesOptions`](#projen.javascript.UpgradeDependenciesOptions) | Options for depsUpgrade. |
 | [`gitignore`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygitignore) | `string`[] | Additional entries to .gitignore. |
 | [`jest`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjest) | `boolean` | Setup jest unit tests. |
-| [`jestOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjestoptions) | [`projen.JestOptions`](#projen.JestOptions) | Jest options. |
+| [`jestOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjestoptions) | [`projen.javascript.JestOptions`](#projen.javascript.JestOptions) | Jest options. |
 | [`mutableBuild`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymutablebuild) | `boolean` | Automatically update files modified during builds to pull-request branches. |
 | [`npmignore`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmignore) | `string`[] | Additional entries to .npmignore. |
 | [`npmignoreEnabled`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmignoreenabled) | `boolean` | Defines an .npmignore file. Normally this is only needed for libraries that are packaged as tarballs. |
@@ -211,7 +211,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`docsDirectory`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydocsdirectory) | `string` | Docs directory. |
 | [`entrypointTypes`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyentrypointtypes) | `string` | The .d.ts file that includes the type declarations for this module. |
 | [`eslint`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyeslint) | `boolean` | Setup eslint. |
-| [`eslintOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyeslintoptions) | [`projen.EslintOptions`](#projen.EslintOptions) | Eslint options. |
+| [`eslintOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyeslintoptions) | [`projen.javascript.EslintOptions`](#projen.javascript.EslintOptions) | Eslint options. |
 | [`libdir`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylibdir) | `string` | Typescript  artifacts output directory. |
 | [`package`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackage) | `boolean` | Defines a `yarn package` command that will produce a tarball and place it under `dist/js`. |
 | [`projenrcTs`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcts) | `boolean` | Use TypeScript for your projenrc file (`.projenrc.ts`). |
@@ -219,8 +219,8 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`sampleCode`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertysamplecode) | `boolean` | Generate one-time sample in `src/` and `test/` if there are no files there. |
 | [`srcdir`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertysrcdir) | `string` | Typescript sources directory. |
 | [`testdir`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytestdir) | `string` | Jest tests directory. Tests files should be named `xxx.test.ts`. |
-| [`tsconfig`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytsconfig) | [`projen.TypescriptConfigOptions`](#projen.TypescriptConfigOptions) | Custom TSConfig. |
-| [`tsconfigDev`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytsconfigdev) | [`projen.TypescriptConfigOptions`](#projen.TypescriptConfigOptions) | Custom tsconfig options for the development tsconfig.json file (used for testing). |
+| [`tsconfig`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytsconfig) | [`projen.javascript.TypescriptConfigOptions`](#projen.javascript.TypescriptConfigOptions) | Custom TSConfig. |
+| [`tsconfigDev`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytsconfigdev) | [`projen.javascript.TypescriptConfigOptions`](#projen.javascript.TypescriptConfigOptions) | Custom tsconfig options for the development tsconfig.json file (used for testing). |
 | [`tsconfigDevFile`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytsconfigdevfile) | `string` | The name of the development tsconfig.json file. |
 | [`typescriptVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytypescriptversion) | `string` | TypeScript version to use. |
 | [`cdkout`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkout) | `string` | cdk.out directory. |
@@ -327,7 +327,7 @@ Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .pr
 public readonly projenrcJsonOptions: ProjenrcOptions;
 ```
 
-- *Type:* [`projen.json.ProjenrcOptions`](#projen.json.ProjenrcOptions)
+- *Type:* [`projen.ProjenrcOptions`](#projen.ProjenrcOptions)
 - *Default:* default options
 
 Options for .projenrc.json.
@@ -642,7 +642,7 @@ These modules will be added both to the `dependencies` section and `peerDependen
 public readonly codeArtifactOptions: CodeArtifactOptions;
 ```
 
-- *Type:* [`projen.CodeArtifactOptions`](#projen.CodeArtifactOptions)
+- *Type:* [`projen.javascript.CodeArtifactOptions`](#projen.javascript.CodeArtifactOptions)
 - *Default:* undefined
 
 Options for publishing npm package to AWS CodeArtifact.
@@ -792,7 +792,7 @@ Minimum Node.js version to require via package.json `engines` (inclusive).
 public readonly npmAccess: NpmAccess;
 ```
 
-- *Type:* [`projen.NpmAccess`](#projen.NpmAccess)
+- *Type:* [`projen.javascript.NpmAccess`](#projen.javascript.NpmAccess)
 - *Default:* for scoped packages (e.g. `foo@bar`), the default is `NpmAccess.RESTRICTED`, for non-scoped packages, the default is `NpmAccess.PUBLIC`.
 
 Access level of the npm package.
@@ -864,7 +864,7 @@ GitHub secret which contains the NPM token to use when publishing packages.
 public readonly packageManager: NodePackageManager;
 ```
 
-- *Type:* [`projen.NodePackageManager`](#projen.NodePackageManager)
+- *Type:* [`projen.javascript.NodePackageManager`](#projen.javascript.NodePackageManager)
 - *Default:* NodePackageManager.YARN
 
 The Node Package Manager used to execute scripts.
@@ -890,7 +890,7 @@ The "name" in package.json.
 public readonly peerDependencyOptions: PeerDependencyOptions;
 ```
 
-- *Type:* [`projen.PeerDependencyOptions`](#projen.PeerDependencyOptions)
+- *Type:* [`projen.javascript.PeerDependencyOptions`](#projen.javascript.PeerDependencyOptions)
 
 Options for `peerDeps`.
 
@@ -1367,7 +1367,7 @@ Cannot be used in conjunction with `dependabot`.
 public readonly depsUpgradeOptions: UpgradeDependenciesOptions;
 ```
 
-- *Type:* [`projen.UpgradeDependenciesOptions`](#projen.UpgradeDependenciesOptions)
+- *Type:* [`projen.javascript.UpgradeDependenciesOptions`](#projen.javascript.UpgradeDependenciesOptions)
 - *Default:* default options
 
 Options for depsUpgrade.
@@ -1405,7 +1405,7 @@ Setup jest unit tests.
 public readonly jestOptions: JestOptions;
 ```
 
-- *Type:* [`projen.JestOptions`](#projen.JestOptions)
+- *Type:* [`projen.javascript.JestOptions`](#projen.javascript.JestOptions)
 - *Default:* default options
 
 Jest options.
@@ -1728,7 +1728,7 @@ Setup eslint.
 public readonly eslintOptions: EslintOptions;
 ```
 
-- *Type:* [`projen.EslintOptions`](#projen.EslintOptions)
+- *Type:* [`projen.javascript.EslintOptions`](#projen.javascript.EslintOptions)
 - *Default:* opinionated default options
 
 Eslint options.
@@ -1833,7 +1833,7 @@ If this directory is under `srcdir` (e.g. `src/test`, `src/__tests__`), then tes
 public readonly tsconfig: TypescriptConfigOptions;
 ```
 
-- *Type:* [`projen.TypescriptConfigOptions`](#projen.TypescriptConfigOptions)
+- *Type:* [`projen.javascript.TypescriptConfigOptions`](#projen.javascript.TypescriptConfigOptions)
 - *Default:* default options
 
 Custom TSConfig.
@@ -1846,7 +1846,7 @@ Custom TSConfig.
 public readonly tsconfigDev: TypescriptConfigOptions;
 ```
 
-- *Type:* [`projen.TypescriptConfigOptions`](#projen.TypescriptConfigOptions)
+- *Type:* [`projen.javascript.TypescriptConfigOptions`](#projen.javascript.TypescriptConfigOptions)
 - *Default:* use the production tsconfig options
 
 Custom tsconfig options for the development tsconfig.json file (used for testing).

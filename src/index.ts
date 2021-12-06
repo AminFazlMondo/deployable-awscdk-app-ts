@@ -1,11 +1,11 @@
-import {AwsCdkTypeScriptApp, TextFile} from 'projen'
+import {awscdk, TextFile} from 'projen'
 import {Job, JobPermission} from 'projen/lib/github/workflows-model'
 import * as steps from './steps'
 import {DeployableAwsCdkTypeScriptAppOptions, DeployOptions} from './types'
 
 export * from './types'
 
-export class DeployableAwsCdkTypeScriptApp extends AwsCdkTypeScriptApp {
+export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
   private readonly deployable: boolean
   private readonly generateNvmrc: boolean

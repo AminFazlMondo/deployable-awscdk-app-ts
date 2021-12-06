@@ -1,8 +1,8 @@
-import {JsiiProject, NodePackageManager, NpmAccess, TextFile} from 'projen'
+import {javascript, cdk, TextFile} from 'projen'
 
 const nodeVersion = '14.18.1'
 
-const project = new JsiiProject({
+const project = new cdk.JsiiProject({
   author: 'Amin Fazl',
   authorAddress: 'amin.fazl@mondo.com.au',
   defaultReleaseBranch: 'main',
@@ -16,8 +16,8 @@ const project = new JsiiProject({
   ],
   projenrcTs: true,
   repositoryUrl: 'https://github.com/amin.fazl/deployable-awscdk-app-ts.git',
-  packageManager: NodePackageManager.NPM,
-  npmAccess: NpmAccess.PUBLIC,
+  packageManager: javascript.NodePackageManager.NPM,
+  npmAccess: javascript.NpmAccess.PUBLIC,
   deps: [
     'projen',
   ],

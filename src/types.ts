@@ -1,6 +1,6 @@
-import {AwsCdkTypeScriptAppOptions} from 'projen'
+import {awscdk} from 'projen'
 
-export interface DeployableAwsCdkTypeScriptAppOptions extends AwsCdkTypeScriptAppOptions {
+export interface DeployableAwsCdkTypeScriptAppOptions extends awscdk.AwsCdkTypeScriptAppOptions {
   /**
    * Deployment options
    */
