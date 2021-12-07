@@ -44,7 +44,7 @@ function setAwsCredentialsInEnvironment(): JobStep {
   ]
 
   return {
-    if: '${{ matrix.assumeRole == false }}',
+    if: '${{ matrix.assumeRole == "false" }}',
     name: 'Configure AWS Credentials',
     run: `\n${commands.join('\n')}`,
     env: {
@@ -57,7 +57,7 @@ function setAwsCredentialsInEnvironment(): JobStep {
 
 function assumeAwsRoleStep(): JobStep {
   return {
-    if: '${{ matrix.assumeRole == true }}',
+    if: '${{ matrix.assumeRole == "true" }}',
     name: 'Assume AWS Role',
     uses: 'aws-actions/configure-aws-credentials@v1',
     with: {
