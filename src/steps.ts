@@ -20,10 +20,10 @@ export function setNodeVersionStep(nodeVersion: string): JobStep {
   }
 }
 
-export function installDependenciesStep(): JobStep {
+export function installDependenciesStep(command: string): JobStep {
   return {
     name: 'Install dependencies',
-    run: 'npm ci',
+    run: command,
   }
 }
 
