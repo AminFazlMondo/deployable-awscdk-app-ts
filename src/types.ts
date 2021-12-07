@@ -23,8 +23,18 @@ export interface DeployOptions {
    * Regex for stacks to be deployed
    *
    * if not provided matches all of the stacks in the CDK App.
+   * @default undefined
    */
   readonly stackPattern?: string;
+
+  /**
+   * npm config name to set as the environment name
+   * This might be useful in deployment process
+   *
+   * if not provided will not set
+   * @default undefined
+   */
+  readonly npmConfigEnvironment?: string;
 }
 
 export interface EnvironmentOptions {

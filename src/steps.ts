@@ -20,10 +20,10 @@ export function setNodeVersionStep(nodeVersion: string): JobStep {
   }
 }
 
-export function installDependenciesStep(): JobStep {
+export function installDependenciesStep(command: string): JobStep {
   return {
     name: 'Install dependencies',
-    run: 'npm ci',
+    run: command,
   }
 }
 
@@ -44,7 +44,7 @@ function setAwsCredentialsInEnvironment(): JobStep {
   ]
 
   return {
-    if: '${{ matrix.assumeRole == "false" }}',
+    if: '${{ matrix.assumeRole == false }}',
     name: 'Configure AWS Credentials',
     run: `\n${commands.join('\n')}`,
     env: {
@@ -57,7 +57,7 @@ function setAwsCredentialsInEnvironment(): JobStep {
 
 function assumeAwsRoleStep(): JobStep {
   return {
-    if: '${{ matrix.assumeRole == "true" }}',
+    if: '${{ matrix.assumeRole == true }}',
     name: 'Assume AWS Role',
     uses: 'aws-actions/configure-aws-credentials@v1',
     with: {
@@ -75,4 +75,15 @@ export function setAwsCredentialsSteps(): JobStep[] {
     setAwsCredentialsInEnvironment(),
     assumeAwsRoleStep(),
   ]
+}
+
+export function setNpmConfig(configName: string, configValue: string): JobStep {
+  const environmentVariableName = 'CONFIG_VALUE'
+  return {
+    name: 'Setting NPM Config',
+    env: {
+      [environmentVariableName]: configValue,
+    },
+    run: `npm config set ${configName} $${environmentVariableName}`,
+  }
 }
