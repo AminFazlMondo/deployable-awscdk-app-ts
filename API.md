@@ -2078,6 +2078,7 @@ const deployOptions: DeployOptions = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | [`environments`](#deployableawscdkapptsdeployoptionspropertyenvironments)<span title="Required">*</span> | [`deployable-awscdk-app-ts.EnvironmentOptions`](#deployable-awscdk-app-ts.EnvironmentOptions)[] | Environment settings to deploy to. |
+| [`npmConfigEnvironment`](#deployableawscdkapptsdeployoptionspropertynpmconfigenvironment) | `string` | npm config name to set as the environment name This might be useful in deployment process. |
 | [`stackPattern`](#deployableawscdkapptsdeployoptionspropertystackpattern) | `string` | Regex for stacks to be deployed. |
 
 ---
@@ -2094,6 +2095,21 @@ Environment settings to deploy to.
 
 ---
 
+##### `npmConfigEnvironment`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployOptions.property.npmConfigEnvironment" id="deployableawscdkapptsdeployoptionspropertynpmconfigenvironment"></a>
+
+```typescript
+public readonly npmConfigEnvironment: string;
+```
+
+- *Type:* `string`
+- *Default:* undefined
+
+npm config name to set as the environment name This might be useful in deployment process.
+
+if not provided will not set
+
+---
+
 ##### `stackPattern`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployOptions.property.stackPattern" id="deployableawscdkapptsdeployoptionspropertystackpattern"></a>
 
 ```typescript
@@ -2101,6 +2117,7 @@ public readonly stackPattern: string;
 ```
 
 - *Type:* `string`
+- *Default:* undefined
 
 Regex for stacks to be deployed.
 
@@ -2179,7 +2196,20 @@ new DeployableAwsCdkTypeScriptApp(options: DeployableAwsCdkTypeScriptAppOptions)
 
 | **Name** | **Description** |
 | --- | --- |
+| [`addEnvironments`](#deployableawscdkapptsdeployableawscdktypescriptappaddenvironments) | *No description.* |
 | [`synth`](#deployableawscdkapptsdeployableawscdktypescriptappsynth) | (experimental) Synthesize all project files into `outdir`. |
+
+---
+
+##### `addEnvironments` <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments" id="deployableawscdkapptsdeployableawscdktypescriptappaddenvironments"></a>
+
+```typescript
+public addEnvironments(items: EnvironmentOptions)
+```
+
+###### `items`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.parameter.items" id="deployableawscdkapptsdeployableawscdktypescriptappparameteritems"></a>
+
+- *Type:* [`deployable-awscdk-app-ts.EnvironmentOptions`](#deployable-awscdk-app-ts.EnvironmentOptions)
 
 ---
 
