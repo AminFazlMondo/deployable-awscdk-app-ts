@@ -268,3 +268,40 @@ describe('environment added by invoking the addEnvironments', () => {
     expect(content).toMatchSnapshot()
   })
 })
+
+describe('npm config set for each environments', () => {
+  const outdir = mkdtemp()
+  const project = new DeployableAwsCdkTypeScriptApp({
+    name: 'my-test-app',
+    defaultReleaseBranch: 'main',
+    cdkVersion: '1.129.0',
+    outdir,
+    workflowNodeVersion: '14.18.1',
+    deployOptions: {
+      npmConfigEnvironment: 'stage',
+      environments: [{
+        name: 'dev',
+        awsCredentials: {
+          accessKeyIdSecretName: 'dev-secret-1',
+          secretAccessKeySecretName: 'dev-secret-2',
+          region: 'dev-aws-region-1',
+        },
+      },
+      {
+        name: 'staging',
+        awsCredentials: {
+          accessKeyIdSecretName: 'staging-secret-1',
+          secretAccessKeySecretName: 'staging-secret-2',
+          region: 'staging-aws-region-1',
+        },
+      }],
+    },
+  })
+
+  project.synth()
+
+  test('release workflow', () => {
+    const content = readFile('/.github/workflows/release.yml', project.outdir)
+    expect(content).toMatchSnapshot()
+  })
+})

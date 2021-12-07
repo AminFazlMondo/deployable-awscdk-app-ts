@@ -99,6 +99,9 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
     jobDefinition.steps.push(steps.installDependenciesStep())
     jobDefinition.steps.push(...steps.setAwsCredentialsSteps())
+    if (this.deployOptions.npmConfigEnvironment)
+      jobDefinition.steps.push(steps.setNpmConfig(this.deployOptions.npmConfigEnvironment, '${{ matrix.environment }}'))
+
     jobDefinition.steps.push(steps.deploymentStep(this.deployOptions.stackPattern))
 
     this.release?.addJobs({deploy: jobDefinition})

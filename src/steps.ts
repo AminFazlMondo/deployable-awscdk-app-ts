@@ -76,3 +76,14 @@ export function setAwsCredentialsSteps(): JobStep[] {
     assumeAwsRoleStep(),
   ]
 }
+
+export function setNpmConfig(configName: string, configValue: string): JobStep {
+  const environmentVariableName = 'CONFIG_VALUE'
+  return {
+    name: 'Setting NPM Config',
+    env: {
+      [environmentVariableName]: configValue,
+    },
+    run: `npm config set ${configName} $${environmentVariableName}`,
+  }
+}
