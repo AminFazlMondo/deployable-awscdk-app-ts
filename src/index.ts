@@ -1,7 +1,7 @@
 import {awscdk, TextFile} from 'projen'
 import {Job, JobPermission} from 'projen/lib/github/workflows-model'
 import * as steps from './steps'
-import {DeployableAwsCdkTypeScriptAppOptions, DeployOptions} from './types'
+import {DeployableAwsCdkTypeScriptAppOptions, DeployOptions, EnvironmentOptions} from './types'
 
 export * from './types'
 
@@ -32,7 +32,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
   synth() {
     if (this.deployable)
-      this.addDeployJobs(this.workflowNodeVersion)
+      this.addDeployJobs()
 
     if (this.generateNvmrc)
       new TextFile(this, '.nvmrc', {
@@ -42,7 +42,14 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     super.synth()
   }
 
-  private addDeployJobs(workflowNodeVersion?: string) {
+  addEnvironments(...items: EnvironmentOptions[]) {
+    this.deployOptions.environments.push(...items)
+  }
+
+  private addDeployJobs() {
+
+    if (this.deployOptions.environments.length === 0)
+      console.warn('The project does not have any environment set, make sure this is desired setting')
 
     const include = this.deployOptions.environments.map(environmentOptions => {
       const {awsCredentials} = environmentOptions
@@ -87,8 +94,8 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
     jobDefinition.steps.push(steps.checkoutStep())
 
-    if (workflowNodeVersion)
-      jobDefinition.steps.push(steps.setNodeVersionStep(workflowNodeVersion))
+    if (this.workflowNodeVersion)
+      jobDefinition.steps.push(steps.setNodeVersionStep(this.workflowNodeVersion))
 
     jobDefinition.steps.push(steps.installDependenciesStep())
     jobDefinition.steps.push(...steps.setAwsCredentialsSteps())
