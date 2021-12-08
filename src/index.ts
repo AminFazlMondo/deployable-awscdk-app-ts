@@ -83,6 +83,9 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       strategy: {
         maxParallel: 1,
         matrix: {
+          domain: {
+            environment: include.map(e => e.environment),
+          },
           include,
         },
       },

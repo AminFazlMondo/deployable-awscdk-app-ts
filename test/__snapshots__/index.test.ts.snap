@@ -123,6 +123,9 @@ jobs:
             secretAccessKey: staging-secret-2
             region: staging-aws-region-1
             assumeRole: \\"false\\"
+        environment:
+          - dev
+          - staging
 "
 `;
 
@@ -238,6 +241,8 @@ jobs:
             assumeRole: \\"true\\"
             roleToAssume: dev-role
             assumeRoleDurationSeconds: \\"300\\"
+        environment:
+          - dev
 "
 `;
 
@@ -353,6 +358,8 @@ jobs:
             assumeRole: \\"true\\"
             roleToAssume: dev-role
             assumeRoleDurationSeconds: \\"1200\\"
+        environment:
+          - dev
 "
 `;
 
@@ -479,6 +486,9 @@ jobs:
             secretAccessKey: staging-secret-2
             region: staging-aws-region-1
             assumeRole: \\"false\\"
+        environment:
+          - dev
+          - staging
 "
 `;
 
@@ -609,6 +619,9 @@ jobs:
             secretAccessKey: staging-secret-2
             region: staging-aws-region-1
             assumeRole: \\"false\\"
+        environment:
+          - dev
+          - staging
 "
 `;
 
@@ -722,5 +735,7 @@ jobs:
             secretAccessKey: dev-secret-2
             region: dev-aws-region-1
             assumeRole: \\"false\\"
+        environment:
+          - dev
 "
 `;
