@@ -172,6 +172,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`releaseWorkflowSetupSteps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleaseworkflowsetupsteps) | [`projen.github.workflows.JobStep`](#projen.github.workflows.JobStep)[] | A set of workflow steps to execute in order to setup the workflow container. |
 | [`versionrcOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyversionrcoptions) | {[ key: string ]: `any`} | Custom configuration used when creating changelog with standard-version package. |
 | [`workflowContainerImage`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflowcontainerimage) | `string` | Container image to use for GitHub workflows. |
+| [`workflowRunsOn`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflowrunson) | `string`[] | Github Runner selection labels. |
 | [`defaultReleaseBranch`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydefaultreleasebranch)<span title="Required">*</span> | `string` | The name of the main release branch. |
 | [`autoApproveProjenUpgrades`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveprojenupgrades) | `boolean` | Automatically approve projen upgrade PRs, allowing them to be merged by mergify (if configued). |
 | [`autoApproveUpgrades`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveupgrades) | `boolean` | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued). |
@@ -1195,6 +1196,19 @@ public readonly workflowContainerImage: string;
 - *Default:* default image
 
 Container image to use for GitHub workflows.
+
+---
+
+##### `workflowRunsOn`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowRunsOn" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflowrunson"></a>
+
+```typescript
+public readonly workflowRunsOn: string[];
+```
+
+- *Type:* `string`[]
+- *Default:* ["ubuntu-latest"]
+
+Github Runner selection labels.
 
 ---
 

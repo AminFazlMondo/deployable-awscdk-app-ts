@@ -72,7 +72,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     })
 
     const jobDefinition: Job = {
-      runsOn: 'ubuntu-latest',
+      runsOn: ['ubuntu-latest'],
       concurrency: 'deploy',
       needs: [
         'release_github',
