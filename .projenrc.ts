@@ -32,6 +32,7 @@ const project = new cdk.JsiiProject({
   depsUpgradeOptions: {
     ignoreProjen: false,
   },
+  publishTasks: true,
 })
 
 new TextFile(project, '.nvmrc', {
