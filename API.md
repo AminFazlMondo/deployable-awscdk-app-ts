@@ -143,7 +143,6 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`maxNodeVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymaxnodeversion) | `string` | Minimum node.js version to require via `engines` (inclusive). |
 | [`minNodeVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyminnodeversion) | `string` | Minimum Node.js version to require via package.json `engines` (inclusive). |
 | [`npmAccess`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmaccess) | [`projen.javascript.NpmAccess`](#projen.javascript.NpmAccess) | Access level of the npm package. |
-| [`npmDistTag`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmdisttag) | `string` | Tags can be used to provide an alias instead of version numbers. |
 | [`npmRegistry`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmregistry) | `string` | The host name of the npm registry to publish to. |
 | [`npmRegistryUrl`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmregistryurl) | `string` | The base URL of the npm package registry. |
 | [`npmTokenSecret`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmtokensecret) | `string` | GitHub secret which contains the NPM token to use when publishing packages. |
@@ -159,8 +158,10 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`artifactsDirectory`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyartifactsdirectory) | `string` | A directory which will contain artifacts to be published to npm. |
 | [`jsiiReleaseVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjsiireleaseversion) | `string` | Version requirement of `jsii-release` which is used to publish modules to npm. |
 | [`majorVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymajorversion) | `number` | Major version to release from the default branch. |
+| [`npmDistTag`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmdisttag) | `string` | The npmDistTag to use when publishing from the default branch. |
 | [`postBuildSteps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypostbuildsteps) | [`projen.github.workflows.JobStep`](#projen.github.workflows.JobStep)[] | Steps to execute after build as part of the release workflow. |
 | [`prerelease`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprerelease) | `string` | Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre"). |
+| [`publishTasks`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypublishtasks) | `boolean` | Define publishing tasks that can be executed manually as well as workflows. |
 | [`releaseBranches`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasebranches) | {[ key: string ]: [`projen.release.BranchOptions`](#projen.release.BranchOptions)} | Defines additional release branches. |
 | [`releaseEveryCommit`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleaseeverycommit) | `boolean` | Automatically release new versions every commit to one of branches in `releaseBranches`. |
 | [`releaseFailureIssue`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasefailureissue) | `boolean` | Create a github issue on every failed publishing task. |
@@ -800,21 +801,6 @@ Access level of the npm package.
 
 ---
 
-##### `npmDistTag`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmDistTag" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmdisttag"></a>
-
-```typescript
-public readonly npmDistTag: string;
-```
-
-- *Type:* `string`
-- *Default:* "latest"
-
-Tags can be used to provide an alias instead of version numbers.
-
-For example, a project might choose to have multiple streams of development and use a different tag for each stream, e.g., stable, beta, dev, canary.  By default, the `latest` tag is used by npm to identify the current version of a package, and `npm install <pkg>` (without any `@<version>` or `@<tag>` specifier) installs the latest tag. Typically, projects only use the `latest` tag for stable release versions, and use other tags for unstable versions such as prereleases.  The `next` tag is used by some projects to identify the upcoming version.
-
----
-
 ##### ~~`npmRegistry`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmRegistry" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmregistry"></a>
 
 - *Deprecated:* use `npmRegistryUrl` instead
@@ -1019,6 +1005,21 @@ If this is specified, we bump the latest version of this major version line. If 
 
 ---
 
+##### `npmDistTag`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmDistTag" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmdisttag"></a>
+
+```typescript
+public readonly npmDistTag: string;
+```
+
+- *Type:* `string`
+- *Default:* "latest"
+
+The npmDistTag to use when publishing from the default branch.
+
+To set the npm dist-tag for release branches, set the `npmDistTag` property for each branch.
+
+---
+
 ##### `postBuildSteps`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.postBuildSteps" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypostbuildsteps"></a>
 
 ```typescript
@@ -1042,6 +1043,21 @@ public readonly prerelease: string;
 - *Default:* normal semantic versions
 
 Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre").
+
+---
+
+##### `publishTasks`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.publishTasks" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypublishtasks"></a>
+
+```typescript
+public readonly publishTasks: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Define publishing tasks that can be executed manually as well as workflows.
+
+Normally, publishing only happens within automated workflows. Enable this in order to create a publishing task for each publishing activity.
 
 ---
 
