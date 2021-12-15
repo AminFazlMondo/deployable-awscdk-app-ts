@@ -225,16 +225,22 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`tsconfigDev`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytsconfigdev) | [`projen.javascript.TypescriptConfigOptions`](#projen.javascript.TypescriptConfigOptions) | Custom tsconfig options for the development tsconfig.json file (used for testing). |
 | [`tsconfigDevFile`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytsconfigdevfile) | `string` | The name of the development tsconfig.json file. |
 | [`typescriptVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytypescriptversion) | `string` | TypeScript version to use. |
+| [`buildCommand`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybuildcommand) | `string` | A command to execute before synthesis. |
 | [`cdkout`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkout) | `string` | cdk.out directory. |
 | [`context`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycontext) | {[ key: string ]: `string`} | Additional context to include in `cdk.json`. |
 | [`featureFlags`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyfeatureflags) | `boolean` | Include all feature flags in cdk.json. |
 | [`requireApproval`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrequireapproval) | [`projen.awscdk.ApprovalLevel`](#projen.awscdk.ApprovalLevel) | To protect you against unintended changes that affect your security posture, the AWS CDK Toolkit prompts you to approve security-related changes before deploying them. |
 | [`watchExcludes`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertywatchexcludes) | `string`[] | Glob patterns to exclude from `cdk watch`. |
 | [`watchIncludes`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertywatchincludes) | `string`[] | Glob patterns to include in `cdk watch`. |
-| [`cdkVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkversion)<span title="Required">*</span> | `string` | AWS CDK version to use. |
-| [`appEntrypoint`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyappentrypoint) | `string` | The CDK app's entrypoint (relative to the source directory, which is "src" by default). |
-| [`cdkDependencies`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkdependencies) | `string`[] | Which AWS CDK modules (those that start with "@aws-cdk/") this app uses. |
+| [`cdkVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkversion)<span title="Required">*</span> | `string` | Minimum version of the AWS CDK to depend on. |
+| [`cdkAssert`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkassert) | `boolean` | Install the @aws-cdk/assert library? |
+| [`cdkAssertions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkassertions) | `boolean` | Install the @aws-cdk/assertions library? |
+| [`cdkDependencies`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkdependencies) | `string`[] | Which AWS CDK modules (those that start with "@aws-cdk/") does this library require when consumed? |
+| [`cdkDependenciesAsDeps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkdependenciesasdeps) | `boolean` | If this is enabled (default), all modules declared in `cdkDependencies` will be also added as normal `dependencies` (as well as `peerDependencies`). |
+| [`cdkTestDependencies`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdktestdependencies) | `string`[] | AWS CDK modules required for testing. |
 | [`cdkVersionPinning`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkversionpinning) | `boolean` | Use pinned version instead of caret version for CDK. |
+| [`constructsVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyconstructsversion) | `string` | Minimum version of the `constructs` library to depend on. |
+| [`appEntrypoint`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyappentrypoint) | `string` | The CDK app's entrypoint (relative to the source directory, which is "src" by default). |
 | [`lambdaAutoDiscover`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaautodiscover) | `boolean` | Automatically adds an `awscdk.LambdaFunction` for each `.lambda.ts` handler in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project. |
 | [`lambdaOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaoptions) | [`projen.awscdk.LambdaFunctionCommonOptions`](#projen.awscdk.LambdaFunctionCommonOptions) | Common options for all AWS Lambda functions. |
 | [`deployOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeployoptions)<span title="Required">*</span> | [`deployable-awscdk-app-ts.DeployOptions`](#deployable-awscdk-app-ts.DeployOptions) | Deployment options. |
@@ -634,7 +640,7 @@ public readonly bundledDeps: string[];
 
 List of dependencies to bundle into this module.
 
-These modules will be added both to the `dependencies` section and `peerDependencies` section of your `package.json`.  The recommendation is to only specify the module name here (e.g. `express`). This will behave similar to `yarn add` or `npm install` in the sense that it will add the module as a dependency to your `package.json` file with the latest version (`^`). You can specify semver requirements in the same syntax passed to `npm i` or `yarn add` (e.g. `express@^2`) and this will be what you `package.json` will eventually include.
+These modules will be added both to the `dependencies` section and `bundledDependencies` section of your `package.json`.  The recommendation is to only specify the module name here (e.g. `express`). This will behave similar to `yarn add` or `npm install` in the sense that it will add the module as a dependency to your `package.json` file with the latest version (`^`). You can specify semver requirements in the same syntax passed to `npm i` or `yarn add` (e.g. `express@^2`) and this will be what you `package.json` will eventually include.
 
 ---
 
@@ -1911,6 +1917,21 @@ NOTE: Typescript is not semantically versioned and should remain on the same min
 
 ---
 
+##### `buildCommand`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.buildCommand" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybuildcommand"></a>
+
+```typescript
+public readonly buildCommand: string;
+```
+
+- *Type:* `string`
+- *Default:* no build command
+
+A command to execute before synthesis.
+
+This command will be called when running `cdk synth` or when `cdk watch` identifies a change in your source code before redeployment.
+
+---
+
 ##### `cdkout`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkout" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkout"></a>
 
 ```typescript
@@ -1996,9 +2017,111 @@ public readonly cdkVersion: string;
 ```
 
 - *Type:* `string`
-- *Default:* "1.129.0"
+- *Default:* "2.1.0"
 
-AWS CDK version to use.
+Minimum version of the AWS CDK to depend on.
+
+---
+
+##### ~~`cdkAssert`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkAssert" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkassert"></a>
+
+- *Deprecated:* The
+
+```typescript
+public readonly cdkAssert: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* will be included by default for AWS CDK >= 1.0.0 < 2.0.0
+
+Install the @aws-cdk/assert library?
+
+---
+
+##### `cdkAssertions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkAssertions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkassertions"></a>
+
+```typescript
+public readonly cdkAssertions: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* will be included by default for AWS CDK >= 1.111.0 < 2.0.0
+
+Install the @aws-cdk/assertions library?
+
+Only needed for CDK 1.x. If using CDK 2.x then assertions is already included in 'aws-cdk-lib'
+
+---
+
+##### ~~`cdkDependencies`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkDependencies" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkdependencies"></a>
+
+- *Deprecated:* For CDK 2.x use 'peerDeps' instead
+
+```typescript
+public readonly cdkDependencies: string[];
+```
+
+- *Type:* `string`[]
+
+Which AWS CDK modules (those that start with "@aws-cdk/") does this library require when consumed?
+
+---
+
+##### ~~`cdkDependenciesAsDeps`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkDependenciesAsDeps" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkdependenciesasdeps"></a>
+
+- *Deprecated:* Not supported in CDK v2.
+
+```typescript
+public readonly cdkDependenciesAsDeps: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* true
+
+If this is enabled (default), all modules declared in `cdkDependencies` will be also added as normal `dependencies` (as well as `peerDependencies`).
+
+This is to ensure that downstream consumers actually have your CDK dependencies installed when using npm < 7 or yarn, where peer dependencies are not automatically installed. If this is disabled, `cdkDependencies` will be added to `devDependencies` to ensure they are present during development.
+
+---
+
+##### ~~`cdkTestDependencies`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkTestDependencies" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdktestdependencies"></a>
+
+- *Deprecated:* For CDK 2.x use 'devDeps' instead
+
+```typescript
+public readonly cdkTestDependencies: string[];
+```
+
+- *Type:* `string`[]
+
+AWS CDK modules required for testing.
+
+---
+
+##### `cdkVersionPinning`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkVersionPinning" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkversionpinning"></a>
+
+```typescript
+public readonly cdkVersionPinning: boolean;
+```
+
+- *Type:* `boolean`
+
+Use pinned version instead of caret version for CDK.
+
+You can use this to prevent yarn to mix versions for your CDK dependencies and to prevent auto-updates. If you use experimental features this will let you define the moment you include breaking changes.
+
+---
+
+##### `constructsVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.constructsVersion" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyconstructsversion"></a>
+
+```typescript
+public readonly constructsVersion: string;
+```
+
+- *Type:* `string`
+- *Default:* for CDK 1.x the default is "3.2.27", for CDK 2.x the default is "10.0.5".
+
+Minimum version of the `constructs` library to depend on.
 
 ---
 
@@ -2012,33 +2135,6 @@ public readonly appEntrypoint: string;
 - *Default:* "main.ts"
 
 The CDK app's entrypoint (relative to the source directory, which is "src" by default).
-
----
-
-##### `cdkDependencies`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkDependencies" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkdependencies"></a>
-
-```typescript
-public readonly cdkDependencies: string[];
-```
-
-- *Type:* `string`[]
-
-Which AWS CDK modules (those that start with "@aws-cdk/") this app uses.
-
----
-
-##### `cdkVersionPinning`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkVersionPinning" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkversionpinning"></a>
-
-```typescript
-public readonly cdkVersionPinning: boolean;
-```
-
-- *Type:* `boolean`
-- *Default:* false
-
-Use pinned version instead of caret version for CDK.
-
-You can use this to prevent yarn to mix versions for your CDK dependencies and to prevent auto-updates. If you use experimental features this will let you define the moment you include breaking changes.
 
 ---
 
