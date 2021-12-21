@@ -118,13 +118,13 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: dev-secret-1
-            secretAccessKey: dev-secret-2
+            accessKeyId: \${{ secrets.dev-secret-1 }}
+            secretAccessKey: \${{ secrets.dev-secret-2 }}
             region: dev-aws-region-1
             assumeRole: \\"false\\"
           - environment: staging
-            accessKeyId: staging-secret-1
-            secretAccessKey: staging-secret-2
+            accessKeyId: \${{ secrets.staging-secret-1 }}
+            secretAccessKey: \${{ secrets.staging-secret-2 }}
             region: staging-aws-region-1
             assumeRole: \\"false\\"
         environment:
@@ -243,8 +243,8 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: dev-secret-1
-            secretAccessKey: dev-secret-2
+            accessKeyId: \${{ secrets.dev-secret-1 }}
+            secretAccessKey: \${{ secrets.dev-secret-2 }}
             region: dev-aws-region-1
             assumeRole: \\"true\\"
             roleToAssume: dev-role
@@ -364,8 +364,8 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: dev-secret-1
-            secretAccessKey: dev-secret-2
+            accessKeyId: \${{ secrets.dev-secret-1 }}
+            secretAccessKey: \${{ secrets.dev-secret-2 }}
             region: dev-aws-region-1
             assumeRole: \\"true\\"
             roleToAssume: dev-role
@@ -493,13 +493,13 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: dev-secret-1
-            secretAccessKey: dev-secret-2
+            accessKeyId: \${{ secrets.dev-secret-1 }}
+            secretAccessKey: \${{ secrets.dev-secret-2 }}
             region: dev-aws-region-1
             assumeRole: \\"false\\"
           - environment: staging
-            accessKeyId: staging-secret-1
-            secretAccessKey: staging-secret-2
+            accessKeyId: \${{ secrets.staging-secret-1 }}
+            secretAccessKey: \${{ secrets.staging-secret-2 }}
             region: staging-aws-region-1
             assumeRole: \\"false\\"
         environment:
@@ -630,13 +630,13 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: dev-secret-1
-            secretAccessKey: dev-secret-2
+            accessKeyId: \${{ secrets.dev-secret-1 }}
+            secretAccessKey: \${{ secrets.dev-secret-2 }}
             region: dev-aws-region-1
             assumeRole: \\"false\\"
           - environment: staging
-            accessKeyId: staging-secret-1
-            secretAccessKey: staging-secret-2
+            accessKeyId: \${{ secrets.staging-secret-1 }}
+            secretAccessKey: \${{ secrets.staging-secret-2 }}
             region: staging-aws-region-1
             assumeRole: \\"false\\"
         environment:
@@ -774,8 +774,8 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: dev-secret-1
-            secretAccessKey: dev-secret-2
+            accessKeyId: \${{ secrets.dev-secret-1 }}
+            secretAccessKey: \${{ secrets.dev-secret-2 }}
             region: dev-aws-region-1
             assumeRole: \\"false\\"
         environment:
@@ -893,8 +893,8 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: dev-secret-1
-            secretAccessKey: dev-secret-2
+            accessKeyId: \${{ secrets.dev-secret-1 }}
+            secretAccessKey: \${{ secrets.dev-secret-2 }}
             region: dev-aws-region-1
             assumeRole: \\"false\\"
         environment:

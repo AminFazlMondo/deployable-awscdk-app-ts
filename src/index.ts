@@ -63,10 +63,13 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
         assumeRoleDurationSeconds: (awsCredentials.assumeRoleDurationSeconds || 300).toString(),
       }: undefined
 
+      const accessKeyIdSecretName = awsCredentials.accessKeyIdSecretName ?? 'AWS_ACCESS_KEY_ID'
+      const secretAccessKeySecretName = awsCredentials.secretAccessKeySecretName ?? 'AWS_SECRET_ACCESS_KEY'
+
       return {
         environment: environmentOptions.name,
-        accessKeyId: awsCredentials.accessKeyIdSecretName ?? 'AWS_ACCESS_KEY_ID',
-        secretAccessKey: awsCredentials.secretAccessKeySecretName ?? 'AWS_SECRET_ACCESS_KEY',
+        accessKeyId: `\${{ secrets.${accessKeyIdSecretName} }}`,
+        secretAccessKey: `\${{ secrets.${secretAccessKeySecretName} }}`,
         region: awsCredentials.region,
         assumeRole,
         ...assumeRoleSettings,
