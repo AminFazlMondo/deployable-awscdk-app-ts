@@ -9,6 +9,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
   private readonly deployable: boolean
   private readonly generateNvmrc: boolean
+  private readonly checkActiveDeployment: boolean
   private readonly workflowNodeVersion?: string
   private readonly deployOptions: DeployOptions
 
@@ -20,6 +21,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     })
     this.deployable = deployable
     this.generateNvmrc = options.generateNvmrc ?? true
+    this.checkActiveDeployment = options.checkActiveDeployment ?? false
     this.workflowNodeVersion = options.workflowNodeVersion
     this.deployOptions = options.deployOptions
 
@@ -79,6 +81,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       ],
       permissions: {
         contents: JobPermission.READ,
+        deployments: JobPermission.READ,
       },
       strategy: {
         maxParallel: 1,
@@ -97,16 +100,19 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
     jobDefinition.steps.push(steps.checkoutStep())
 
-    if (this.workflowNodeVersion)
-      jobDefinition.steps.push(steps.setNodeVersionStep(this.workflowNodeVersion))
+    if (this.checkActiveDeployment)
+      jobDefinition.steps.push(steps.checkActiveDeploymentStep())
 
-    jobDefinition.steps.push(steps.installDependenciesStep(this.package.installCommand))
-    jobDefinition.steps.push(...steps.setAwsCredentialsSteps())
+    if (this.workflowNodeVersion)
+      jobDefinition.steps.push(steps.setNodeVersionStep(this.workflowNodeVersion, this.checkActiveDeployment))
+
+    jobDefinition.steps.push(steps.installDependenciesStep(this.package.installCommand, this.checkActiveDeployment))
+    jobDefinition.steps.push(...steps.setAwsCredentialsSteps(this.checkActiveDeployment))
 
     if (this.deployOptions.npmConfigEnvironment)
-      jobDefinition.steps.push(steps.setNpmConfig(this.deployOptions.npmConfigEnvironment, '${{ matrix.environment }}'))
+      jobDefinition.steps.push(steps.setNpmConfig(this.deployOptions.npmConfigEnvironment, '${{ matrix.environment }}', this.checkActiveDeployment))
 
-    jobDefinition.steps.push(steps.deploymentStep(this.deployOptions.stackPattern))
+    jobDefinition.steps.push(steps.deploymentStep(this.deployOptions.stackPattern, this.checkActiveDeployment))
 
     this.release?.addJobs({deploy: jobDefinition})
 

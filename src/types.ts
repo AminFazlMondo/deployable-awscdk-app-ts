@@ -11,6 +11,12 @@ export interface DeployableAwsCdkTypeScriptAppOptions extends awscdk.AwsCdkTypeS
    * @default true
    */
   readonly generateNvmrc?: boolean;
+
+  /**
+   * Whether to check and skip the deployment for environments that have active deployment of the same commit
+   * @default false
+   */
+  readonly checkActiveDeployment?: boolean;
 }
 
 export interface DeployOptions {
