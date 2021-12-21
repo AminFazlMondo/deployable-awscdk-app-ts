@@ -48,8 +48,8 @@ function setAwsCredentialsInEnvironment(checkActiveDeployment: boolean): JobStep
 
   const condition =
     checkActiveDeployment ?
-      `\${{ matrix.assumeRole == false && ${skipIfAlreadyActiveDeploymentCondition} }}` :
-      '${{ matrix.assumeRole == false }}'
+      `\${{ matrix.assumeRole == 'false' && ${skipIfAlreadyActiveDeploymentCondition} }}` :
+      '${{ matrix.assumeRole == \'false\' }}'
 
   return {
     if: condition,
@@ -66,8 +66,8 @@ function setAwsCredentialsInEnvironment(checkActiveDeployment: boolean): JobStep
 function assumeAwsRoleStep(checkActiveDeployment: boolean): JobStep {
   const condition =
     checkActiveDeployment ?
-      `\${{ matrix.assumeRole == true && ${skipIfAlreadyActiveDeploymentCondition} }}` :
-      '${{ matrix.assumeRole == true }}'
+      `\${{ matrix.assumeRole == 'true' && ${skipIfAlreadyActiveDeploymentCondition} }}` :
+      '${{ matrix.assumeRole == \'true\' }}'
   return {
     if: condition,
     name: 'Assume AWS Role',
