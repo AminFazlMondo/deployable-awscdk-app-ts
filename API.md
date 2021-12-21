@@ -244,6 +244,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`lambdaAutoDiscover`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaautodiscover) | `boolean` | Automatically adds an `awscdk.LambdaFunction` for each `.lambda.ts` handler in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project. |
 | [`lambdaOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaoptions) | [`projen.awscdk.LambdaFunctionCommonOptions`](#projen.awscdk.LambdaFunctionCommonOptions) | Common options for all AWS Lambda functions. |
 | [`deployOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeployoptions)<span title="Required">*</span> | [`deployable-awscdk-app-ts.DeployOptions`](#deployable-awscdk-app-ts.DeployOptions) | Deployment options. |
+| [`checkActiveDeployment`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycheckactivedeployment) | `boolean` | Whether to check and skip the deployment for environments that have active deployment of the same commit. |
 | [`generateNvmrc`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygeneratenvmrc) | `boolean` | Whether to generate nvmrc file for the node version of the project. |
 
 ---
@@ -2173,6 +2174,19 @@ public readonly deployOptions: DeployOptions;
 - *Type:* [`deployable-awscdk-app-ts.DeployOptions`](#deployable-awscdk-app-ts.DeployOptions)
 
 Deployment options.
+
+---
+
+##### `checkActiveDeployment`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.checkActiveDeployment" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycheckactivedeployment"></a>
+
+```typescript
+public readonly checkActiveDeployment: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Whether to check and skip the deployment for environments that have active deployment of the same commit.
 
 ---
 

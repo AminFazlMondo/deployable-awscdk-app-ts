@@ -10,8 +10,9 @@ export function checkoutStep(): JobStep {
   }
 }
 
-export function setNodeVersionStep(nodeVersion: string): JobStep {
+export function setNodeVersionStep(nodeVersion: string, checkActiveDeployment: boolean): JobStep {
   return {
+    ...getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment),
     name: 'Setup Node.js',
     uses: 'actions/setup-node@v2.2.0',
     with: {
@@ -20,31 +21,38 @@ export function setNodeVersionStep(nodeVersion: string): JobStep {
   }
 }
 
-export function installDependenciesStep(command: string): JobStep {
+export function installDependenciesStep(command: string, checkActiveDeployment: boolean): JobStep {
   return {
+    ...getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment),
     name: 'Install dependencies',
     run: command,
   }
 }
 
-export function deploymentStep(stackPattern?: string): JobStep {
+export function deploymentStep(stackPattern: string | undefined, checkActiveDeployment: boolean): JobStep {
   const deployArgument = stackPattern ? ` ${stackPattern}`: ''
 
   return {
+    ...getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment),
     name: 'Deployment',
     run: `npx projen deploy${deployArgument}`,
   }
 }
 
-function setAwsCredentialsInEnvironment(): JobStep {
+function setAwsCredentialsInEnvironment(checkActiveDeployment: boolean): JobStep {
   const commands = [
     'echo "AWS_ACCESS_KEY_ID=$accessKeyId" >> $GITHUB_ENV',
     'echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV',
     'echo "AWS_REGION=$region" >> $GITHUB_ENV',
   ]
 
+  const condition =
+    checkActiveDeployment ?
+      `\${{ matrix.assumeRole == 'false' && ${skipIfAlreadyActiveDeploymentCondition} }}` :
+      '${{ matrix.assumeRole == \'false\' }}'
+
   return {
-    if: '${{ matrix.assumeRole == false }}',
+    if: condition,
     name: 'Configure AWS Credentials',
     run: `\n${commands.join('\n')}`,
     env: {
@@ -55,9 +63,13 @@ function setAwsCredentialsInEnvironment(): JobStep {
   }
 }
 
-function assumeAwsRoleStep(): JobStep {
+function assumeAwsRoleStep(checkActiveDeployment: boolean): JobStep {
+  const condition =
+    checkActiveDeployment ?
+      `\${{ matrix.assumeRole == 'true' && ${skipIfAlreadyActiveDeploymentCondition} }}` :
+      '${{ matrix.assumeRole == \'true\' }}'
   return {
-    if: '${{ matrix.assumeRole == true }}',
+    if: condition,
     name: 'Assume AWS Role',
     uses: 'aws-actions/configure-aws-credentials@v1',
     with: {
@@ -70,20 +82,41 @@ function assumeAwsRoleStep(): JobStep {
   }
 }
 
-export function setAwsCredentialsSteps(): JobStep[] {
+export function setAwsCredentialsSteps(checkActiveDeployment: boolean): JobStep[] {
   return [
-    setAwsCredentialsInEnvironment(),
-    assumeAwsRoleStep(),
+    setAwsCredentialsInEnvironment(checkActiveDeployment),
+    assumeAwsRoleStep(checkActiveDeployment),
   ]
 }
 
-export function setNpmConfig(configName: string, configValue: string): JobStep {
+export function setNpmConfig(configName: string, configValue: string, checkActiveDeployment: boolean): JobStep {
   const environmentVariableName = 'CONFIG_VALUE'
   return {
+    ...getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment),
     name: 'Setting NPM Config',
     env: {
       [environmentVariableName]: configValue,
     },
     run: `npm config set ${configName} $${environmentVariableName}`,
   }
+}
+
+const checkActiveDeploymentStepId = 'deployment-check'
+export function checkActiveDeploymentStep(): JobStep {
+  return {
+    id: checkActiveDeploymentStepId,
+    uses: 'AminFazlMondo/check-deployed-environment@v1',
+    with: {
+      environment: '${{ matrix.environment }}',
+    },
+    env: {
+      GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+    },
+  }
+}
+
+const skipIfAlreadyActiveDeploymentCondition= `steps.${checkActiveDeploymentStepId}.outputs.has_active_deployment == 'true'`
+
+function getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment: boolean): JobStep | undefined {
+  return checkActiveDeployment ? {if: `\${{ ${skipIfAlreadyActiveDeploymentCondition} }}`} : undefined
 }
