@@ -113,7 +113,7 @@ export function checkActiveDeploymentStep(): JobStep {
   }
 }
 
-const skipIfAlreadyActiveDeploymentCondition= `steps.${checkActiveDeploymentStepId}.outputs.has_active_deployment == 'true'`
+const skipIfAlreadyActiveDeploymentCondition= `steps.${checkActiveDeploymentStepId}.outputs.has_active_deployment != 'true'`
 
 function getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment: boolean): JobStep | undefined {
   return checkActiveDeployment ? {if: `\${{ ${skipIfAlreadyActiveDeploymentCondition} }}`} : undefined

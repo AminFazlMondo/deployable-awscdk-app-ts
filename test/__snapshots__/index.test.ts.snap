@@ -32,7 +32,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -90,7 +90,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -161,7 +161,7 @@ jobs:
           git config user.name \\"github-actions\\"
           git config user.email \\"github-actions@github.com\\"
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -215,7 +215,7 @@ jobs:
         with:
           ref: \${{ github.sha }}
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -282,7 +282,7 @@ jobs:
           git config user.name \\"github-actions\\"
           git config user.email \\"github-actions@github.com\\"
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -336,7 +336,7 @@ jobs:
         with:
           ref: \${{ github.sha }}
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -407,7 +407,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -465,7 +465,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -540,7 +540,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -598,7 +598,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -677,7 +677,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -736,16 +736,16 @@ jobs:
           environment: \${{ matrix.environment }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
-      - if: \${{ steps.deployment-check.outputs.has_active_deployment == 'true' }}
+      - if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Setup Node.js
         uses: actions/setup-node@v2.2.0
         with:
           node-version: 14.18.1
-      - if: \${{ steps.deployment-check.outputs.has_active_deployment == 'true' }}
+      - if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' &&
-          steps.deployment-check.outputs.has_active_deployment == 'true' }}
+          steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Configure AWS Credentials
         run: |-
           
@@ -757,7 +757,7 @@ jobs:
           secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
       - if: \${{ matrix.assumeRole == 'true' &&
-          steps.deployment-check.outputs.has_active_deployment == 'true' }}
+          steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Assume AWS Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -766,7 +766,7 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: 1200
-      - if: \${{ steps.deployment-check.outputs.has_active_deployment == 'true' }}
+      - if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Deployment
         run: npx projen deploy:workflow
     strategy:
@@ -811,7 +811,7 @@ jobs:
           git config user.name \\"github-actions\\"
           git config user.email \\"github-actions@github.com\\"
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -865,7 +865,7 @@ jobs:
         with:
           ref: \${{ github.sha }}
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
