@@ -77,7 +77,7 @@ function assumeAwsRoleStep(checkActiveDeployment: boolean): JobStep {
       'aws-secret-access-key': '${{ secrets[matrix.secretAccessKeySecretName] }}',
       'role-to-assume': '${{ matrix.roleToAssume }}',
       'aws-region': '${{ matrix.region }}',
-      'role-duration-seconds': 300, //'${{ matrix.assumeRoleDurationSeconds }}',
+      'role-duration-seconds': 1200, //'${{ matrix.assumeRoleDurationSeconds }}',
     },
   }
 }

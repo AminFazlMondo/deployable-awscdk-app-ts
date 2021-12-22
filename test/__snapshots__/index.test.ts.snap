@@ -110,7 +110,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 300
+          role-duration-seconds: 1200
       - name: Deployment
         run: npx projen deploy --require-approval never
     strategy:
@@ -235,7 +235,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 300
+          role-duration-seconds: 1200
       - name: Deployment
         run: npx projen deploy --require-approval never
     strategy:
@@ -356,7 +356,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 300
+          role-duration-seconds: 1200
       - name: Deployment
         run: npx projen deploy --require-approval never
     strategy:
@@ -485,7 +485,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 300
+          role-duration-seconds: 1200
       - name: Deployment
         run: npx projen deploy --require-approval never
     strategy:
@@ -618,7 +618,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 300
+          role-duration-seconds: 1200
       - name: Setting NPM Config
         env:
           CONFIG_VALUE: \${{ matrix.environment }}
@@ -765,7 +765,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 300
+          role-duration-seconds: 1200
       - if: \${{ steps.deployment-check.outputs.has_active_deployment == 'true' }}
         name: Deployment
         run: npx projen deploy --require-approval never
@@ -885,7 +885,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 300
+          role-duration-seconds: 1200
       - name: Deployment
         run: npx projen deploy myStack --require-approval never
     strategy:
