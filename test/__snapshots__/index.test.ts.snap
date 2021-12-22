@@ -110,8 +110,9 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
+          role-duration-seconds: 300
       - name: Deployment
-        run: npx projen deploy
+        run: npx projen deploy --require-approval never
     strategy:
       max-parallel: 1
       matrix:
@@ -234,8 +235,9 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
+          role-duration-seconds: 300
       - name: Deployment
-        run: npx projen deploy
+        run: npx projen deploy --require-approval never
     strategy:
       max-parallel: 1
       matrix:
@@ -354,8 +356,9 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
+          role-duration-seconds: 300
       - name: Deployment
-        run: npx projen deploy
+        run: npx projen deploy --require-approval never
     strategy:
       max-parallel: 1
       matrix:
@@ -482,8 +485,9 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
+          role-duration-seconds: 300
       - name: Deployment
-        run: npx projen deploy
+        run: npx projen deploy --require-approval never
     strategy:
       max-parallel: 1
       matrix:
@@ -614,12 +618,13 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
+          role-duration-seconds: 300
       - name: Setting NPM Config
         env:
           CONFIG_VALUE: \${{ matrix.environment }}
         run: npm config set stage $CONFIG_VALUE
       - name: Deployment
-        run: npx projen deploy
+        run: npx projen deploy --require-approval never
     strategy:
       max-parallel: 1
       matrix:
@@ -760,9 +765,10 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
+          role-duration-seconds: 300
       - if: \${{ steps.deployment-check.outputs.has_active_deployment == 'true' }}
         name: Deployment
-        run: npx projen deploy
+        run: npx projen deploy --require-approval never
     strategy:
       max-parallel: 1
       matrix:
@@ -879,8 +885,9 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
+          role-duration-seconds: 300
       - name: Deployment
-        run: npx projen deploy myStack
+        run: npx projen deploy myStack --require-approval never
     strategy:
       max-parallel: 1
       matrix:
