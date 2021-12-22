@@ -68,8 +68,8 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
       return {
         environment: environmentOptions.name,
-        accessKeyId: `\${{ secrets.${accessKeyIdSecretName} }}`,
-        secretAccessKey: `\${{ secrets.${secretAccessKeySecretName} }}`,
+        accessKeyIdSecretName,
+        secretAccessKeySecretName,
         region: awsCredentials.region,
         assumeRole,
         ...assumeRoleSettings,

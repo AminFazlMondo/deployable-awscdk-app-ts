@@ -56,8 +56,8 @@ function setAwsCredentialsInEnvironment(checkActiveDeployment: boolean): JobStep
     name: 'Configure AWS Credentials',
     run: `\n${commands.join('\n')}`,
     env: {
-      accessKeyId: '${{ matrix.accessKeyId }}',
-      secretAccessKey: '${{ matrix.secretAccessKey }}',
+      accessKeyId: '${{ secrets[matrix.accessKeyIdSecretName] }}',
+      secretAccessKey: '${{ secrets[matrix.secretAccessKeySecretName] }}',
       region: '${{ matrix.region }}',
     },
   }
@@ -73,8 +73,8 @@ function assumeAwsRoleStep(checkActiveDeployment: boolean): JobStep {
     name: 'Assume AWS Role',
     uses: 'aws-actions/configure-aws-credentials@v1',
     with: {
-      'aws-access-key-id': '${{ matrix.accessKeyId }}',
-      'aws-secret-access-key': '${{ matrix.secretAccessKey }}',
+      'aws-access-key-id': '${{ secrets[matrix.accessKeyIdSecretName] }}',
+      'aws-secret-access-key': '${{ secrets[matrix.secretAccessKeySecretName] }}',
       'role-to-assume': '${{ matrix.roleToAssume }}',
       'aws-region': '${{ matrix.region }}',
       'role-duration-seconds': '${{ matrix.assumeRoleDurationSeconds }}',

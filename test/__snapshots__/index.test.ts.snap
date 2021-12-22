@@ -99,15 +99,15 @@ jobs:
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
         env:
-          accessKeyId: \${{ matrix.accessKeyId }}
-          secretAccessKey: \${{ matrix.secretAccessKey }}
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
       - if: \${{ matrix.assumeRole == 'true' }}
         name: Assume AWS Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: \${{ matrix.accessKeyId }}
-          aws-secret-access-key: \${{ matrix.secretAccessKey }}
+          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
@@ -118,13 +118,13 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: \${{ secrets.dev-secret-1 }}
-            secretAccessKey: \${{ secrets.dev-secret-2 }}
+            accessKeyIdSecretName: dev-secret-1
+            secretAccessKeySecretName: dev-secret-2
             region: dev-aws-region-1
             assumeRole: \\"false\\"
           - environment: staging
-            accessKeyId: \${{ secrets.staging-secret-1 }}
-            secretAccessKey: \${{ secrets.staging-secret-2 }}
+            accessKeyIdSecretName: staging-secret-1
+            secretAccessKeySecretName: staging-secret-2
             region: staging-aws-region-1
             assumeRole: \\"false\\"
         environment:
@@ -224,15 +224,15 @@ jobs:
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
         env:
-          accessKeyId: \${{ matrix.accessKeyId }}
-          secretAccessKey: \${{ matrix.secretAccessKey }}
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
       - if: \${{ matrix.assumeRole == 'true' }}
         name: Assume AWS Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: \${{ matrix.accessKeyId }}
-          aws-secret-access-key: \${{ matrix.secretAccessKey }}
+          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
@@ -243,8 +243,8 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: \${{ secrets.dev-secret-1 }}
-            secretAccessKey: \${{ secrets.dev-secret-2 }}
+            accessKeyIdSecretName: dev-secret-1
+            secretAccessKeySecretName: dev-secret-2
             region: dev-aws-region-1
             assumeRole: \\"true\\"
             roleToAssume: dev-role
@@ -345,15 +345,15 @@ jobs:
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
         env:
-          accessKeyId: \${{ matrix.accessKeyId }}
-          secretAccessKey: \${{ matrix.secretAccessKey }}
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
       - if: \${{ matrix.assumeRole == 'true' }}
         name: Assume AWS Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: \${{ matrix.accessKeyId }}
-          aws-secret-access-key: \${{ matrix.secretAccessKey }}
+          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
@@ -364,8 +364,8 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: \${{ secrets.dev-secret-1 }}
-            secretAccessKey: \${{ secrets.dev-secret-2 }}
+            accessKeyIdSecretName: dev-secret-1
+            secretAccessKeySecretName: dev-secret-2
             region: dev-aws-region-1
             assumeRole: \\"true\\"
             roleToAssume: dev-role
@@ -474,15 +474,15 @@ jobs:
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
         env:
-          accessKeyId: \${{ matrix.accessKeyId }}
-          secretAccessKey: \${{ matrix.secretAccessKey }}
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
       - if: \${{ matrix.assumeRole == 'true' }}
         name: Assume AWS Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: \${{ matrix.accessKeyId }}
-          aws-secret-access-key: \${{ matrix.secretAccessKey }}
+          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
@@ -493,13 +493,13 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: \${{ secrets.dev-secret-1 }}
-            secretAccessKey: \${{ secrets.dev-secret-2 }}
+            accessKeyIdSecretName: dev-secret-1
+            secretAccessKeySecretName: dev-secret-2
             region: dev-aws-region-1
             assumeRole: \\"false\\"
           - environment: staging
-            accessKeyId: \${{ secrets.staging-secret-1 }}
-            secretAccessKey: \${{ secrets.staging-secret-2 }}
+            accessKeyIdSecretName: staging-secret-1
+            secretAccessKeySecretName: staging-secret-2
             region: staging-aws-region-1
             assumeRole: \\"false\\"
         environment:
@@ -607,15 +607,15 @@ jobs:
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
         env:
-          accessKeyId: \${{ matrix.accessKeyId }}
-          secretAccessKey: \${{ matrix.secretAccessKey }}
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
       - if: \${{ matrix.assumeRole == 'true' }}
         name: Assume AWS Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: \${{ matrix.accessKeyId }}
-          aws-secret-access-key: \${{ matrix.secretAccessKey }}
+          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
@@ -630,13 +630,13 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: \${{ secrets.dev-secret-1 }}
-            secretAccessKey: \${{ secrets.dev-secret-2 }}
+            accessKeyIdSecretName: dev-secret-1
+            secretAccessKeySecretName: dev-secret-2
             region: dev-aws-region-1
             assumeRole: \\"false\\"
           - environment: staging
-            accessKeyId: \${{ secrets.staging-secret-1 }}
-            secretAccessKey: \${{ secrets.staging-secret-2 }}
+            accessKeyIdSecretName: staging-secret-1
+            secretAccessKeySecretName: staging-secret-2
             region: staging-aws-region-1
             assumeRole: \\"false\\"
         environment:
@@ -753,16 +753,16 @@ jobs:
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
         env:
-          accessKeyId: \${{ matrix.accessKeyId }}
-          secretAccessKey: \${{ matrix.secretAccessKey }}
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
       - if: \${{ matrix.assumeRole == 'true' &&
           steps.deployment-check.outputs.has_active_deployment == 'true' }}
         name: Assume AWS Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: \${{ matrix.accessKeyId }}
-          aws-secret-access-key: \${{ matrix.secretAccessKey }}
+          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
@@ -774,8 +774,8 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: \${{ secrets.dev-secret-1 }}
-            secretAccessKey: \${{ secrets.dev-secret-2 }}
+            accessKeyIdSecretName: dev-secret-1
+            secretAccessKeySecretName: dev-secret-2
             region: dev-aws-region-1
             assumeRole: \\"false\\"
         environment:
@@ -874,15 +874,15 @@ jobs:
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
         env:
-          accessKeyId: \${{ matrix.accessKeyId }}
-          secretAccessKey: \${{ matrix.secretAccessKey }}
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
       - if: \${{ matrix.assumeRole == 'true' }}
         name: Assume AWS Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: \${{ matrix.accessKeyId }}
-          aws-secret-access-key: \${{ matrix.secretAccessKey }}
+          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
@@ -893,8 +893,8 @@ jobs:
       matrix:
         include:
           - environment: dev
-            accessKeyId: \${{ secrets.dev-secret-1 }}
-            secretAccessKey: \${{ secrets.dev-secret-2 }}
+            accessKeyIdSecretName: dev-secret-1
+            secretAccessKeySecretName: dev-secret-2
             region: dev-aws-region-1
             assumeRole: \\"false\\"
         environment:
