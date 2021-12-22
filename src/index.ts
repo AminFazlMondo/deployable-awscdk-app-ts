@@ -40,6 +40,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       new TextFile(this, '.nvmrc', {
         lines: [this.workflowNodeVersion ?? ''],
       })
+
     const deployArgument = this.deployOptions.stackPattern ? ` ${this.deployOptions.stackPattern}`: ''
     this.addTask('deploy:workflow', {
       exec: `cdk deploy${deployArgument} --require-approval never`,
@@ -119,7 +120,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     if (this.deployOptions.npmConfigEnvironment)
       jobDefinition.steps.push(steps.setNpmConfig(this.deployOptions.npmConfigEnvironment, '${{ matrix.environment }}', this.checkActiveDeployment))
 
-    jobDefinition.steps.push(steps.deploymentStep(this.checkActiveDeployment))
+    jobDefinition.steps.push(steps.deploymentStep(this.checkActiveDeployment, this.packageManager))
 
     this.release?.addJobs({deploy: jobDefinition})
 

@@ -1,3 +1,4 @@
+import {javascript} from 'projen'
 import {JobStep} from 'projen/lib/github/workflows-model'
 
 export function checkoutStep(): JobStep {
@@ -29,11 +30,25 @@ export function installDependenciesStep(command: string, checkActiveDeployment: 
   }
 }
 
-export function deploymentStep(checkActiveDeployment: boolean): JobStep {
+function getPackageManagerCommandPrefix(packageManager: javascript.NodePackageManager): string {
+  if (packageManager === javascript.NodePackageManager.NPM)
+    return 'npm run'
+
+  if (packageManager === javascript.NodePackageManager.YARN)
+    return 'yarn'
+
+  if (packageManager === javascript.NodePackageManager.PNPM)
+    return 'pnpm'
+
+  throw new Error(`Invalid package manager selected (${packageManager})`)
+}
+
+export function deploymentStep(checkActiveDeployment: boolean, packageManager: javascript.NodePackageManager): JobStep {
+
   return {
     ...getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment),
     name: 'Deployment',
-    run: 'npx projen deploy:workflow',
+    run: `${getPackageManagerCommandPrefix(packageManager)} deploy:workflow`,
   }
 }
 

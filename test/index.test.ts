@@ -89,6 +89,11 @@ describe('specific stack', () => {
     const content = readFile('/.github/workflows/release.yml', project.outdir)
     expect(content).toMatchSnapshot()
   })
+
+  test('tasks', () => {
+    const content = readFile('/.projen/tasks.json', project.outdir)
+    expect(content).toMatchSnapshot()
+  })
 })
 
 describe('assume role with default duration', () => {
@@ -342,6 +347,35 @@ describe('set the checkActiveDeployment flag', () => {
 
   test('release workflow', () => {
     const content = readFile('/.github/workflows/release.yml', project.outdir)
+    expect(content).toMatchSnapshot()
+  })
+})
+
+describe('a new task added for deployment in workflow', () => {
+  const outdir = mkdtemp()
+  const project = new DeployableAwsCdkTypeScriptApp({
+    packageManager: NodePackageManager.NPM,
+    name: 'my-test-app',
+    defaultReleaseBranch: 'main',
+    cdkVersion: '1.129.0',
+    outdir,
+    workflowNodeVersion: '14.18.1',
+    deployOptions: {
+      environments: [{
+        name: 'dev',
+        awsCredentials: {
+          accessKeyIdSecretName: 'dev-secret-1',
+          secretAccessKeySecretName: 'dev-secret-2',
+          region: 'dev-aws-region-1',
+        },
+      }],
+    },
+  })
+
+  project.synth()
+
+  test('tasks', () => {
+    const content = readFile('/.projen/tasks.json', project.outdir)
     expect(content).toMatchSnapshot()
   })
 })
