@@ -41,7 +41,9 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
         lines: [this.workflowNodeVersion ?? ''],
       })
     const deployArgument = this.deployOptions.stackPattern ? ` ${this.deployOptions.stackPattern}`: ''
-    this.tasks.tryFind('deploy')?.exec(`cdk deploy${deployArgument} --require-approval never`)
+    this.addTask('deploy:workflow', {
+      exec: `cdk deploy${deployArgument} --require-approval never`,
+    })
 
     super.synth()
   }

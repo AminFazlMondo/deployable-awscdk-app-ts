@@ -33,7 +33,7 @@ export function deploymentStep(checkActiveDeployment: boolean): JobStep {
   return {
     ...getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment),
     name: 'Deployment',
-    run: 'npx projen deploy',
+    run: 'npx projen deploy:workflow',
   }
 }
 
