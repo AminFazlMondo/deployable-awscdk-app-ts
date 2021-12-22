@@ -29,13 +29,11 @@ export function installDependenciesStep(command: string, checkActiveDeployment: 
   }
 }
 
-export function deploymentStep(stackPattern: string | undefined, checkActiveDeployment: boolean): JobStep {
-  const deployArgument = stackPattern ? ` ${stackPattern}`: ''
-
+export function deploymentStep(checkActiveDeployment: boolean): JobStep {
   return {
     ...getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment),
     name: 'Deployment',
-    run: `npx projen deploy${deployArgument} --require-approval never`,
+    run: 'npx projen deploy',
   }
 }
 
