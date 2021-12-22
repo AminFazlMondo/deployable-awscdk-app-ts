@@ -110,7 +110,6 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
         run: npx projen deploy
     strategy:
@@ -235,7 +234,6 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
         run: npx projen deploy
     strategy:
@@ -356,7 +354,6 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
         run: npx projen deploy
     strategy:
@@ -485,7 +482,6 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
         run: npx projen deploy
     strategy:
@@ -618,7 +614,6 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Setting NPM Config
         env:
           CONFIG_VALUE: \${{ matrix.environment }}
@@ -765,7 +760,6 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - if: \${{ steps.deployment-check.outputs.has_active_deployment == 'true' }}
         name: Deployment
         run: npx projen deploy
@@ -885,7 +879,6 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
         run: npx projen deploy myStack
     strategy:
