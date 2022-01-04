@@ -15,6 +15,8 @@
     "docgen": "npx projen docgen",
     "eslint": "npx projen eslint",
     "package": "npx projen package",
+    "package-all": "npx projen package-all",
+    "package:js": "npx projen package:js",
     "post-compile": "npx projen post-compile",
     "pre-compile": "npx projen pre-compile",
     "publish:github": "npx projen publish:github",
@@ -35,36 +37,34 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
-    "@types/jest": "*",
+    "@types/jest": "^27.4.0",
     "@types/node": "^12",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
     "eslint": "^8",
     "eslint-import-resolver-node": "^0.3.6",
     "eslint-import-resolver-typescript": "^2.5.0",
-    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-import": "^2.25.4",
     "fs-extra": "^9.1.0",
     "jest": "^27.4.5",
     "jest-junit": "^13",
-    "jsii": "^1.49.0",
-    "jsii-diff": "^1.49.0",
-    "jsii-docgen": "^4.2.14",
-    "jsii-pacmak": "^1.49.0",
+    "jsii": "^1.50.0",
+    "jsii-diff": "^1.50.0",
+    "jsii-docgen": "^4.2.30",
     "json-schema": "^0.4.0",
     "npm-check-updates": "^12",
-    "projen": "^0.45.3",
+    "projen": "^0.50.6",
     "standard-version": "^9",
     "ts-jest": "^27.1.2",
     "ts-node": "^9",
     "typescript": "^4.5.4"
   },
   "peerDependencies": {
-    "projen": "^0.45.3"
+    "projen": "^0.50.6"
   },
   "dependencies": {
-    "projen": "^0.45.3"
+    "projen": "^0.50.6"
   },
-  "bundledDependencies": [],
   "keywords": [
     "AWS CDK",
     "Deployment",
@@ -76,8 +76,8 @@
   "version": "0.0.0",
   "jest": {
     "testMatch": [
-      "**/__tests__/**/*.ts?(x)",
-      "**/?(*.)+(spec|test).ts?(x)"
+      "<rootDir>/src/**/__tests__/**/*.ts?(x)",
+      "<rootDir>/(test|src)/**/?(*.)+(spec|test).ts?(x)"
     ],
     "clearMocks": true,
     "collectCoverage": true,
