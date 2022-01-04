@@ -119,6 +119,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`mergify`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymergify) | `boolean` | Whether mergify should be enabled on this repository or not. |
 | [`mergifyOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymergifyoptions) | [`projen.github.MergifyOptions`](#projen.github.MergifyOptions) | Options for mergify. |
 | [`projectType`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojecttype) | [`projen.ProjectType`](#projen.ProjectType) | Which type of project this is (library/app). |
+| [`projenTokenSecret`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojentokensecret) | `string` | The name of a secret which includes a GitHub Personal Access Token to be used by projen workflows. |
 | [`readme`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreadme) | [`projen.SampleReadmeProps`](#projen.SampleReadmeProps) | The README setup. |
 | [`stale`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertystale) | `boolean` | Auto-close of stale issues and pull request. |
 | [`staleOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertystaleoptions) | [`projen.github.StaleOptions`](#projen.github.StaleOptions) | Auto-close stale issues and pull requests. |
@@ -130,6 +131,8 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`authorUrl`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthorurl) | `string` | Author's URL / Website. |
 | [`autoDetectBin`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautodetectbin) | `boolean` | Automatically add all executables under the `bin` directory to your `package.json` file under the `bin` section. |
 | [`bin`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybin) | {[ key: string ]: `string`} | Binary programs vended with your module. |
+| [`bugsEmail`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybugsemail) | `string` | The email address to which issues should be reported. |
+| [`bugsUrl`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybugsurl) | `string` | The url to your project's issue tracker. |
 | [`bundledDeps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybundleddeps) | `string`[] | List of dependencies to bundle into this module. |
 | [`codeArtifactOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodeartifactoptions) | [`projen.javascript.CodeArtifactOptions`](#projen.javascript.CodeArtifactOptions) | Options for publishing npm package to AWS CodeArtifact. |
 | [`deps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeps) | `string`[] | Runtime dependencies of this module. |
@@ -154,13 +157,12 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`repositoryDirectory`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrepositorydirectory) | `string` | If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives. |
 | [`scripts`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyscripts) | {[ key: string ]: `string`} | npm scripts to include. |
 | [`stability`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertystability) | `string` | Package's Stability. |
-| [`antitamper`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyantitamper) | `boolean` | Checks that after build there are no modified files on git. |
-| [`artifactsDirectory`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyartifactsdirectory) | `string` | A directory which will contain artifacts to be published to npm. |
 | [`jsiiReleaseVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjsiireleaseversion) | `string` | Version requirement of `jsii-release` which is used to publish modules to npm. |
 | [`majorVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymajorversion) | `number` | Major version to release from the default branch. |
 | [`npmDistTag`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmdisttag) | `string` | The npmDistTag to use when publishing from the default branch. |
 | [`postBuildSteps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypostbuildsteps) | [`projen.github.workflows.JobStep`](#projen.github.workflows.JobStep)[] | Steps to execute after build as part of the release workflow. |
 | [`prerelease`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprerelease) | `string` | Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre"). |
+| [`publishDryRun`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypublishdryrun) | `boolean` | Instead of actually publishing to package managers, just print the publishing command. |
 | [`publishTasks`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypublishtasks) | `boolean` | Define publishing tasks that can be executed manually as well as workflows. |
 | [`releaseBranches`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleasebranches) | {[ key: string ]: [`projen.release.BranchOptions`](#projen.release.BranchOptions)} | Defines additional release branches. |
 | [`releaseEveryCommit`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreleaseeverycommit) | `boolean` | Automatically release new versions every commit to one of branches in `releaseBranches`. |
@@ -175,6 +177,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`workflowContainerImage`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflowcontainerimage) | `string` | Container image to use for GitHub workflows. |
 | [`workflowRunsOn`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflowrunson) | `string`[] | Github Runner selection labels. |
 | [`defaultReleaseBranch`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydefaultreleasebranch)<span title="Required">*</span> | `string` | The name of the main release branch. |
+| [`artifactsDirectory`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyartifactsdirectory) | `string` | A directory which will contain build artifacts. |
 | [`autoApproveProjenUpgrades`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveprojenupgrades) | `boolean` | Automatically approve projen upgrade PRs, allowing them to be merged by mergify (if configued). |
 | [`autoApproveUpgrades`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveupgrades) | `boolean` | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued). |
 | [`buildWorkflow`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybuildworkflow) | `boolean` | Define a GitHub workflow for building PRs. |
@@ -193,6 +196,9 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`mutableBuild`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymutablebuild) | `boolean` | Automatically update files modified during builds to pull-request branches. |
 | [`npmignore`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmignore) | `string`[] | Additional entries to .npmignore. |
 | [`npmignoreEnabled`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmignoreenabled) | `boolean` | Defines an .npmignore file. Normally this is only needed for libraries that are packaged as tarballs. |
+| [`package`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackage) | `boolean` | Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`). |
+| [`prettier`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprettier) | `boolean` | Setup prettier. |
+| [`prettierOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprettieroptions) | [`projen.javascript.PrettierOptions`](#projen.javascript.PrettierOptions) | Prettier options. |
 | [`projenDevDependency`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojendevdependency) | `boolean` | Indicates of "projen" should be installed as a devDependency. |
 | [`projenrcJs`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjs) | `boolean` | Generate (once) .projenrc.js (in JavaScript). Set to `false` in order to disable .projenrc.js generation. |
 | [`projenrcJsOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjsoptions) | [`projen.javascript.ProjenrcOptions`](#projen.javascript.ProjenrcOptions) | Options for .projenrc.js. |
@@ -215,7 +221,6 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`eslint`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyeslint) | `boolean` | Setup eslint. |
 | [`eslintOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyeslintoptions) | [`projen.javascript.EslintOptions`](#projen.javascript.EslintOptions) | Eslint options. |
 | [`libdir`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylibdir) | `string` | Typescript  artifacts output directory. |
-| [`package`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackage) | `boolean` | Defines a `yarn package` command that will produce a tarball and place it under `dist/js`. |
 | [`projenrcTs`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcts) | `boolean` | Use TypeScript for your projenrc file (`.projenrc.ts`). |
 | [`projenrcTsOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrctsoptions) | [`projen.typescript.ProjenrcOptions`](#projen.typescript.ProjenrcOptions) | Options for .projenrc.ts. |
 | [`sampleCode`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertysamplecode) | `boolean` | Generate one-time sample in `src/` and `test/` if there are no files there. |
@@ -227,15 +232,15 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`typescriptVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertytypescriptversion) | `string` | TypeScript version to use. |
 | [`buildCommand`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybuildcommand) | `string` | A command to execute before synthesis. |
 | [`cdkout`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkout) | `string` | cdk.out directory. |
-| [`context`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycontext) | {[ key: string ]: `string`} | Additional context to include in `cdk.json`. |
+| [`context`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycontext) | {[ key: string ]: `any`} | Additional context to include in `cdk.json`. |
 | [`featureFlags`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyfeatureflags) | `boolean` | Include all feature flags in cdk.json. |
 | [`requireApproval`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrequireapproval) | [`projen.awscdk.ApprovalLevel`](#projen.awscdk.ApprovalLevel) | To protect you against unintended changes that affect your security posture, the AWS CDK Toolkit prompts you to approve security-related changes before deploying them. |
 | [`watchExcludes`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertywatchexcludes) | `string`[] | Glob patterns to exclude from `cdk watch`. |
 | [`watchIncludes`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertywatchincludes) | `string`[] | Glob patterns to include in `cdk watch`. |
 | [`cdkVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkversion)<span title="Required">*</span> | `string` | Minimum version of the AWS CDK to depend on. |
-| [`cdkAssert`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkassert) | `boolean` | Install the @aws-cdk/assert library? |
-| [`cdkAssertions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkassertions) | `boolean` | Install the @aws-cdk/assertions library? |
-| [`cdkDependencies`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkdependencies) | `string`[] | Which AWS CDK modules (those that start with "@aws-cdk/") does this library require when consumed? |
+| [`cdkAssert`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkassert) | `boolean` | Warning: NodeJS only. |
+| [`cdkAssertions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkassertions) | `boolean` | Install the assertions library? |
+| [`cdkDependencies`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkdependencies) | `string`[] | Which AWS CDKv1 modules this project requires. |
 | [`cdkDependenciesAsDeps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkdependenciesasdeps) | `boolean` | If this is enabled (default), all modules declared in `cdkDependencies` will be also added as normal `dependencies` (as well as `peerDependencies`). |
 | [`cdkTestDependencies`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdktestdependencies) | `string`[] | AWS CDK modules required for testing. |
 | [`cdkVersionPinning`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkversionpinning) | `boolean` | Use pinned version instead of caret version for CDK. |
@@ -483,6 +488,21 @@ Which type of project this is (library/app).
 
 ---
 
+##### `projenTokenSecret`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenTokenSecret" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojentokensecret"></a>
+
+```typescript
+public readonly projenTokenSecret: string;
+```
+
+- *Type:* `string`
+- *Default:* "PROJEN_GITHUB_TOKEN"
+
+The name of a secret which includes a GitHub Personal Access Token to be used by projen workflows.
+
+This token needs to have the `repo`, `workflows` and `packages` scope.
+
+---
+
 ##### `readme`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.readme" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreadme"></a>
 
 ```typescript
@@ -628,6 +648,30 @@ public readonly bin: {[ key: string ]: string};
 Binary programs vended with your module.
 
 You can use this option to add/customize how binaries are represented in your `package.json`, but unless `autoDetectBin` is `false`, every executable file under `bin` will automatically be added to this section.
+
+---
+
+##### `bugsEmail`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.bugsEmail" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybugsemail"></a>
+
+```typescript
+public readonly bugsEmail: string;
+```
+
+- *Type:* `string`
+
+The email address to which issues should be reported.
+
+---
+
+##### `bugsUrl`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.bugsUrl" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybugsurl"></a>
+
+```typescript
+public readonly bugsUrl: string;
+```
+
+- *Type:* `string`
+
+The url to your project's issue tracker.
 
 ---
 
@@ -958,32 +1002,6 @@ Package's Stability.
 
 ---
 
-##### `antitamper`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.antitamper" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyantitamper"></a>
-
-```typescript
-public readonly antitamper: boolean;
-```
-
-- *Type:* `boolean`
-- *Default:* true
-
-Checks that after build there are no modified files on git.
-
----
-
-##### `artifactsDirectory`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.artifactsDirectory" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyartifactsdirectory"></a>
-
-```typescript
-public readonly artifactsDirectory: string;
-```
-
-- *Type:* `string`
-- *Default:* "dist"
-
-A directory which will contain artifacts to be published to npm.
-
----
-
 ##### `jsiiReleaseVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.jsiiReleaseVersion" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjsiireleaseversion"></a>
 
 ```typescript
@@ -1050,6 +1068,19 @@ public readonly prerelease: string;
 - *Default:* normal semantic versions
 
 Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre").
+
+---
+
+##### `publishDryRun`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.publishDryRun" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypublishdryrun"></a>
+
+```typescript
+public readonly publishDryRun: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Instead of actually publishing to package managers, just print the publishing command.
 
 ---
 
@@ -1245,6 +1276,19 @@ public readonly defaultReleaseBranch: string;
 - *Default:* "main"
 
 The name of the main release branch.
+
+---
+
+##### `artifactsDirectory`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.artifactsDirectory" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyartifactsdirectory"></a>
+
+```typescript
+public readonly artifactsDirectory: string;
+```
+
+- *Type:* `string`
+- *Default:* "dist"
+
+A directory which will contain build artifacts.
 
 ---
 
@@ -1491,6 +1535,45 @@ Defines an .npmignore file. Normally this is only needed for libraries that are 
 
 ---
 
+##### `package`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.package" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackage"></a>
+
+```typescript
+public readonly package: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* true
+
+Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`).
+
+---
+
+##### `prettier`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.prettier" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprettier"></a>
+
+```typescript
+public readonly prettier: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Setup prettier.
+
+---
+
+##### `prettierOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.prettierOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprettieroptions"></a>
+
+```typescript
+public readonly prettierOptions: PrettierOptions;
+```
+
+- *Type:* [`projen.javascript.PrettierOptions`](#projen.javascript.PrettierOptions)
+- *Default:* default options
+
+Prettier options.
+
+---
+
 ##### `projenDevDependency`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenDevDependency" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojendevdependency"></a>
 
 ```typescript
@@ -1560,7 +1643,9 @@ Customize the projenUpgrade schedule in cron expression.
 
 ---
 
-##### `projenUpgradeSecret`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenUpgradeSecret" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradesecret"></a>
+##### ~~`projenUpgradeSecret`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenUpgradeSecret" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradesecret"></a>
+
+- *Deprecated:* use `githubTokenSecret` instead.
 
 ```typescript
 public readonly projenUpgradeSecret: string;
@@ -1785,19 +1870,6 @@ Typescript  artifacts output directory.
 
 ---
 
-##### `package`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.package" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackage"></a>
-
-```typescript
-public readonly package: boolean;
-```
-
-- *Type:* `boolean`
-- *Default:* true
-
-Defines a `yarn package` command that will produce a tarball and place it under `dist/js`.
-
----
-
 ##### `projenrcTs`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcTs" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcts"></a>
 
 ```typescript
@@ -1949,10 +2021,10 @@ cdk.out directory.
 ##### `context`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.context" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycontext"></a>
 
 ```typescript
-public readonly context: {[ key: string ]: string};
+public readonly context: {[ key: string ]: any};
 ```
 
-- *Type:* {[ key: string ]: `string`}
+- *Type:* {[ key: string ]: `any`}
 - *Default:* no additional context
 
 Additional context to include in `cdk.json`.
@@ -2035,6 +2107,8 @@ public readonly cdkAssert: boolean;
 - *Type:* `boolean`
 - *Default:* will be included by default for AWS CDK >= 1.0.0 < 2.0.0
 
+Warning: NodeJS only.
+
 Install the @aws-cdk/assert library?
 
 ---
@@ -2048,7 +2122,7 @@ public readonly cdkAssertions: boolean;
 - *Type:* `boolean`
 - *Default:* will be included by default for AWS CDK >= 1.111.0 < 2.0.0
 
-Install the @aws-cdk/assertions library?
+Install the assertions library?
 
 Only needed for CDK 1.x. If using CDK 2.x then assertions is already included in 'aws-cdk-lib'
 
@@ -2056,7 +2130,7 @@ Only needed for CDK 1.x. If using CDK 2.x then assertions is already included in
 
 ##### ~~`cdkDependencies`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkDependencies" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkdependencies"></a>
 
-- *Deprecated:* For CDK 2.x use 'peerDeps' instead
+- *Deprecated:* For CDK 2.x use "deps" instead. (or "peerDeps" if you're building a library)
 
 ```typescript
 public readonly cdkDependencies: string[];
@@ -2064,7 +2138,7 @@ public readonly cdkDependencies: string[];
 
 - *Type:* `string`[]
 
-Which AWS CDK modules (those that start with "@aws-cdk/") does this library require when consumed?
+Which AWS CDKv1 modules this project requires.
 
 ---
 
@@ -2081,13 +2155,13 @@ public readonly cdkDependenciesAsDeps: boolean;
 
 If this is enabled (default), all modules declared in `cdkDependencies` will be also added as normal `dependencies` (as well as `peerDependencies`).
 
-This is to ensure that downstream consumers actually have your CDK dependencies installed when using npm < 7 or yarn, where peer dependencies are not automatically installed. If this is disabled, `cdkDependencies` will be added to `devDependencies` to ensure they are present during development.
+This is to ensure that downstream consumers actually have your CDK dependencies installed when using npm < 7 or yarn, where peer dependencies are not automatically installed. If this is disabled, `cdkDependencies` will be added to `devDependencies` to ensure they are present during development.  Note: this setting only applies to construct library projects
 
 ---
 
 ##### ~~`cdkTestDependencies`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkTestDependencies" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdktestdependencies"></a>
 
-- *Deprecated:* For CDK 2.x use 'devDeps' instead
+- *Deprecated:* For CDK 2.x use 'devDeps' (in node.js projects) or 'testDeps' (in java projects) instead
 
 ```typescript
 public readonly cdkTestDependencies: string[];
@@ -2109,7 +2183,7 @@ public readonly cdkVersionPinning: boolean;
 
 Use pinned version instead of caret version for CDK.
 
-You can use this to prevent yarn to mix versions for your CDK dependencies and to prevent auto-updates. If you use experimental features this will let you define the moment you include breaking changes.
+You can use this to prevent mixed versions for your CDK dependencies and to prevent auto-updates. If you use experimental features this will let you define the moment you include breaking changes.
 
 ---
 

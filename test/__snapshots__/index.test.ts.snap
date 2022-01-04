@@ -32,7 +32,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -43,7 +43,7 @@ jobs:
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
         with:
-          name: dist
+          name: build-artifact
           path: dist
   release_github:
     name: Publish to GitHub Releases
@@ -55,11 +55,11 @@ jobs:
     steps:
       - uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 14.x
       - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
-          name: dist
+          name: build-artifact
           path: dist
       - name: Release
         run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R
@@ -90,7 +90,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -112,7 +112,7 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: 1200
       - name: Deployment
-        run: npm run deploy:workflow
+        run: yarn deploy:workflow
     strategy:
       max-parallel: 1
       matrix:
@@ -278,7 +278,7 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
       \\"description\\": \\"Runs after successful compilation\\",
       \\"steps\\": [
         {
-          \\"spawn\\": \\"synth\\"
+          \\"spawn\\": \\"synth:silent\\"
         }
       ]
     },
@@ -312,7 +312,16 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
     },
     \\"synth\\": {
       \\"name\\": \\"synth\\",
-      \\"description\\": \\"Synthesizes your cdk app into cdk.out (part of \\\\\\"yarn build\\\\\\")\\",
+      \\"description\\": \\"Synthesizes your cdk app into cdk.out\\",
+      \\"steps\\": [
+        {
+          \\"exec\\": \\"cdk synth\\"
+        }
+      ]
+    },
+    \\"synth:silent\\": {
+      \\"name\\": \\"synth:silent\\",
+      \\"description\\": \\"Synthesizes your cdk app into cdk.out and suppresses the template in stdout (part of \\\\\\"yarn build\\\\\\")\\",
       \\"steps\\": [
         {
           \\"exec\\": \\"cdk synth > /dev/null\\"
@@ -387,10 +396,10 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
           \\"exec\\": \\"npm-check-updates --dep bundle --upgrade --target=minor --reject='projen'\\"
         },
         {
-          \\"exec\\": \\"npm install\\"
+          \\"exec\\": \\"yarn install --check-files\\"
         },
         {
-          \\"exec\\": \\"npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions\\"
+          \\"exec\\": \\"yarn upgrade @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions\\"
         },
         {
           \\"exec\\": \\"npx projen\\"
@@ -420,10 +429,10 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
           \\"exec\\": \\"npm-check-updates --dep bundle --upgrade --target=minor --filter='projen'\\"
         },
         {
-          \\"exec\\": \\"npm install\\"
+          \\"exec\\": \\"yarn install --check-files\\"
         },
         {
-          \\"exec\\": \\"npm update projen\\"
+          \\"exec\\": \\"yarn upgrade projen\\"
         },
         {
           \\"exec\\": \\"npx projen\\"
@@ -479,7 +488,7 @@ jobs:
           git config user.name \\"github-actions\\"
           git config user.email \\"github-actions@github.com\\"
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -490,7 +499,7 @@ jobs:
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
         with:
-          name: dist
+          name: build-artifact
           path: dist
   release_github:
     name: Publish to GitHub Releases
@@ -502,11 +511,11 @@ jobs:
     steps:
       - uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 14.x
       - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
-          name: dist
+          name: build-artifact
           path: dist
       - name: Release
         run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R
@@ -533,7 +542,7 @@ jobs:
         with:
           ref: \${{ github.sha }}
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -555,7 +564,7 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: 1200
       - name: Deployment
-        run: npm run deploy:workflow
+        run: yarn deploy:workflow
     strategy:
       max-parallel: 1
       matrix:
@@ -600,7 +609,7 @@ jobs:
           git config user.name \\"github-actions\\"
           git config user.email \\"github-actions@github.com\\"
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -611,7 +620,7 @@ jobs:
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
         with:
-          name: dist
+          name: build-artifact
           path: dist
   release_github:
     name: Publish to GitHub Releases
@@ -623,11 +632,11 @@ jobs:
     steps:
       - uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 14.x
       - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
-          name: dist
+          name: build-artifact
           path: dist
       - name: Release
         run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R
@@ -654,7 +663,7 @@ jobs:
         with:
           ref: \${{ github.sha }}
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -676,7 +685,7 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: 1200
       - name: Deployment
-        run: npm run deploy:workflow
+        run: yarn deploy:workflow
     strategy:
       max-parallel: 1
       matrix:
@@ -725,7 +734,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -736,7 +745,7 @@ jobs:
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
         with:
-          name: dist
+          name: build-artifact
           path: dist
   release_github:
     name: Publish to GitHub Releases
@@ -748,11 +757,11 @@ jobs:
     steps:
       - uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 14.x
       - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
-          name: dist
+          name: build-artifact
           path: dist
       - name: Release
         run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R
@@ -783,7 +792,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -805,7 +814,7 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: 1200
       - name: Deployment
-        run: npm run deploy:workflow
+        run: yarn deploy:workflow
     strategy:
       max-parallel: 1
       matrix:
@@ -858,7 +867,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -869,7 +878,7 @@ jobs:
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
         with:
-          name: dist
+          name: build-artifact
           path: dist
   release_github:
     name: Publish to GitHub Releases
@@ -881,11 +890,11 @@ jobs:
     steps:
       - uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 14.x
       - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
-          name: dist
+          name: build-artifact
           path: dist
       - name: Release
         run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R
@@ -916,7 +925,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -942,7 +951,7 @@ jobs:
           CONFIG_VALUE: \${{ matrix.environment }}
         run: npm config set stage $CONFIG_VALUE
       - name: Deployment
-        run: npm run deploy:workflow
+        run: yarn deploy:workflow
     strategy:
       max-parallel: 1
       matrix:
@@ -995,7 +1004,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -1006,7 +1015,7 @@ jobs:
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
         with:
-          name: dist
+          name: build-artifact
           path: dist
   release_github:
     name: Publish to GitHub Releases
@@ -1018,11 +1027,11 @@ jobs:
     steps:
       - uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 14.x
       - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
-          name: dist
+          name: build-artifact
           path: dist
       - name: Release
         run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R
@@ -1061,7 +1070,7 @@ jobs:
           node-version: 14.18.1
       - if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - if: \${{ matrix.assumeRole == 'false' &&
           steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Configure AWS Credentials
@@ -1086,7 +1095,7 @@ jobs:
           role-duration-seconds: 1200
       - if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Deployment
-        run: npm run deploy:workflow
+        run: yarn deploy:workflow
     strategy:
       max-parallel: 1
       matrix:
@@ -1129,7 +1138,7 @@ jobs:
           git config user.name \\"github-actions\\"
           git config user.email \\"github-actions@github.com\\"
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -1140,7 +1149,7 @@ jobs:
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
         with:
-          name: dist
+          name: build-artifact
           path: dist
   release_github:
     name: Publish to GitHub Releases
@@ -1152,11 +1161,11 @@ jobs:
     steps:
       - uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 14.x
       - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
-          name: dist
+          name: build-artifact
           path: dist
       - name: Release
         run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R
@@ -1183,7 +1192,7 @@ jobs:
         with:
           ref: \${{ github.sha }}
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --check-files --frozen-lockfile
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -1205,7 +1214,7 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: 1200
       - name: Deployment
-        run: npm run deploy:workflow
+        run: yarn deploy:workflow
     strategy:
       max-parallel: 1
       matrix:
@@ -1365,7 +1374,7 @@ exports[`specific stack tasks 1`] = `
       \\"description\\": \\"Runs after successful compilation\\",
       \\"steps\\": [
         {
-          \\"spawn\\": \\"synth\\"
+          \\"spawn\\": \\"synth:silent\\"
         }
       ]
     },
@@ -1399,7 +1408,16 @@ exports[`specific stack tasks 1`] = `
     },
     \\"synth\\": {
       \\"name\\": \\"synth\\",
-      \\"description\\": \\"Synthesizes your cdk app into cdk.out (part of \\\\\\"yarn build\\\\\\")\\",
+      \\"description\\": \\"Synthesizes your cdk app into cdk.out\\",
+      \\"steps\\": [
+        {
+          \\"exec\\": \\"cdk synth\\"
+        }
+      ]
+    },
+    \\"synth:silent\\": {
+      \\"name\\": \\"synth:silent\\",
+      \\"description\\": \\"Synthesizes your cdk app into cdk.out and suppresses the template in stdout (part of \\\\\\"yarn build\\\\\\")\\",
       \\"steps\\": [
         {
           \\"exec\\": \\"cdk synth > /dev/null\\"
@@ -1474,10 +1492,10 @@ exports[`specific stack tasks 1`] = `
           \\"exec\\": \\"npm-check-updates --dep bundle --upgrade --target=minor --reject='projen'\\"
         },
         {
-          \\"exec\\": \\"npm install\\"
+          \\"exec\\": \\"yarn install --check-files\\"
         },
         {
-          \\"exec\\": \\"npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions\\"
+          \\"exec\\": \\"yarn upgrade @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions\\"
         },
         {
           \\"exec\\": \\"npx projen\\"
@@ -1507,10 +1525,10 @@ exports[`specific stack tasks 1`] = `
           \\"exec\\": \\"npm-check-updates --dep bundle --upgrade --target=minor --filter='projen'\\"
         },
         {
-          \\"exec\\": \\"npm install\\"
+          \\"exec\\": \\"yarn install --check-files\\"
         },
         {
-          \\"exec\\": \\"npm update projen\\"
+          \\"exec\\": \\"yarn upgrade projen\\"
         },
         {
           \\"exec\\": \\"npx projen\\"
