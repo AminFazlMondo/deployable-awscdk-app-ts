@@ -282,6 +282,10 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
         }
       ]
     },
+    \\"post-upgrade\\": {
+      \\"name\\": \\"post-upgrade\\",
+      \\"description\\": \\"Runs after upgrading dependencies\\"
+    },
     \\"pre-compile\\": {
       \\"name\\": \\"pre-compile\\",
       \\"description\\": \\"Prepare the project for compilation\\"
@@ -403,6 +407,9 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
         },
         {
           \\"exec\\": \\"npx projen\\"
+        },
+        {
+          \\"spawn\\": \\"post-upgrade\\"
         }
       ]
     },
@@ -436,6 +443,9 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
         },
         {
           \\"exec\\": \\"npx projen\\"
+        },
+        {
+          \\"spawn\\": \\"post-upgrade\\"
         }
       ]
     },
@@ -1378,6 +1388,10 @@ exports[`specific stack tasks 1`] = `
         }
       ]
     },
+    \\"post-upgrade\\": {
+      \\"name\\": \\"post-upgrade\\",
+      \\"description\\": \\"Runs after upgrading dependencies\\"
+    },
     \\"pre-compile\\": {
       \\"name\\": \\"pre-compile\\",
       \\"description\\": \\"Prepare the project for compilation\\"
@@ -1499,6 +1513,9 @@ exports[`specific stack tasks 1`] = `
         },
         {
           \\"exec\\": \\"npx projen\\"
+        },
+        {
+          \\"spawn\\": \\"post-upgrade\\"
         }
       ]
     },
@@ -1532,6 +1549,9 @@ exports[`specific stack tasks 1`] = `
         },
         {
           \\"exec\\": \\"npx projen\\"
+        },
+        {
+          \\"spawn\\": \\"post-upgrade\\"
         }
       ]
     },
