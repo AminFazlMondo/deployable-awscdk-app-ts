@@ -255,6 +255,18 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
         }
       ]
     },
+    \\"eject\\": {
+      \\"name\\": \\"eject\\",
+      \\"description\\": \\"Remove projen from the project\\",
+      \\"env\\": {
+        \\"PROJEN_EJECTING\\": \\"true\\"
+      },
+      \\"steps\\": [
+        {
+          \\"spawn\\": \\"default\\"
+        }
+      ]
+    },
     \\"eslint\\": {
       \\"name\\": \\"eslint\\",
       \\"description\\": \\"Runs eslint against the codebase\\",
@@ -1326,6 +1338,18 @@ exports[`specific stack tasks 1`] = `
       \\"steps\\": [
         {
           \\"exec\\": \\"cdk diff\\"
+        }
+      ]
+    },
+    \\"eject\\": {
+      \\"name\\": \\"eject\\",
+      \\"description\\": \\"Remove projen from the project\\",
+      \\"env\\": {
+        \\"PROJEN_EJECTING\\": \\"true\\"
+      },
+      \\"steps\\": [
+        {
+          \\"spawn\\": \\"default\\"
         }
       ]
     },
