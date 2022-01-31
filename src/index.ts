@@ -23,13 +23,13 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     this.generateNvmrc = options.generateNvmrc ?? true
     this.checkActiveDeployment = options.checkActiveDeployment ?? false
     this.workflowNodeVersion = options.workflowNodeVersion
-    this.deployOptions = options.deployOptions
+    this.deployOptions = options.deployOptions ?? {environments: []}
 
     if (!deployable)
       console.warn('The project is explicitly set to not release, make sure this is desired setting')
 
     if (this.generateNvmrc && !this.workflowNodeVersion)
-      throw new Error('workflowNodeVersion is required for nvmrc')
+      this.workflowNodeVersion = '14.18.1'
   }
 
   synth() {
