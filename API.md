@@ -249,9 +249,9 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`appEntrypoint`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyappentrypoint) | `string` | The CDK app's entrypoint (relative to the source directory, which is "src" by default). |
 | [`lambdaAutoDiscover`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaautodiscover) | `boolean` | Automatically adds an `awscdk.LambdaFunction` for each `.lambda.ts` handler in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project. |
 | [`lambdaOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaoptions) | [`projen.awscdk.LambdaFunctionCommonOptions`](#projen.awscdk.LambdaFunctionCommonOptions) | Common options for all AWS Lambda functions. |
-| [`deployOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeployoptions)<span title="Required">*</span> | [`deployable-awscdk-app-ts.DeployOptions`](#deployable-awscdk-app-ts.DeployOptions) | Deployment options. |
 | [`checkActiveDeployment`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycheckactivedeployment) | `boolean` | Whether to check and skip the deployment for environments that have active deployment of the same commit. |
-| [`generateNvmrc`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygeneratenvmrc) | `boolean` | Whether to generate nvmrc file for the node version of the project. |
+| [`deployOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeployoptions) | [`deployable-awscdk-app-ts.DeployOptions`](#deployable-awscdk-app-ts.DeployOptions) | Deployment options. |
+| [`generateNvmrc`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygeneratenvmrc) | `boolean` | Whether to generate nvmrc file for the node version of the project if set to true, and no "workflowNodeVersion" is specified will use version 14.18.1. |
 
 ---
 
@@ -2253,18 +2253,6 @@ Common options for all AWS Lambda functions.
 
 ---
 
-##### `deployOptions`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.deployOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeployoptions"></a>
-
-```typescript
-public readonly deployOptions: DeployOptions;
-```
-
-- *Type:* [`deployable-awscdk-app-ts.DeployOptions`](#deployable-awscdk-app-ts.DeployOptions)
-
-Deployment options.
-
----
-
 ##### `checkActiveDeployment`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.checkActiveDeployment" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycheckactivedeployment"></a>
 
 ```typescript
@@ -2278,6 +2266,19 @@ Whether to check and skip the deployment for environments that have active deplo
 
 ---
 
+##### `deployOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.deployOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeployoptions"></a>
+
+```typescript
+public readonly deployOptions: DeployOptions;
+```
+
+- *Type:* [`deployable-awscdk-app-ts.DeployOptions`](#deployable-awscdk-app-ts.DeployOptions)
+- *Default:* "config with empty list of environments"
+
+Deployment options.
+
+---
+
 ##### `generateNvmrc`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.generateNvmrc" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygeneratenvmrc"></a>
 
 ```typescript
@@ -2287,7 +2288,7 @@ public readonly generateNvmrc: boolean;
 - *Type:* `boolean`
 - *Default:* true
 
-Whether to generate nvmrc file for the node version of the project.
+Whether to generate nvmrc file for the node version of the project if set to true, and no "workflowNodeVersion" is specified will use version 14.18.1.
 
 ---
 
