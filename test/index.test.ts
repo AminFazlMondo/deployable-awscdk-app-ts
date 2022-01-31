@@ -216,32 +216,33 @@ describe('nvmrc', () => {
     expect(pathExistsSync(`${outdir}.nvmrc`)).toBeFalsy()
   })
 
-  test('error when generate but not node version is set', ()=> {
+  test('defaults the node version where generate Nvmrc is true', ()=> {
     const outdir = mkdtemp()
 
-    expect(()=> {
-      const project = new DeployableAwsCdkTypeScriptApp({
-        packageManager: NodePackageManager.YARN,
-        name: 'my-test-app',
-        defaultReleaseBranch: 'main',
-        cdkVersion: '1.129.0',
-        outdir,
-        deployOptions: {
-          environments: [
-            {
-              name: 'dev',
-              awsCredentials: {
-                accessKeyIdSecretName: 'dev-secret-1',
-                secretAccessKeySecretName: 'dev-secret-2',
-                region: 'dev-aws-region-1',
-              },
+    const project = new DeployableAwsCdkTypeScriptApp({
+      packageManager: NodePackageManager.YARN,
+      name: 'my-test-app',
+      defaultReleaseBranch: 'main',
+      cdkVersion: '1.129.0',
+      outdir,
+      deployOptions: {
+        environments: [
+          {
+            name: 'dev',
+            awsCredentials: {
+              accessKeyIdSecretName: 'dev-secret-1',
+              secretAccessKeySecretName: 'dev-secret-2',
+              region: 'dev-aws-region-1',
             },
-          ],
-        },
-      })
-      project.synth()
+          },
+        ],
+      },
+    })
+    project.synth()
 
-    }).toThrowError('workflowNodeVersion is required for nvmrc')
+    const content = readFile('/.nvmrc', project.outdir)
+    expect(content).toBe('14.18.1')
+
   })
 })
 
