@@ -65,7 +65,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
       const assumeRoleSettings = awsCredentials.roleToAssume ? {
         roleToAssume: awsCredentials.roleToAssume,
-        assumeRoleDurationSeconds: (awsCredentials.assumeRoleDurationSeconds || 300).toString(),
+        assumeRoleDurationSeconds: awsCredentials.assumeRoleDurationSeconds || 300,
       }: undefined
 
       const accessKeyIdSecretName = awsCredentials.accessKeyIdSecretName ?? 'AWS_ACCESS_KEY_ID'

@@ -105,7 +105,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 1200
+          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
         run: yarn deploy:workflow
     strategy:
@@ -574,7 +574,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 1200
+          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
         run: yarn deploy:workflow
     strategy:
@@ -587,7 +587,7 @@ jobs:
             region: dev-aws-region-1
             assumeRole: \\"true\\"
             roleToAssume: dev-role
-            assumeRoleDurationSeconds: \\"300\\"
+            assumeRoleDurationSeconds: 300
         environment:
           - dev
 "
@@ -690,7 +690,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 1200
+          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
         run: yarn deploy:workflow
     strategy:
@@ -703,7 +703,7 @@ jobs:
             region: dev-aws-region-1
             assumeRole: \\"true\\"
             roleToAssume: dev-role
-            assumeRoleDurationSeconds: \\"1200\\"
+            assumeRoleDurationSeconds: 1200
         environment:
           - dev
 "
@@ -814,7 +814,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 1200
+          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
         run: yarn deploy:workflow
     strategy:
@@ -942,7 +942,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 1200
+          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Setting NPM Config
         env:
           CONFIG_VALUE: \${{ matrix.environment }}
@@ -1082,7 +1082,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 1200
+          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Deployment
         run: yarn deploy:workflow
@@ -1197,7 +1197,7 @@ jobs:
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
-          role-duration-seconds: 1200
+          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
         run: yarn deploy:workflow
     strategy:
