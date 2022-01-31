@@ -3,11 +3,13 @@ import {awscdk} from 'projen'
 export interface DeployableAwsCdkTypeScriptAppOptions extends awscdk.AwsCdkTypeScriptAppOptions {
   /**
    * Deployment options
+   * @default "config with empty list of environments"
    */
-  readonly deployOptions: DeployOptions;
+  readonly deployOptions?: DeployOptions;
 
   /**
    * Whether to generate nvmrc file for the node version of the project
+   * if set to true, and no "workflowNodeVersion" is specified will use version 14.18.1
    * @default true
    */
   readonly generateNvmrc?: boolean;
