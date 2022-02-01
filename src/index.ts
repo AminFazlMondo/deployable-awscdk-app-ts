@@ -71,12 +71,16 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       const accessKeyIdSecretName = awsCredentials.accessKeyIdSecretName ?? 'AWS_ACCESS_KEY_ID'
       const secretAccessKeySecretName = awsCredentials.secretAccessKeySecretName ?? 'AWS_SECRET_ACCESS_KEY'
 
+      const hasPostDeployTask = environmentOptions.postDeployWorkflowScript ? 'true' : 'false'
+
       return {
         environment: environmentOptions.name,
         accessKeyIdSecretName,
         secretAccessKeySecretName,
         region: awsCredentials.region,
         assumeRole,
+        hasPostDeployTask,
+        postDeploymentScript: environmentOptions.postDeployWorkflowScript || '',
         ...assumeRoleSettings,
       }
     })
@@ -121,6 +125,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       jobDefinition.steps.push(steps.setNpmConfig(this.deployOptions.npmConfigEnvironment, '${{ matrix.environment }}', this.checkActiveDeployment))
 
     jobDefinition.steps.push(steps.deploymentStep(this.checkActiveDeployment, this.packageManager))
+    jobDefinition.steps.push(steps.postDeploymentStep(this.checkActiveDeployment, this.packageManager))
 
     this.release?.addJobs({deploy: jobDefinition})
 

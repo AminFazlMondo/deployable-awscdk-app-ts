@@ -22,6 +22,9 @@ function readFile(filePath: string, outdir: string): string {
   return fs.readFileSync(`${outdir}${filePath}`, 'utf-8')
 }
 
+const releaseWorkflowFilePath = '/.github/workflows/release.yml'
+const tasksFilePath = '/.projen/tasks.json'
+
 describe('No stack pattern', () => {
   const outdir = mkdtemp()
   const project = new DeployableAwsCdkTypeScriptApp({
@@ -55,7 +58,7 @@ describe('No stack pattern', () => {
   project.synth()
 
   test('release workflow', () => {
-    const content = readFile('/.github/workflows/release.yml', project.outdir)
+    const content = readFile(releaseWorkflowFilePath, project.outdir)
     expect(content).toMatchSnapshot()
   })
 })
@@ -86,12 +89,12 @@ describe('specific stack', () => {
   project.synth()
 
   test('release workflow', () => {
-    const content = readFile('/.github/workflows/release.yml', project.outdir)
+    const content = readFile(releaseWorkflowFilePath, project.outdir)
     expect(content).toMatchSnapshot()
   })
 
   test('tasks', () => {
-    const content = readFile('/.projen/tasks.json', project.outdir)
+    const content = readFile(tasksFilePath, project.outdir)
     expect(content).toMatchSnapshot()
   })
 })
@@ -122,7 +125,7 @@ describe('assume role with default duration', () => {
   project.synth()
 
   test('release workflow', () => {
-    const content = readFile('/.github/workflows/release.yml', project.outdir)
+    const content = readFile(releaseWorkflowFilePath, project.outdir)
     expect(content).toMatchSnapshot()
   })
 })
@@ -154,7 +157,7 @@ describe('assume role with specified duration', () => {
   project.synth()
 
   test('release workflow', () => {
-    const content = readFile('/.github/workflows/release.yml', project.outdir)
+    const content = readFile(releaseWorkflowFilePath, project.outdir)
     expect(content).toMatchSnapshot()
   })
 })
@@ -279,7 +282,7 @@ describe('environment added by invoking the addEnvironments', () => {
   project.synth()
 
   test('release workflow', () => {
-    const content = readFile('/.github/workflows/release.yml', project.outdir)
+    const content = readFile(releaseWorkflowFilePath, project.outdir)
     expect(content).toMatchSnapshot()
   })
 })
@@ -317,7 +320,7 @@ describe('npm config set for each environments', () => {
   project.synth()
 
   test('release workflow', () => {
-    const content = readFile('/.github/workflows/release.yml', project.outdir)
+    const content = readFile(releaseWorkflowFilePath, project.outdir)
     expect(content).toMatchSnapshot()
   })
 })
@@ -347,7 +350,7 @@ describe('set the checkActiveDeployment flag', () => {
   project.synth()
 
   test('release workflow', () => {
-    const content = readFile('/.github/workflows/release.yml', project.outdir)
+    const content = readFile(releaseWorkflowFilePath, project.outdir)
     expect(content).toMatchSnapshot()
   })
 })
@@ -376,7 +379,47 @@ describe('a new task added for deployment in workflow', () => {
   project.synth()
 
   test('tasks', () => {
-    const content = readFile('/.projen/tasks.json', project.outdir)
+    const content = readFile(tasksFilePath, project.outdir)
+    expect(content).toMatchSnapshot()
+  })
+})
+
+describe('post deployment added in workflow', () => {
+  const outdir = mkdtemp()
+  const project = new DeployableAwsCdkTypeScriptApp({
+    packageManager: NodePackageManager.YARN,
+    name: 'my-test-app',
+    defaultReleaseBranch: 'main',
+    cdkVersion: '1.129.0',
+    outdir,
+    workflowNodeVersion: '14.18.1',
+    deployOptions: {
+      environments: [
+        {
+          name: 'dev1',
+          postDeployWorkflowScript: 'post-deploy',
+          awsCredentials: {
+            accessKeyIdSecretName: 'dev-secret-1',
+            secretAccessKeySecretName: 'dev-secret-2',
+            region: 'dev-aws-region-1',
+          },
+        },
+        {
+          name: 'dev2',
+          awsCredentials: {
+            accessKeyIdSecretName: 'dev-secret-3',
+            secretAccessKeySecretName: 'dev-secret-4',
+            region: 'dev-aws-region-2',
+          },
+        },
+      ],
+    },
+  })
+
+  project.synth()
+
+  test('tasks', () => {
+    const content = readFile(releaseWorkflowFilePath, project.outdir)
     expect(content).toMatchSnapshot()
   })
 })
