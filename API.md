@@ -2370,6 +2370,7 @@ const environmentOptions: EnvironmentOptions = { ... }
 | --- | --- | --- |
 | [`awsCredentials`](#deployableawscdkapptsenvironmentoptionspropertyawscredentials)<span title="Required">*</span> | [`deployable-awscdk-app-ts.AWSCredentials`](#deployable-awscdk-app-ts.AWSCredentials) | AWS credential details for deployment. |
 | [`name`](#deployableawscdkapptsenvironmentoptionspropertyname)<span title="Required">*</span> | `string` | Environment name to deploy to. |
+| [`postDeployWorkflowScript`](#deployableawscdkapptsenvironmentoptionspropertypostdeployworkflowscript) | `string` | The script/task to run after deployment of the environment in the workflow If not present, the workflow will not execute that. |
 
 ---
 
@@ -2394,6 +2395,18 @@ public readonly name: string;
 - *Type:* `string`
 
 Environment name to deploy to.
+
+---
+
+##### `postDeployWorkflowScript`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.EnvironmentOptions.property.postDeployWorkflowScript" id="deployableawscdkapptsenvironmentoptionspropertypostdeployworkflowscript"></a>
+
+```typescript
+public readonly postDeployWorkflowScript: string;
+```
+
+- *Type:* `string`
+
+The script/task to run after deployment of the environment in the workflow If not present, the workflow will not execute that.
 
 ---
 

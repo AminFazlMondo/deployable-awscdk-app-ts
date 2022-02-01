@@ -55,6 +55,14 @@ export interface EnvironmentOptions {
    * AWS credential details for deployment
    */
   readonly awsCredentials: AWSCredentials;
+
+  /**
+   * The script/task to run after deployment of the environment in the workflow
+   * If not present, the workflow will not execute that
+   *
+   * @example "post:deploy"
+   */
+  readonly postDeployWorkflowScript?: string;
 }
 
 export interface AWSCredentials {

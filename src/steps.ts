@@ -133,3 +133,15 @@ const skipIfAlreadyActiveDeploymentCondition= `steps.${checkActiveDeploymentStep
 function getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment: boolean): JobStep | undefined {
   return checkActiveDeployment ? {if: `\${{ ${skipIfAlreadyActiveDeploymentCondition} }}`} : undefined
 }
+
+export function postDeploymentStep(checkActiveDeployment: boolean, packageManager: javascript.NodePackageManager): JobStep {
+  const condition =
+  checkActiveDeployment ?
+    `\${{ matrix.hasPostDeployTask == 'true' && ${skipIfAlreadyActiveDeploymentCondition} }}` :
+    '${{ matrix.hasPostDeployTask == \'true\' }}'
+  return {
+    if: condition,
+    name: 'Post Deployment',
+    run: `${getPackageManagerCommandPrefix(packageManager)} \${{ matrix.postDeploymentScript }}`,
+  }
+}
