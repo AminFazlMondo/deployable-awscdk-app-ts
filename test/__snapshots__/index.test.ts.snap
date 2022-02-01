@@ -32,7 +32,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -85,7 +85,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -107,10 +107,10 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
-        run: yarn deploy:workflow
+        run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
-        run: yarn \${{ matrix.postDeploymentScript }}
+        run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
       matrix:
@@ -414,10 +414,10 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
           \\"exec\\": \\"npm-check-updates --dep bundle --upgrade --target=minor --reject='projen'\\"
         },
         {
-          \\"exec\\": \\"yarn install --check-files\\"
+          \\"exec\\": \\"npm install\\"
         },
         {
-          \\"exec\\": \\"yarn upgrade @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions\\"
+          \\"exec\\": \\"npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions\\"
         },
         {
           \\"exec\\": \\"npx projen\\"
@@ -450,10 +450,10 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
           \\"exec\\": \\"npm-check-updates --dep bundle --upgrade --target=minor --filter='projen'\\"
         },
         {
-          \\"exec\\": \\"yarn install --check-files\\"
+          \\"exec\\": \\"npm install\\"
         },
         {
-          \\"exec\\": \\"yarn upgrade projen\\"
+          \\"exec\\": \\"npm update projen\\"
         },
         {
           \\"exec\\": \\"npx projen\\"
@@ -512,7 +512,7 @@ jobs:
           git config user.name \\"github-actions\\"
           git config user.email \\"github-actions@github.com\\"
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -561,7 +561,7 @@ jobs:
         with:
           ref: \${{ github.sha }}
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -583,10 +583,10 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
-        run: yarn deploy:workflow
+        run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
-        run: yarn \${{ matrix.postDeploymentScript }}
+        run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
       matrix:
@@ -633,7 +633,7 @@ jobs:
           git config user.name \\"github-actions\\"
           git config user.email \\"github-actions@github.com\\"
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -682,7 +682,7 @@ jobs:
         with:
           ref: \${{ github.sha }}
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -704,10 +704,10 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
-        run: yarn deploy:workflow
+        run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
-        run: yarn \${{ matrix.postDeploymentScript }}
+        run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
       matrix:
@@ -758,7 +758,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -811,7 +811,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -833,10 +833,10 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
-        run: yarn deploy:workflow
+        run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
-        run: yarn \${{ matrix.postDeploymentScript }}
+        run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
       matrix:
@@ -893,7 +893,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -946,7 +946,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -972,10 +972,10 @@ jobs:
           CONFIG_VALUE: \${{ matrix.environment }}
         run: npm config set stage $CONFIG_VALUE
       - name: Deployment
-        run: yarn deploy:workflow
+        run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
-        run: yarn \${{ matrix.postDeploymentScript }}
+        run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
       matrix:
@@ -1032,7 +1032,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -1085,7 +1085,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -1107,10 +1107,10 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
-        run: yarn deploy:workflow
+        run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
-        run: yarn \${{ matrix.postDeploymentScript }}
+        run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
       matrix:
@@ -1167,7 +1167,7 @@ jobs:
         with:
           node-version: 14.18.1
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -1228,7 +1228,7 @@ jobs:
           node-version: 14.18.1
       - if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Configure AWS Credentials
         run: |-
@@ -1251,10 +1251,10 @@ jobs:
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Deployment
-        run: yarn deploy:workflow
+        run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Post Deployment
-        run: yarn \${{ matrix.postDeploymentScript }}
+        run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
       matrix:
@@ -1299,7 +1299,7 @@ jobs:
           git config user.name \\"github-actions\\"
           git config user.email \\"github-actions@github.com\\"
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Check for new commits
@@ -1348,7 +1348,7 @@ jobs:
         with:
           ref: \${{ github.sha }}
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - if: \${{ matrix.assumeRole == 'false' }}
         name: Configure AWS Credentials
         run: |-
@@ -1370,10 +1370,10 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Deployment
-        run: yarn deploy:workflow
+        run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
-        run: yarn \${{ matrix.postDeploymentScript }}
+        run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
       matrix:
@@ -1669,10 +1669,10 @@ exports[`specific stack tasks 1`] = `
           \\"exec\\": \\"npm-check-updates --dep bundle --upgrade --target=minor --reject='projen'\\"
         },
         {
-          \\"exec\\": \\"yarn install --check-files\\"
+          \\"exec\\": \\"npm install\\"
         },
         {
-          \\"exec\\": \\"yarn upgrade @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions\\"
+          \\"exec\\": \\"npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions\\"
         },
         {
           \\"exec\\": \\"npx projen\\"
@@ -1705,10 +1705,10 @@ exports[`specific stack tasks 1`] = `
           \\"exec\\": \\"npm-check-updates --dep bundle --upgrade --target=minor --filter='projen'\\"
         },
         {
-          \\"exec\\": \\"yarn install --check-files\\"
+          \\"exec\\": \\"npm install\\"
         },
         {
-          \\"exec\\": \\"yarn upgrade projen\\"
+          \\"exec\\": \\"npm update projen\\"
         },
         {
           \\"exec\\": \\"npx projen\\"
