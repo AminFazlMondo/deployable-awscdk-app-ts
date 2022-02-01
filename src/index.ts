@@ -26,7 +26,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     this.deployOptions = options.deployOptions ?? {environments: []}
 
     if (!deployable)
-      console.warn('The project is explicitly set to not release, make sure this is desired setting')
+      this.logger.warn('The project is explicitly set to not release, make sure this is desired setting')
 
     if (this.generateNvmrc && !this.workflowNodeVersion)
       this.workflowNodeVersion = '14.18.1'
@@ -56,7 +56,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
   private addDeployJobs() {
 
     if (this.deployOptions.environments.length === 0)
-      console.warn('The project does not have any environment set, make sure this is desired setting')
+      this.logger.warn('The project does not have any environment set, make sure this is desired setting')
 
     const include = this.deployOptions.environments.map(environmentOptions => {
       const {awsCredentials} = environmentOptions
