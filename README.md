@@ -37,7 +37,7 @@ This will initialize a projen project and will create `.projenrc.js` file for ca
 ```javascript
 const { DeployableAwsCdkTypeScriptApp } = require('deployable-awscdk-app-ts');
 
-const project = new TypeScriptProject({
+const project = new DeployableAwsCdkTypeScriptApp({
   name: 'my-test-app',
   defaultReleaseBranch: 'main',
   cdkVersion: '1.129.0',
