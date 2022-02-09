@@ -24,6 +24,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     this.checkActiveDeployment = options.checkActiveDeployment ?? false
     this.workflowNodeVersion = options.workflowNodeVersion
     this.deployOptions = options.deployOptions ?? {environments: []}
+    this.addDevDeps('deployable-awscdk-app-ts')
 
     if (!deployable)
       this.logger.warn('The project is explicitly set to not release, make sure this is desired setting')
