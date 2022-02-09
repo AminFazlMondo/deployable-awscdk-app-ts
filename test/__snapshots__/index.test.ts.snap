@@ -421,7 +421,7 @@ Object {
           "exec": "npm install",
         },
         Object {
-          "exec": "npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions",
+          "exec": "npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk deployable-awscdk-app-ts esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions",
         },
         Object {
           "exec": "npx projen",
@@ -1675,7 +1675,7 @@ Object {
           "exec": "npm install",
         },
         Object {
-          "exec": "npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions",
+          "exec": "npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk deployable-awscdk-app-ts esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions",
         },
         Object {
           "exec": "npx projen",
