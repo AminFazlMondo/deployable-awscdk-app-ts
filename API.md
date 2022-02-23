@@ -57,7 +57,7 @@ public readonly assumeRoleDurationSeconds: number;
 ```
 
 - *Type:* `number`
-- *Default:* 300
+- *Default:* 900
 
 Duration of assume role session.
 
