@@ -598,7 +598,7 @@ jobs:
             hasPostDeployTask: \\"false\\"
             postDeploymentScript: \\"\\"
             roleToAssume: dev-role
-            assumeRoleDurationSeconds: 300
+            assumeRoleDurationSeconds: 900
         environment:
           - dev
 "

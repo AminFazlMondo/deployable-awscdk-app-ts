@@ -85,7 +85,7 @@ export interface AWSCredentials {
 
   /**
    * Duration of assume role session
-   * @default 300
+   * @default 900
    */
   readonly assumeRoleDurationSeconds?: number;
 
