@@ -33,6 +33,8 @@ const project = new cdk.JsiiProject({
     ignoreProjen: false,
   },
   publishTasks: true,
+  autoApproveOptions: {},
+  autoApproveUpgrades: true,
 })
 
 new TextFile(project, '.nvmrc', {
