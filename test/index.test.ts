@@ -367,3 +367,40 @@ describe('post deployment added in workflow', () => {
     expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot()
   })
 })
+
+describe('pre deployment added in workflow', () => {
+  const project = new DeployableAwsCdkTypeScriptApp({
+    packageManager: NodePackageManager.NPM,
+    name: 'my-test-app',
+    defaultReleaseBranch: 'main',
+    cdkVersion: '1.129.0',
+    workflowNodeVersion: '14.18.1',
+    deployOptions: {
+      environments: [
+        {
+          name: 'dev1',
+          preDeployWorkflowScript: 'pre-deploy',
+          awsCredentials: {
+            accessKeyIdSecretName: 'dev-secret-1',
+            secretAccessKeySecretName: 'dev-secret-2',
+            region: 'dev-aws-region-1',
+          },
+        },
+        {
+          name: 'dev2',
+          awsCredentials: {
+            accessKeyIdSecretName: 'dev-secret-3',
+            secretAccessKeySecretName: 'dev-secret-4',
+            region: 'dev-aws-region-2',
+          },
+        },
+      ],
+    },
+  })
+
+  const synthOutput = synthSnapshot(project)
+
+  test('tasks', () => {
+    expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot()
+  })
+})

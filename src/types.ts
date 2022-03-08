@@ -63,6 +63,14 @@ export interface EnvironmentOptions {
    * @example "post:deploy"
    */
   readonly postDeployWorkflowScript?: string;
+
+  /**
+   * The script/task to run before deployment of the environment in the workflow
+   * If not present, the workflow will not execute that
+   *
+   * @example "pre:deploy"
+   */
+  readonly preDeployWorkflowScript?: string;
 }
 
 export interface AWSCredentials {

@@ -145,3 +145,15 @@ export function postDeploymentStep(checkActiveDeployment: boolean, packageManage
     run: `${getPackageManagerCommandPrefix(packageManager)} \${{ matrix.postDeploymentScript }}`,
   }
 }
+
+export function preDeploymentStep(checkActiveDeployment: boolean, packageManager: javascript.NodePackageManager): JobStep {
+  const condition =
+  checkActiveDeployment ?
+    `\${{ matrix.hasPreDeployTask == 'true' && ${skipIfAlreadyActiveDeploymentCondition} }}` :
+    '${{ matrix.hasPreDeployTask == \'true\' }}'
+  return {
+    if: condition,
+    name: 'Pre Deployment',
+    run: `${getPackageManagerCommandPrefix(packageManager)} \${{ matrix.preDeploymentScript }}`,
+  }
+}

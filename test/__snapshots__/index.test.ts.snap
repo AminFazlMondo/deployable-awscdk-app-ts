@@ -106,6 +106,9 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
+      - if: \${{ matrix.hasPreDeployTask == 'true' }}
+        name: Pre Deployment
+        run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
@@ -122,6 +125,8 @@ jobs:
             assumeRole: \\"false\\"
             hasPostDeployTask: \\"false\\"
             postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
           - environment: staging
             accessKeyIdSecretName: staging-secret-1
             secretAccessKeySecretName: staging-secret-2
@@ -129,6 +134,8 @@ jobs:
             assumeRole: \\"false\\"
             hasPostDeployTask: \\"false\\"
             postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
         environment:
           - dev
           - staging
@@ -581,6 +588,9 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
+      - if: \${{ matrix.hasPreDeployTask == 'true' }}
+        name: Pre Deployment
+        run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
@@ -597,6 +607,8 @@ jobs:
             assumeRole: \\"true\\"
             hasPostDeployTask: \\"false\\"
             postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
             roleToAssume: dev-role
             assumeRoleDurationSeconds: 900
         environment:
@@ -702,6 +714,9 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
+      - if: \${{ matrix.hasPreDeployTask == 'true' }}
+        name: Pre Deployment
+        run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
@@ -718,6 +733,8 @@ jobs:
             assumeRole: \\"true\\"
             hasPostDeployTask: \\"false\\"
             postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
             roleToAssume: dev-role
             assumeRoleDurationSeconds: 1200
         environment:
@@ -831,6 +848,9 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
+      - if: \${{ matrix.hasPreDeployTask == 'true' }}
+        name: Pre Deployment
+        run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
@@ -847,6 +867,8 @@ jobs:
             assumeRole: \\"false\\"
             hasPostDeployTask: \\"false\\"
             postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
           - environment: staging
             accessKeyIdSecretName: staging-secret-1
             secretAccessKeySecretName: staging-secret-2
@@ -854,6 +876,8 @@ jobs:
             assumeRole: \\"false\\"
             hasPostDeployTask: \\"false\\"
             postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
         environment:
           - dev
           - staging
@@ -970,6 +994,9 @@ jobs:
         env:
           CONFIG_VALUE: \${{ matrix.environment }}
         run: npm config set stage $CONFIG_VALUE
+      - if: \${{ matrix.hasPreDeployTask == 'true' }}
+        name: Pre Deployment
+        run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
@@ -986,6 +1013,8 @@ jobs:
             assumeRole: \\"false\\"
             hasPostDeployTask: \\"false\\"
             postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
           - environment: staging
             accessKeyIdSecretName: staging-secret-1
             secretAccessKeySecretName: staging-secret-2
@@ -993,6 +1022,8 @@ jobs:
             assumeRole: \\"false\\"
             hasPostDeployTask: \\"false\\"
             postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
         environment:
           - dev
           - staging
@@ -1105,6 +1136,9 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
+      - if: \${{ matrix.hasPreDeployTask == 'true' }}
+        name: Pre Deployment
+        run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
@@ -1121,6 +1155,8 @@ jobs:
             assumeRole: \\"false\\"
             hasPostDeployTask: \\"true\\"
             postDeploymentScript: post-deploy
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
           - environment: dev2
             accessKeyIdSecretName: dev-secret-3
             secretAccessKeySecretName: dev-secret-4
@@ -1128,6 +1164,150 @@ jobs:
             assumeRole: \\"false\\"
             hasPostDeployTask: \\"false\\"
             postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
+        environment:
+          - dev1
+          - dev2
+"
+`;
+
+exports[`pre deployment added in workflow tasks 1`] = `
+"# ~~ Generated by projen. To modify, edit .projenrc.js and run \\"npx projen\\".
+
+name: release
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      latest_commit: \${{ steps.git_remote.outputs.latest_commit }}
+    env:
+      CI: \\"true\\"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set git identity
+        run: |-
+          git config user.name \\"github-actions\\"
+          git config user.email \\"github-actions@github.com\\"
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.2.0
+        with:
+          node-version: 14.18.1
+      - name: Install dependencies
+        run: npm ci
+      - name: release
+        run: npx projen release
+      - name: Check for new commits
+        id: git_remote
+        run: echo ::set-output name=latest_commit::\\"$(git ls-remote origin -h \${{ github.ref }} | cut -f1)\\"
+      - name: Upload artifact
+        if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
+        uses: actions/upload-artifact@v2.1.1
+        with:
+          name: build-artifact
+          path: dist
+  release_github:
+    name: Publish to GitHub Releases
+    needs: release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    if: needs.release.outputs.latest_commit == github.sha
+    steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build-artifact
+          path: dist
+      - name: Release
+        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
+        env:
+          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: \${{ github.repository }}
+          GITHUB_REF: \${{ github.ref }}
+  deploy:
+    needs: release_github
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: read
+    environment:
+      name: \${{ matrix.environment }}
+    concurrency: deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: \${{ github.sha }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.2.0
+        with:
+          node-version: 14.18.1
+      - name: Install dependencies
+        run: npm ci
+      - if: \${{ matrix.assumeRole == 'false' }}
+        name: Configure AWS Credentials
+        run: |-
+          
+          echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
+          echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
+          echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
+        env:
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          region: \${{ matrix.region }}
+      - if: \${{ matrix.assumeRole == 'true' }}
+        name: Assume AWS Role
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          role-to-assume: \${{ matrix.roleToAssume }}
+          aws-region: \${{ matrix.region }}
+          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
+      - if: \${{ matrix.hasPreDeployTask == 'true' }}
+        name: Pre Deployment
+        run: npm run \${{ matrix.preDeploymentScript }}
+      - name: Deployment
+        run: npm run deploy:workflow
+      - if: \${{ matrix.hasPostDeployTask == 'true' }}
+        name: Post Deployment
+        run: npm run \${{ matrix.postDeploymentScript }}
+    strategy:
+      max-parallel: 1
+      matrix:
+        include:
+          - environment: dev1
+            accessKeyIdSecretName: dev-secret-1
+            secretAccessKeySecretName: dev-secret-2
+            region: dev-aws-region-1
+            assumeRole: \\"false\\"
+            hasPostDeployTask: \\"false\\"
+            postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"true\\"
+            preDeploymentScript: pre-deploy
+          - environment: dev2
+            accessKeyIdSecretName: dev-secret-3
+            secretAccessKeySecretName: dev-secret-4
+            region: dev-aws-region-2
+            assumeRole: \\"false\\"
+            hasPostDeployTask: \\"false\\"
+            postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
         environment:
           - dev1
           - dev2
@@ -1248,6 +1428,9 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
+      - if: \${{ matrix.hasPreDeployTask == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
+        name: Pre Deployment
+        run: npm run \${{ matrix.preDeploymentScript }}
       - if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Deployment
         run: npm run deploy:workflow
@@ -1265,6 +1448,8 @@ jobs:
             assumeRole: \\"false\\"
             hasPostDeployTask: \\"false\\"
             postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
         environment:
           - dev
 "
@@ -1368,6 +1553,9 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
+      - if: \${{ matrix.hasPreDeployTask == 'true' }}
+        name: Pre Deployment
+        run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
@@ -1384,6 +1572,8 @@ jobs:
             assumeRole: \\"false\\"
             hasPostDeployTask: \\"false\\"
             postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
         environment:
           - dev
 "
