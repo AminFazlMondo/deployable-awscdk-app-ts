@@ -249,6 +249,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`appEntrypoint`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyappentrypoint) | `string` | The CDK app's entrypoint (relative to the source directory, which is "src" by default). |
 | [`integrationTestAutoDiscover`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyintegrationtestautodiscover) | `boolean` | Automatically discovers and creates integration tests for each `.integ.ts` file in under your test directory. |
 | [`lambdaAutoDiscover`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaautodiscover) | `boolean` | Automatically adds an `awscdk.LambdaFunction` for each `.lambda.ts` handler in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project. |
+| [`lambdaExtensionAutoDiscover`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaextensionautodiscover) | `boolean` | Automatically adds an `awscdk.LambdaExtension` for each `.lambda-extension.ts` entrypoint in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project. |
 | [`lambdaOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaoptions) | [`projen.awscdk.LambdaFunctionCommonOptions`](#projen.awscdk.LambdaFunctionCommonOptions) | Common options for all AWS Lambda functions. |
 | [`checkActiveDeployment`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycheckactivedeployment) | `boolean` | Whether to check and skip the deployment for environments that have active deployment of the same commit. |
 | [`deployOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeployoptions) | [`deployable-awscdk-app-ts.DeployOptions`](#deployable-awscdk-app-ts.DeployOptions) | Deployment options. |
@@ -2251,6 +2252,19 @@ public readonly lambdaAutoDiscover: boolean;
 - *Default:* true
 
 Automatically adds an `awscdk.LambdaFunction` for each `.lambda.ts` handler in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project.
+
+---
+
+##### `lambdaExtensionAutoDiscover`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.lambdaExtensionAutoDiscover" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaextensionautodiscover"></a>
+
+```typescript
+public readonly lambdaExtensionAutoDiscover: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* true
+
+Automatically adds an `awscdk.LambdaExtension` for each `.lambda-extension.ts` entrypoint in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project.
 
 ---
 
