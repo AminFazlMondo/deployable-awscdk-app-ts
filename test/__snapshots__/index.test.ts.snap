@@ -74,7 +74,7 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: deploy
+    concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -568,7 +568,7 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: deploy
+    concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -694,7 +694,7 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: deploy
+    concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -824,7 +824,7 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: deploy
+    concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -966,7 +966,7 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: deploy
+    concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -1112,7 +1112,7 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: deploy
+    concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -1254,7 +1254,7 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: deploy
+    concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -1396,7 +1396,7 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: deploy
+    concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -1533,7 +1533,7 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: deploy
+    concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
         uses: actions/checkout@v2
