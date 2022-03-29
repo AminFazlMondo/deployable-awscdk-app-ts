@@ -91,7 +91,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
     const jobDefinition: Job = {
       runsOn: ['ubuntu-latest'],
-      concurrency: 'deploy',
+      concurrency: '${{ matrix.environment }}-deploy',
       needs: [
         'release_github',
       ],
