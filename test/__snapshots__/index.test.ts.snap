@@ -415,64 +415,25 @@ Object {
           "exec": "npm update npm-check-updates",
         },
         Object {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='projen'",
+          "exec": "npm-check-updates --dep dev --upgrade --target=minor",
         },
         Object {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='projen'",
+          "exec": "npm-check-updates --dep optional --upgrade --target=minor",
         },
         Object {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='projen'",
+          "exec": "npm-check-updates --dep peer --upgrade --target=minor",
         },
         Object {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='projen'",
+          "exec": "npm-check-updates --dep prod --upgrade --target=minor",
         },
         Object {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='projen'",
-        },
-        Object {
-          "exec": "npm install",
-        },
-        Object {
-          "exec": "npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk deployable-awscdk-app-ts esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions",
-        },
-        Object {
-          "exec": "npx projen",
-        },
-        Object {
-          "spawn": "post-upgrade",
-        },
-      ],
-    },
-    "upgrade-projen": Object {
-      "description": "upgrade projen",
-      "env": Object {
-        "CI": "0",
-      },
-      "name": "upgrade-projen",
-      "steps": Array [
-        Object {
-          "exec": "npm update npm-check-updates",
-        },
-        Object {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --filter='projen'",
-        },
-        Object {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --filter='projen'",
-        },
-        Object {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --filter='projen'",
-        },
-        Object {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --filter='projen'",
-        },
-        Object {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --filter='projen'",
+          "exec": "npm-check-updates --dep bundle --upgrade --target=minor",
         },
         Object {
           "exec": "npm install",
         },
         Object {
-          "exec": "npm update projen",
+          "exec": "npm update",
         },
         Object {
           "exec": "npx projen",
@@ -1860,64 +1821,25 @@ Object {
           "exec": "npm update npm-check-updates",
         },
         Object {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='projen'",
+          "exec": "npm-check-updates --dep dev --upgrade --target=minor",
         },
         Object {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='projen'",
+          "exec": "npm-check-updates --dep optional --upgrade --target=minor",
         },
         Object {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='projen'",
+          "exec": "npm-check-updates --dep peer --upgrade --target=minor",
         },
         Object {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='projen'",
+          "exec": "npm-check-updates --dep prod --upgrade --target=minor",
         },
         Object {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='projen'",
-        },
-        Object {
-          "exec": "npm install",
-        },
-        Object {
-          "exec": "npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk deployable-awscdk-app-ts esbuild eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit json-schema npm-check-updates standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions",
-        },
-        Object {
-          "exec": "npx projen",
-        },
-        Object {
-          "spawn": "post-upgrade",
-        },
-      ],
-    },
-    "upgrade-projen": Object {
-      "description": "upgrade projen",
-      "env": Object {
-        "CI": "0",
-      },
-      "name": "upgrade-projen",
-      "steps": Array [
-        Object {
-          "exec": "npm update npm-check-updates",
-        },
-        Object {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --filter='projen'",
-        },
-        Object {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --filter='projen'",
-        },
-        Object {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --filter='projen'",
-        },
-        Object {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --filter='projen'",
-        },
-        Object {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --filter='projen'",
+          "exec": "npm-check-updates --dep bundle --upgrade --target=minor",
         },
         Object {
           "exec": "npm install",
         },
         Object {
-          "exec": "npm update projen",
+          "exec": "npm update",
         },
         Object {
           "exec": "npx projen",

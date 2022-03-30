@@ -119,6 +119,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`mergify`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymergify) | `boolean` | Whether mergify should be enabled on this repository or not. |
 | [`mergifyOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymergifyoptions) | [`projen.github.MergifyOptions`](#projen.github.MergifyOptions) | Options for mergify. |
 | [`projectType`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojecttype) | [`projen.ProjectType`](#projen.ProjectType) | Which type of project this is (library/app). |
+| [`projenCredentials`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojencredentials) | [`projen.github.GithubCredentials`](#projen.github.GithubCredentials) | Choose a method of providing GitHub API access for projen workflows. |
 | [`projenTokenSecret`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojentokensecret) | `string` | The name of a secret which includes a GitHub Personal Access Token to be used by projen workflows. |
 | [`readme`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyreadme) | [`projen.SampleReadmeProps`](#projen.SampleReadmeProps) | The README setup. |
 | [`stale`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertystale) | `boolean` | Auto-close of stale issues and pull request. |
@@ -178,7 +179,6 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`workflowRunsOn`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyworkflowrunson) | `string`[] | Github Runner selection labels. |
 | [`defaultReleaseBranch`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydefaultreleasebranch)<span title="Required">*</span> | `string` | The name of the main release branch. |
 | [`artifactsDirectory`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyartifactsdirectory) | `string` | A directory which will contain build artifacts. |
-| [`autoApproveProjenUpgrades`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveprojenupgrades) | `boolean` | Automatically approve projen upgrade PRs, allowing them to be merged by mergify (if configued). |
 | [`autoApproveUpgrades`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveupgrades) | `boolean` | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued). |
 | [`buildWorkflow`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybuildworkflow) | `boolean` | Define a GitHub workflow for building PRs. |
 | [`buildWorkflowTriggers`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybuildworkflowtriggers) | [`projen.github.workflows.Triggers`](#projen.github.workflows.Triggers) | Build workflow triggers. |
@@ -190,7 +190,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`dependabot`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydependabot) | `boolean` | Use dependabot to handle dependency upgrades. |
 | [`dependabotOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydependabotoptions) | [`projen.github.DependabotOptions`](#projen.github.DependabotOptions) | Options for dependabot. |
 | [`depsUpgrade`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydepsupgrade) | `boolean` | Use github workflows to handle dependency upgrades. |
-| [`depsUpgradeOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydepsupgradeoptions) | [`projen.javascript.UpgradeDependenciesOptions`](#projen.javascript.UpgradeDependenciesOptions) | Options for depsUpgrade. |
+| [`depsUpgradeOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydepsupgradeoptions) | [`projen.javascript.UpgradeDependenciesOptions`](#projen.javascript.UpgradeDependenciesOptions) | Options for `UpgradeDependencies`. |
 | [`gitignore`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygitignore) | `string`[] | Additional entries to .gitignore. |
 | [`jest`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjest) | `boolean` | Setup jest unit tests. |
 | [`jestOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjestoptions) | [`projen.javascript.JestOptions`](#projen.javascript.JestOptions) | Jest options. |
@@ -203,9 +203,6 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`projenDevDependency`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojendevdependency) | `boolean` | Indicates of "projen" should be installed as a devDependency. |
 | [`projenrcJs`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjs) | `boolean` | Generate (once) .projenrc.js (in JavaScript). Set to `false` in order to disable .projenrc.js generation. |
 | [`projenrcJsOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjsoptions) | [`projen.javascript.ProjenrcOptions`](#projen.javascript.ProjenrcOptions) | Options for .projenrc.js. |
-| [`projenUpgradeAutoMerge`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradeautomerge) | `boolean` | Automatically approve projen upgrade PRs, allowing them to be merged by mergify (if configued). |
-| [`projenUpgradeSchedule`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradeschedule) | `string`[] | Customize the projenUpgrade schedule in cron expression. |
-| [`projenUpgradeSecret`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradesecret) | `string` | Periodically submits a pull request for projen upgrades (executes `yarn projen:upgrade`). |
 | [`projenVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenversion) | `string` | Version of projen to install. |
 | [`pullRequestTemplate`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypullrequesttemplate) | `boolean` | Include a GitHub pull request template. |
 | [`pullRequestTemplateContents`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypullrequesttemplatecontents) | `string`[] | The contents of the pull request template. |
@@ -491,7 +488,22 @@ Which type of project this is (library/app).
 
 ---
 
-##### `projenTokenSecret`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenTokenSecret" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojentokensecret"></a>
+##### `projenCredentials`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenCredentials" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojencredentials"></a>
+
+```typescript
+public readonly projenCredentials: GithubCredentials;
+```
+
+- *Type:* [`projen.github.GithubCredentials`](#projen.github.GithubCredentials)
+- *Default:* use a personal access token named PROJEN_GITHUB_TOKEN
+
+Choose a method of providing GitHub API access for projen workflows.
+
+---
+
+##### ~~`projenTokenSecret`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenTokenSecret" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojentokensecret"></a>
+
+- *Deprecated:* use `projenCredentials`
 
 ```typescript
 public readonly projenTokenSecret: string;
@@ -1295,21 +1307,6 @@ A directory which will contain build artifacts.
 
 ---
 
-##### `autoApproveProjenUpgrades`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoApproveProjenUpgrades" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveprojenupgrades"></a>
-
-```typescript
-public readonly autoApproveProjenUpgrades: boolean;
-```
-
-- *Type:* `boolean`
-- *Default:* false
-
-Automatically approve projen upgrade PRs, allowing them to be merged by mergify (if configued).
-
-Throw if set to true but `autoApproveOptions` are not defined.
-
----
-
 ##### `autoApproveUpgrades`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoApproveUpgrades" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveupgrades"></a>
 
 ```typescript
@@ -1467,7 +1464,7 @@ public readonly depsUpgradeOptions: UpgradeDependenciesOptions;
 - *Type:* [`projen.javascript.UpgradeDependenciesOptions`](#projen.javascript.UpgradeDependenciesOptions)
 - *Default:* default options
 
-Options for depsUpgrade.
+Options for `UpgradeDependencies`.
 
 ---
 
@@ -1626,53 +1623,6 @@ public readonly projenrcJsOptions: ProjenrcOptions;
 - *Default:* default options
 
 Options for .projenrc.js.
-
----
-
-##### ~~`projenUpgradeAutoMerge`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenUpgradeAutoMerge" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradeautomerge"></a>
-
-- *Deprecated:* use `autoApproveProjenUpgrades`.
-
-```typescript
-public readonly projenUpgradeAutoMerge: boolean;
-```
-
-- *Type:* `boolean`
-- *Default:* false
-
-Automatically approve projen upgrade PRs, allowing them to be merged by mergify (if configued).
-
-Throw if set to true but `autoApproveOptions` are not defined.
-
----
-
-##### `projenUpgradeSchedule`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenUpgradeSchedule" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradeschedule"></a>
-
-```typescript
-public readonly projenUpgradeSchedule: string[];
-```
-
-- *Type:* `string`[]
-- *Default:* [ "0 6 * * *" ]
-
-Customize the projenUpgrade schedule in cron expression.
-
----
-
-##### ~~`projenUpgradeSecret`~~<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenUpgradeSecret" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenupgradesecret"></a>
-
-- *Deprecated:* use `githubTokenSecret` instead.
-
-```typescript
-public readonly projenUpgradeSecret: string;
-```
-
-- *Type:* `string`
-- *Default:* no automatic projen upgrade pull requests
-
-Periodically submits a pull request for projen upgrades (executes `yarn projen:upgrade`).
-
-This setting is a GitHub secret name which contains a GitHub Access Token with `repo` and `workflow` permissions.  This token is used to submit the upgrade pull request, which will likely include workflow updates.  To create a personal access token see https://github.com/settings/tokens
 
 ---
 

@@ -29,9 +29,6 @@ const project = new cdk.JsiiProject({
     '@types/fs-extra',
   ],
   workflowNodeVersion: nodeVersion,
-  depsUpgradeOptions: {
-    ignoreProjen: false,
-  },
   publishTasks: true,
   autoApproveOptions: {
     allowedUsernames: ['AminFazlMondo'],
