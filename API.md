@@ -135,7 +135,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`bugsEmail`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybugsemail) | `string` | The email address to which issues should be reported. |
 | [`bugsUrl`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybugsurl) | `string` | The url to your project's issue tracker. |
 | [`bundledDeps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybundleddeps) | `string`[] | List of dependencies to bundle into this module. |
-| [`codeArtifactOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodeartifactoptions) | [`projen.javascript.CodeArtifactOptions`](#projen.javascript.CodeArtifactOptions) | Options for publishing npm package to AWS CodeArtifact. |
+| [`codeArtifactOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodeartifactoptions) | [`projen.javascript.CodeArtifactOptions`](#projen.javascript.CodeArtifactOptions) | Options for npm packages using AWS CodeArtifact. |
 | [`deps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydeps) | `string`[] | Runtime dependencies of this module. |
 | [`description`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydescription) | `string` | The description is just a string that helps people understand the purpose of the package. |
 | [`devDeps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydevdeps) | `string`[] | Build dependencies for this module. |
@@ -156,6 +156,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`peerDeps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypeerdeps) | `string`[] | Peer dependencies for this module. |
 | [`repository`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrepository) | `string` | The repository is the location where the actual code for your package lives. |
 | [`repositoryDirectory`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrepositorydirectory) | `string` | If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives. |
+| [`scopedPackagesOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyscopedpackagesoptions) | [`projen.javascript.ScopedPackagesOptions`](#projen.javascript.ScopedPackagesOptions)[] | Options for privately hosted scoped packages. |
 | [`scripts`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyscripts) | {[ key: string ]: `string`} | npm scripts to include. |
 | [`stability`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertystability) | `string` | Package's Stability. |
 | [`jsiiReleaseVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjsiireleaseversion) | `string` | Version requirement of `publib` which is used to publish modules to npm. |
@@ -713,7 +714,9 @@ public readonly codeArtifactOptions: CodeArtifactOptions;
 - *Type:* [`projen.javascript.CodeArtifactOptions`](#projen.javascript.CodeArtifactOptions)
 - *Default:* undefined
 
-Options for publishing npm package to AWS CodeArtifact.
+Options for npm packages using AWS CodeArtifact.
+
+This is required if publishing packages to, or installing scoped packages from AWS CodeArtifact
 
 ---
 
@@ -987,6 +990,19 @@ public readonly repositoryDirectory: string;
 - *Type:* `string`
 
 If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives.
+
+---
+
+##### `scopedPackagesOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.scopedPackagesOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyscopedpackagesoptions"></a>
+
+```typescript
+public readonly scopedPackagesOptions: ScopedPackagesOptions[];
+```
+
+- *Type:* [`projen.javascript.ScopedPackagesOptions`](#projen.javascript.ScopedPackagesOptions)[]
+- *Default:* fetch all scoped packages from the public npm registry
+
+Options for privately hosted scoped packages.
 
 ---
 
