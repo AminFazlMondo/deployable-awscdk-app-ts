@@ -354,7 +354,7 @@ Object {
       "name": "synth:silent",
       "steps": Array [
         Object {
-          "exec": "cdk synth > /dev/null",
+          "exec": "cdk synth -q",
         },
       ],
     },
@@ -1760,7 +1760,7 @@ Object {
       "name": "synth:silent",
       "steps": Array [
         Object {
-          "exec": "cdk synth > /dev/null",
+          "exec": "cdk synth -q",
         },
       ],
     },
