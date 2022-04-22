@@ -110,6 +110,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`projenrcJson`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjson) | `boolean` | Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation. |
 | [`projenrcJsonOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjsonoptions) | [`projen.ProjenrcOptions`](#projen.ProjenrcOptions) | Options for .projenrc.json. |
 | [`autoApproveOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveoptions) | [`projen.github.AutoApproveOptions`](#projen.github.AutoApproveOptions) | Enable and configure the 'auto approve' workflow. |
+| [`autoMerge`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautomerge) | `boolean` | Enable automatic merging on GitHub. |
 | [`autoMergeOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautomergeoptions) | [`projen.github.AutoMergeOptions`](#projen.github.AutoMergeOptions) | Configure options for automatic merging on GitHub. |
 | [`clobber`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyclobber) | `boolean` | Add a `clobber` task which resets the repo to origin. |
 | [`devContainer`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertydevcontainer) | `boolean` | Add a VSCode development environment (used for GitHub Codespaces). |
@@ -362,6 +363,21 @@ Enable and configure the 'auto approve' workflow.
 
 ---
 
+##### `autoMerge`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoMerge" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautomerge"></a>
+
+```typescript
+public readonly autoMerge: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* true
+
+Enable automatic merging on GitHub.
+
+Has no effect if `github.mergify` is set to false.
+
+---
+
 ##### `autoMergeOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.autoMergeOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautomergeoptions"></a>
 
 ```typescript
@@ -373,7 +389,7 @@ public readonly autoMergeOptions: AutoMergeOptions;
 
 Configure options for automatic merging on GitHub.
 
-Has no effect if `github.mergify` is set to false.
+Has no effect if `github.mergify` or `autoMerge` is set to false.
 
 ---
 
