@@ -109,6 +109,8 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`projenCommand`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojencommand) | `string` | The shell command to use in order to run the projen CLI. |
 | [`projenrcJson`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjson) | `boolean` | Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation. |
 | [`projenrcJsonOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprojenrcjsonoptions) | [`projen.ProjenrcOptions`](#projen.ProjenrcOptions) | Options for .projenrc.json. |
+| [`renovatebot`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrenovatebot) | `boolean` | Use renovatebot to handle dependency upgrades. |
+| [`renovatebotOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrenovatebotoptions) | [`projen.RenovatebotOptions`](#projen.RenovatebotOptions) | Options for renovatebot. |
 | [`autoApproveOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautoapproveoptions) | [`projen.github.AutoApproveOptions`](#projen.github.AutoApproveOptions) | Enable and configure the 'auto approve' workflow. |
 | [`autoMerge`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautomerge) | `boolean` | Enable automatic merging on GitHub. |
 | [`autoMergeOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautomergeoptions) | [`projen.github.AutoMergeOptions`](#projen.github.AutoMergeOptions) | Configure options for automatic merging on GitHub. |
@@ -347,6 +349,32 @@ public readonly projenrcJsonOptions: ProjenrcOptions;
 - *Default:* default options
 
 Options for .projenrc.json.
+
+---
+
+##### `renovatebot`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.renovatebot" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrenovatebot"></a>
+
+```typescript
+public readonly renovatebot: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Use renovatebot to handle dependency upgrades.
+
+---
+
+##### `renovatebotOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.renovatebotOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrenovatebotoptions"></a>
+
+```typescript
+public readonly renovatebotOptions: RenovatebotOptions;
+```
+
+- *Type:* [`projen.RenovatebotOptions`](#projen.RenovatebotOptions)
+- *Default:* default options
+
+Options for renovatebot.
 
 ---
 
