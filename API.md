@@ -2347,6 +2347,7 @@ const deployOptions: DeployOptions = { ... }
 | [`environments`](#deployableawscdkapptsdeployoptionspropertyenvironments)<span title="Required">*</span> | [`deployable-awscdk-app-ts.EnvironmentOptions`](#deployable-awscdk-app-ts.EnvironmentOptions)[] | Environment settings to deploy to. |
 | [`npmConfigEnvironment`](#deployableawscdkapptsdeployoptionspropertynpmconfigenvironment) | `string` | npm config name to set as the environment name This might be useful in deployment process. |
 | [`stackPattern`](#deployableawscdkapptsdeployoptionspropertystackpattern) | `string` | Regex for stacks to be deployed. |
+| [`taskToRunPreInstall`](#deployableawscdkapptsdeployoptionspropertytasktorunpreinstall) | `string` | task name to run prior to installation in deploy job of workflow if not provided will not add to workflow. |
 
 ---
 
@@ -2389,6 +2390,19 @@ public readonly stackPattern: string;
 Regex for stacks to be deployed.
 
 if not provided matches all of the stacks in the CDK App.
+
+---
+
+##### `taskToRunPreInstall`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployOptions.property.taskToRunPreInstall" id="deployableawscdkapptsdeployoptionspropertytasktorunpreinstall"></a>
+
+```typescript
+public readonly taskToRunPreInstall: string;
+```
+
+- *Type:* `string`
+- *Default:* undefined
+
+task name to run prior to installation in deploy job of workflow if not provided will not add to workflow.
 
 ---
 
