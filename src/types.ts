@@ -43,6 +43,13 @@ export interface DeployOptions {
    * @default undefined
    */
   readonly npmConfigEnvironment?: string;
+
+  /**
+   * task name to run prior to installation in deploy job of workflow
+   * if not provided will not add to workflow
+   * @default undefined
+   */
+  readonly taskToRunPreInstall?: string;
 }
 
 export interface EnvironmentOptions {

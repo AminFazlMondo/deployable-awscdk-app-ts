@@ -157,3 +157,11 @@ export function preDeploymentStep(checkActiveDeployment: boolean, packageManager
     run: `${getPackageManagerCommandPrefix(packageManager)} \${{ matrix.preDeploymentScript }}`,
   }
 }
+
+export function preInstallDependenciesStep(taskName: string, checkActiveDeployment: boolean, packageManager: javascript.NodePackageManager): JobStep {
+  return {
+    ...getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment),
+    name: taskName,
+    run: `${getPackageManagerCommandPrefix(packageManager)} ${taskName}`,
+  }
+}
