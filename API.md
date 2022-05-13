@@ -248,6 +248,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`cdkVersionPinning`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycdkversionpinning) | `boolean` | Use pinned version instead of caret version for CDK. |
 | [`constructsVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyconstructsversion) | `string` | Minimum version of the `constructs` library to depend on. |
 | [`appEntrypoint`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyappentrypoint) | `string` | The CDK app's entrypoint (relative to the source directory, which is "src" by default). |
+| [`edgeLambdaAutoDiscover`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyedgelambdaautodiscover) | `boolean` | Automatically adds an `cloudfront.experimental.EdgeFunction` for each `.edge-lambda.ts` handler in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project. |
 | [`integrationTestAutoDiscover`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyintegrationtestautodiscover) | `boolean` | Automatically discovers and creates integration tests for each `.integ.ts` file in under your test directory. |
 | [`lambdaAutoDiscover`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaautodiscover) | `boolean` | Automatically adds an `awscdk.LambdaFunction` for each `.lambda.ts` handler in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project. |
 | [`lambdaExtensionAutoDiscover`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylambdaextensionautodiscover) | `boolean` | Automatically adds an `awscdk.LambdaExtension` for each `.lambda-extension.ts` entrypoint in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project. |
@@ -2236,6 +2237,19 @@ public readonly appEntrypoint: string;
 - *Default:* "main.ts"
 
 The CDK app's entrypoint (relative to the source directory, which is "src" by default).
+
+---
+
+##### `edgeLambdaAutoDiscover`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.edgeLambdaAutoDiscover" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyedgelambdaautodiscover"></a>
+
+```typescript
+public readonly edgeLambdaAutoDiscover: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* true
+
+Automatically adds an `cloudfront.experimental.EdgeFunction` for each `.edge-lambda.ts` handler in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project.
 
 ---
 
