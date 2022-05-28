@@ -56,17 +56,17 @@
     "jsii-pacmak": "^1.59.0",
     "json-schema": "^0.4.0",
     "npm-check-updates": "^12",
-    "projen": "^0.56.34",
+    "projen": "^0.56.36",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.8.0",
     "typescript": "^4.7.2"
   },
   "peerDependencies": {
-    "projen": "^0.56.34"
+    "projen": "^0.56.36"
   },
   "dependencies": {
-    "projen": "^0.56.34"
+    "projen": "^0.56.36"
   },
   "keywords": [
     "AWS CDK",
