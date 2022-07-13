@@ -109,11 +109,17 @@ jobs:
       - if: \${{ matrix.hasPreDeployTask == 'true' }}
         name: Pre Deployment
         run: npm run \${{ matrix.preDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - name: Deployment
         run: npm run deploy:workflow
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
         run: npm run \${{ matrix.postDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
     strategy:
       max-parallel: 1
       matrix:
@@ -560,11 +566,17 @@ jobs:
       - if: \${{ matrix.hasPreDeployTask == 'true' }}
         name: Pre Deployment
         run: npm run \${{ matrix.preDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - name: Deployment
         run: npm run deploy:workflow
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
         run: npm run \${{ matrix.postDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
     strategy:
       max-parallel: 1
       matrix:
@@ -686,11 +698,17 @@ jobs:
       - if: \${{ matrix.hasPreDeployTask == 'true' }}
         name: Pre Deployment
         run: npm run \${{ matrix.preDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - name: Deployment
         run: npm run deploy:workflow
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
         run: npm run \${{ matrix.postDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
     strategy:
       max-parallel: 1
       matrix:
@@ -820,11 +838,17 @@ jobs:
       - if: \${{ matrix.hasPreDeployTask == 'true' }}
         name: Pre Deployment
         run: npm run \${{ matrix.preDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - name: Deployment
         run: npm run deploy:workflow
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
         run: npm run \${{ matrix.postDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
     strategy:
       max-parallel: 1
       matrix:
@@ -966,11 +990,17 @@ jobs:
       - if: \${{ matrix.hasPreDeployTask == 'true' }}
         name: Pre Deployment
         run: npm run \${{ matrix.preDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - name: Deployment
         run: npm run deploy:workflow
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
         run: npm run \${{ matrix.postDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
     strategy:
       max-parallel: 1
       matrix:
@@ -1108,11 +1138,17 @@ jobs:
       - if: \${{ matrix.hasPreDeployTask == 'true' }}
         name: Pre Deployment
         run: npm run \${{ matrix.preDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - name: Deployment
         run: npm run deploy:workflow
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
         run: npm run \${{ matrix.postDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
     strategy:
       max-parallel: 1
       matrix:
@@ -1250,11 +1286,17 @@ jobs:
       - if: \${{ matrix.hasPreDeployTask == 'true' }}
         name: Pre Deployment
         run: npm run \${{ matrix.preDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - name: Deployment
         run: npm run deploy:workflow
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
         run: npm run \${{ matrix.postDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
     strategy:
       max-parallel: 1
       matrix:
@@ -1389,16 +1431,24 @@ jobs:
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: stub-task
         run: npm run stub-task
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - name: Install dependencies
         run: npm ci
       - if: \${{ matrix.hasPreDeployTask == 'true' }}
         name: Pre Deployment
         run: npm run \${{ matrix.preDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - name: Deployment
         run: npm run deploy:workflow
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
         run: npm run \${{ matrix.postDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
     strategy:
       max-parallel: 1
       matrix:
@@ -1534,12 +1584,18 @@ jobs:
       - if: \${{ matrix.hasPreDeployTask == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Pre Deployment
         run: npm run \${{ matrix.preDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Deployment
         run: npm run deploy:workflow
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - if: \${{ matrix.hasPostDeployTask == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         name: Post Deployment
         run: npm run \${{ matrix.postDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
     strategy:
       max-parallel: 1
       matrix:
@@ -1659,11 +1715,17 @@ jobs:
       - if: \${{ matrix.hasPreDeployTask == 'true' }}
         name: Pre Deployment
         run: npm run \${{ matrix.preDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - name: Deployment
         run: npm run deploy:workflow
+        env:
+          COMMIT_REF: \${{ github.sha }}
       - if: \${{ matrix.hasPostDeployTask == 'true' }}
         name: Post Deployment
         run: npm run \${{ matrix.postDeploymentScript }}
+        env:
+          COMMIT_REF: \${{ github.sha }}
     strategy:
       max-parallel: 1
       matrix:
