@@ -49,6 +49,9 @@ export function deploymentStep(checkActiveDeployment: boolean, packageManager: j
     ...getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment),
     name: 'Deployment',
     run: `${getPackageManagerCommandPrefix(packageManager)} deploy:workflow`,
+    env: {
+      COMMIT_REF: '${{ github.sha }}',
+    },
   }
 }
 
@@ -143,6 +146,9 @@ export function postDeploymentStep(checkActiveDeployment: boolean, packageManage
     if: condition,
     name: 'Post Deployment',
     run: `${getPackageManagerCommandPrefix(packageManager)} \${{ matrix.postDeploymentScript }}`,
+    env: {
+      COMMIT_REF: '${{ github.sha }}',
+    },
   }
 }
 
@@ -155,6 +161,9 @@ export function preDeploymentStep(checkActiveDeployment: boolean, packageManager
     if: condition,
     name: 'Pre Deployment',
     run: `${getPackageManagerCommandPrefix(packageManager)} \${{ matrix.preDeploymentScript }}`,
+    env: {
+      COMMIT_REF: '${{ github.sha }}',
+    },
   }
 }
 
@@ -163,5 +172,8 @@ export function preInstallDependenciesStep(taskName: string, checkActiveDeployme
     ...getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment),
     name: taskName,
     run: `${getPackageManagerCommandPrefix(packageManager)} ${taskName}`,
+    env: {
+      COMMIT_REF: '${{ github.sha }}',
+    },
   }
 }
