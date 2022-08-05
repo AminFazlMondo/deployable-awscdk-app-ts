@@ -164,6 +164,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`stability`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertystability) | `string` | Package's Stability. |
 | [`jsiiReleaseVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyjsiireleaseversion) | `string` | Version requirement of `publib` which is used to publish modules to npm. |
 | [`majorVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertymajorversion) | `number` | Major version to release from the default branch. |
+| [`minMajorVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyminmajorversion) | `number` | Minimal Major version to release. |
 | [`npmDistTag`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertynpmdisttag) | `string` | The npmDistTag to use when publishing from the default branch. |
 | [`postBuildSteps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypostbuildsteps) | [`projen.github.workflows.JobStep`](#projen.github.workflows.JobStep)[] | Steps to execute after build as part of the release workflow. |
 | [`prerelease`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyprerelease) | `string` | Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre"). |
@@ -1103,6 +1104,21 @@ public readonly majorVersion: number;
 Major version to release from the default branch.
 
 If this is specified, we bump the latest version of this major version line. If not specified, we bump the global latest version.
+
+---
+
+##### `minMajorVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.minMajorVersion" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyminmajorversion"></a>
+
+```typescript
+public readonly minMajorVersion: number;
+```
+
+- *Type:* `number`
+- *Default:* No minimum version is being enforced
+
+Minimal Major version to release.
+
+This can be useful to set to 1, as breaking changes before the 1.x major release are not incrementing the major version number.  Can not be set together with `majorVersion`.
 
 ---
 
