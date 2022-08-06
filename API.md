@@ -103,6 +103,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | [`name`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyname)<span title="Required">*</span> | `string` | This is the name of your project. |
+| [`commitGenerated`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycommitgenerated) | `boolean` | Whether to commit the managed files by default. |
 | [`logging`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylogging) | [`projen.LoggerOptions`](#projen.LoggerOptions) | Configure logging options such as verbosity. |
 | [`outdir`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyoutdir) | `string` | The root directory of the project. |
 | [`parent`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyparent) | [`projen.Project`](#projen.Project) | The parent project, if this project is part of a bigger project. |
@@ -270,6 +271,19 @@ public readonly name: string;
 - *Default:* $BASEDIR
 
 This is the name of your project.
+
+---
+
+##### `commitGenerated`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.commitGenerated" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycommitgenerated"></a>
+
+```typescript
+public readonly commitGenerated: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* true
+
+Whether to commit the managed files by default.
 
 ---
 
