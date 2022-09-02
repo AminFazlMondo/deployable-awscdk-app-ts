@@ -54,7 +54,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 14.18.1
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
@@ -765,7 +765,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 14.18.1
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
@@ -907,7 +907,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 14.18.1
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
@@ -1053,7 +1053,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 14.18.1
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
@@ -1195,7 +1195,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 14.18.1
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
@@ -1337,7 +1337,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 14.18.1
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
@@ -1471,7 +1471,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 14.18.1
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
