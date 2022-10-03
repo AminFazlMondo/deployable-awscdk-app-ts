@@ -41,6 +41,7 @@ jobs:
       - name: Backup artifact permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
+        continue-on-error: true
       - name: Upload artifact
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
@@ -65,12 +66,13 @@ jobs:
           path: dist
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
       - name: Release
-        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: \${{ github.repository }}
           GITHUB_REF: \${{ github.ref }}
+        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
   deploy:
     needs: release_github
     runs-on: ubuntu-latest
@@ -89,19 +91,19 @@ jobs:
         uses: actions/setup-node@v2.2.0
         with:
           node-version: 14.18.1
-      - if: \${{ matrix.assumeRole == 'false' }}
-        name: Configure AWS Credentials
+      - name: Configure AWS Credentials
+        if: \${{ matrix.assumeRole == 'false' }}
+        env:
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          region: \${{ matrix.region }}
         run: |-
           
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
-        env:
-          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
-          region: \${{ matrix.region }}
-      - if: \${{ matrix.assumeRole == 'true' }}
-        name: Assume AWS Role
+      - name: Assume AWS Role
+        if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -111,13 +113,13 @@ jobs:
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Install dependencies
         run: npm ci
-      - if: \${{ matrix.hasPreDeployTask == 'true' }}
-        name: Pre Deployment
+      - name: Pre Deployment
+        if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
-      - if: \${{ matrix.hasPostDeployTask == 'true' }}
-        name: Post Deployment
+      - name: Post Deployment
+        if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
@@ -492,6 +494,7 @@ jobs:
       - name: Backup artifact permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
+        continue-on-error: true
       - name: Upload artifact
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
@@ -516,12 +519,13 @@ jobs:
           path: dist
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
       - name: Release
-        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: \${{ github.repository }}
           GITHUB_REF: \${{ github.ref }}
+        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
   deploy:
     needs: release_github
     runs-on: ubuntu-latest
@@ -536,19 +540,19 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: \${{ github.sha }}
-      - if: \${{ matrix.assumeRole == 'false' }}
-        name: Configure AWS Credentials
+      - name: Configure AWS Credentials
+        if: \${{ matrix.assumeRole == 'false' }}
+        env:
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          region: \${{ matrix.region }}
         run: |-
           
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
-        env:
-          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
-          region: \${{ matrix.region }}
-      - if: \${{ matrix.assumeRole == 'true' }}
-        name: Assume AWS Role
+      - name: Assume AWS Role
+        if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -558,13 +562,13 @@ jobs:
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Install dependencies
         run: npm ci
-      - if: \${{ matrix.hasPreDeployTask == 'true' }}
-        name: Pre Deployment
+      - name: Pre Deployment
+        if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
-      - if: \${{ matrix.hasPostDeployTask == 'true' }}
-        name: Post Deployment
+      - name: Post Deployment
+        if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
@@ -623,6 +627,7 @@ jobs:
       - name: Backup artifact permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
+        continue-on-error: true
       - name: Upload artifact
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
@@ -647,12 +652,13 @@ jobs:
           path: dist
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
       - name: Release
-        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: \${{ github.repository }}
           GITHUB_REF: \${{ github.ref }}
+        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
   deploy:
     needs: release_github
     runs-on: ubuntu-latest
@@ -667,19 +673,19 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: \${{ github.sha }}
-      - if: \${{ matrix.assumeRole == 'false' }}
-        name: Configure AWS Credentials
+      - name: Configure AWS Credentials
+        if: \${{ matrix.assumeRole == 'false' }}
+        env:
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          region: \${{ matrix.region }}
         run: |-
           
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
-        env:
-          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
-          region: \${{ matrix.region }}
-      - if: \${{ matrix.assumeRole == 'true' }}
-        name: Assume AWS Role
+      - name: Assume AWS Role
+        if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -689,13 +695,13 @@ jobs:
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Install dependencies
         run: npm ci
-      - if: \${{ matrix.hasPreDeployTask == 'true' }}
-        name: Pre Deployment
+      - name: Pre Deployment
+        if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
-      - if: \${{ matrix.hasPostDeployTask == 'true' }}
-        name: Post Deployment
+      - name: Post Deployment
+        if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
@@ -758,6 +764,7 @@ jobs:
       - name: Backup artifact permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
+        continue-on-error: true
       - name: Upload artifact
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
@@ -782,12 +789,13 @@ jobs:
           path: dist
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
       - name: Release
-        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: \${{ github.repository }}
           GITHUB_REF: \${{ github.ref }}
+        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
   deploy:
     needs: release_github
     runs-on: ubuntu-latest
@@ -806,19 +814,19 @@ jobs:
         uses: actions/setup-node@v2.2.0
         with:
           node-version: 14.18.1
-      - if: \${{ matrix.assumeRole == 'false' }}
-        name: Configure AWS Credentials
+      - name: Configure AWS Credentials
+        if: \${{ matrix.assumeRole == 'false' }}
+        env:
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          region: \${{ matrix.region }}
         run: |-
           
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
-        env:
-          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
-          region: \${{ matrix.region }}
-      - if: \${{ matrix.assumeRole == 'true' }}
-        name: Assume AWS Role
+      - name: Assume AWS Role
+        if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -828,13 +836,13 @@ jobs:
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Install dependencies
         run: npm ci
-      - if: \${{ matrix.hasPreDeployTask == 'true' }}
-        name: Pre Deployment
+      - name: Pre Deployment
+        if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
-      - if: \${{ matrix.hasPostDeployTask == 'true' }}
-        name: Post Deployment
+      - name: Post Deployment
+        if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
@@ -905,6 +913,7 @@ jobs:
       - name: Backup artifact permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
+        continue-on-error: true
       - name: Upload artifact
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
@@ -929,12 +938,13 @@ jobs:
           path: dist
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
       - name: Release
-        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: \${{ github.repository }}
           GITHUB_REF: \${{ github.ref }}
+        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
   deploy:
     needs: release_github
     runs-on: ubuntu-latest
@@ -953,19 +963,19 @@ jobs:
         uses: actions/setup-node@v2.2.0
         with:
           node-version: 14.18.1
-      - if: \${{ matrix.assumeRole == 'false' }}
-        name: Configure AWS Credentials
+      - name: Configure AWS Credentials
+        if: \${{ matrix.assumeRole == 'false' }}
+        env:
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          region: \${{ matrix.region }}
         run: |-
           
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
-        env:
-          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
-          region: \${{ matrix.region }}
-      - if: \${{ matrix.assumeRole == 'true' }}
-        name: Assume AWS Role
+      - name: Assume AWS Role
+        if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -979,13 +989,13 @@ jobs:
         env:
           CONFIG_VALUE: \${{ matrix.environment }}
         run: npm config set stage $CONFIG_VALUE
-      - if: \${{ matrix.hasPreDeployTask == 'true' }}
-        name: Pre Deployment
+      - name: Pre Deployment
+        if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
-      - if: \${{ matrix.hasPostDeployTask == 'true' }}
-        name: Post Deployment
+      - name: Post Deployment
+        if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
@@ -1056,6 +1066,7 @@ jobs:
       - name: Backup artifact permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
+        continue-on-error: true
       - name: Upload artifact
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
@@ -1080,12 +1091,13 @@ jobs:
           path: dist
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
       - name: Release
-        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: \${{ github.repository }}
           GITHUB_REF: \${{ github.ref }}
+        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
   deploy:
     needs: release_github
     runs-on: ubuntu-latest
@@ -1104,19 +1116,19 @@ jobs:
         uses: actions/setup-node@v2.2.0
         with:
           node-version: 14.18.1
-      - if: \${{ matrix.assumeRole == 'false' }}
-        name: Configure AWS Credentials
+      - name: Configure AWS Credentials
+        if: \${{ matrix.assumeRole == 'false' }}
+        env:
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          region: \${{ matrix.region }}
         run: |-
           
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
-        env:
-          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
-          region: \${{ matrix.region }}
-      - if: \${{ matrix.assumeRole == 'true' }}
-        name: Assume AWS Role
+      - name: Assume AWS Role
+        if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -1126,13 +1138,13 @@ jobs:
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Install dependencies
         run: npm ci
-      - if: \${{ matrix.hasPreDeployTask == 'true' }}
-        name: Pre Deployment
+      - name: Pre Deployment
+        if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
-      - if: \${{ matrix.hasPostDeployTask == 'true' }}
-        name: Post Deployment
+      - name: Post Deployment
+        if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
@@ -1203,6 +1215,7 @@ jobs:
       - name: Backup artifact permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
+        continue-on-error: true
       - name: Upload artifact
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
@@ -1227,12 +1240,13 @@ jobs:
           path: dist
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
       - name: Release
-        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: \${{ github.repository }}
           GITHUB_REF: \${{ github.ref }}
+        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
   deploy:
     needs: release_github
     runs-on: ubuntu-latest
@@ -1251,19 +1265,19 @@ jobs:
         uses: actions/setup-node@v2.2.0
         with:
           node-version: 14.18.1
-      - if: \${{ matrix.assumeRole == 'false' }}
-        name: Configure AWS Credentials
+      - name: Configure AWS Credentials
+        if: \${{ matrix.assumeRole == 'false' }}
+        env:
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          region: \${{ matrix.region }}
         run: |-
           
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
-        env:
-          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
-          region: \${{ matrix.region }}
-      - if: \${{ matrix.assumeRole == 'true' }}
-        name: Assume AWS Role
+      - name: Assume AWS Role
+        if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -1273,13 +1287,13 @@ jobs:
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Install dependencies
         run: npm ci
-      - if: \${{ matrix.hasPreDeployTask == 'true' }}
-        name: Pre Deployment
+      - name: Pre Deployment
+        if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
-      - if: \${{ matrix.hasPostDeployTask == 'true' }}
-        name: Post Deployment
+      - name: Post Deployment
+        if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
@@ -1350,6 +1364,7 @@ jobs:
       - name: Backup artifact permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
+        continue-on-error: true
       - name: Upload artifact
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
@@ -1374,12 +1389,13 @@ jobs:
           path: dist
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
       - name: Release
-        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: \${{ github.repository }}
           GITHUB_REF: \${{ github.ref }}
+        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
   deploy:
     needs: release_github
     runs-on: ubuntu-latest
@@ -1398,19 +1414,19 @@ jobs:
         uses: actions/setup-node@v2.2.0
         with:
           node-version: 14.18.1
-      - if: \${{ matrix.assumeRole == 'false' }}
-        name: Configure AWS Credentials
+      - name: Configure AWS Credentials
+        if: \${{ matrix.assumeRole == 'false' }}
+        env:
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          region: \${{ matrix.region }}
         run: |-
           
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
-        env:
-          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
-          region: \${{ matrix.region }}
-      - if: \${{ matrix.assumeRole == 'true' }}
-        name: Assume AWS Role
+      - name: Assume AWS Role
+        if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -1422,13 +1438,13 @@ jobs:
         run: npm run stub-task
       - name: Install dependencies
         run: npm ci
-      - if: \${{ matrix.hasPreDeployTask == 'true' }}
-        name: Pre Deployment
+      - name: Pre Deployment
+        if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
-      - if: \${{ matrix.hasPostDeployTask == 'true' }}
-        name: Post Deployment
+      - name: Post Deployment
+        if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
@@ -1489,6 +1505,7 @@ jobs:
       - name: Backup artifact permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
+        continue-on-error: true
       - name: Upload artifact
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
@@ -1513,12 +1530,13 @@ jobs:
           path: dist
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
       - name: Release
-        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: \${{ github.repository }}
           GITHUB_REF: \${{ github.ref }}
+        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
   deploy:
     needs: release_github
     runs-on: ubuntu-latest
@@ -1535,28 +1553,28 @@ jobs:
           ref: \${{ github.sha }}
       - id: deployment-check
         uses: AminFazlMondo/check-deployed-environment@v1
-        with:
-          environment: \${{ matrix.environment }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
-      - if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
-        name: Setup Node.js
+        with:
+          environment: \${{ matrix.environment }}
+      - name: Setup Node.js
+        if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
         uses: actions/setup-node@v2.2.0
         with:
           node-version: 14.18.1
-      - if: \${{ matrix.assumeRole == 'false' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
-        name: Configure AWS Credentials
+      - name: Configure AWS Credentials
+        if: \${{ matrix.assumeRole == 'false' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
+        env:
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          region: \${{ matrix.region }}
         run: |-
           
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
-        env:
-          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
-          region: \${{ matrix.region }}
-      - if: \${{ matrix.assumeRole == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
-        name: Assume AWS Role
+      - name: Assume AWS Role
+        if: \${{ matrix.assumeRole == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -1564,17 +1582,17 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
-        name: Install dependencies
+      - name: Install dependencies
+        if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
         run: npm ci
-      - if: \${{ matrix.hasPreDeployTask == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
-        name: Pre Deployment
+      - name: Pre Deployment
+        if: \${{ matrix.hasPreDeployTask == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
-        name: Deployment
+      - name: Deployment
+        if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
         run: npm run deploy:workflow
-      - if: \${{ matrix.hasPostDeployTask == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
-        name: Post Deployment
+      - name: Post Deployment
+        if: \${{ matrix.hasPostDeployTask == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
@@ -1631,6 +1649,7 @@ jobs:
       - name: Backup artifact permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
+        continue-on-error: true
       - name: Upload artifact
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         uses: actions/upload-artifact@v2.1.1
@@ -1655,12 +1674,13 @@ jobs:
           path: dist
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
       - name: Release
-        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: \${{ github.repository }}
           GITHUB_REF: \${{ github.ref }}
+        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
   deploy:
     needs: release_github
     runs-on: ubuntu-latest
@@ -1675,19 +1695,19 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: \${{ github.sha }}
-      - if: \${{ matrix.assumeRole == 'false' }}
-        name: Configure AWS Credentials
+      - name: Configure AWS Credentials
+        if: \${{ matrix.assumeRole == 'false' }}
+        env:
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          region: \${{ matrix.region }}
         run: |-
           
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
-        env:
-          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
-          region: \${{ matrix.region }}
-      - if: \${{ matrix.assumeRole == 'true' }}
-        name: Assume AWS Role
+      - name: Assume AWS Role
+        if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -1697,13 +1717,13 @@ jobs:
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Install dependencies
         run: npm ci
-      - if: \${{ matrix.hasPreDeployTask == 'true' }}
-        name: Pre Deployment
+      - name: Pre Deployment
+        if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Deployment
         run: npm run deploy:workflow
-      - if: \${{ matrix.hasPostDeployTask == 'true' }}
-        name: Post Deployment
+      - name: Post Deployment
+        if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
       max-parallel: 1
