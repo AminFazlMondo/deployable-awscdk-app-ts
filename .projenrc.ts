@@ -1,6 +1,6 @@
 import {javascript, cdk, TextFile} from 'projen'
 
-const nodeVersion = '14.18.1'
+const nodeVersion = '16'
 
 const project = new cdk.JsiiProject({
   author: 'Amin Fazl',
