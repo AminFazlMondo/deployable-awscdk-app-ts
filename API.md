@@ -132,7 +132,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`allowLibraryDependencies`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyallowlibrarydependencies) | `boolean` | Allow the project to include `peerDependencies` and `bundledDependencies`. |
 | [`authorEmail`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthoremail) | `string` | Author's e-mail. |
 | [`authorName`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthorname) | `string` | Author's name. |
-| [`authorOrganization`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthororganization) | `boolean` | Author's Organization. |
+| [`authorOrganization`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthororganization) | `boolean` | Is the author an organization. |
 | [`authorUrl`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyauthorurl) | `string` | Author's URL / Website. |
 | [`autoDetectBin`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyautodetectbin) | `boolean` | Automatically add all executables under the `bin` directory to your `package.json` file under the `bin` section. |
 | [`bin`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybin) | {[ key: string ]: `string`} | Binary programs vended with your module. |
@@ -684,7 +684,7 @@ public readonly authorOrganization: boolean;
 
 - *Type:* `boolean`
 
-Author's Organization.
+Is the author an organization.
 
 ---
 
@@ -1285,7 +1285,7 @@ public readonly releaseTagPrefix: string;
 ```
 
 - *Type:* `string`
-- *Default:* no prefix
+- *Default:* "v"
 
 Automatically add the given prefix to release tags. Useful if you are releasing on multiple branches with overlapping version numbers.
 
