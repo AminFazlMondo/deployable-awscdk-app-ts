@@ -1,4 +1,4 @@
-import {awscdk, TextFile} from 'projen'
+import {awscdk, Task, TextFile} from 'projen'
 import {Job, JobPermission} from 'projen/lib/github/workflows-model'
 import * as steps from './steps'
 import {DeployableAwsCdkTypeScriptAppOptions, DeployOptions, EnvironmentOptions} from './types'
@@ -6,6 +6,11 @@ import {DeployableAwsCdkTypeScriptAppOptions, DeployOptions, EnvironmentOptions}
 export * from './types'
 
 export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
+
+  /**
+   * Task to deploy your app.
+   */
+  public readonly deployWorkflowTask: Task
 
   private readonly deployable: boolean
   private readonly generateNvmrc: boolean
@@ -31,6 +36,11 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
     if (this.generateNvmrc && !this.workflowNodeVersion)
       this.workflowNodeVersion = '14.18.1'
+
+    const deployArgument = this.deployOptions.stackPattern ? ` ${this.deployOptions.stackPattern}`: ''
+    this.deployWorkflowTask = this.addTask('deploy:workflow', {
+      exec: `cdk deploy${deployArgument} --require-approval never`,
+    })
   }
 
   synth() {
@@ -41,11 +51,6 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       new TextFile(this, '.nvmrc', {
         lines: [this.workflowNodeVersion ?? ''],
       })
-
-    const deployArgument = this.deployOptions.stackPattern ? ` ${this.deployOptions.stackPattern}`: ''
-    this.addTask('deploy:workflow', {
-      exec: `cdk deploy${deployArgument} --require-approval never`,
-    })
 
     super.synth()
   }
