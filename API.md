@@ -2571,6 +2571,25 @@ public synth()
 ```
 
 
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`deployWorkflowTask`](#deployableawscdkapptsdeployableawscdktypescriptapppropertydeployworkflowtask)<span title="Required">*</span> | [`projen.Task`](#projen.Task) | Task to deploy your app. |
+
+---
+
+##### `deployWorkflowTask`<sup>Required</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.deployWorkflowTask" id="deployableawscdkapptsdeployableawscdktypescriptapppropertydeployworkflowtask"></a>
+
+```typescript
+public readonly deployWorkflowTask: Task;
+```
+
+- *Type:* [`projen.Task`](#projen.Task)
+
+Task to deploy your app.
+
+---
 
 
 
