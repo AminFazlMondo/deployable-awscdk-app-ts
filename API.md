@@ -189,7 +189,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`buildWorkflow`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybuildworkflow) | `boolean` | Define a GitHub workflow for building PRs. |
 | [`buildWorkflowTriggers`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybuildworkflowtriggers) | [`projen.github.workflows.Triggers`](#projen.github.workflows.Triggers) | Build workflow triggers. |
 | [`bundlerOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertybundleroptions) | [`projen.javascript.BundlerOptions`](#projen.javascript.BundlerOptions) | Options for `Bundler`. |
-| [`codeCov`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodecov) | `boolean` | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v1 A secret is required for private repos. Configured with @codeCovTokenSecret. |
+| [`codeCov`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodecov) | `boolean` | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v3 A secret is required for private repos. Configured with @codeCovTokenSecret. |
 | [`codeCovTokenSecret`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycodecovtokensecret) | `string` | Define the secret name for a specified https://codecov.io/ token A secret is required to send coverage for private repositories. |
 | [`copyrightOwner`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycopyrightowner) | `string` | License copyright owner. |
 | [`copyrightPeriod`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycopyrightperiod) | `string` | The copyright years to put in the LICENSE file. |
@@ -1460,7 +1460,7 @@ public readonly codeCov: boolean;
 - *Type:* `boolean`
 - *Default:* false
 
-Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v1 A secret is required for private repos. Configured with @codeCovTokenSecret.
+Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v3 A secret is required for private repos. Configured with @codeCovTokenSecret.
 
 ---
 
