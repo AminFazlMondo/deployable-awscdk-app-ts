@@ -252,6 +252,7 @@ Object {
       "steps": Array [
         Object {
           "exec": "cdk deploy",
+          "receiveArgs": true,
         },
       ],
     },
@@ -269,6 +270,7 @@ Object {
       "steps": Array [
         Object {
           "exec": "cdk destroy",
+          "receiveArgs": true,
         },
       ],
     },
@@ -1846,6 +1848,7 @@ Object {
       "steps": Array [
         Object {
           "exec": "cdk deploy",
+          "receiveArgs": true,
         },
       ],
     },
@@ -1863,6 +1866,7 @@ Object {
       "steps": Array [
         Object {
           "exec": "cdk destroy",
+          "receiveArgs": true,
         },
       ],
     },
