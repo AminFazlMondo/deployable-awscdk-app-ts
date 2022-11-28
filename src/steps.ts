@@ -4,7 +4,7 @@ import {JobStep} from 'projen/lib/github/workflows-model'
 export function checkoutStep(): JobStep {
   return {
     name: 'Checkout',
-    uses: 'actions/checkout@v2',
+    uses: 'actions/checkout@v3',
     with: {
       ref: '${{ github.sha }}',
     },
@@ -15,7 +15,7 @@ export function setNodeVersionStep(nodeVersion: string, checkActiveDeployment: b
   return {
     ...getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment),
     name: 'Setup Node.js',
-    uses: 'actions/setup-node@v2.2.0',
+    uses: 'actions/setup-node@v3',
     with: {
       'node-version': nodeVersion,
     },
