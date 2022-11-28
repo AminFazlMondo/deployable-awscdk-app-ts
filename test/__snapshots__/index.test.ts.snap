@@ -84,11 +84,11 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v2.2.0
+        uses: actions/setup-node@v3
         with:
           node-version: 14.18.1
       - name: Configure AWS Credentials
@@ -540,7 +540,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
       - name: Configure AWS Credentials
@@ -673,7 +673,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
       - name: Configure AWS Credentials
@@ -810,11 +810,11 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v2.2.0
+        uses: actions/setup-node@v3
         with:
           node-version: 14.18.1
       - name: Configure AWS Credentials
@@ -959,11 +959,11 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v2.2.0
+        uses: actions/setup-node@v3
         with:
           node-version: 14.18.1
       - name: Configure AWS Credentials
@@ -1112,11 +1112,11 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v2.2.0
+        uses: actions/setup-node@v3
         with:
           node-version: 14.18.1
       - name: Configure AWS Credentials
@@ -1261,11 +1261,11 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v2.2.0
+        uses: actions/setup-node@v3
         with:
           node-version: 14.18.1
       - name: Configure AWS Credentials
@@ -1410,11 +1410,11 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v2.2.0
+        uses: actions/setup-node@v3
         with:
           node-version: 14.18.1
       - name: Configure AWS Credentials
@@ -1551,7 +1551,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
       - id: deployment-check
@@ -1562,7 +1562,7 @@ jobs:
           environment: \${{ matrix.environment }}
       - name: Setup Node.js
         if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
-        uses: actions/setup-node@v2.2.0
+        uses: actions/setup-node@v3
         with:
           node-version: 14.18.1
       - name: Configure AWS Credentials
@@ -1695,7 +1695,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
       - name: Configure AWS Credentials
