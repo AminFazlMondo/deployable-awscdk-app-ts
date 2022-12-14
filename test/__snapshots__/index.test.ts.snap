@@ -98,7 +98,6 @@ jobs:
           secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
         run: |-
-          
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
@@ -550,7 +549,6 @@ jobs:
           secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
         run: |-
-          
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
@@ -683,7 +681,6 @@ jobs:
           secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
         run: |-
-          
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
@@ -824,7 +821,6 @@ jobs:
           secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
         run: |-
-          
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
@@ -973,7 +969,6 @@ jobs:
           secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
         run: |-
-          
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
@@ -1126,7 +1121,6 @@ jobs:
           secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
         run: |-
-          
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
@@ -1275,7 +1269,6 @@ jobs:
           secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
         run: |-
-          
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
@@ -1424,7 +1417,6 @@ jobs:
           secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
         run: |-
-          
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
@@ -1572,7 +1564,6 @@ jobs:
           secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
         run: |-
-          
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
@@ -1705,7 +1696,6 @@ jobs:
           secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
           region: \${{ matrix.region }}
         run: |-
-          
           echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
           echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV

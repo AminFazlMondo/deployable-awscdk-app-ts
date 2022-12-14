@@ -67,7 +67,7 @@ function setAwsCredentialsInEnvironment(checkActiveDeployment: boolean): JobStep
   return {
     if: condition,
     name: 'Configure AWS Credentials',
-    run: `\n${commands.join('\n')}`,
+    run: `${commands.join('\n')}`,
     env: {
       accessKeyId: '${{ secrets[matrix.accessKeyIdSecretName] }}',
       secretAccessKey: '${{ secrets[matrix.secretAccessKeySecretName] }}',
