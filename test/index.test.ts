@@ -276,6 +276,10 @@ describe('npm config set for each environments', () => {
   test('release workflow', () => {
     expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot()
   })
+
+  test('deploy:workflow task should have requiredEnv', () => {
+    expect(synthOutput[tasksFilePath].tasks['deploy:workflow']).toMatchSnapshot()
+  })
 })
 
 describe('set the checkActiveDeployment flag', () => {
@@ -363,7 +367,7 @@ describe('post deployment added in workflow', () => {
 
   const synthOutput = synthSnapshot(project)
 
-  test('tasks', () => {
+  test('release workflow', () => {
     expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot()
   })
 })
