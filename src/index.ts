@@ -1,5 +1,6 @@
 import {awscdk, Task, TextFile} from 'projen'
 import {Job, JobPermission} from 'projen/lib/github/workflows-model'
+import {NodeProject} from 'projen/lib/javascript'
 import * as steps from './steps'
 import {DeployableAwsCdkTypeScriptAppOptions, DeployOptions, EnvironmentOptions} from './types'
 
@@ -125,23 +126,20 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     if (this.checkActiveDeployment)
       jobDefinition.steps.push(steps.checkActiveDeploymentStep())
 
-    if (this.workflowNodeVersion)
-      jobDefinition.steps.push(steps.setNodeVersionStep(this.workflowNodeVersion, this.checkActiveDeployment))
-
     jobDefinition.steps.push(...steps.setAwsCredentialsSteps(this.checkActiveDeployment))
 
     const {taskToRunPreInstall} = this.deployOptions
     if (taskToRunPreInstall)
-      jobDefinition.steps.push(steps.preInstallDependenciesStep(taskToRunPreInstall, this.checkActiveDeployment, this.packageManager))
+      jobDefinition.steps.push(steps.preInstallDependenciesStep(taskToRunPreInstall, this.checkActiveDeployment, this.package.packageManager))
 
-    jobDefinition.steps.push(steps.installDependenciesStep(this.package.installCommand, this.checkActiveDeployment))
+    jobDefinition.steps.push(...(this.package.project as NodeProject).renderWorkflowSetup())
 
     if (this.deployOptions.npmConfigEnvironment)
       jobDefinition.steps.push(steps.setNpmConfig(this.deployOptions.npmConfigEnvironment, '${{ matrix.environment }}', this.checkActiveDeployment))
 
-    jobDefinition.steps.push(steps.preDeploymentStep(this.checkActiveDeployment, this.packageManager))
-    jobDefinition.steps.push(steps.deploymentStep(this.checkActiveDeployment, this.packageManager))
-    jobDefinition.steps.push(steps.postDeploymentStep(this.checkActiveDeployment, this.packageManager))
+    jobDefinition.steps.push(steps.preDeploymentStep(this.checkActiveDeployment, this.package.packageManager))
+    jobDefinition.steps.push(steps.deploymentStep(this.checkActiveDeployment, this.package.packageManager))
+    jobDefinition.steps.push(steps.postDeploymentStep(this.checkActiveDeployment, this.package.packageManager))
 
     this.release?.addJobs({deploy: jobDefinition})
 
