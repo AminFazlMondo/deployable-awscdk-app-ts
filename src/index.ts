@@ -130,7 +130,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
     const {taskToRunPreInstall} = this.deployOptions
     if (taskToRunPreInstall)
-      jobDefinition.steps.push(steps.preInstallDependenciesStep(taskToRunPreInstall, this.checkActiveDeployment, this.package.packageManager))
+      jobDefinition.steps.push(steps.preInstallDependenciesStep(taskToRunPreInstall, this.checkActiveDeployment))
 
     jobDefinition.steps.push(...(this.package.project as NodeProject).renderWorkflowSetup())
 
