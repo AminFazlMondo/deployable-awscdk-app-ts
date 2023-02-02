@@ -437,3 +437,38 @@ describe('pre install added in workflow', () => {
     expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot()
   })
 })
+
+describe('scoped packages exists', () => {
+  const project = new DeployableAwsCdkTypeScriptApp({
+    packageManager: NodePackageManager.NPM,
+    name: 'my-test-app',
+    defaultReleaseBranch: 'main',
+    cdkVersion: '1.129.0',
+    scopedPackagesOptions: [
+      {
+        registryUrl: 'https://my-domain-111122223333.d.codeartifact.us-west-2.amazonaws.com/npm/my_repo/',
+        scope: '@blah',
+      },
+    ],
+    codeArtifactOptions: {
+      roleToAssume: 'stub-role-1',
+    },
+    deployOptions: {
+      environments: [
+        {
+          name: 'dev1',
+          awsCredentials: {
+            roleToAssume: 'stub-role-2',
+            region: 'dev-aws-region-1',
+          },
+        },
+      ],
+    },
+  })
+
+  const synthOutput = synthSnapshot(project)
+
+  test('release workflow', () => {
+    expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot()
+  })
+})
