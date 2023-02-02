@@ -1440,7 +1440,7 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: stub-task
-        run: npm run stub-task
+        run: npx projen stub-task
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:

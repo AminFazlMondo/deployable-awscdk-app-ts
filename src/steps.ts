@@ -158,10 +158,10 @@ export function preDeploymentStep(checkActiveDeployment: boolean, packageManager
   }
 }
 
-export function preInstallDependenciesStep(taskName: string, checkActiveDeployment: boolean, packageManager: javascript.NodePackageManager): JobStep {
+export function preInstallDependenciesStep(taskName: string, checkActiveDeployment: boolean): JobStep {
   return {
     ...getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment),
     name: taskName,
-    run: `${getPackageManagerCommandPrefix(packageManager)} ${taskName}`,
+    run: `npx projen ${taskName}`,
   }
 }
