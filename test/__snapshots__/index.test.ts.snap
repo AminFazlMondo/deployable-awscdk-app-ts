@@ -87,6 +87,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.18.1
+      - name: Install dependencies
+        run: npm ci
       - name: Configure AWS Credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
@@ -106,12 +112,6 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14.18.1
-      - name: Install dependencies
-        run: npm ci
       - name: Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
@@ -542,6 +542,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
+      - name: Install dependencies
+        run: npm ci
       - name: Configure AWS Credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
@@ -561,8 +563,6 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Install dependencies
-        run: npm ci
       - name: Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
@@ -674,6 +674,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
+      - name: Install dependencies
+        run: npm ci
       - name: Configure AWS Credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
@@ -693,8 +695,6 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Install dependencies
-        run: npm ci
       - name: Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
@@ -810,6 +810,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.18.1
+      - name: Install dependencies
+        run: npm ci
       - name: Configure AWS Credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
@@ -829,12 +835,6 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14.18.1
-      - name: Install dependencies
-        run: npm ci
       - name: Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
@@ -972,6 +972,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.18.1
+      - name: Install dependencies
+        run: npm ci
       - name: Configure AWS Credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
@@ -991,12 +997,6 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14.18.1
-      - name: Install dependencies
-        run: npm ci
       - name: Setting NPM Config
         env:
           CONFIG_VALUE: \${{ matrix.environment }}
@@ -1124,6 +1124,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.18.1
+      - name: Install dependencies
+        run: npm ci
       - name: Configure AWS Credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
@@ -1143,12 +1149,6 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14.18.1
-      - name: Install dependencies
-        run: npm ci
       - name: Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
@@ -1272,6 +1272,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.18.1
+      - name: Install dependencies
+        run: npm ci
       - name: Configure AWS Credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
@@ -1291,12 +1297,6 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14.18.1
-      - name: Install dependencies
-        run: npm ci
       - name: Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
@@ -1420,6 +1420,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
+      - name: stub-task
+        run: npx projen stub-task
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.18.1
+      - name: Install dependencies
+        run: npm ci
       - name: Configure AWS Credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
@@ -1439,14 +1447,6 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: stub-task
-        run: npx projen stub-task
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14.18.1
-      - name: Install dependencies
-        run: npm ci
       - name: Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
@@ -1468,6 +1468,158 @@ jobs:
             postDeploymentScript: \\"\\"
             hasPreDeployTask: \\"false\\"
             preDeploymentScript: \\"\\"
+        environment:
+          - dev1
+"
+`;
+
+exports[`scoped packages exists release workflow 1`] = `
+"# ~~ Generated by projen. To modify, edit .projenrc.js and run \\"npx projen\\".
+
+name: release
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      latest_commit: \${{ steps.git_remote.outputs.latest_commit }}
+    env:
+      CI: \\"true\\"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set git identity
+        run: |-
+          git config user.name \\"github-actions\\"
+          git config user.email \\"github-actions@github.com\\"
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: \${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+          role-to-assume: stub-role-1
+          role-duration-seconds: 900
+      - name: AWS CodeArtifact Login
+        run: npm run ca:login
+      - name: Install dependencies
+        run: npm ci
+      - name: release
+        run: npx projen release
+      - name: Check for new commits
+        id: git_remote
+        run: echo \\"latest_commit=$(git ls-remote origin -h \${{ github.ref }} | cut -f1)\\" >> $GITHUB_OUTPUT
+      - name: Backup artifact permissions
+        if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
+        run: cd dist && getfacl -R . > permissions-backup.acl
+        continue-on-error: true
+      - name: Upload artifact
+        if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: dist
+  release_github:
+    name: Publish to GitHub Releases
+    needs: release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    if: needs.release.outputs.latest_commit == github.sha
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14.x
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact
+          path: dist
+      - name: Restore build artifact permissions
+        run: cd dist && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
+      - name: Release
+        env:
+          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: \${{ github.repository }}
+          GITHUB_REF: \${{ github.ref }}
+        run: errout=$(mktemp); gh release create $(cat dist/releasetag.txt) -R $GITHUB_REPOSITORY -F dist/changelog.md -t $(cat dist/releasetag.txt) --target $GITHUB_REF 2> $errout && true; exitcode=$?; if [ $exitcode -ne 0 ] && ! grep -q \\"Release.tag_name already exists\\" $errout; then cat $errout; exit $exitcode; fi
+  deploy:
+    needs: release_github
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: read
+    environment:
+      name: \${{ matrix.environment }}
+    concurrency: \${{ matrix.environment }}-deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: \${{ github.sha }}
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: \${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+          role-to-assume: stub-role-1
+          role-duration-seconds: 900
+      - name: AWS CodeArtifact Login
+        run: npm run ca:login
+      - name: Install dependencies
+        run: npm ci
+      - name: Configure AWS Credentials
+        if: \${{ matrix.assumeRole == 'false' }}
+        env:
+          accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          secretAccessKey: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          region: \${{ matrix.region }}
+        run: |-
+          echo \\"AWS_ACCESS_KEY_ID=$accessKeyId\\" >> $GITHUB_ENV
+          echo \\"AWS_SECRET_ACCESS_KEY=$secretAccessKey\\" >> $GITHUB_ENV
+          echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
+      - name: Assume AWS Role
+        if: \${{ matrix.assumeRole == 'true' }}
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
+          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
+          role-to-assume: \${{ matrix.roleToAssume }}
+          aws-region: \${{ matrix.region }}
+          role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
+      - name: Pre Deployment
+        if: \${{ matrix.hasPreDeployTask == 'true' }}
+        run: npm run \${{ matrix.preDeploymentScript }}
+      - name: Deployment
+        run: npm run deploy:workflow
+      - name: Post Deployment
+        if: \${{ matrix.hasPostDeployTask == 'true' }}
+        run: npm run \${{ matrix.postDeploymentScript }}
+    strategy:
+      max-parallel: 1
+      matrix:
+        include:
+          - environment: dev1
+            accessKeyIdSecretName: AWS_ACCESS_KEY_ID
+            secretAccessKeySecretName: AWS_SECRET_ACCESS_KEY
+            region: dev-aws-region-1
+            assumeRole: \\"true\\"
+            hasPostDeployTask: \\"false\\"
+            postDeploymentScript: \\"\\"
+            hasPreDeployTask: \\"false\\"
+            preDeploymentScript: \\"\\"
+            roleToAssume: stub-role-2
+            assumeRoleDurationSeconds: 900
         environment:
           - dev1
 "
@@ -1566,6 +1718,12 @@ jobs:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
         with:
           environment: \${{ matrix.environment }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.18.1
+      - name: Install dependencies
+        run: npm ci
       - name: Configure AWS Credentials
         if: \${{ matrix.assumeRole == 'false' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         env:
@@ -1585,12 +1743,6 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14.18.1
-      - name: Install dependencies
-        run: npm ci
       - name: Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
@@ -1701,6 +1853,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
+      - name: Install dependencies
+        run: npm ci
       - name: Configure AWS Credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
@@ -1720,8 +1874,6 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Install dependencies
-        run: npm ci
       - name: Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}

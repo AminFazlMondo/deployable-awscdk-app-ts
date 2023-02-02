@@ -126,13 +126,13 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     if (this.checkActiveDeployment)
       jobDefinition.steps.push(steps.checkActiveDeploymentStep())
 
-    jobDefinition.steps.push(...steps.setAwsCredentialsSteps(this.checkActiveDeployment))
-
     const {taskToRunPreInstall} = this.deployOptions
     if (taskToRunPreInstall)
       jobDefinition.steps.push(steps.preInstallDependenciesStep(taskToRunPreInstall, this.checkActiveDeployment))
 
     jobDefinition.steps.push(...(this.package.project as NodeProject).renderWorkflowSetup())
+
+    jobDefinition.steps.push(...steps.setAwsCredentialsSteps(this.checkActiveDeployment))
 
     if (this.deployOptions.npmConfigEnvironment)
       jobDefinition.steps.push(steps.setNpmConfig(this.deployOptions.npmConfigEnvironment, '${{ matrix.environment }}', this.checkActiveDeployment))
