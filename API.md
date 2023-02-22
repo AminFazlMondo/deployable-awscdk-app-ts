@@ -104,6 +104,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | --- | --- | --- |
 | [`name`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyname)<span title="Required">*</span> | `string` | This is the name of your project. |
 | [`commitGenerated`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertycommitgenerated) | `boolean` | Whether to commit the managed files by default. |
+| [`gitOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygitoptions) | [`projen.GitOptions`](#projen.GitOptions) | Configuration options for git. |
 | [`logging`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertylogging) | [`projen.LoggerOptions`](#projen.LoggerOptions) | Configure logging options such as verbosity. |
 | [`outdir`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyoutdir) | `string` | The root directory of the project. |
 | [`parent`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyparent) | [`projen.Project`](#projen.Project) | The parent project, if this project is part of a bigger project. |
@@ -284,6 +285,18 @@ public readonly commitGenerated: boolean;
 - *Default:* true
 
 Whether to commit the managed files by default.
+
+---
+
+##### `gitOptions`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.gitOptions" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertygitoptions"></a>
+
+```typescript
+public readonly gitOptions: GitOptions;
+```
+
+- *Type:* [`projen.GitOptions`](#projen.GitOptions)
+
+Configuration options for git.
 
 ---
 
