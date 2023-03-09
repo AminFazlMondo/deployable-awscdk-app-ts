@@ -159,6 +159,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | [`packageName`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypackagename) | `string` | The "name" in package.json. |
 | [`peerDependencyOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypeerdependencyoptions) | [`projen.javascript.PeerDependencyOptions`](#projen.javascript.PeerDependencyOptions) | Options for `peerDeps`. |
 | [`peerDeps`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypeerdeps) | `string`[] | Peer dependencies for this module. |
+| [`pnpmVersion`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypnpmversion) | `string` | The version of PNPM to use if using PNPM as a package manager. |
 | [`repository`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrepository) | `string` | The repository is the location where the actual code for your package lives. |
 | [`repositoryDirectory`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyrepositorydirectory) | `string` | If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives. |
 | [`scopedPackagesOptions`](#deployableawscdkapptsdeployableawscdktypescriptappoptionspropertyscopedpackagesoptions) | [`projen.javascript.ScopedPackagesOptions`](#projen.javascript.ScopedPackagesOptions)[] | Options for privately hosted scoped packages. |
@@ -1037,6 +1038,19 @@ public readonly peerDeps: string[];
 Peer dependencies for this module.
 
 Dependencies listed here are required to be installed (and satisfied) by the _consumer_ of this library. Using peer dependencies allows you to ensure that only a single module of a certain library exists in the `node_modules` tree of your consumers.  Note that prior to npm@7, peer dependencies are _not_ automatically installed, which means that adding peer dependencies to a library will be a breaking change for your customers.  Unless `peerDependencyOptions.pinnedDevDependency` is disabled (it is enabled by default), projen will automatically add a dev dependency with a pinned version for each peer dependency. This will ensure that you build & test your module against the lowest peer version required.
+
+---
+
+##### `pnpmVersion`<sup>Optional</sup> <a name="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.pnpmVersion" id="deployableawscdkapptsdeployableawscdktypescriptappoptionspropertypnpmversion"></a>
+
+```typescript
+public readonly pnpmVersion: string;
+```
+
+- *Type:* `string`
+- *Default:* "7"
+
+The version of PNPM to use if using PNPM as a package manager.
 
 ---
 
