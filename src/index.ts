@@ -1,6 +1,6 @@
 import {awscdk, Task, TextFile} from 'projen'
 import {Job, JobPermission} from 'projen/lib/github/workflows-model'
-import {NodeProject} from 'projen/lib/javascript'
+import {CodeArtifactOptions, NodeProject} from 'projen/lib/javascript'
 import * as steps from './steps'
 import {DeployableAwsCdkTypeScriptAppOptions, DeployOptions, EnvironmentOptions} from './types'
 
@@ -18,6 +18,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
   private readonly checkActiveDeployment: boolean
   private readonly workflowNodeVersion?: string
   private readonly deployOptions: DeployOptions
+  private readonly codeArtifactOptions?: CodeArtifactOptions
 
   constructor(options: DeployableAwsCdkTypeScriptAppOptions) {
     const deployable = options.release ?? true
@@ -30,6 +31,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     this.checkActiveDeployment = options.checkActiveDeployment ?? false
     this.workflowNodeVersion = options.workflowNodeVersion
     this.deployOptions = options.deployOptions ?? {environments: []}
+    this.codeArtifactOptions = options.codeArtifactOptions
     this.addDevDeps('deployable-awscdk-app-ts')
 
     if (!deployable)
@@ -132,7 +134,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
     jobDefinition.steps.push(...(this.package.project as NodeProject).renderWorkflowSetup())
 
-    jobDefinition.steps.push(...steps.setAwsCredentialsSteps(this.checkActiveDeployment))
+    jobDefinition.steps.push(...steps.setAwsCredentialsSteps(this.checkActiveDeployment, this.codeArtifactOptions?.authProvider))
 
     if (this.deployOptions.npmConfigEnvironment)
       jobDefinition.steps.push(steps.setNpmConfig(this.deployOptions.npmConfigEnvironment, '${{ matrix.environment }}', this.checkActiveDeployment))

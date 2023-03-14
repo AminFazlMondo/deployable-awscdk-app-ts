@@ -1,5 +1,6 @@
 import {javascript} from 'projen'
 import {JobStep} from 'projen/lib/github/workflows-model'
+import {CodeArtifactAuthProvider} from 'projen/lib/javascript'
 
 export function checkoutStep(): JobStep {
   return {
@@ -76,18 +77,24 @@ function setAwsCredentialsInEnvironment(checkActiveDeployment: boolean): JobStep
   }
 }
 
-function assumeAwsRoleStep(checkActiveDeployment: boolean): JobStep {
+function assumeAwsRoleStep(checkActiveDeployment: boolean, authProvider: CodeArtifactAuthProvider): JobStep {
   const condition =
     checkActiveDeployment ?
       `\${{ matrix.assumeRole == 'true' && ${skipIfAlreadyActiveDeploymentCondition} }}` :
       '${{ matrix.assumeRole == \'true\' }}'
+
+  const secretsParams =
+    authProvider === CodeArtifactAuthProvider.ACCESS_AND_SECRET_KEY_PAIR ?
+      {
+        'aws-access-key-id': '${{ secrets[matrix.accessKeyIdSecretName] }}',
+        'aws-secret-access-key': '${{ secrets[matrix.secretAccessKeySecretName] }}',
+      } : undefined
   return {
     if: condition,
     name: 'Assume AWS Role',
     uses: 'aws-actions/configure-aws-credentials@v1',
     with: {
-      'aws-access-key-id': '${{ secrets[matrix.accessKeyIdSecretName] }}',
-      'aws-secret-access-key': '${{ secrets[matrix.secretAccessKeySecretName] }}',
+      ...secretsParams,
       'role-to-assume': '${{ matrix.roleToAssume }}',
       'aws-region': '${{ matrix.region }}',
       'role-duration-seconds': '${{ matrix.assumeRoleDurationSeconds }}',
@@ -95,10 +102,13 @@ function assumeAwsRoleStep(checkActiveDeployment: boolean): JobStep {
   }
 }
 
-export function setAwsCredentialsSteps(checkActiveDeployment: boolean): JobStep[] {
+export function setAwsCredentialsSteps(
+  checkActiveDeployment: boolean,
+  authProvider: CodeArtifactAuthProvider = CodeArtifactAuthProvider.ACCESS_AND_SECRET_KEY_PAIR)
+  : JobStep[] {
   return [
     setAwsCredentialsInEnvironment(checkActiveDeployment),
-    assumeAwsRoleStep(checkActiveDeployment),
+    assumeAwsRoleStep(checkActiveDeployment, authProvider),
   ]
 }
 

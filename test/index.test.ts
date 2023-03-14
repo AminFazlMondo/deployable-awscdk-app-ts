@@ -1,4 +1,4 @@
-import {NodePackageManager} from 'projen/lib/javascript'
+import {CodeArtifactAuthProvider, NodePackageManager} from 'projen/lib/javascript'
 import {synthSnapshot} from 'projen/lib/util/synth'
 import {DeployableAwsCdkTypeScriptApp} from '../src'
 
@@ -470,5 +470,42 @@ describe('scoped packages exists', () => {
 
   test('release workflow', () => {
     expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot()
+  })
+})
+
+describe('CodeArtifactOptions', () => {
+  describe('GitHub OIDC auth provider', () => {
+    const project = new DeployableAwsCdkTypeScriptApp({
+      packageManager: NodePackageManager.NPM,
+      name: 'my-test-app',
+      defaultReleaseBranch: 'main',
+      cdkVersion: '1.129.0',
+      scopedPackagesOptions: [
+        {
+          registryUrl: 'https://my-domain-111122223333.d.codeartifact.us-west-2.amazonaws.com/npm/my_repo/',
+          scope: '@blah',
+        },
+      ],
+      codeArtifactOptions: {
+        roleToAssume: 'stub-role-1',
+        authProvider: CodeArtifactAuthProvider.GITHUB_OIDC,
+      },
+      deployOptions: {
+        environments: [
+          {
+            name: 'dev1',
+            awsCredentials: {
+              roleToAssume: 'stub-role-2',
+              region: 'dev-aws-region-1',
+            },
+          },
+        ],
+      },
+    })
+    const synthOutput = synthSnapshot(project)
+
+    test('release workflow should not contain aws secrets', () => {
+      expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot()
+    })
   })
 })
