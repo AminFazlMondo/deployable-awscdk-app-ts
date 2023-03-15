@@ -114,7 +114,7 @@ jobs:
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -252,7 +252,7 @@ jobs:
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -721,7 +721,7 @@ jobs:
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -853,7 +853,7 @@ jobs:
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -993,7 +993,7 @@ jobs:
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -1155,7 +1155,7 @@ jobs:
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -1307,7 +1307,7 @@ jobs:
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -1455,7 +1455,7 @@ jobs:
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -1605,7 +1605,7 @@ jobs:
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -1755,7 +1755,7 @@ jobs:
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -1901,7 +1901,7 @@ jobs:
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -2032,7 +2032,7 @@ jobs:
           echo \\"AWS_REGION=$region\\" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
