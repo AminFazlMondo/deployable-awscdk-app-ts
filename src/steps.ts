@@ -92,7 +92,7 @@ function assumeAwsRoleStep(checkActiveDeployment: boolean, authProvider: CodeArt
   return {
     if: condition,
     name: 'Assume AWS Role',
-    uses: 'aws-actions/configure-aws-credentials@v1',
+    uses: 'aws-actions/configure-aws-credentials@v2',
     with: {
       ...secretsParams,
       'role-to-assume': '${{ matrix.roleToAssume }}',
