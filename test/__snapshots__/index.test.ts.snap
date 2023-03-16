@@ -84,6 +84,7 @@ jobs:
     permissions:
       contents: read
       deployments: read
+      id-token: write
     environment:
       name: \${{ matrix.environment }}
     concurrency: \${{ matrix.environment }}-deploy

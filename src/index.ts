@@ -1,6 +1,6 @@
 import {awscdk, Task, TextFile} from 'projen'
 import {Job, JobPermission} from 'projen/lib/github/workflows-model'
-import {CodeArtifactOptions, NodeProject} from 'projen/lib/javascript'
+import {CodeArtifactAuthProvider, CodeArtifactOptions, NodeProject} from 'projen/lib/javascript'
 import * as steps from './steps'
 import {DeployableAwsCdkTypeScriptAppOptions, DeployOptions, EnvironmentOptions} from './types'
 
@@ -107,6 +107,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       permissions: {
         contents: JobPermission.READ,
         deployments: JobPermission.READ,
+        idToken: this.codeArtifactOptions?.authProvider === CodeArtifactAuthProvider.GITHUB_OIDC ? JobPermission.WRITE : undefined,
       },
       strategy: {
         maxParallel: 1,
