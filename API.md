@@ -111,6 +111,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | --- | --- | --- |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.name">name</a></code> | <code>string</code> | This is the name of your project. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.gitIgnoreOptions">gitIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .gitignore file. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.gitOptions">gitOptions</a></code> | <code>projen.GitOptions</code> | Configuration options for git. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.logging">logging</a></code> | <code>projen.LoggerOptions</code> | Configure logging options such as verbosity. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.outdir">outdir</a></code> | <code>string</code> | The root directory of the project. |
@@ -212,6 +213,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.mutableBuild">mutableBuild</a></code> | <code>boolean</code> | Automatically update files modified during builds to pull-request branches. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmignore">npmignore</a></code> | <code>string[]</code> | Additional entries to .npmignore. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmignoreEnabled">npmignoreEnabled</a></code> | <code>boolean</code> | Defines an .npmignore file. Normally this is only needed for libraries that are packaged as tarballs. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmIgnoreOptions">npmIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .npmignore file. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.package">package</a></code> | <code>boolean</code> | Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`). |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.prettier">prettier</a></code> | <code>boolean</code> | Setup prettier. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.prettierOptions">prettierOptions</a></code> | <code>projen.javascript.PrettierOptions</code> | Prettier options. |
@@ -293,6 +295,18 @@ public readonly commitGenerated: boolean;
 - *Default:* true
 
 Whether to commit the managed files by default.
+
+---
+
+##### `gitIgnoreOptions`<sup>Optional</sup> <a name="gitIgnoreOptions" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.gitIgnoreOptions"></a>
+
+```typescript
+public readonly gitIgnoreOptions: IgnoreFileOptions;
+```
+
+- *Type:* projen.IgnoreFileOptions
+
+Configuration options for .gitignore file.
 
 ---
 
@@ -1757,6 +1771,18 @@ public readonly npmignoreEnabled: boolean;
 - *Default:* true
 
 Defines an .npmignore file. Normally this is only needed for libraries that are packaged as tarballs.
+
+---
+
+##### `npmIgnoreOptions`<sup>Optional</sup> <a name="npmIgnoreOptions" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmIgnoreOptions"></a>
+
+```typescript
+public readonly npmIgnoreOptions: IgnoreFileOptions;
+```
+
+- *Type:* projen.IgnoreFileOptions
+
+Configuration options for .npmignore file.
 
 ---
 
