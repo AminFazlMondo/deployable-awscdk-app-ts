@@ -2744,6 +2744,7 @@ new DeployableAwsCdkTypeScriptApp(options: DeployableAwsCdkTypeScriptAppOptions)
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addFields">addFields</a></code> | Directly set fields in `package.json`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addKeywords">addKeywords</a></code> | Adds keywords to package.json (deduplicated). |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPeerDeps">addPeerDeps</a></code> | Defines peer dependencies. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addScripts">addScripts</a></code> | Replaces the contents of multiple npm package.json scripts. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTestCommand">addTestCommand</a></code> | DEPRECATED. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.hasScript">hasScript</a></code> | Indicates if a script by the name name is defined. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeScript">removeScript</a></code> | Removes the npm script (always successful). |
@@ -3159,6 +3160,22 @@ be installed in the next `npx projen` run and the version will be recorded
 in your `package.json` file. You can upgrade manually or using `yarn
 add/upgrade`. If you wish to specify a version range use this syntax:
 `module@^7`.
+
+---
+
+##### `addScripts` <a name="addScripts" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addScripts"></a>
+
+```typescript
+public addScripts(scripts: {[ key: string ]: string}): void
+```
+
+Replaces the contents of multiple npm package.json scripts.
+
+###### `scripts`<sup>Required</sup> <a name="scripts" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addScripts.parameter.scripts"></a>
+
+- *Type:* {[ key: string ]: string}
+
+The scripts to set.
 
 ---
 
