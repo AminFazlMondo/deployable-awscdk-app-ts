@@ -34,6 +34,7 @@ const project = new cdk.JsiiProject({
     allowedUsernames: ['AminFazlMondo'],
   },
   autoApproveUpgrades: true,
+  jsiiVersion: '5.x',
 })
 
 new TextFile(project, '.nvmrc', {
