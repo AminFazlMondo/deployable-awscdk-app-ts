@@ -1878,18 +1878,18 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: \${{ github.sha }}
-      - id: deployment-check
-        uses: AminFazlMondo/check-deployed-environment@v1
-        env:
-          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
-        with:
-          environment: \${{ matrix.environment }}
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 14.18.1
       - name: Install dependencies
         run: npm ci
+      - id: deployment-check
+        uses: AminFazlMondo/check-deployed-environment@v1
+        env:
+          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+        with:
+          environment: \${{ matrix.environment }}
       - name: Configure AWS Credentials
         if: \${{ matrix.assumeRole == 'false' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         env:
