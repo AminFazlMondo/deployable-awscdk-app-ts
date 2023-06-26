@@ -50,6 +50,12 @@ export interface DeployOptions {
    * @default undefined
    */
   readonly taskToRunPreInstall?: string;
+
+  /**
+   * How to perform the deployment. Direct is a bit faster but lacks progress information
+   * @default "change-set"
+   */
+  readonly method?: 'direct' | 'change-set' | 'prepare-change-set';
 }
 
 export interface EnvironmentOptions {

@@ -335,6 +335,33 @@ describe('a new task added for deployment in workflow', () => {
   })
 })
 
+describe('deploy option method is specified', () => {
+  const project = new DeployableAwsCdkTypeScriptApp({
+    packageManager: NodePackageManager.NPM,
+    name: 'my-test-app',
+    defaultReleaseBranch: 'main',
+    cdkVersion: '1.129.0',
+    workflowNodeVersion: '14.18.1',
+    deployOptions: {
+      method: 'direct',
+      environments: [{
+        name: 'dev',
+        awsCredentials: {
+          accessKeyIdSecretName: 'dev-secret-1',
+          secretAccessKeySecretName: 'dev-secret-2',
+          region: 'dev-aws-region-1',
+        },
+      }],
+    },
+  })
+
+  const synthOutput = synthSnapshot(project)
+
+  test('tasks', () => {
+    expect(synthOutput[tasksFilePath].tasks['deploy:workflow']).toMatchSnapshot()
+  })
+})
+
 describe('post deployment added in workflow', () => {
   const project = new DeployableAwsCdkTypeScriptApp({
     packageManager: NodePackageManager.NPM,
