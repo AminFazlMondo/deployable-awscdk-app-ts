@@ -2649,6 +2649,7 @@ const deployOptions: DeployOptions = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.environments">environments</a></code> | <code><a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>[]</code> | Environment settings to deploy to. |
+| <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.method">method</a></code> | <code>string</code> | How to perform the deployment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.npmConfigEnvironment">npmConfigEnvironment</a></code> | <code>string</code> | npm config name to set as the environment name This might be useful in deployment process. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.stackPattern">stackPattern</a></code> | <code>string</code> | Regex for stacks to be deployed. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.taskToRunPreInstall">taskToRunPreInstall</a></code> | <code>string</code> | task name to run prior to installation in deploy job of workflow if not provided will not add to workflow. |
@@ -2664,6 +2665,21 @@ public readonly environments: EnvironmentOptions[];
 - *Type:* <a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>[]
 
 Environment settings to deploy to.
+
+---
+
+##### `method`<sup>Optional</sup> <a name="method" id="deployable-awscdk-app-ts.DeployOptions.property.method"></a>
+
+```typescript
+public readonly method: string;
+```
+
+- *Type:* string
+- *Default:* "change-set"
+
+How to perform the deployment.
+
+Direct is a bit faster but lacks progress information
 
 ---
 
