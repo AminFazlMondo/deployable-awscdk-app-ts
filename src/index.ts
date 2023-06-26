@@ -43,8 +43,12 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     const deployArgument = this.deployOptions.stackPattern ? ` ${this.deployOptions.stackPattern}`: ''
     this.deployWorkflowTask = this.addTask('deploy:workflow', {
       requiredEnv: this.deployOptions.npmConfigEnvironment ? [`npm_config_${this.deployOptions.npmConfigEnvironment}`] : undefined,
-      exec: `cdk deploy${deployArgument} --require-approval never`,
+      exec: `cdk deploy${deployArgument} ${this.getMethodArgument()} --require-approval never`,
     })
+  }
+
+  private getMethodArgument() {
+    return `--method ${this.deployOptions.method ?? 'change-set'}`
   }
 
   synth() {
