@@ -43,7 +43,7 @@
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
     "eslint": "^8",
-    "eslint-import-resolver-node": "^0.3.8",
+    "eslint-import-resolver-node": "^0.3.9",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.28.0",
     "fs-extra": "^11.1.1",
@@ -55,7 +55,7 @@
     "jsii-pacmak": "^1.86.1",
     "jsii-rosetta": "5.x",
     "npm-check-updates": "^16",
-    "projen": "^0.72.5",
+    "projen": "^0.72.6",
     "standard-version": "^9",
     "ts-jest": "^29",
     "ts-node": "^10.9.1",
@@ -65,7 +65,7 @@
     "projen": "^0.72.1"
   },
   "dependencies": {
-    "projen": "^0.72.5"
+    "projen": "^0.72.6"
   },
   "keywords": [
     "AWS CDK",
