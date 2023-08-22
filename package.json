@@ -55,7 +55,7 @@
     "jsii-pacmak": "^1.87.0",
     "jsii-rosetta": "5.x",
     "npm-check-updates": "^16",
-    "projen": "^0.72.18",
+    "projen": "^0.72.19",
     "standard-version": "^9",
     "ts-jest": "^29",
     "ts-node": "^10.9.1",
@@ -65,7 +65,7 @@
     "projen": "^0.72.1"
   },
   "dependencies": {
-    "projen": "^0.72.18"
+    "projen": "^0.72.19"
   },
   "keywords": [
     "AWS CDK",
