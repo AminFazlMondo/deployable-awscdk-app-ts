@@ -275,7 +275,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.copyrightPeriod">copyrightPeriod</a></code> | <code>string</code> | The copyright years to put in the LICENSE file. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.dependabot">dependabot</a></code> | <code>boolean</code> | Use dependabot to handle dependency upgrades. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.dependabotOptions">dependabotOptions</a></code> | <code>projen.github.DependabotOptions</code> | Options for dependabot. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.depsUpgrade">depsUpgrade</a></code> | <code>boolean</code> | Use github workflows to handle dependency upgrades. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.depsUpgrade">depsUpgrade</a></code> | <code>boolean</code> | Use tasks and github workflows to handle dependency upgrades. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.depsUpgradeOptions">depsUpgradeOptions</a></code> | <code>projen.javascript.UpgradeDependenciesOptions</code> | Options for `UpgradeDependencies`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.gitignore">gitignore</a></code> | <code>string[]</code> | Additional entries to .gitignore. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.jest">jest</a></code> | <code>boolean</code> | Setup jest unit tests. |
@@ -1759,7 +1759,7 @@ public readonly depsUpgrade: boolean;
 - *Type:* boolean
 - *Default:* true
 
-Use github workflows to handle dependency upgrades.
+Use tasks and github workflows to handle dependency upgrades.
 
 Cannot be used in conjunction with `dependabot`.
 
@@ -3511,6 +3511,7 @@ public addEnvironments(items: EnvironmentOptions): void
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkTasks">cdkTasks</a></code> | <code>projen.awscdk.CdkTasks</code> | Common CDK tasks. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkVersion">cdkVersion</a></code> | <code>string</code> | The CDK version this app is using. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.deployWorkflowTask">deployWorkflowTask</a></code> | <code>projen.Task</code> | Task to deploy your app. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.majorNodeVersion">majorNodeVersion</a></code> | <code>number</code> | return the major node version set for the project. |
 
 ---
 
@@ -4315,6 +4316,19 @@ public readonly deployWorkflowTask: Task;
 - *Type:* projen.Task
 
 Task to deploy your app.
+
+---
+
+##### `majorNodeVersion`<sup>Required</sup> <a name="majorNodeVersion" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.majorNodeVersion"></a>
+
+```typescript
+public readonly majorNodeVersion: number;
+```
+
+- *Type:* number
+- *Default:* 16
+
+return the major node version set for the project.
 
 ---
 

@@ -41,9 +41,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     if (this.generateNvmrc && !this.workflowNodeVersion)
       this.workflowNodeVersion = '14.18.1'
 
-    const majorNodeVersion = this.getMajorNodeVersion(this.nodeVersion)
-
-    if (this.deployOptions.npmConfigEnvironment && majorNodeVersion >= 18)
+    if (this.deployOptions.npmConfigEnvironment && this.majorNodeVersion >= 18)
       throw new Error(`npmConfigEnvironment is not supported for node versions above version 18. Current version is ${this.nodeVersion}`)
 
     const deployArgument = this.deployOptions.stackPattern ? ` ${this.deployOptions.stackPattern}`: ''
@@ -53,12 +51,16 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     })
   }
 
-  private getMajorNodeVersion(nodeVersion: string | undefined) {
-    if (!nodeVersion)
+  /**
+   * return the major node version set for the project
+   * @default 16
+   */
+  get majorNodeVersion(): number {
+    if (!this.nodeVersion)
       return 16
-    const parsed = semver.coerce(nodeVersion)
+    const parsed = semver.coerce(this.nodeVersion)
     if (!parsed)
-      throw new Error(`Could not parse node version ${nodeVersion}`)
+      throw new Error(`Could not parse node version ${this.nodeVersion}`)
     return parsed.major
   }
 
