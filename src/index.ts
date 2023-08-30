@@ -44,7 +44,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     const majorNodeVersion = this.getMajorNodeVersion(this.nodeVersion)
 
     if (this.deployOptions.npmConfigEnvironment && majorNodeVersion >= 18)
-      throw new Error(`npmConfigEnvironment is not supported for node versions above version 18. Current version is ${this.workflowNodeVersion}`)
+      throw new Error(`npmConfigEnvironment is not supported for node versions above version 18. Current version is ${this.nodeVersion}`)
 
     const deployArgument = this.deployOptions.stackPattern ? ` ${this.deployOptions.stackPattern}`: ''
     this.deployWorkflowTask = this.addTask('deploy:workflow', {
