@@ -2663,6 +2663,7 @@ const deployOptions: DeployOptions = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.environments">environments</a></code> | <code><a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>[]</code> | Environment settings to deploy to. |
+| <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.environmentVariableName">environmentVariableName</a></code> | <code>string</code> | Name of the environment variable used to set the deploy environment name. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.method">method</a></code> | <code>string</code> | How to perform the deployment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.npmConfigEnvironment">npmConfigEnvironment</a></code> | <code>string</code> | npm config name to set as the environment name This might be useful in deployment process. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.stackPattern">stackPattern</a></code> | <code>string</code> | Regex for stacks to be deployed. |
@@ -2679,6 +2680,19 @@ public readonly environments: EnvironmentOptions[];
 - *Type:* <a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>[]
 
 Environment settings to deploy to.
+
+---
+
+##### `environmentVariableName`<sup>Optional</sup> <a name="environmentVariableName" id="deployable-awscdk-app-ts.DeployOptions.property.environmentVariableName"></a>
+
+```typescript
+public readonly environmentVariableName: string;
+```
+
+- *Type:* string
+- *Default:* undefined
+
+Name of the environment variable used to set the deploy environment name.
 
 ---
 
@@ -2707,6 +2721,8 @@ public readonly npmConfigEnvironment: string;
 - *Default:* undefined
 
 npm config name to set as the environment name This might be useful in deployment process.
+
+Does not support node versions above 18.
 
 if not provided will not set
 

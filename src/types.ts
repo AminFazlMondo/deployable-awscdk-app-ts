@@ -39,10 +39,19 @@ export interface DeployOptions {
    * npm config name to set as the environment name
    * This might be useful in deployment process
    *
+   * Does not support node versions above 18.
+   *
    * if not provided will not set
    * @default undefined
    */
   readonly npmConfigEnvironment?: string;
+
+  /**
+   * Name of the environment variable used to set the deploy environment name.
+   *
+   * @default undefined
+   */
+  readonly environmentVariableName?: string;
 
   /**
    * task name to run prior to installation in deploy job of workflow

@@ -21,6 +21,9 @@ const project = new cdk.JsiiProject({
   deps: [
     'projen',
   ],
+  bundledDeps: [
+    'semver',
+  ],
   peerDeps: [
     'projen',
   ],
