@@ -47,6 +47,13 @@ export interface DeployOptions {
   readonly npmConfigEnvironment?: string;
 
   /**
+   * Name of the environment variable used to set the deploy environment name.
+   *
+   * @default undefined
+   */
+  readonly environmentVariableName?: string;
+
+  /**
    * task name to run prior to installation in deploy job of workflow
    * if not provided will not add to workflow
    * @default undefined

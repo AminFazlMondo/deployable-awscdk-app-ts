@@ -117,6 +117,10 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       }
     })
 
+    const deployJobEnv = this.deployOptions.environmentVariableName ? {
+      [this.deployOptions.environmentVariableName]: '${{ matrix.environment }}',
+    } : undefined
+
     const jobDefinition: Job = {
       runsOn: ['ubuntu-latest'],
       concurrency: '${{ matrix.environment }}-deploy',
@@ -140,6 +144,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       environment: {
         name: '${{ matrix.environment }}',
       },
+      env: deployJobEnv,
       steps: [],
     }
 

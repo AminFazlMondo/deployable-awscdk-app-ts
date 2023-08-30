@@ -537,6 +537,33 @@ describe('CodeArtifactOptions', () => {
 })
 
 describe('node version 18', () => {
+  describe('environmentVariableName', () => {
+    const project = new DeployableAwsCdkTypeScriptApp({
+      packageManager: NodePackageManager.NPM,
+      name: 'my-test-app',
+      defaultReleaseBranch: 'main',
+      workflowNodeVersion: '18',
+      cdkVersion: '1.129.0',
+      deployOptions: {
+        environmentVariableName: 'STAGE',
+        environments: [
+          {
+            name: 'dev1',
+            awsCredentials: {
+              roleToAssume: 'stub-role-2',
+              region: 'dev-aws-region-1',
+            },
+          },
+        ],
+      },
+    })
+    const synthOutput = synthSnapshot(project)
+
+    test('release workflow', () => {
+      expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot()
+    })
+  })
+
   describe('npmConfigEnvironment', () => {
     test('should throw when npmConfigEnvironment is set', () => {
       expect(() => new DeployableAwsCdkTypeScriptApp({
