@@ -20,6 +20,8 @@ const project = new cdk.JsiiProject({
   npmAccess: javascript.NpmAccess.PUBLIC,
   deps: [
     'projen',
+  ],
+  bundledDeps: [
     'semver',
   ],
   peerDeps: [

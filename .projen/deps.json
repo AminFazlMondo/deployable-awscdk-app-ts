@@ -102,15 +102,15 @@
       "type": "build"
     },
     {
+      "name": "semver",
+      "type": "bundled"
+    },
+    {
       "name": "projen",
       "type": "peer"
     },
     {
       "name": "projen",
-      "type": "runtime"
-    },
-    {
-      "name": "semver",
       "type": "runtime"
     }
   ],
