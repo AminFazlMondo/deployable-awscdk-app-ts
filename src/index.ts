@@ -1,6 +1,7 @@
 import {awscdk, Task, TextFile} from 'projen'
 import {Job, JobPermission} from 'projen/lib/github/workflows-model'
 import {CodeArtifactAuthProvider, CodeArtifactOptions, NodeProject} from 'projen/lib/javascript'
+import * as semver from 'semver'
 import * as steps from './steps'
 import {DeployableAwsCdkTypeScriptAppOptions, DeployOptions, EnvironmentOptions} from './types'
 
@@ -40,11 +41,25 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     if (this.generateNvmrc && !this.workflowNodeVersion)
       this.workflowNodeVersion = '14.18.1'
 
+    const majorNodeVersion = this.getMajorNodeVersion(this.nodeVersion)
+
+    if (this.deployOptions.npmConfigEnvironment && majorNodeVersion >= 18)
+      throw new Error(`npmConfigEnvironment is not supported for node versions above version 18. Current version is ${this.workflowNodeVersion}`)
+
     const deployArgument = this.deployOptions.stackPattern ? ` ${this.deployOptions.stackPattern}`: ''
     this.deployWorkflowTask = this.addTask('deploy:workflow', {
       requiredEnv: this.deployOptions.npmConfigEnvironment ? [`npm_config_${this.deployOptions.npmConfigEnvironment}`] : undefined,
       exec: `cdk deploy${deployArgument} ${this.getMethodArgument()} --require-approval never`,
     })
+  }
+
+  private getMajorNodeVersion(nodeVersion: string | undefined) {
+    if (!nodeVersion)
+      return 16
+    const parsed = semver.coerce(nodeVersion)
+    if (!parsed)
+      throw new Error(`Could not parse node version ${nodeVersion}`)
+    return parsed.major
   }
 
   private getMethodArgument() {

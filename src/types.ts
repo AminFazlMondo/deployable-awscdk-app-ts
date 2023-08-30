@@ -39,6 +39,8 @@ export interface DeployOptions {
    * npm config name to set as the environment name
    * This might be useful in deployment process
    *
+   * Does not support node versions above 18.
+   *
    * if not provided will not set
    * @default undefined
    */
