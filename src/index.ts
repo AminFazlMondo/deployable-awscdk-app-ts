@@ -1,11 +1,12 @@
 import {awscdk, Task, TextFile} from 'projen'
 import {Job, JobPermission} from 'projen/lib/github/workflows-model'
 import {CodeArtifactAuthProvider, CodeArtifactOptions, NodeProject} from 'projen/lib/javascript'
-import * as semver from 'semver'
 import * as steps from './steps'
 import {DeployableAwsCdkTypeScriptAppOptions, DeployOptions, EnvironmentOptions} from './types'
+import {getMajorNodeVersion} from './utils'
 
 export * from './types'
+export * as utils from './utils'
 
 export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
@@ -56,12 +57,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
    * @default 16
    */
   get majorNodeVersion(): number {
-    if (!this.nodeVersion)
-      return 16
-    const parsed = semver.coerce(this.nodeVersion)
-    if (!parsed)
-      throw new Error(`Could not parse node version ${this.nodeVersion}`)
-    return parsed.major
+    return getMajorNodeVersion(this.nodeVersion)
   }
 
   private getMethodArgument() {
