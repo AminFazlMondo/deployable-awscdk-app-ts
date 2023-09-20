@@ -30,6 +30,7 @@ const project = new cdk.JsiiProject({
   devDeps: [
     'fs-extra',
     '@types/fs-extra',
+    'yaml',
   ],
   workflowNodeVersion: nodeVersion,
   publishTasks: true,

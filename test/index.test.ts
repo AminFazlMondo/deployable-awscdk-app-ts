@@ -1,10 +1,16 @@
 import {CodeArtifactAuthProvider, NodePackageManager} from 'projen/lib/javascript'
-import {synthSnapshot} from 'projen/lib/util/synth'
+import {SynthOutput, synthSnapshot} from 'projen/lib/util/synth'
+import * as YAML from 'yaml'
 import {DeployableAwsCdkTypeScriptApp} from '../src'
 
 const releaseWorkflowFilePath = '.github/workflows/release.yml'
 const tasksFilePath = '.projen/tasks.json'
 const nvmrcFilePath = '.nvmrc'
+
+function extractReleaseMatrix(synthOutput: SynthOutput) {
+  const releaseWorkflow = YAML.parse(synthOutput[releaseWorkflowFilePath])
+  return releaseWorkflow.jobs.deploy.strategy.matrix
+}
 
 describe('No stack pattern', () => {
   const project = new DeployableAwsCdkTypeScriptApp({
@@ -239,6 +245,79 @@ describe('environment added by invoking the addEnvironments', () => {
 
   test('release workflow', () => {
     expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot()
+  })
+})
+
+describe('update pre/post deploy scripts', () => {
+  function generateProject() {
+    return new DeployableAwsCdkTypeScriptApp({
+      packageManager: NodePackageManager.NPM,
+      name: 'my-test-app',
+      defaultReleaseBranch: 'main',
+      cdkVersion: '1.129.0',
+      workflowNodeVersion: '14.18.1',
+      deployOptions: {
+        environments: [
+          {
+            name: 'dev',
+            awsCredentials: {
+              accessKeyIdSecretName: 'dev-secret-1',
+              secretAccessKeySecretName: 'dev-secret-2',
+              region: 'dev-aws-region-1',
+            },
+          },
+          {
+            name: 'staging',
+            awsCredentials: {
+              accessKeyIdSecretName: 'staging-secret-1',
+              secretAccessKeySecretName: 'staging-secret-2',
+              region: 'staging-aws-region-1',
+            },
+          },
+          {
+            name: 'prod',
+            awsCredentials: {
+              accessKeyIdSecretName: 'prod-secret-1',
+              secretAccessKeySecretName: 'prod-secret-2',
+              region: 'prod-aws-region-1',
+            },
+          },
+        ],
+      },
+    })
+  }
+
+
+  test('should update scripts for pre deploy for all environments', () => {
+    const project = generateProject()
+    project.updatePreDeployWorkflowScriptToEnvironments('pre:deploy')
+
+    const synthOutput = synthSnapshot(project)
+    extractReleaseMatrix(synthOutput).include.forEach((x: any) => expect(x).toMatchObject({
+      preDeploymentScript: 'pre:deploy',
+      hasPreDeployTask: 'true',
+    }))
+  })
+
+  test('should update scripts for post deploy for all environments', () => {
+    const project = generateProject()
+    project.updatePostDeployWorkflowScriptToEnvironments('post:deploy')
+
+    const synthOutput = synthSnapshot(project)
+    extractReleaseMatrix(synthOutput).include.forEach((x: any) => expect(x).toMatchObject({
+      postDeploymentScript: 'post:deploy',
+      hasPostDeployTask: 'true',
+    }))
+  })
+
+  test('should update scripts for pre/post deploy for selected environments', () => {
+    const project = generateProject()
+    project.updatePostDeployWorkflowScriptToEnvironments('post:deploy', ['dev', 'staging'])
+    project.updatePreDeployWorkflowScriptToEnvironments('pre:deploy', ['staging', 'prod'])
+
+    const synthOutput = synthSnapshot(project)
+
+    expect(extractReleaseMatrix(synthOutput)).toMatchSnapshot()
   })
 })
 

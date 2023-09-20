@@ -19,7 +19,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
   private readonly generateNvmrc: boolean
   private readonly checkActiveDeployment: boolean
   private readonly workflowNodeVersion?: string
-  private readonly deployOptions: DeployOptions
+  protected deployOptions: DeployOptions
   private readonly codeArtifactOptions?: CodeArtifactOptions
 
   constructor(options: DeployableAwsCdkTypeScriptAppOptions) {
@@ -76,8 +76,55 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     super.synth()
   }
 
+  /**
+   * Add new environments to the application
+   * @param items list of environment options
+   */
   addEnvironments(...items: EnvironmentOptions[]) {
     this.deployOptions.environments.push(...items)
+  }
+
+  private updateEnvironments(newEnvironments: EnvironmentOptions[]) {
+    this.deployOptions = {
+      ...this.deployOptions,
+      environments: newEnvironments,
+    }
+  }
+
+  /**
+   * Updates the postDeployWorkflowScript for environments
+   * @param script the script to be added, for example "post:deploy"
+   * @param environmentNameFilter the name of environments to add the scripts to, if not provided or empty will update all
+   */
+  updatePostDeployWorkflowScriptToEnvironments(script: string, environmentNameFilter?: string[]) {
+    const newEnvironments = this.deployOptions.environments.map(environment => {
+      if (environmentNameFilter && environmentNameFilter.length > 0 && !environmentNameFilter.includes(environment.name))
+        return environment
+
+      return {
+        ...environment,
+        postDeployWorkflowScript: script,
+      }
+    })
+    this.updateEnvironments(newEnvironments)
+  }
+
+  /**
+   * Updates the preDeployWorkflowScript for environments
+   * @param script the script to be added, for example "pre:deploy"
+   * @param environmentNameFilter the name of environments to add the scripts to, if not provided or empty will update all
+   */
+  updatePreDeployWorkflowScriptToEnvironments(script: string, environmentNameFilter?: string[]) {
+    const newEnvironments = this.deployOptions.environments.map(environment => {
+      if (environmentNameFilter && environmentNameFilter.length > 0 && !environmentNameFilter.includes(environment.name))
+        return environment
+
+      return {
+        ...environment,
+        preDeployWorkflowScript: script,
+      }
+    })
+    this.updateEnvironments(newEnvironments)
   }
 
   private addDeployJobs() {
