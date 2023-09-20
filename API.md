@@ -2910,7 +2910,9 @@ new DeployableAwsCdkTypeScriptApp(options: DeployableAwsCdkTypeScriptAppOptions)
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.renderWorkflowSetup">renderWorkflowSetup</a></code> | Returns the set of workflow steps which should be executed to bootstrap a workflow. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.setScript">setScript</a></code> | Replaces the contents of an npm package.json script. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCdkDependency">addCdkDependency</a></code> | Adds an AWS CDK module dependencies. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments">addEnvironments</a></code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments">addEnvironments</a></code> | Add new environments to the application. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments">updatePostDeployWorkflowScriptToEnvironments</a></code> | Updates the postDeployWorkflowScript for environments. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePreDeployWorkflowScriptToEnvironments">updatePreDeployWorkflowScriptToEnvironments</a></code> | Updates the preDeployWorkflowScript for environments. |
 
 ---
 
@@ -3446,9 +3448,61 @@ The list of modules to depend on.
 public addEnvironments(items: EnvironmentOptions): void
 ```
 
+Add new environments to the application.
+
 ###### `items`<sup>Required</sup> <a name="items" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments.parameter.items"></a>
 
 - *Type:* <a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>
+
+list of environment options.
+
+---
+
+##### `updatePostDeployWorkflowScriptToEnvironments` <a name="updatePostDeployWorkflowScriptToEnvironments" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments"></a>
+
+```typescript
+public updatePostDeployWorkflowScriptToEnvironments(script: string, environmentNameFilter?: string[]): void
+```
+
+Updates the postDeployWorkflowScript for environments.
+
+###### `script`<sup>Required</sup> <a name="script" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments.parameter.script"></a>
+
+- *Type:* string
+
+the script to be added, for example "post:deploy".
+
+---
+
+###### `environmentNameFilter`<sup>Optional</sup> <a name="environmentNameFilter" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments.parameter.environmentNameFilter"></a>
+
+- *Type:* string[]
+
+the name of environments to add the scripts to, if not provided or empty will update all.
+
+---
+
+##### `updatePreDeployWorkflowScriptToEnvironments` <a name="updatePreDeployWorkflowScriptToEnvironments" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePreDeployWorkflowScriptToEnvironments"></a>
+
+```typescript
+public updatePreDeployWorkflowScriptToEnvironments(script: string, environmentNameFilter?: string[]): void
+```
+
+Updates the preDeployWorkflowScript for environments.
+
+###### `script`<sup>Required</sup> <a name="script" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePreDeployWorkflowScriptToEnvironments.parameter.script"></a>
+
+- *Type:* string
+
+the script to be added, for example "pre:deploy".
+
+---
+
+###### `environmentNameFilter`<sup>Optional</sup> <a name="environmentNameFilter" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePreDeployWorkflowScriptToEnvironments.parameter.environmentNameFilter"></a>
+
+- *Type:* string[]
+
+the name of environments to add the scripts to, if not provided or empty will update all.
 
 ---
 
