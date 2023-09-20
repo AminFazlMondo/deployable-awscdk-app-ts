@@ -2523,3 +2523,48 @@ exports[`specific stack tasks 1`] = `
   },
 }
 `;
+
+exports[`update pre/post deploy scripts should update scripts for pre/post deploy for selected environments 1`] = `
+{
+  "environment": [
+    "dev",
+    "staging",
+    "prod",
+  ],
+  "include": [
+    {
+      "accessKeyIdSecretName": "dev-secret-1",
+      "assumeRole": "false",
+      "environment": "dev",
+      "hasPostDeployTask": "true",
+      "hasPreDeployTask": "false",
+      "postDeploymentScript": "post:deploy",
+      "preDeploymentScript": "",
+      "region": "dev-aws-region-1",
+      "secretAccessKeySecretName": "dev-secret-2",
+    },
+    {
+      "accessKeyIdSecretName": "staging-secret-1",
+      "assumeRole": "false",
+      "environment": "staging",
+      "hasPostDeployTask": "true",
+      "hasPreDeployTask": "true",
+      "postDeploymentScript": "post:deploy",
+      "preDeploymentScript": "pre:deploy",
+      "region": "staging-aws-region-1",
+      "secretAccessKeySecretName": "staging-secret-2",
+    },
+    {
+      "accessKeyIdSecretName": "prod-secret-1",
+      "assumeRole": "false",
+      "environment": "prod",
+      "hasPostDeployTask": "false",
+      "hasPreDeployTask": "true",
+      "postDeploymentScript": "",
+      "preDeploymentScript": "pre:deploy",
+      "region": "prod-aws-region-1",
+      "secretAccessKeySecretName": "prod-secret-2",
+    },
+  ],
+}
+`;
