@@ -1146,7 +1146,7 @@ public readonly packageManager: NodePackageManager;
 ```
 
 - *Type:* projen.javascript.NodePackageManager
-- *Default:* NodePackageManager.YARN
+- *Default:* NodePackageManager.YARN_CLASSIC
 
 The Node Package Manager used to execute scripts.
 
