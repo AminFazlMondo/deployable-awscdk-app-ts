@@ -69,6 +69,1672 @@ project.synth()
 
 # API Reference <a name="API Reference" id="api-reference"></a>
 
+## Constructs <a name="Constructs" id="Constructs"></a>
+
+### DeployableAwsCdkTypeScriptApp <a name="DeployableAwsCdkTypeScriptApp" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp"></a>
+
+#### Initializers <a name="Initializers" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.Initializer"></a>
+
+```typescript
+import { DeployableAwsCdkTypeScriptApp } from 'deployable-awscdk-app-ts'
+
+new DeployableAwsCdkTypeScriptApp(options: DeployableAwsCdkTypeScriptAppOptions)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.Initializer.parameter.options">options</a></code> | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions">DeployableAwsCdkTypeScriptAppOptions</a></code> | *No description.* |
+
+---
+
+##### `options`<sup>Required</sup> <a name="options" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.Initializer.parameter.options"></a>
+
+- *Type:* <a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions">DeployableAwsCdkTypeScriptAppOptions</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addExcludeFromCleanup">addExcludeFromCleanup</a></code> | Exclude the matching files from pre-synth cleanup. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addGitIgnore">addGitIgnore</a></code> | Adds a .gitignore pattern. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPackageIgnore">addPackageIgnore</a></code> | Exclude these files from the bundled package. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTask">addTask</a></code> | Adds a new task to this project. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTip">addTip</a></code> | Prints a "tip" message during synthesis. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.annotateGenerated">annotateGenerated</a></code> | Marks the provided file(s) as being generated. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.postSynthesize">postSynthesize</a></code> | Called after all components are synthesized. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.preSynthesize">preSynthesize</a></code> | Called before all components are synthesized. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeTask">removeTask</a></code> | Removes a task from a project. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.runTaskCommand">runTaskCommand</a></code> | Returns the shell command to execute in order to run a task. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.synth">synth</a></code> | Synthesize all project files into `outdir`. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindFile">tryFindFile</a></code> | Finds a file at the specified relative path within this project and all its subprojects. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindJsonFile">tryFindJsonFile</a></code> | Finds a json file by name. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindObjectFile">tryFindObjectFile</a></code> | Finds an object file (like JsonFile, YamlFile, etc.) by name. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryRemoveFile">tryRemoveFile</a></code> | Finds a file at the specified relative path within this project and removes it. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBins">addBins</a></code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBundledDeps">addBundledDeps</a></code> | Defines bundled dependencies. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCompileCommand">addCompileCommand</a></code> | DEPRECATED. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDeps">addDeps</a></code> | Defines normal dependencies. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDevDeps">addDevDeps</a></code> | Defines development/test dependencies. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addFields">addFields</a></code> | Directly set fields in `package.json`. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addKeywords">addKeywords</a></code> | Adds keywords to package.json (deduplicated). |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPeerDeps">addPeerDeps</a></code> | Defines peer dependencies. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addScripts">addScripts</a></code> | Replaces the contents of multiple npm package.json scripts. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTestCommand">addTestCommand</a></code> | DEPRECATED. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.hasScript">hasScript</a></code> | Indicates if a script by the name name is defined. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeScript">removeScript</a></code> | Removes the npm script (always successful). |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.renderWorkflowSetup">renderWorkflowSetup</a></code> | Returns the set of workflow steps which should be executed to bootstrap a workflow. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.setScript">setScript</a></code> | Replaces the contents of an npm package.json script. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCdkDependency">addCdkDependency</a></code> | Adds an AWS CDK module dependencies. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments">addEnvironments</a></code> | Add new environments to the application. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments">updatePostDeployWorkflowScriptToEnvironments</a></code> | Updates the postDeployWorkflowScript for environments. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePreDeployWorkflowScriptToEnvironments">updatePreDeployWorkflowScriptToEnvironments</a></code> | Updates the preDeployWorkflowScript for environments. |
+
+---
+
+##### `toString` <a name="toString" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `addExcludeFromCleanup` <a name="addExcludeFromCleanup" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addExcludeFromCleanup"></a>
+
+```typescript
+public addExcludeFromCleanup(globs: string): void
+```
+
+Exclude the matching files from pre-synth cleanup.
+
+Can be used when, for example, some
+source files include the projen marker and we don't want them to be erased during synth.
+
+###### `globs`<sup>Required</sup> <a name="globs" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addExcludeFromCleanup.parameter.globs"></a>
+
+- *Type:* string
+
+The glob patterns to match.
+
+---
+
+##### `addGitIgnore` <a name="addGitIgnore" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addGitIgnore"></a>
+
+```typescript
+public addGitIgnore(pattern: string): void
+```
+
+Adds a .gitignore pattern.
+
+###### `pattern`<sup>Required</sup> <a name="pattern" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addGitIgnore.parameter.pattern"></a>
+
+- *Type:* string
+
+The glob pattern to ignore.
+
+---
+
+##### `addPackageIgnore` <a name="addPackageIgnore" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPackageIgnore"></a>
+
+```typescript
+public addPackageIgnore(pattern: string): void
+```
+
+Exclude these files from the bundled package.
+
+Implemented by project types based on the
+packaging mechanism. For example, `NodeProject` delegates this to `.npmignore`.
+
+###### `pattern`<sup>Required</sup> <a name="pattern" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPackageIgnore.parameter.pattern"></a>
+
+- *Type:* string
+
+---
+
+##### `addTask` <a name="addTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTask"></a>
+
+```typescript
+public addTask(name: string, props?: TaskOptions): Task
+```
+
+Adds a new task to this project.
+
+This will fail if the project already has
+a task with this name.
+
+###### `name`<sup>Required</sup> <a name="name" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTask.parameter.name"></a>
+
+- *Type:* string
+
+The task name to add.
+
+---
+
+###### `props`<sup>Optional</sup> <a name="props" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTask.parameter.props"></a>
+
+- *Type:* projen.TaskOptions
+
+Task properties.
+
+---
+
+##### ~~`addTip`~~ <a name="addTip" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTip"></a>
+
+```typescript
+public addTip(message: string): void
+```
+
+Prints a "tip" message during synthesis.
+
+###### `message`<sup>Required</sup> <a name="message" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTip.parameter.message"></a>
+
+- *Type:* string
+
+The message.
+
+---
+
+##### `annotateGenerated` <a name="annotateGenerated" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.annotateGenerated"></a>
+
+```typescript
+public annotateGenerated(glob: string): void
+```
+
+Marks the provided file(s) as being generated.
+
+This is achieved using the
+github-linguist attributes. Generated files do not count against the
+repository statistics and language breakdown.
+
+> [https://github.com/github/linguist/blob/master/docs/overrides.md](https://github.com/github/linguist/blob/master/docs/overrides.md)
+
+###### `glob`<sup>Required</sup> <a name="glob" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.annotateGenerated.parameter.glob"></a>
+
+- *Type:* string
+
+the glob pattern to match (could be a file path).
+
+---
+
+##### `postSynthesize` <a name="postSynthesize" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.postSynthesize"></a>
+
+```typescript
+public postSynthesize(): void
+```
+
+Called after all components are synthesized.
+
+Order is *not* guaranteed.
+
+##### `preSynthesize` <a name="preSynthesize" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.preSynthesize"></a>
+
+```typescript
+public preSynthesize(): void
+```
+
+Called before all components are synthesized.
+
+##### `removeTask` <a name="removeTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeTask"></a>
+
+```typescript
+public removeTask(name: string): Task
+```
+
+Removes a task from a project.
+
+###### `name`<sup>Required</sup> <a name="name" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeTask.parameter.name"></a>
+
+- *Type:* string
+
+The name of the task to remove.
+
+---
+
+##### `runTaskCommand` <a name="runTaskCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.runTaskCommand"></a>
+
+```typescript
+public runTaskCommand(task: Task): string
+```
+
+Returns the shell command to execute in order to run a task.
+
+This will
+typically be `npx projen TASK`.
+
+###### `task`<sup>Required</sup> <a name="task" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.runTaskCommand.parameter.task"></a>
+
+- *Type:* projen.Task
+
+The task for which the command is required.
+
+---
+
+##### `synth` <a name="synth" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.synth"></a>
+
+```typescript
+public synth(): void
+```
+
+Synthesize all project files into `outdir`.
+
+1. Call "this.preSynthesize()"
+2. Delete all generated files
+3. Synthesize all subprojects
+4. Synthesize all components of this project
+5. Call "postSynthesize()" for all components of this project
+6. Call "this.postSynthesize()"
+
+##### `tryFindFile` <a name="tryFindFile" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindFile"></a>
+
+```typescript
+public tryFindFile(filePath: string): FileBase
+```
+
+Finds a file at the specified relative path within this project and all its subprojects.
+
+###### `filePath`<sup>Required</sup> <a name="filePath" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindFile.parameter.filePath"></a>
+
+- *Type:* string
+
+The file path.
+
+If this path is relative, it will be resolved
+from the root of _this_ project.
+
+---
+
+##### ~~`tryFindJsonFile`~~ <a name="tryFindJsonFile" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindJsonFile"></a>
+
+```typescript
+public tryFindJsonFile(filePath: string): JsonFile
+```
+
+Finds a json file by name.
+
+###### `filePath`<sup>Required</sup> <a name="filePath" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindJsonFile.parameter.filePath"></a>
+
+- *Type:* string
+
+The file path.
+
+---
+
+##### `tryFindObjectFile` <a name="tryFindObjectFile" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindObjectFile"></a>
+
+```typescript
+public tryFindObjectFile(filePath: string): ObjectFile
+```
+
+Finds an object file (like JsonFile, YamlFile, etc.) by name.
+
+###### `filePath`<sup>Required</sup> <a name="filePath" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindObjectFile.parameter.filePath"></a>
+
+- *Type:* string
+
+The file path.
+
+---
+
+##### `tryRemoveFile` <a name="tryRemoveFile" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryRemoveFile"></a>
+
+```typescript
+public tryRemoveFile(filePath: string): FileBase
+```
+
+Finds a file at the specified relative path within this project and removes it.
+
+###### `filePath`<sup>Required</sup> <a name="filePath" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryRemoveFile.parameter.filePath"></a>
+
+- *Type:* string
+
+The file path.
+
+If this path is relative, it will be
+resolved from the root of _this_ project.
+
+---
+
+##### `addBins` <a name="addBins" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBins"></a>
+
+```typescript
+public addBins(bins: {[ key: string ]: string}): void
+```
+
+###### `bins`<sup>Required</sup> <a name="bins" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBins.parameter.bins"></a>
+
+- *Type:* {[ key: string ]: string}
+
+---
+
+##### `addBundledDeps` <a name="addBundledDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBundledDeps"></a>
+
+```typescript
+public addBundledDeps(deps: string): void
+```
+
+Defines bundled dependencies.
+
+Bundled dependencies will be added as normal dependencies as well as to the
+`bundledDependencies` section of your `package.json`.
+
+###### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBundledDeps.parameter.deps"></a>
+
+- *Type:* string
+
+Names modules to install.
+
+By default, the the dependency will
+be installed in the next `npx projen` run and the version will be recorded
+in your `package.json` file. You can upgrade manually or using `yarn
+add/upgrade`. If you wish to specify a version range use this syntax:
+`module@^7`.
+
+---
+
+##### ~~`addCompileCommand`~~ <a name="addCompileCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCompileCommand"></a>
+
+```typescript
+public addCompileCommand(commands: string): void
+```
+
+DEPRECATED.
+
+###### `commands`<sup>Required</sup> <a name="commands" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCompileCommand.parameter.commands"></a>
+
+- *Type:* string
+
+---
+
+##### `addDeps` <a name="addDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDeps"></a>
+
+```typescript
+public addDeps(deps: string): void
+```
+
+Defines normal dependencies.
+
+###### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDeps.parameter.deps"></a>
+
+- *Type:* string
+
+Names modules to install.
+
+By default, the the dependency will
+be installed in the next `npx projen` run and the version will be recorded
+in your `package.json` file. You can upgrade manually or using `yarn
+add/upgrade`. If you wish to specify a version range use this syntax:
+`module@^7`.
+
+---
+
+##### `addDevDeps` <a name="addDevDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDevDeps"></a>
+
+```typescript
+public addDevDeps(deps: string): void
+```
+
+Defines development/test dependencies.
+
+###### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDevDeps.parameter.deps"></a>
+
+- *Type:* string
+
+Names modules to install.
+
+By default, the the dependency will
+be installed in the next `npx projen` run and the version will be recorded
+in your `package.json` file. You can upgrade manually or using `yarn
+add/upgrade`. If you wish to specify a version range use this syntax:
+`module@^7`.
+
+---
+
+##### `addFields` <a name="addFields" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addFields"></a>
+
+```typescript
+public addFields(fields: {[ key: string ]: any}): void
+```
+
+Directly set fields in `package.json`.
+
+###### `fields`<sup>Required</sup> <a name="fields" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addFields.parameter.fields"></a>
+
+- *Type:* {[ key: string ]: any}
+
+The fields to set.
+
+---
+
+##### `addKeywords` <a name="addKeywords" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addKeywords"></a>
+
+```typescript
+public addKeywords(keywords: string): void
+```
+
+Adds keywords to package.json (deduplicated).
+
+###### `keywords`<sup>Required</sup> <a name="keywords" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addKeywords.parameter.keywords"></a>
+
+- *Type:* string
+
+The keywords to add.
+
+---
+
+##### `addPeerDeps` <a name="addPeerDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPeerDeps"></a>
+
+```typescript
+public addPeerDeps(deps: string): void
+```
+
+Defines peer dependencies.
+
+When adding peer dependencies, a devDependency will also be added on the
+pinned version of the declared peer. This will ensure that you are testing
+your code against the minimum version required from your consumers.
+
+###### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPeerDeps.parameter.deps"></a>
+
+- *Type:* string
+
+Names modules to install.
+
+By default, the the dependency will
+be installed in the next `npx projen` run and the version will be recorded
+in your `package.json` file. You can upgrade manually or using `yarn
+add/upgrade`. If you wish to specify a version range use this syntax:
+`module@^7`.
+
+---
+
+##### `addScripts` <a name="addScripts" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addScripts"></a>
+
+```typescript
+public addScripts(scripts: {[ key: string ]: string}): void
+```
+
+Replaces the contents of multiple npm package.json scripts.
+
+###### `scripts`<sup>Required</sup> <a name="scripts" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addScripts.parameter.scripts"></a>
+
+- *Type:* {[ key: string ]: string}
+
+The scripts to set.
+
+---
+
+##### ~~`addTestCommand`~~ <a name="addTestCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTestCommand"></a>
+
+```typescript
+public addTestCommand(commands: string): void
+```
+
+DEPRECATED.
+
+###### `commands`<sup>Required</sup> <a name="commands" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTestCommand.parameter.commands"></a>
+
+- *Type:* string
+
+---
+
+##### ~~`hasScript`~~ <a name="hasScript" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.hasScript"></a>
+
+```typescript
+public hasScript(name: string): boolean
+```
+
+Indicates if a script by the name name is defined.
+
+###### `name`<sup>Required</sup> <a name="name" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.hasScript.parameter.name"></a>
+
+- *Type:* string
+
+The name of the script.
+
+---
+
+##### `removeScript` <a name="removeScript" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeScript"></a>
+
+```typescript
+public removeScript(name: string): void
+```
+
+Removes the npm script (always successful).
+
+###### `name`<sup>Required</sup> <a name="name" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeScript.parameter.name"></a>
+
+- *Type:* string
+
+The name of the script.
+
+---
+
+##### `renderWorkflowSetup` <a name="renderWorkflowSetup" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.renderWorkflowSetup"></a>
+
+```typescript
+public renderWorkflowSetup(options?: RenderWorkflowSetupOptions): JobStep[]
+```
+
+Returns the set of workflow steps which should be executed to bootstrap a workflow.
+
+###### `options`<sup>Optional</sup> <a name="options" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.renderWorkflowSetup.parameter.options"></a>
+
+- *Type:* projen.javascript.RenderWorkflowSetupOptions
+
+Options.
+
+---
+
+##### `setScript` <a name="setScript" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.setScript"></a>
+
+```typescript
+public setScript(name: string, command: string): void
+```
+
+Replaces the contents of an npm package.json script.
+
+###### `name`<sup>Required</sup> <a name="name" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.setScript.parameter.name"></a>
+
+- *Type:* string
+
+The script name.
+
+---
+
+###### `command`<sup>Required</sup> <a name="command" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.setScript.parameter.command"></a>
+
+- *Type:* string
+
+The command to execute.
+
+---
+
+##### `addCdkDependency` <a name="addCdkDependency" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCdkDependency"></a>
+
+```typescript
+public addCdkDependency(modules: string): void
+```
+
+Adds an AWS CDK module dependencies.
+
+###### `modules`<sup>Required</sup> <a name="modules" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCdkDependency.parameter.modules"></a>
+
+- *Type:* string
+
+The list of modules to depend on.
+
+---
+
+##### `addEnvironments` <a name="addEnvironments" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments"></a>
+
+```typescript
+public addEnvironments(items: EnvironmentOptions): void
+```
+
+Add new environments to the application.
+
+###### `items`<sup>Required</sup> <a name="items" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments.parameter.items"></a>
+
+- *Type:* <a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>
+
+list of environment options.
+
+---
+
+##### `updatePostDeployWorkflowScriptToEnvironments` <a name="updatePostDeployWorkflowScriptToEnvironments" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments"></a>
+
+```typescript
+public updatePostDeployWorkflowScriptToEnvironments(script: string, environmentNameFilter?: string[]): void
+```
+
+Updates the postDeployWorkflowScript for environments.
+
+###### `script`<sup>Required</sup> <a name="script" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments.parameter.script"></a>
+
+- *Type:* string
+
+the script to be added, for example "post:deploy".
+
+---
+
+###### `environmentNameFilter`<sup>Optional</sup> <a name="environmentNameFilter" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments.parameter.environmentNameFilter"></a>
+
+- *Type:* string[]
+
+the name of environments to add the scripts to, if not provided or empty will update all.
+
+---
+
+##### `updatePreDeployWorkflowScriptToEnvironments` <a name="updatePreDeployWorkflowScriptToEnvironments" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePreDeployWorkflowScriptToEnvironments"></a>
+
+```typescript
+public updatePreDeployWorkflowScriptToEnvironments(script: string, environmentNameFilter?: string[]): void
+```
+
+Updates the preDeployWorkflowScript for environments.
+
+###### `script`<sup>Required</sup> <a name="script" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePreDeployWorkflowScriptToEnvironments.parameter.script"></a>
+
+- *Type:* string
+
+the script to be added, for example "pre:deploy".
+
+---
+
+###### `environmentNameFilter`<sup>Optional</sup> <a name="environmentNameFilter" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePreDeployWorkflowScriptToEnvironments.parameter.environmentNameFilter"></a>
+
+- *Type:* string[]
+
+the name of environments to add the scripts to, if not provided or empty will update all.
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.isProject">isProject</a></code> | Test whether the given construct is a project. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.of">of</a></code> | Find the closest ancestor project for given construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.isConstruct"></a>
+
+```typescript
+import { DeployableAwsCdkTypeScriptApp } from 'deployable-awscdk-app-ts'
+
+DeployableAwsCdkTypeScriptApp.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `isProject` <a name="isProject" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.isProject"></a>
+
+```typescript
+import { DeployableAwsCdkTypeScriptApp } from 'deployable-awscdk-app-ts'
+
+DeployableAwsCdkTypeScriptApp.isProject(x: any)
+```
+
+Test whether the given construct is a project.
+
+###### `x`<sup>Required</sup> <a name="x" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.isProject.parameter.x"></a>
+
+- *Type:* any
+
+---
+
+##### `of` <a name="of" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.of"></a>
+
+```typescript
+import { DeployableAwsCdkTypeScriptApp } from 'deployable-awscdk-app-ts'
+
+DeployableAwsCdkTypeScriptApp.of(construct: IConstruct)
+```
+
+Find the closest ancestor project for given construct.
+
+When given a project, this it the project itself.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.of.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.buildTask">buildTask</a></code> | <code>projen.Task</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.compileTask">compileTask</a></code> | <code>projen.Task</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.components">components</a></code> | <code>projen.Component[]</code> | Returns all the components within this project. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.deps">deps</a></code> | <code>projen.Dependencies</code> | Project dependencies. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.ejected">ejected</a></code> | <code>boolean</code> | Whether or not the project is being ejected. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.files">files</a></code> | <code>projen.FileBase[]</code> | All files in this project. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.gitattributes">gitattributes</a></code> | <code>projen.GitAttributesFile</code> | The .gitattributes file for this repository. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.gitignore">gitignore</a></code> | <code>projen.IgnoreFile</code> | .gitignore. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.logger">logger</a></code> | <code>projen.Logger</code> | Logging utilities. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.name">name</a></code> | <code>string</code> | Project name. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.outdir">outdir</a></code> | <code>string</code> | Absolute output directory of this project. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.packageTask">packageTask</a></code> | <code>projen.Task</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.postCompileTask">postCompileTask</a></code> | <code>projen.Task</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.preCompileTask">preCompileTask</a></code> | <code>projen.Task</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projectBuild">projectBuild</a></code> | <code>projen.ProjectBuild</code> | Manages the build process of the project. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projenCommand">projenCommand</a></code> | <code>string</code> | The command to use in order to run the projen CLI. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.root">root</a></code> | <code>projen.Project</code> | The root project. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.subprojects">subprojects</a></code> | <code>projen.Project[]</code> | Returns all the subprojects within this project. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tasks">tasks</a></code> | <code>projen.Tasks</code> | Project tasks. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.testTask">testTask</a></code> | <code>projen.Task</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.defaultTask">defaultTask</a></code> | <code>projen.Task</code> | This is the "default" task, the one that executes "projen". |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.initProject">initProject</a></code> | <code>projen.InitProject</code> | The options used when this project is bootstrapped via `projen new`. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.parent">parent</a></code> | <code>projen.Project</code> | A parent project. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projectType">projectType</a></code> | <code>projen.ProjectType</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.autoApprove">autoApprove</a></code> | <code>projen.github.AutoApprove</code> | Auto approve set up for this project. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.devContainer">devContainer</a></code> | <code>projen.vscode.DevContainer</code> | Access for .devcontainer.json (used for GitHub Codespaces). |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.github">github</a></code> | <code>projen.github.GitHub</code> | Access all github components. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.gitpod">gitpod</a></code> | <code>projen.Gitpod</code> | Access for Gitpod. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.vscode">vscode</a></code> | <code>projen.vscode.VsCode</code> | Access all VSCode components. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.allowLibraryDependencies">allowLibraryDependencies</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | The build output directory. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.artifactsJavascriptDirectory">artifactsJavascriptDirectory</a></code> | <code>string</code> | The location of the npm tarball after build (`${artifactsDirectory}/js`). |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.bundler">bundler</a></code> | <code>projen.javascript.Bundler</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.entrypoint">entrypoint</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.manifest">manifest</a></code> | <code>any</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.npmrc">npmrc</a></code> | <code>projen.javascript.NpmConfig</code> | The .npmrc file. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.package">package</a></code> | <code>projen.javascript.NodePackage</code> | API for managing the node package. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.packageManager">packageManager</a></code> | <code>projen.javascript.NodePackageManager</code> | The package manager to use. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.runScriptCommand">runScriptCommand</a></code> | <code>string</code> | The command to use to run scripts (e.g. `yarn run` or `npm run` depends on the package manager). |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.autoMerge">autoMerge</a></code> | <code>projen.github.AutoMerge</code> | Component that sets up mergify for merging approved pull requests. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.buildWorkflow">buildWorkflow</a></code> | <code>projen.build.BuildWorkflow</code> | The PR build GitHub workflow. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.buildWorkflowJobId">buildWorkflowJobId</a></code> | <code>string</code> | The job ID of the build workflow. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.jest">jest</a></code> | <code>projen.javascript.Jest</code> | The Jest configuration (if enabled). |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.maxNodeVersion">maxNodeVersion</a></code> | <code>string</code> | Maximum node version required by this package. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | Minimum node.js version required by this package. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.npmignore">npmignore</a></code> | <code>projen.IgnoreFile</code> | The .npmignore file. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.prettier">prettier</a></code> | <code>projen.javascript.Prettier</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.publisher">publisher</a></code> | <code>projen.release.Publisher</code> | Package publisher. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.release">release</a></code> | <code>projen.release.Release</code> | Release management. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.upgradeWorkflow">upgradeWorkflow</a></code> | <code>projen.javascript.UpgradeDependencies</code> | The upgrade workflow. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.docsDirectory">docsDirectory</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.libdir">libdir</a></code> | <code>string</code> | The directory in which compiled .js files reside. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.srcdir">srcdir</a></code> | <code>string</code> | The directory in which the .ts sources reside. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.testdir">testdir</a></code> | <code>string</code> | The directory in which tests reside. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfig</code> | A typescript configuration file which covers all files (sources, tests, projen). |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.watchTask">watchTask</a></code> | <code>projen.Task</code> | The "watch" task. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.docgen">docgen</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.eslint">eslint</a></code> | <code>projen.javascript.Eslint</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tsconfig">tsconfig</a></code> | <code>projen.javascript.TypescriptConfig</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tsconfigEslint">tsconfigEslint</a></code> | <code>projen.javascript.TypescriptConfig</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.appEntrypoint">appEntrypoint</a></code> | <code>string</code> | The CDK app entrypoint. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkConfig">cdkConfig</a></code> | <code>projen.awscdk.CdkConfig</code> | cdk.json configuration. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkDeps">cdkDeps</a></code> | <code>projen.awscdk.AwsCdkDeps</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkTasks">cdkTasks</a></code> | <code>projen.awscdk.CdkTasks</code> | Common CDK tasks. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkVersion">cdkVersion</a></code> | <code>string</code> | The CDK version this app is using. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.deployWorkflowTask">deployWorkflowTask</a></code> | <code>projen.Task</code> | Task to deploy your app. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.majorNodeVersion">majorNodeVersion</a></code> | <code>number</code> | return the major node version set for the project. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `buildTask`<sup>Required</sup> <a name="buildTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.buildTask"></a>
+
+```typescript
+public readonly buildTask: Task;
+```
+
+- *Type:* projen.Task
+
+---
+
+##### `commitGenerated`<sup>Required</sup> <a name="commitGenerated" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.commitGenerated"></a>
+
+```typescript
+public readonly commitGenerated: boolean;
+```
+
+- *Type:* boolean
+
+Whether to commit the managed files by default.
+
+---
+
+##### `compileTask`<sup>Required</sup> <a name="compileTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.compileTask"></a>
+
+```typescript
+public readonly compileTask: Task;
+```
+
+- *Type:* projen.Task
+
+---
+
+##### `components`<sup>Required</sup> <a name="components" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.components"></a>
+
+```typescript
+public readonly components: Component[];
+```
+
+- *Type:* projen.Component[]
+
+Returns all the components within this project.
+
+---
+
+##### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.deps"></a>
+
+```typescript
+public readonly deps: Dependencies;
+```
+
+- *Type:* projen.Dependencies
+
+Project dependencies.
+
+---
+
+##### `ejected`<sup>Required</sup> <a name="ejected" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.ejected"></a>
+
+```typescript
+public readonly ejected: boolean;
+```
+
+- *Type:* boolean
+
+Whether or not the project is being ejected.
+
+---
+
+##### `files`<sup>Required</sup> <a name="files" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.files"></a>
+
+```typescript
+public readonly files: FileBase[];
+```
+
+- *Type:* projen.FileBase[]
+
+All files in this project.
+
+---
+
+##### `gitattributes`<sup>Required</sup> <a name="gitattributes" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.gitattributes"></a>
+
+```typescript
+public readonly gitattributes: GitAttributesFile;
+```
+
+- *Type:* projen.GitAttributesFile
+
+The .gitattributes file for this repository.
+
+---
+
+##### `gitignore`<sup>Required</sup> <a name="gitignore" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.gitignore"></a>
+
+```typescript
+public readonly gitignore: IgnoreFile;
+```
+
+- *Type:* projen.IgnoreFile
+
+.gitignore.
+
+---
+
+##### `logger`<sup>Required</sup> <a name="logger" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.logger"></a>
+
+```typescript
+public readonly logger: Logger;
+```
+
+- *Type:* projen.Logger
+
+Logging utilities.
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+Project name.
+
+---
+
+##### `outdir`<sup>Required</sup> <a name="outdir" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.outdir"></a>
+
+```typescript
+public readonly outdir: string;
+```
+
+- *Type:* string
+
+Absolute output directory of this project.
+
+---
+
+##### `packageTask`<sup>Required</sup> <a name="packageTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.packageTask"></a>
+
+```typescript
+public readonly packageTask: Task;
+```
+
+- *Type:* projen.Task
+
+---
+
+##### `postCompileTask`<sup>Required</sup> <a name="postCompileTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.postCompileTask"></a>
+
+```typescript
+public readonly postCompileTask: Task;
+```
+
+- *Type:* projen.Task
+
+---
+
+##### `preCompileTask`<sup>Required</sup> <a name="preCompileTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.preCompileTask"></a>
+
+```typescript
+public readonly preCompileTask: Task;
+```
+
+- *Type:* projen.Task
+
+---
+
+##### `projectBuild`<sup>Required</sup> <a name="projectBuild" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projectBuild"></a>
+
+```typescript
+public readonly projectBuild: ProjectBuild;
+```
+
+- *Type:* projen.ProjectBuild
+
+Manages the build process of the project.
+
+---
+
+##### `projenCommand`<sup>Required</sup> <a name="projenCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projenCommand"></a>
+
+```typescript
+public readonly projenCommand: string;
+```
+
+- *Type:* string
+
+The command to use in order to run the projen CLI.
+
+---
+
+##### `root`<sup>Required</sup> <a name="root" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.root"></a>
+
+```typescript
+public readonly root: Project;
+```
+
+- *Type:* projen.Project
+
+The root project.
+
+---
+
+##### `subprojects`<sup>Required</sup> <a name="subprojects" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.subprojects"></a>
+
+```typescript
+public readonly subprojects: Project[];
+```
+
+- *Type:* projen.Project[]
+
+Returns all the subprojects within this project.
+
+---
+
+##### `tasks`<sup>Required</sup> <a name="tasks" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tasks"></a>
+
+```typescript
+public readonly tasks: Tasks;
+```
+
+- *Type:* projen.Tasks
+
+Project tasks.
+
+---
+
+##### `testTask`<sup>Required</sup> <a name="testTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.testTask"></a>
+
+```typescript
+public readonly testTask: Task;
+```
+
+- *Type:* projen.Task
+
+---
+
+##### `defaultTask`<sup>Optional</sup> <a name="defaultTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.defaultTask"></a>
+
+```typescript
+public readonly defaultTask: Task;
+```
+
+- *Type:* projen.Task
+
+This is the "default" task, the one that executes "projen".
+
+Undefined if
+the project is being ejected.
+
+---
+
+##### `initProject`<sup>Optional</sup> <a name="initProject" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.initProject"></a>
+
+```typescript
+public readonly initProject: InitProject;
+```
+
+- *Type:* projen.InitProject
+
+The options used when this project is bootstrapped via `projen new`.
+
+It
+includes the original set of options passed to the CLI and also the JSII
+FQN of the project type.
+
+---
+
+##### `parent`<sup>Optional</sup> <a name="parent" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.parent"></a>
+
+```typescript
+public readonly parent: Project;
+```
+
+- *Type:* projen.Project
+
+A parent project.
+
+If undefined, this is the root project.
+
+---
+
+##### `projectType`<sup>Required</sup> <a name="projectType" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projectType"></a>
+
+```typescript
+public readonly projectType: ProjectType;
+```
+
+- *Type:* projen.ProjectType
+
+---
+
+##### `autoApprove`<sup>Optional</sup> <a name="autoApprove" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.autoApprove"></a>
+
+```typescript
+public readonly autoApprove: AutoApprove;
+```
+
+- *Type:* projen.github.AutoApprove
+
+Auto approve set up for this project.
+
+---
+
+##### `devContainer`<sup>Optional</sup> <a name="devContainer" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.devContainer"></a>
+
+```typescript
+public readonly devContainer: DevContainer;
+```
+
+- *Type:* projen.vscode.DevContainer
+
+Access for .devcontainer.json (used for GitHub Codespaces).
+
+This will be `undefined` if devContainer boolean is false
+
+---
+
+##### `github`<sup>Optional</sup> <a name="github" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.github"></a>
+
+```typescript
+public readonly github: GitHub;
+```
+
+- *Type:* projen.github.GitHub
+
+Access all github components.
+
+This will be `undefined` for subprojects.
+
+---
+
+##### `gitpod`<sup>Optional</sup> <a name="gitpod" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.gitpod"></a>
+
+```typescript
+public readonly gitpod: Gitpod;
+```
+
+- *Type:* projen.Gitpod
+
+Access for Gitpod.
+
+This will be `undefined` if gitpod boolean is false
+
+---
+
+##### `vscode`<sup>Optional</sup> <a name="vscode" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.vscode"></a>
+
+```typescript
+public readonly vscode: VsCode;
+```
+
+- *Type:* projen.vscode.VsCode
+
+Access all VSCode components.
+
+This will be `undefined` for subprojects.
+
+---
+
+##### ~~`allowLibraryDependencies`~~<sup>Required</sup> <a name="allowLibraryDependencies" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.allowLibraryDependencies"></a>
+
+- *Deprecated:* use `package.allowLibraryDependencies`
+
+```typescript
+public readonly allowLibraryDependencies: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `artifactsDirectory`<sup>Required</sup> <a name="artifactsDirectory" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.artifactsDirectory"></a>
+
+```typescript
+public readonly artifactsDirectory: string;
+```
+
+- *Type:* string
+
+The build output directory.
+
+An npm tarball will be created under the `js`
+subdirectory. For example, if this is set to `dist` (the default), the npm
+tarball will be placed under `dist/js/boom-boom-1.2.3.tg`.
+
+---
+
+##### `artifactsJavascriptDirectory`<sup>Required</sup> <a name="artifactsJavascriptDirectory" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.artifactsJavascriptDirectory"></a>
+
+```typescript
+public readonly artifactsJavascriptDirectory: string;
+```
+
+- *Type:* string
+
+The location of the npm tarball after build (`${artifactsDirectory}/js`).
+
+---
+
+##### `bundler`<sup>Required</sup> <a name="bundler" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.bundler"></a>
+
+```typescript
+public readonly bundler: Bundler;
+```
+
+- *Type:* projen.javascript.Bundler
+
+---
+
+##### ~~`entrypoint`~~<sup>Required</sup> <a name="entrypoint" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.entrypoint"></a>
+
+- *Deprecated:* use `package.entrypoint`
+
+```typescript
+public readonly entrypoint: string;
+```
+
+- *Type:* string
+
+---
+
+##### ~~`manifest`~~<sup>Required</sup> <a name="manifest" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.manifest"></a>
+
+- *Deprecated:* use `package.addField(x, y)`
+
+```typescript
+public readonly manifest: any;
+```
+
+- *Type:* any
+
+---
+
+##### `npmrc`<sup>Required</sup> <a name="npmrc" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.npmrc"></a>
+
+```typescript
+public readonly npmrc: NpmConfig;
+```
+
+- *Type:* projen.javascript.NpmConfig
+
+The .npmrc file.
+
+---
+
+##### `package`<sup>Required</sup> <a name="package" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.package"></a>
+
+```typescript
+public readonly package: NodePackage;
+```
+
+- *Type:* projen.javascript.NodePackage
+
+API for managing the node package.
+
+---
+
+##### ~~`packageManager`~~<sup>Required</sup> <a name="packageManager" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.packageManager"></a>
+
+- *Deprecated:* use `package.packageManager`
+
+```typescript
+public readonly packageManager: NodePackageManager;
+```
+
+- *Type:* projen.javascript.NodePackageManager
+
+The package manager to use.
+
+---
+
+##### `runScriptCommand`<sup>Required</sup> <a name="runScriptCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.runScriptCommand"></a>
+
+```typescript
+public readonly runScriptCommand: string;
+```
+
+- *Type:* string
+
+The command to use to run scripts (e.g. `yarn run` or `npm run` depends on the package manager).
+
+---
+
+##### `autoMerge`<sup>Optional</sup> <a name="autoMerge" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.autoMerge"></a>
+
+```typescript
+public readonly autoMerge: AutoMerge;
+```
+
+- *Type:* projen.github.AutoMerge
+
+Component that sets up mergify for merging approved pull requests.
+
+---
+
+##### `buildWorkflow`<sup>Optional</sup> <a name="buildWorkflow" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.buildWorkflow"></a>
+
+```typescript
+public readonly buildWorkflow: BuildWorkflow;
+```
+
+- *Type:* projen.build.BuildWorkflow
+
+The PR build GitHub workflow.
+
+`undefined` if `buildWorkflow` is disabled.
+
+---
+
+##### `buildWorkflowJobId`<sup>Optional</sup> <a name="buildWorkflowJobId" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.buildWorkflowJobId"></a>
+
+```typescript
+public readonly buildWorkflowJobId: string;
+```
+
+- *Type:* string
+
+The job ID of the build workflow.
+
+---
+
+##### `jest`<sup>Optional</sup> <a name="jest" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.jest"></a>
+
+```typescript
+public readonly jest: Jest;
+```
+
+- *Type:* projen.javascript.Jest
+
+The Jest configuration (if enabled).
+
+---
+
+##### `maxNodeVersion`<sup>Optional</sup> <a name="maxNodeVersion" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.maxNodeVersion"></a>
+
+```typescript
+public readonly maxNodeVersion: string;
+```
+
+- *Type:* string
+
+Maximum node version required by this package.
+
+---
+
+##### `minNodeVersion`<sup>Optional</sup> <a name="minNodeVersion" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.minNodeVersion"></a>
+
+```typescript
+public readonly minNodeVersion: string;
+```
+
+- *Type:* string
+
+Minimum node.js version required by this package.
+
+---
+
+##### `npmignore`<sup>Optional</sup> <a name="npmignore" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.npmignore"></a>
+
+```typescript
+public readonly npmignore: IgnoreFile;
+```
+
+- *Type:* projen.IgnoreFile
+
+The .npmignore file.
+
+---
+
+##### `prettier`<sup>Optional</sup> <a name="prettier" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.prettier"></a>
+
+```typescript
+public readonly prettier: Prettier;
+```
+
+- *Type:* projen.javascript.Prettier
+
+---
+
+##### ~~`publisher`~~<sup>Optional</sup> <a name="publisher" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.publisher"></a>
+
+- *Deprecated:* use `release.publisher`.
+
+```typescript
+public readonly publisher: Publisher;
+```
+
+- *Type:* projen.release.Publisher
+
+Package publisher.
+
+This will be `undefined` if the project does not have a
+release workflow.
+
+---
+
+##### `release`<sup>Optional</sup> <a name="release" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.release"></a>
+
+```typescript
+public readonly release: Release;
+```
+
+- *Type:* projen.release.Release
+
+Release management.
+
+---
+
+##### `upgradeWorkflow`<sup>Optional</sup> <a name="upgradeWorkflow" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.upgradeWorkflow"></a>
+
+```typescript
+public readonly upgradeWorkflow: UpgradeDependencies;
+```
+
+- *Type:* projen.javascript.UpgradeDependencies
+
+The upgrade workflow.
+
+---
+
+##### `docsDirectory`<sup>Required</sup> <a name="docsDirectory" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.docsDirectory"></a>
+
+```typescript
+public readonly docsDirectory: string;
+```
+
+- *Type:* string
+
+---
+
+##### `libdir`<sup>Required</sup> <a name="libdir" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.libdir"></a>
+
+```typescript
+public readonly libdir: string;
+```
+
+- *Type:* string
+
+The directory in which compiled .js files reside.
+
+---
+
+##### `srcdir`<sup>Required</sup> <a name="srcdir" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.srcdir"></a>
+
+```typescript
+public readonly srcdir: string;
+```
+
+- *Type:* string
+
+The directory in which the .ts sources reside.
+
+---
+
+##### `testdir`<sup>Required</sup> <a name="testdir" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.testdir"></a>
+
+```typescript
+public readonly testdir: string;
+```
+
+- *Type:* string
+
+The directory in which tests reside.
+
+---
+
+##### `tsconfigDev`<sup>Required</sup> <a name="tsconfigDev" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tsconfigDev"></a>
+
+```typescript
+public readonly tsconfigDev: TypescriptConfig;
+```
+
+- *Type:* projen.javascript.TypescriptConfig
+
+A typescript configuration file which covers all files (sources, tests, projen).
+
+---
+
+##### `watchTask`<sup>Required</sup> <a name="watchTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.watchTask"></a>
+
+```typescript
+public readonly watchTask: Task;
+```
+
+- *Type:* projen.Task
+
+The "watch" task.
+
+---
+
+##### `docgen`<sup>Optional</sup> <a name="docgen" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.docgen"></a>
+
+```typescript
+public readonly docgen: boolean;
+```
+
+- *Type:* boolean
+
+---
+
+##### `eslint`<sup>Optional</sup> <a name="eslint" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.eslint"></a>
+
+```typescript
+public readonly eslint: Eslint;
+```
+
+- *Type:* projen.javascript.Eslint
+
+---
+
+##### `tsconfig`<sup>Optional</sup> <a name="tsconfig" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tsconfig"></a>
+
+```typescript
+public readonly tsconfig: TypescriptConfig;
+```
+
+- *Type:* projen.javascript.TypescriptConfig
+
+---
+
+##### `tsconfigEslint`<sup>Optional</sup> <a name="tsconfigEslint" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tsconfigEslint"></a>
+
+```typescript
+public readonly tsconfigEslint: TypescriptConfig;
+```
+
+- *Type:* projen.javascript.TypescriptConfig
+
+---
+
+##### `appEntrypoint`<sup>Required</sup> <a name="appEntrypoint" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.appEntrypoint"></a>
+
+```typescript
+public readonly appEntrypoint: string;
+```
+
+- *Type:* string
+
+The CDK app entrypoint.
+
+---
+
+##### `cdkConfig`<sup>Required</sup> <a name="cdkConfig" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkConfig"></a>
+
+```typescript
+public readonly cdkConfig: CdkConfig;
+```
+
+- *Type:* projen.awscdk.CdkConfig
+
+cdk.json configuration.
+
+---
+
+##### `cdkDeps`<sup>Required</sup> <a name="cdkDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkDeps"></a>
+
+```typescript
+public readonly cdkDeps: AwsCdkDeps;
+```
+
+- *Type:* projen.awscdk.AwsCdkDeps
+
+---
+
+##### `cdkTasks`<sup>Required</sup> <a name="cdkTasks" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkTasks"></a>
+
+```typescript
+public readonly cdkTasks: CdkTasks;
+```
+
+- *Type:* projen.awscdk.CdkTasks
+
+Common CDK tasks.
+
+---
+
+##### `cdkVersion`<sup>Required</sup> <a name="cdkVersion" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkVersion"></a>
+
+```typescript
+public readonly cdkVersion: string;
+```
+
+- *Type:* string
+
+The CDK version this app is using.
+
+---
+
+##### `deployWorkflowTask`<sup>Required</sup> <a name="deployWorkflowTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.deployWorkflowTask"></a>
+
+```typescript
+public readonly deployWorkflowTask: Task;
+```
+
+- *Type:* projen.Task
+
+Task to deploy your app.
+
+---
+
+##### `majorNodeVersion`<sup>Required</sup> <a name="majorNodeVersion" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.majorNodeVersion"></a>
+
+```typescript
+public readonly majorNodeVersion: number;
+```
+
+- *Type:* number
+- *Default:* 16
+
+return the major node version set for the project.
+
+---
+
+#### Constants <a name="Constants" id="Constants"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.DEFAULT_TASK">DEFAULT_TASK</a></code> | <code>string</code> | The name of the default task (the task executed when `projen` is run without arguments). |
+
+---
+
+##### `DEFAULT_TASK`<sup>Required</sup> <a name="DEFAULT_TASK" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.DEFAULT_TASK"></a>
+
+```typescript
+public readonly DEFAULT_TASK: string;
+```
+
+- *Type:* string
+
+The name of the default task (the task executed when `projen` is run without arguments).
+
+Normally
+this task should synthesize the project files.
+
+---
 
 ## Structs <a name="Structs" id="Structs"></a>
 
@@ -2866,1574 +4532,5 @@ The script/task to run before deployment of the environment in the workflow If n
 ```
 
 
-## Classes <a name="Classes" id="Classes"></a>
-
-### DeployableAwsCdkTypeScriptApp <a name="DeployableAwsCdkTypeScriptApp" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp"></a>
-
-#### Initializers <a name="Initializers" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.Initializer"></a>
-
-```typescript
-import { DeployableAwsCdkTypeScriptApp } from 'deployable-awscdk-app-ts'
-
-new DeployableAwsCdkTypeScriptApp(options: DeployableAwsCdkTypeScriptAppOptions)
-```
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.Initializer.parameter.options">options</a></code> | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions">DeployableAwsCdkTypeScriptAppOptions</a></code> | *No description.* |
-
----
-
-##### `options`<sup>Required</sup> <a name="options" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.Initializer.parameter.options"></a>
-
-- *Type:* <a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions">DeployableAwsCdkTypeScriptAppOptions</a>
-
----
-
-#### Methods <a name="Methods" id="Methods"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addExcludeFromCleanup">addExcludeFromCleanup</a></code> | Exclude the matching files from pre-synth cleanup. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addGitIgnore">addGitIgnore</a></code> | Adds a .gitignore pattern. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPackageIgnore">addPackageIgnore</a></code> | Exclude these files from the bundled package. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTask">addTask</a></code> | Adds a new task to this project. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTip">addTip</a></code> | Prints a "tip" message during synthesis. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.annotateGenerated">annotateGenerated</a></code> | Marks the provided file(s) as being generated. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.postSynthesize">postSynthesize</a></code> | Called after all components are synthesized. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.preSynthesize">preSynthesize</a></code> | Called before all components are synthesized. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeTask">removeTask</a></code> | Removes a task from a project. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.runTaskCommand">runTaskCommand</a></code> | Returns the shell command to execute in order to run a task. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.synth">synth</a></code> | Synthesize all project files into `outdir`. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindFile">tryFindFile</a></code> | Finds a file at the specified relative path within this project and all its subprojects. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindJsonFile">tryFindJsonFile</a></code> | Finds a json file by name. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindObjectFile">tryFindObjectFile</a></code> | Finds an object file (like JsonFile, YamlFile, etc.) by name. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryRemoveFile">tryRemoveFile</a></code> | Finds a file at the specified relative path within this project and removes it. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBins">addBins</a></code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBundledDeps">addBundledDeps</a></code> | Defines bundled dependencies. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCompileCommand">addCompileCommand</a></code> | DEPRECATED. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDeps">addDeps</a></code> | Defines normal dependencies. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDevDeps">addDevDeps</a></code> | Defines development/test dependencies. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addFields">addFields</a></code> | Directly set fields in `package.json`. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addKeywords">addKeywords</a></code> | Adds keywords to package.json (deduplicated). |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPeerDeps">addPeerDeps</a></code> | Defines peer dependencies. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addScripts">addScripts</a></code> | Replaces the contents of multiple npm package.json scripts. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTestCommand">addTestCommand</a></code> | DEPRECATED. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.hasScript">hasScript</a></code> | Indicates if a script by the name name is defined. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeScript">removeScript</a></code> | Removes the npm script (always successful). |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.renderWorkflowSetup">renderWorkflowSetup</a></code> | Returns the set of workflow steps which should be executed to bootstrap a workflow. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.setScript">setScript</a></code> | Replaces the contents of an npm package.json script. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCdkDependency">addCdkDependency</a></code> | Adds an AWS CDK module dependencies. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments">addEnvironments</a></code> | Add new environments to the application. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments">updatePostDeployWorkflowScriptToEnvironments</a></code> | Updates the postDeployWorkflowScript for environments. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePreDeployWorkflowScriptToEnvironments">updatePreDeployWorkflowScriptToEnvironments</a></code> | Updates the preDeployWorkflowScript for environments. |
-
----
-
-##### `addExcludeFromCleanup` <a name="addExcludeFromCleanup" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addExcludeFromCleanup"></a>
-
-```typescript
-public addExcludeFromCleanup(globs: string): void
-```
-
-Exclude the matching files from pre-synth cleanup.
-
-Can be used when, for example, some
-source files include the projen marker and we don't want them to be erased during synth.
-
-###### `globs`<sup>Required</sup> <a name="globs" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addExcludeFromCleanup.parameter.globs"></a>
-
-- *Type:* string
-
-The glob patterns to match.
-
----
-
-##### `addGitIgnore` <a name="addGitIgnore" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addGitIgnore"></a>
-
-```typescript
-public addGitIgnore(pattern: string): void
-```
-
-Adds a .gitignore pattern.
-
-###### `pattern`<sup>Required</sup> <a name="pattern" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addGitIgnore.parameter.pattern"></a>
-
-- *Type:* string
-
-The glob pattern to ignore.
-
----
-
-##### `addPackageIgnore` <a name="addPackageIgnore" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPackageIgnore"></a>
-
-```typescript
-public addPackageIgnore(pattern: string): void
-```
-
-Exclude these files from the bundled package.
-
-Implemented by project types based on the
-packaging mechanism. For example, `NodeProject` delegates this to `.npmignore`.
-
-###### `pattern`<sup>Required</sup> <a name="pattern" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPackageIgnore.parameter.pattern"></a>
-
-- *Type:* string
-
----
-
-##### `addTask` <a name="addTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTask"></a>
-
-```typescript
-public addTask(name: string, props?: TaskOptions): Task
-```
-
-Adds a new task to this project.
-
-This will fail if the project already has
-a task with this name.
-
-###### `name`<sup>Required</sup> <a name="name" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTask.parameter.name"></a>
-
-- *Type:* string
-
-The task name to add.
-
----
-
-###### `props`<sup>Optional</sup> <a name="props" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTask.parameter.props"></a>
-
-- *Type:* projen.TaskOptions
-
-Task properties.
-
----
-
-##### ~~`addTip`~~ <a name="addTip" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTip"></a>
-
-```typescript
-public addTip(message: string): void
-```
-
-Prints a "tip" message during synthesis.
-
-###### `message`<sup>Required</sup> <a name="message" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTip.parameter.message"></a>
-
-- *Type:* string
-
-The message.
-
----
-
-##### `annotateGenerated` <a name="annotateGenerated" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.annotateGenerated"></a>
-
-```typescript
-public annotateGenerated(glob: string): void
-```
-
-Marks the provided file(s) as being generated.
-
-This is achieved using the
-github-linguist attributes. Generated files do not count against the
-repository statistics and language breakdown.
-
-> [https://github.com/github/linguist/blob/master/docs/overrides.md](https://github.com/github/linguist/blob/master/docs/overrides.md)
-
-###### `glob`<sup>Required</sup> <a name="glob" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.annotateGenerated.parameter.glob"></a>
-
-- *Type:* string
-
-the glob pattern to match (could be a file path).
-
----
-
-##### `postSynthesize` <a name="postSynthesize" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.postSynthesize"></a>
-
-```typescript
-public postSynthesize(): void
-```
-
-Called after all components are synthesized.
-
-Order is *not* guaranteed.
-
-##### `preSynthesize` <a name="preSynthesize" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.preSynthesize"></a>
-
-```typescript
-public preSynthesize(): void
-```
-
-Called before all components are synthesized.
-
-##### `removeTask` <a name="removeTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeTask"></a>
-
-```typescript
-public removeTask(name: string): Task
-```
-
-Removes a task from a project.
-
-###### `name`<sup>Required</sup> <a name="name" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeTask.parameter.name"></a>
-
-- *Type:* string
-
-The name of the task to remove.
-
----
-
-##### `runTaskCommand` <a name="runTaskCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.runTaskCommand"></a>
-
-```typescript
-public runTaskCommand(task: Task): string
-```
-
-Returns the shell command to execute in order to run a task.
-
-This will
-typically be `npx projen TASK`.
-
-###### `task`<sup>Required</sup> <a name="task" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.runTaskCommand.parameter.task"></a>
-
-- *Type:* projen.Task
-
-The task for which the command is required.
-
----
-
-##### `synth` <a name="synth" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.synth"></a>
-
-```typescript
-public synth(): void
-```
-
-Synthesize all project files into `outdir`.
-
-1. Call "this.preSynthesize()"
-2. Delete all generated files
-3. Synthesize all subprojects
-4. Synthesize all components of this project
-5. Call "postSynthesize()" for all components of this project
-6. Call "this.postSynthesize()"
-
-##### `tryFindFile` <a name="tryFindFile" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindFile"></a>
-
-```typescript
-public tryFindFile(filePath: string): FileBase
-```
-
-Finds a file at the specified relative path within this project and all its subprojects.
-
-###### `filePath`<sup>Required</sup> <a name="filePath" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindFile.parameter.filePath"></a>
-
-- *Type:* string
-
-The file path.
-
-If this path is relative, it will be resolved
-from the root of _this_ project.
-
----
-
-##### ~~`tryFindJsonFile`~~ <a name="tryFindJsonFile" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindJsonFile"></a>
-
-```typescript
-public tryFindJsonFile(filePath: string): JsonFile
-```
-
-Finds a json file by name.
-
-###### `filePath`<sup>Required</sup> <a name="filePath" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindJsonFile.parameter.filePath"></a>
-
-- *Type:* string
-
-The file path.
-
----
-
-##### `tryFindObjectFile` <a name="tryFindObjectFile" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindObjectFile"></a>
-
-```typescript
-public tryFindObjectFile(filePath: string): ObjectFile
-```
-
-Finds an object file (like JsonFile, YamlFile, etc.) by name.
-
-###### `filePath`<sup>Required</sup> <a name="filePath" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindObjectFile.parameter.filePath"></a>
-
-- *Type:* string
-
-The file path.
-
----
-
-##### `tryRemoveFile` <a name="tryRemoveFile" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryRemoveFile"></a>
-
-```typescript
-public tryRemoveFile(filePath: string): FileBase
-```
-
-Finds a file at the specified relative path within this project and removes it.
-
-###### `filePath`<sup>Required</sup> <a name="filePath" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryRemoveFile.parameter.filePath"></a>
-
-- *Type:* string
-
-The file path.
-
-If this path is relative, it will be
-resolved from the root of _this_ project.
-
----
-
-##### `addBins` <a name="addBins" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBins"></a>
-
-```typescript
-public addBins(bins: {[ key: string ]: string}): void
-```
-
-###### `bins`<sup>Required</sup> <a name="bins" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBins.parameter.bins"></a>
-
-- *Type:* {[ key: string ]: string}
-
----
-
-##### `addBundledDeps` <a name="addBundledDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBundledDeps"></a>
-
-```typescript
-public addBundledDeps(deps: string): void
-```
-
-Defines bundled dependencies.
-
-Bundled dependencies will be added as normal dependencies as well as to the
-`bundledDependencies` section of your `package.json`.
-
-###### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBundledDeps.parameter.deps"></a>
-
-- *Type:* string
-
-Names modules to install.
-
-By default, the the dependency will
-be installed in the next `npx projen` run and the version will be recorded
-in your `package.json` file. You can upgrade manually or using `yarn
-add/upgrade`. If you wish to specify a version range use this syntax:
-`module@^7`.
-
----
-
-##### ~~`addCompileCommand`~~ <a name="addCompileCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCompileCommand"></a>
-
-```typescript
-public addCompileCommand(commands: string): void
-```
-
-DEPRECATED.
-
-###### `commands`<sup>Required</sup> <a name="commands" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCompileCommand.parameter.commands"></a>
-
-- *Type:* string
-
----
-
-##### `addDeps` <a name="addDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDeps"></a>
-
-```typescript
-public addDeps(deps: string): void
-```
-
-Defines normal dependencies.
-
-###### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDeps.parameter.deps"></a>
-
-- *Type:* string
-
-Names modules to install.
-
-By default, the the dependency will
-be installed in the next `npx projen` run and the version will be recorded
-in your `package.json` file. You can upgrade manually or using `yarn
-add/upgrade`. If you wish to specify a version range use this syntax:
-`module@^7`.
-
----
-
-##### `addDevDeps` <a name="addDevDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDevDeps"></a>
-
-```typescript
-public addDevDeps(deps: string): void
-```
-
-Defines development/test dependencies.
-
-###### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDevDeps.parameter.deps"></a>
-
-- *Type:* string
-
-Names modules to install.
-
-By default, the the dependency will
-be installed in the next `npx projen` run and the version will be recorded
-in your `package.json` file. You can upgrade manually or using `yarn
-add/upgrade`. If you wish to specify a version range use this syntax:
-`module@^7`.
-
----
-
-##### `addFields` <a name="addFields" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addFields"></a>
-
-```typescript
-public addFields(fields: {[ key: string ]: any}): void
-```
-
-Directly set fields in `package.json`.
-
-###### `fields`<sup>Required</sup> <a name="fields" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addFields.parameter.fields"></a>
-
-- *Type:* {[ key: string ]: any}
-
-The fields to set.
-
----
-
-##### `addKeywords` <a name="addKeywords" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addKeywords"></a>
-
-```typescript
-public addKeywords(keywords: string): void
-```
-
-Adds keywords to package.json (deduplicated).
-
-###### `keywords`<sup>Required</sup> <a name="keywords" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addKeywords.parameter.keywords"></a>
-
-- *Type:* string
-
-The keywords to add.
-
----
-
-##### `addPeerDeps` <a name="addPeerDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPeerDeps"></a>
-
-```typescript
-public addPeerDeps(deps: string): void
-```
-
-Defines peer dependencies.
-
-When adding peer dependencies, a devDependency will also be added on the
-pinned version of the declared peer. This will ensure that you are testing
-your code against the minimum version required from your consumers.
-
-###### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPeerDeps.parameter.deps"></a>
-
-- *Type:* string
-
-Names modules to install.
-
-By default, the the dependency will
-be installed in the next `npx projen` run and the version will be recorded
-in your `package.json` file. You can upgrade manually or using `yarn
-add/upgrade`. If you wish to specify a version range use this syntax:
-`module@^7`.
-
----
-
-##### `addScripts` <a name="addScripts" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addScripts"></a>
-
-```typescript
-public addScripts(scripts: {[ key: string ]: string}): void
-```
-
-Replaces the contents of multiple npm package.json scripts.
-
-###### `scripts`<sup>Required</sup> <a name="scripts" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addScripts.parameter.scripts"></a>
-
-- *Type:* {[ key: string ]: string}
-
-The scripts to set.
-
----
-
-##### ~~`addTestCommand`~~ <a name="addTestCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTestCommand"></a>
-
-```typescript
-public addTestCommand(commands: string): void
-```
-
-DEPRECATED.
-
-###### `commands`<sup>Required</sup> <a name="commands" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTestCommand.parameter.commands"></a>
-
-- *Type:* string
-
----
-
-##### ~~`hasScript`~~ <a name="hasScript" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.hasScript"></a>
-
-```typescript
-public hasScript(name: string): boolean
-```
-
-Indicates if a script by the name name is defined.
-
-###### `name`<sup>Required</sup> <a name="name" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.hasScript.parameter.name"></a>
-
-- *Type:* string
-
-The name of the script.
-
----
-
-##### `removeScript` <a name="removeScript" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeScript"></a>
-
-```typescript
-public removeScript(name: string): void
-```
-
-Removes the npm script (always successful).
-
-###### `name`<sup>Required</sup> <a name="name" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeScript.parameter.name"></a>
-
-- *Type:* string
-
-The name of the script.
-
----
-
-##### `renderWorkflowSetup` <a name="renderWorkflowSetup" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.renderWorkflowSetup"></a>
-
-```typescript
-public renderWorkflowSetup(options?: RenderWorkflowSetupOptions): JobStep[]
-```
-
-Returns the set of workflow steps which should be executed to bootstrap a workflow.
-
-###### `options`<sup>Optional</sup> <a name="options" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.renderWorkflowSetup.parameter.options"></a>
-
-- *Type:* projen.javascript.RenderWorkflowSetupOptions
-
-Options.
-
----
-
-##### `setScript` <a name="setScript" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.setScript"></a>
-
-```typescript
-public setScript(name: string, command: string): void
-```
-
-Replaces the contents of an npm package.json script.
-
-###### `name`<sup>Required</sup> <a name="name" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.setScript.parameter.name"></a>
-
-- *Type:* string
-
-The script name.
-
----
-
-###### `command`<sup>Required</sup> <a name="command" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.setScript.parameter.command"></a>
-
-- *Type:* string
-
-The command to execute.
-
----
-
-##### `addCdkDependency` <a name="addCdkDependency" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCdkDependency"></a>
-
-```typescript
-public addCdkDependency(modules: string): void
-```
-
-Adds an AWS CDK module dependencies.
-
-###### `modules`<sup>Required</sup> <a name="modules" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCdkDependency.parameter.modules"></a>
-
-- *Type:* string
-
-The list of modules to depend on.
-
----
-
-##### `addEnvironments` <a name="addEnvironments" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments"></a>
-
-```typescript
-public addEnvironments(items: EnvironmentOptions): void
-```
-
-Add new environments to the application.
-
-###### `items`<sup>Required</sup> <a name="items" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments.parameter.items"></a>
-
-- *Type:* <a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>
-
-list of environment options.
-
----
-
-##### `updatePostDeployWorkflowScriptToEnvironments` <a name="updatePostDeployWorkflowScriptToEnvironments" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments"></a>
-
-```typescript
-public updatePostDeployWorkflowScriptToEnvironments(script: string, environmentNameFilter?: string[]): void
-```
-
-Updates the postDeployWorkflowScript for environments.
-
-###### `script`<sup>Required</sup> <a name="script" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments.parameter.script"></a>
-
-- *Type:* string
-
-the script to be added, for example "post:deploy".
-
----
-
-###### `environmentNameFilter`<sup>Optional</sup> <a name="environmentNameFilter" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments.parameter.environmentNameFilter"></a>
-
-- *Type:* string[]
-
-the name of environments to add the scripts to, if not provided or empty will update all.
-
----
-
-##### `updatePreDeployWorkflowScriptToEnvironments` <a name="updatePreDeployWorkflowScriptToEnvironments" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePreDeployWorkflowScriptToEnvironments"></a>
-
-```typescript
-public updatePreDeployWorkflowScriptToEnvironments(script: string, environmentNameFilter?: string[]): void
-```
-
-Updates the preDeployWorkflowScript for environments.
-
-###### `script`<sup>Required</sup> <a name="script" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePreDeployWorkflowScriptToEnvironments.parameter.script"></a>
-
-- *Type:* string
-
-the script to be added, for example "pre:deploy".
-
----
-
-###### `environmentNameFilter`<sup>Optional</sup> <a name="environmentNameFilter" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePreDeployWorkflowScriptToEnvironments.parameter.environmentNameFilter"></a>
-
-- *Type:* string[]
-
-the name of environments to add the scripts to, if not provided or empty will update all.
-
----
-
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.buildTask">buildTask</a></code> | <code>projen.Task</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.compileTask">compileTask</a></code> | <code>projen.Task</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.components">components</a></code> | <code>projen.Component[]</code> | Returns all the components within this project. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.deps">deps</a></code> | <code>projen.Dependencies</code> | Project dependencies. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.ejected">ejected</a></code> | <code>boolean</code> | Whether or not the project is being ejected. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.files">files</a></code> | <code>projen.FileBase[]</code> | All files in this project. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.gitattributes">gitattributes</a></code> | <code>projen.GitAttributesFile</code> | The .gitattributes file for this repository. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.gitignore">gitignore</a></code> | <code>projen.IgnoreFile</code> | .gitignore. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.logger">logger</a></code> | <code>projen.Logger</code> | Logging utilities. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.name">name</a></code> | <code>string</code> | Project name. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.outdir">outdir</a></code> | <code>string</code> | Absolute output directory of this project. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.packageTask">packageTask</a></code> | <code>projen.Task</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.postCompileTask">postCompileTask</a></code> | <code>projen.Task</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.preCompileTask">preCompileTask</a></code> | <code>projen.Task</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projectBuild">projectBuild</a></code> | <code>projen.ProjectBuild</code> | Manages the build process of the project. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projenCommand">projenCommand</a></code> | <code>string</code> | The command to use in order to run the projen CLI. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.root">root</a></code> | <code>projen.Project</code> | The root project. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.subprojects">subprojects</a></code> | <code>projen.Project[]</code> | Returns all the subprojects within this project. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tasks">tasks</a></code> | <code>projen.Tasks</code> | Project tasks. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.testTask">testTask</a></code> | <code>projen.Task</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.defaultTask">defaultTask</a></code> | <code>projen.Task</code> | This is the "default" task, the one that executes "projen". |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.initProject">initProject</a></code> | <code>projen.InitProject</code> | The options used when this project is bootstrapped via `projen new`. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.parent">parent</a></code> | <code>projen.Project</code> | A parent project. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projectType">projectType</a></code> | <code>projen.ProjectType</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.autoApprove">autoApprove</a></code> | <code>projen.github.AutoApprove</code> | Auto approve set up for this project. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.devContainer">devContainer</a></code> | <code>projen.vscode.DevContainer</code> | Access for .devcontainer.json (used for GitHub Codespaces). |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.github">github</a></code> | <code>projen.github.GitHub</code> | Access all github components. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.gitpod">gitpod</a></code> | <code>projen.Gitpod</code> | Access for Gitpod. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.vscode">vscode</a></code> | <code>projen.vscode.VsCode</code> | Access all VSCode components. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.allowLibraryDependencies">allowLibraryDependencies</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | The build output directory. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.artifactsJavascriptDirectory">artifactsJavascriptDirectory</a></code> | <code>string</code> | The location of the npm tarball after build (`${artifactsDirectory}/js`). |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.bundler">bundler</a></code> | <code>projen.javascript.Bundler</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.entrypoint">entrypoint</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.manifest">manifest</a></code> | <code>any</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.npmrc">npmrc</a></code> | <code>projen.javascript.NpmConfig</code> | The .npmrc file. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.package">package</a></code> | <code>projen.javascript.NodePackage</code> | API for managing the node package. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.packageManager">packageManager</a></code> | <code>projen.javascript.NodePackageManager</code> | The package manager to use. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.runScriptCommand">runScriptCommand</a></code> | <code>string</code> | The command to use to run scripts (e.g. `yarn run` or `npm run` depends on the package manager). |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.autoMerge">autoMerge</a></code> | <code>projen.github.AutoMerge</code> | Component that sets up mergify for merging approved pull requests. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.buildWorkflow">buildWorkflow</a></code> | <code>projen.build.BuildWorkflow</code> | The PR build GitHub workflow. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.buildWorkflowJobId">buildWorkflowJobId</a></code> | <code>string</code> | The job ID of the build workflow. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.jest">jest</a></code> | <code>projen.javascript.Jest</code> | The Jest configuration (if enabled). |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.maxNodeVersion">maxNodeVersion</a></code> | <code>string</code> | Maximum node version required by this package. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | Minimum node.js version required by this package. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.npmignore">npmignore</a></code> | <code>projen.IgnoreFile</code> | The .npmignore file. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.prettier">prettier</a></code> | <code>projen.javascript.Prettier</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.publisher">publisher</a></code> | <code>projen.release.Publisher</code> | Package publisher. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.release">release</a></code> | <code>projen.release.Release</code> | Release management. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.upgradeWorkflow">upgradeWorkflow</a></code> | <code>projen.javascript.UpgradeDependencies</code> | The upgrade workflow. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.docsDirectory">docsDirectory</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.libdir">libdir</a></code> | <code>string</code> | The directory in which compiled .js files reside. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.srcdir">srcdir</a></code> | <code>string</code> | The directory in which the .ts sources reside. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.testdir">testdir</a></code> | <code>string</code> | The directory in which tests reside. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfig</code> | A typescript configuration file which covers all files (sources, tests, projen). |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.watchTask">watchTask</a></code> | <code>projen.Task</code> | The "watch" task. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.docgen">docgen</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.eslint">eslint</a></code> | <code>projen.javascript.Eslint</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tsconfig">tsconfig</a></code> | <code>projen.javascript.TypescriptConfig</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tsconfigEslint">tsconfigEslint</a></code> | <code>projen.javascript.TypescriptConfig</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.appEntrypoint">appEntrypoint</a></code> | <code>string</code> | The CDK app entrypoint. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkConfig">cdkConfig</a></code> | <code>projen.awscdk.CdkConfig</code> | cdk.json configuration. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkDeps">cdkDeps</a></code> | <code>projen.awscdk.AwsCdkDeps</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkTasks">cdkTasks</a></code> | <code>projen.awscdk.CdkTasks</code> | Common CDK tasks. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkVersion">cdkVersion</a></code> | <code>string</code> | The CDK version this app is using. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.deployWorkflowTask">deployWorkflowTask</a></code> | <code>projen.Task</code> | Task to deploy your app. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.majorNodeVersion">majorNodeVersion</a></code> | <code>number</code> | return the major node version set for the project. |
-
----
-
-##### `buildTask`<sup>Required</sup> <a name="buildTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.buildTask"></a>
-
-```typescript
-public readonly buildTask: Task;
-```
-
-- *Type:* projen.Task
-
----
-
-##### `commitGenerated`<sup>Required</sup> <a name="commitGenerated" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.commitGenerated"></a>
-
-```typescript
-public readonly commitGenerated: boolean;
-```
-
-- *Type:* boolean
-
-Whether to commit the managed files by default.
-
----
-
-##### `compileTask`<sup>Required</sup> <a name="compileTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.compileTask"></a>
-
-```typescript
-public readonly compileTask: Task;
-```
-
-- *Type:* projen.Task
-
----
-
-##### `components`<sup>Required</sup> <a name="components" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.components"></a>
-
-```typescript
-public readonly components: Component[];
-```
-
-- *Type:* projen.Component[]
-
-Returns all the components within this project.
-
----
-
-##### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.deps"></a>
-
-```typescript
-public readonly deps: Dependencies;
-```
-
-- *Type:* projen.Dependencies
-
-Project dependencies.
-
----
-
-##### `ejected`<sup>Required</sup> <a name="ejected" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.ejected"></a>
-
-```typescript
-public readonly ejected: boolean;
-```
-
-- *Type:* boolean
-
-Whether or not the project is being ejected.
-
----
-
-##### `files`<sup>Required</sup> <a name="files" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.files"></a>
-
-```typescript
-public readonly files: FileBase[];
-```
-
-- *Type:* projen.FileBase[]
-
-All files in this project.
-
----
-
-##### `gitattributes`<sup>Required</sup> <a name="gitattributes" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.gitattributes"></a>
-
-```typescript
-public readonly gitattributes: GitAttributesFile;
-```
-
-- *Type:* projen.GitAttributesFile
-
-The .gitattributes file for this repository.
-
----
-
-##### `gitignore`<sup>Required</sup> <a name="gitignore" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.gitignore"></a>
-
-```typescript
-public readonly gitignore: IgnoreFile;
-```
-
-- *Type:* projen.IgnoreFile
-
-.gitignore.
-
----
-
-##### `logger`<sup>Required</sup> <a name="logger" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.logger"></a>
-
-```typescript
-public readonly logger: Logger;
-```
-
-- *Type:* projen.Logger
-
-Logging utilities.
-
----
-
-##### `name`<sup>Required</sup> <a name="name" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.name"></a>
-
-```typescript
-public readonly name: string;
-```
-
-- *Type:* string
-
-Project name.
-
----
-
-##### `outdir`<sup>Required</sup> <a name="outdir" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.outdir"></a>
-
-```typescript
-public readonly outdir: string;
-```
-
-- *Type:* string
-
-Absolute output directory of this project.
-
----
-
-##### `packageTask`<sup>Required</sup> <a name="packageTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.packageTask"></a>
-
-```typescript
-public readonly packageTask: Task;
-```
-
-- *Type:* projen.Task
-
----
-
-##### `postCompileTask`<sup>Required</sup> <a name="postCompileTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.postCompileTask"></a>
-
-```typescript
-public readonly postCompileTask: Task;
-```
-
-- *Type:* projen.Task
-
----
-
-##### `preCompileTask`<sup>Required</sup> <a name="preCompileTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.preCompileTask"></a>
-
-```typescript
-public readonly preCompileTask: Task;
-```
-
-- *Type:* projen.Task
-
----
-
-##### `projectBuild`<sup>Required</sup> <a name="projectBuild" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projectBuild"></a>
-
-```typescript
-public readonly projectBuild: ProjectBuild;
-```
-
-- *Type:* projen.ProjectBuild
-
-Manages the build process of the project.
-
----
-
-##### `projenCommand`<sup>Required</sup> <a name="projenCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projenCommand"></a>
-
-```typescript
-public readonly projenCommand: string;
-```
-
-- *Type:* string
-
-The command to use in order to run the projen CLI.
-
----
-
-##### `root`<sup>Required</sup> <a name="root" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.root"></a>
-
-```typescript
-public readonly root: Project;
-```
-
-- *Type:* projen.Project
-
-The root project.
-
----
-
-##### `subprojects`<sup>Required</sup> <a name="subprojects" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.subprojects"></a>
-
-```typescript
-public readonly subprojects: Project[];
-```
-
-- *Type:* projen.Project[]
-
-Returns all the subprojects within this project.
-
----
-
-##### `tasks`<sup>Required</sup> <a name="tasks" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tasks"></a>
-
-```typescript
-public readonly tasks: Tasks;
-```
-
-- *Type:* projen.Tasks
-
-Project tasks.
-
----
-
-##### `testTask`<sup>Required</sup> <a name="testTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.testTask"></a>
-
-```typescript
-public readonly testTask: Task;
-```
-
-- *Type:* projen.Task
-
----
-
-##### `defaultTask`<sup>Optional</sup> <a name="defaultTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.defaultTask"></a>
-
-```typescript
-public readonly defaultTask: Task;
-```
-
-- *Type:* projen.Task
-
-This is the "default" task, the one that executes "projen".
-
-Undefined if
-the project is being ejected.
-
----
-
-##### `initProject`<sup>Optional</sup> <a name="initProject" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.initProject"></a>
-
-```typescript
-public readonly initProject: InitProject;
-```
-
-- *Type:* projen.InitProject
-
-The options used when this project is bootstrapped via `projen new`.
-
-It
-includes the original set of options passed to the CLI and also the JSII
-FQN of the project type.
-
----
-
-##### `parent`<sup>Optional</sup> <a name="parent" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.parent"></a>
-
-```typescript
-public readonly parent: Project;
-```
-
-- *Type:* projen.Project
-
-A parent project.
-
-If undefined, this is the root project.
-
----
-
-##### `projectType`<sup>Required</sup> <a name="projectType" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projectType"></a>
-
-```typescript
-public readonly projectType: ProjectType;
-```
-
-- *Type:* projen.ProjectType
-
----
-
-##### `autoApprove`<sup>Optional</sup> <a name="autoApprove" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.autoApprove"></a>
-
-```typescript
-public readonly autoApprove: AutoApprove;
-```
-
-- *Type:* projen.github.AutoApprove
-
-Auto approve set up for this project.
-
----
-
-##### `devContainer`<sup>Optional</sup> <a name="devContainer" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.devContainer"></a>
-
-```typescript
-public readonly devContainer: DevContainer;
-```
-
-- *Type:* projen.vscode.DevContainer
-
-Access for .devcontainer.json (used for GitHub Codespaces).
-
-This will be `undefined` if devContainer boolean is false
-
----
-
-##### `github`<sup>Optional</sup> <a name="github" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.github"></a>
-
-```typescript
-public readonly github: GitHub;
-```
-
-- *Type:* projen.github.GitHub
-
-Access all github components.
-
-This will be `undefined` for subprojects.
-
----
-
-##### `gitpod`<sup>Optional</sup> <a name="gitpod" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.gitpod"></a>
-
-```typescript
-public readonly gitpod: Gitpod;
-```
-
-- *Type:* projen.Gitpod
-
-Access for Gitpod.
-
-This will be `undefined` if gitpod boolean is false
-
----
-
-##### `vscode`<sup>Optional</sup> <a name="vscode" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.vscode"></a>
-
-```typescript
-public readonly vscode: VsCode;
-```
-
-- *Type:* projen.vscode.VsCode
-
-Access all VSCode components.
-
-This will be `undefined` for subprojects.
-
----
-
-##### ~~`allowLibraryDependencies`~~<sup>Required</sup> <a name="allowLibraryDependencies" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.allowLibraryDependencies"></a>
-
-- *Deprecated:* use `package.allowLibraryDependencies`
-
-```typescript
-public readonly allowLibraryDependencies: boolean;
-```
-
-- *Type:* boolean
-
----
-
-##### `artifactsDirectory`<sup>Required</sup> <a name="artifactsDirectory" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.artifactsDirectory"></a>
-
-```typescript
-public readonly artifactsDirectory: string;
-```
-
-- *Type:* string
-
-The build output directory.
-
-An npm tarball will be created under the `js`
-subdirectory. For example, if this is set to `dist` (the default), the npm
-tarball will be placed under `dist/js/boom-boom-1.2.3.tg`.
-
----
-
-##### `artifactsJavascriptDirectory`<sup>Required</sup> <a name="artifactsJavascriptDirectory" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.artifactsJavascriptDirectory"></a>
-
-```typescript
-public readonly artifactsJavascriptDirectory: string;
-```
-
-- *Type:* string
-
-The location of the npm tarball after build (`${artifactsDirectory}/js`).
-
----
-
-##### `bundler`<sup>Required</sup> <a name="bundler" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.bundler"></a>
-
-```typescript
-public readonly bundler: Bundler;
-```
-
-- *Type:* projen.javascript.Bundler
-
----
-
-##### ~~`entrypoint`~~<sup>Required</sup> <a name="entrypoint" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.entrypoint"></a>
-
-- *Deprecated:* use `package.entrypoint`
-
-```typescript
-public readonly entrypoint: string;
-```
-
-- *Type:* string
-
----
-
-##### ~~`manifest`~~<sup>Required</sup> <a name="manifest" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.manifest"></a>
-
-- *Deprecated:* use `package.addField(x, y)`
-
-```typescript
-public readonly manifest: any;
-```
-
-- *Type:* any
-
----
-
-##### `npmrc`<sup>Required</sup> <a name="npmrc" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.npmrc"></a>
-
-```typescript
-public readonly npmrc: NpmConfig;
-```
-
-- *Type:* projen.javascript.NpmConfig
-
-The .npmrc file.
-
----
-
-##### `package`<sup>Required</sup> <a name="package" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.package"></a>
-
-```typescript
-public readonly package: NodePackage;
-```
-
-- *Type:* projen.javascript.NodePackage
-
-API for managing the node package.
-
----
-
-##### ~~`packageManager`~~<sup>Required</sup> <a name="packageManager" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.packageManager"></a>
-
-- *Deprecated:* use `package.packageManager`
-
-```typescript
-public readonly packageManager: NodePackageManager;
-```
-
-- *Type:* projen.javascript.NodePackageManager
-
-The package manager to use.
-
----
-
-##### `runScriptCommand`<sup>Required</sup> <a name="runScriptCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.runScriptCommand"></a>
-
-```typescript
-public readonly runScriptCommand: string;
-```
-
-- *Type:* string
-
-The command to use to run scripts (e.g. `yarn run` or `npm run` depends on the package manager).
-
----
-
-##### `autoMerge`<sup>Optional</sup> <a name="autoMerge" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.autoMerge"></a>
-
-```typescript
-public readonly autoMerge: AutoMerge;
-```
-
-- *Type:* projen.github.AutoMerge
-
-Component that sets up mergify for merging approved pull requests.
-
----
-
-##### `buildWorkflow`<sup>Optional</sup> <a name="buildWorkflow" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.buildWorkflow"></a>
-
-```typescript
-public readonly buildWorkflow: BuildWorkflow;
-```
-
-- *Type:* projen.build.BuildWorkflow
-
-The PR build GitHub workflow.
-
-`undefined` if `buildWorkflow` is disabled.
-
----
-
-##### `buildWorkflowJobId`<sup>Optional</sup> <a name="buildWorkflowJobId" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.buildWorkflowJobId"></a>
-
-```typescript
-public readonly buildWorkflowJobId: string;
-```
-
-- *Type:* string
-
-The job ID of the build workflow.
-
----
-
-##### `jest`<sup>Optional</sup> <a name="jest" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.jest"></a>
-
-```typescript
-public readonly jest: Jest;
-```
-
-- *Type:* projen.javascript.Jest
-
-The Jest configuration (if enabled).
-
----
-
-##### `maxNodeVersion`<sup>Optional</sup> <a name="maxNodeVersion" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.maxNodeVersion"></a>
-
-```typescript
-public readonly maxNodeVersion: string;
-```
-
-- *Type:* string
-
-Maximum node version required by this package.
-
----
-
-##### `minNodeVersion`<sup>Optional</sup> <a name="minNodeVersion" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.minNodeVersion"></a>
-
-```typescript
-public readonly minNodeVersion: string;
-```
-
-- *Type:* string
-
-Minimum node.js version required by this package.
-
----
-
-##### `npmignore`<sup>Optional</sup> <a name="npmignore" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.npmignore"></a>
-
-```typescript
-public readonly npmignore: IgnoreFile;
-```
-
-- *Type:* projen.IgnoreFile
-
-The .npmignore file.
-
----
-
-##### `prettier`<sup>Optional</sup> <a name="prettier" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.prettier"></a>
-
-```typescript
-public readonly prettier: Prettier;
-```
-
-- *Type:* projen.javascript.Prettier
-
----
-
-##### ~~`publisher`~~<sup>Optional</sup> <a name="publisher" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.publisher"></a>
-
-- *Deprecated:* use `release.publisher`.
-
-```typescript
-public readonly publisher: Publisher;
-```
-
-- *Type:* projen.release.Publisher
-
-Package publisher.
-
-This will be `undefined` if the project does not have a
-release workflow.
-
----
-
-##### `release`<sup>Optional</sup> <a name="release" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.release"></a>
-
-```typescript
-public readonly release: Release;
-```
-
-- *Type:* projen.release.Release
-
-Release management.
-
----
-
-##### `upgradeWorkflow`<sup>Optional</sup> <a name="upgradeWorkflow" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.upgradeWorkflow"></a>
-
-```typescript
-public readonly upgradeWorkflow: UpgradeDependencies;
-```
-
-- *Type:* projen.javascript.UpgradeDependencies
-
-The upgrade workflow.
-
----
-
-##### `docsDirectory`<sup>Required</sup> <a name="docsDirectory" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.docsDirectory"></a>
-
-```typescript
-public readonly docsDirectory: string;
-```
-
-- *Type:* string
-
----
-
-##### `libdir`<sup>Required</sup> <a name="libdir" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.libdir"></a>
-
-```typescript
-public readonly libdir: string;
-```
-
-- *Type:* string
-
-The directory in which compiled .js files reside.
-
----
-
-##### `srcdir`<sup>Required</sup> <a name="srcdir" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.srcdir"></a>
-
-```typescript
-public readonly srcdir: string;
-```
-
-- *Type:* string
-
-The directory in which the .ts sources reside.
-
----
-
-##### `testdir`<sup>Required</sup> <a name="testdir" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.testdir"></a>
-
-```typescript
-public readonly testdir: string;
-```
-
-- *Type:* string
-
-The directory in which tests reside.
-
----
-
-##### `tsconfigDev`<sup>Required</sup> <a name="tsconfigDev" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tsconfigDev"></a>
-
-```typescript
-public readonly tsconfigDev: TypescriptConfig;
-```
-
-- *Type:* projen.javascript.TypescriptConfig
-
-A typescript configuration file which covers all files (sources, tests, projen).
-
----
-
-##### `watchTask`<sup>Required</sup> <a name="watchTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.watchTask"></a>
-
-```typescript
-public readonly watchTask: Task;
-```
-
-- *Type:* projen.Task
-
-The "watch" task.
-
----
-
-##### `docgen`<sup>Optional</sup> <a name="docgen" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.docgen"></a>
-
-```typescript
-public readonly docgen: boolean;
-```
-
-- *Type:* boolean
-
----
-
-##### `eslint`<sup>Optional</sup> <a name="eslint" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.eslint"></a>
-
-```typescript
-public readonly eslint: Eslint;
-```
-
-- *Type:* projen.javascript.Eslint
-
----
-
-##### `tsconfig`<sup>Optional</sup> <a name="tsconfig" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tsconfig"></a>
-
-```typescript
-public readonly tsconfig: TypescriptConfig;
-```
-
-- *Type:* projen.javascript.TypescriptConfig
-
----
-
-##### `tsconfigEslint`<sup>Optional</sup> <a name="tsconfigEslint" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tsconfigEslint"></a>
-
-```typescript
-public readonly tsconfigEslint: TypescriptConfig;
-```
-
-- *Type:* projen.javascript.TypescriptConfig
-
----
-
-##### `appEntrypoint`<sup>Required</sup> <a name="appEntrypoint" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.appEntrypoint"></a>
-
-```typescript
-public readonly appEntrypoint: string;
-```
-
-- *Type:* string
-
-The CDK app entrypoint.
-
----
-
-##### `cdkConfig`<sup>Required</sup> <a name="cdkConfig" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkConfig"></a>
-
-```typescript
-public readonly cdkConfig: CdkConfig;
-```
-
-- *Type:* projen.awscdk.CdkConfig
-
-cdk.json configuration.
-
----
-
-##### `cdkDeps`<sup>Required</sup> <a name="cdkDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkDeps"></a>
-
-```typescript
-public readonly cdkDeps: AwsCdkDeps;
-```
-
-- *Type:* projen.awscdk.AwsCdkDeps
-
----
-
-##### `cdkTasks`<sup>Required</sup> <a name="cdkTasks" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkTasks"></a>
-
-```typescript
-public readonly cdkTasks: CdkTasks;
-```
-
-- *Type:* projen.awscdk.CdkTasks
-
-Common CDK tasks.
-
----
-
-##### `cdkVersion`<sup>Required</sup> <a name="cdkVersion" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.cdkVersion"></a>
-
-```typescript
-public readonly cdkVersion: string;
-```
-
-- *Type:* string
-
-The CDK version this app is using.
-
----
-
-##### `deployWorkflowTask`<sup>Required</sup> <a name="deployWorkflowTask" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.deployWorkflowTask"></a>
-
-```typescript
-public readonly deployWorkflowTask: Task;
-```
-
-- *Type:* projen.Task
-
-Task to deploy your app.
-
----
-
-##### `majorNodeVersion`<sup>Required</sup> <a name="majorNodeVersion" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.majorNodeVersion"></a>
-
-```typescript
-public readonly majorNodeVersion: number;
-```
-
-- *Type:* number
-- *Default:* 16
-
-return the major node version set for the project.
-
----
-
-#### Constants <a name="Constants" id="Constants"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.DEFAULT_TASK">DEFAULT_TASK</a></code> | <code>string</code> | The name of the default task (the task executed when `projen` is run without arguments). |
-
----
-
-##### `DEFAULT_TASK`<sup>Required</sup> <a name="DEFAULT_TASK" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.DEFAULT_TASK"></a>
-
-```typescript
-public readonly DEFAULT_TASK: string;
-```
-
-- *Type:* string
-
-The name of the default task (the task executed when `projen` is run without arguments).
-
-Normally
-this task should synthesize the project files.
-
----
 
 
