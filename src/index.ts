@@ -46,9 +46,15 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       throw new Error(`npmConfigEnvironment is not supported for node versions above version 18. Current version is ${this.nodeVersion}`)
 
     const deployArgument = this.deployOptions.stackPattern ? ` ${this.deployOptions.stackPattern}`: ''
+    const deployCommand = `cdk deploy${deployArgument} ${this.getMethodArgument()} --require-approval never`
+    const requiredEnv = this.deployOptions.npmConfigEnvironment ? [`npm_config_${this.deployOptions.npmConfigEnvironment}`] : undefined
     this.deployWorkflowTask = this.addTask('deploy:workflow', {
-      requiredEnv: this.deployOptions.npmConfigEnvironment ? [`npm_config_${this.deployOptions.npmConfigEnvironment}`] : undefined,
-      exec: `cdk deploy${deployArgument} ${this.getMethodArgument()} --require-approval never`,
+      requiredEnv,
+      exec: deployCommand,
+    })
+    this.addTask('deploy:hotswap', {
+      requiredEnv,
+      exec: `${deployCommand} --hotswap`,
     })
   }
 

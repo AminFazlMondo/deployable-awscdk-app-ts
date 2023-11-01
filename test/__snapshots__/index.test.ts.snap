@@ -403,6 +403,14 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
         },
       ],
     },
+    "deploy:hotswap": {
+      "name": "deploy:hotswap",
+      "steps": [
+        {
+          "exec": "cdk deploy --method change-set --require-approval never --hotswap",
+        },
+      ],
+    },
     "deploy:workflow": {
       "name": "deploy:workflow",
       "steps": [
@@ -2311,6 +2319,14 @@ exports[`specific stack tasks 1`] = `
         {
           "exec": "cdk deploy",
           "receiveArgs": true,
+        },
+      ],
+    },
+    "deploy:hotswap": {
+      "name": "deploy:hotswap",
+      "steps": [
+        {
+          "exec": "cdk deploy myStack --method change-set --require-approval never --hotswap",
         },
       ],
     },
