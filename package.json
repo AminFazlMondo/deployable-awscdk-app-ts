@@ -54,8 +54,7 @@
     "jsii-docgen": "^9.2.2",
     "jsii-pacmak": "^1.92.0",
     "jsii-rosetta": "5.x",
-    "npm-check-updates": "^16",
-    "projen": "^0.77.1",
+    "projen": "^0.77.2",
     "standard-version": "^9",
     "ts-jest": "^29",
     "ts-node": "^10.9.1",
@@ -63,10 +62,10 @@
     "yaml": "^2.3.4"
   },
   "peerDependencies": {
-    "projen": "^0.77.1"
+    "projen": "^0.77.2"
   },
   "dependencies": {
-    "projen": "^0.77.1",
+    "projen": "^0.77.2",
     "semver": "^7.5.4"
   },
   "bundledDependencies": [
