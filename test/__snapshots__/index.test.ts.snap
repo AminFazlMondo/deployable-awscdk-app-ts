@@ -455,7 +455,8 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
       "name": "eslint",
       "steps": [
         {
-          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern src test build-tools .projenrc.js",
+          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern $@ src test build-tools .projenrc.js",
+          "receiveArgs": true,
         },
       ],
     },
@@ -2371,7 +2372,8 @@ exports[`specific stack tasks 1`] = `
       "name": "eslint",
       "steps": [
         {
-          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern src test build-tools .projenrc.js",
+          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern $@ src test build-tools .projenrc.js",
+          "receiveArgs": true,
         },
       ],
     },
