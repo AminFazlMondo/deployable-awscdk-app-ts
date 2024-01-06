@@ -100,7 +100,7 @@ new DeployableAwsCdkTypeScriptApp(options: DeployableAwsCdkTypeScriptAppOptions)
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.toString">toString</a></code> | Returns a string representation of this construct. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addExcludeFromCleanup">addExcludeFromCleanup</a></code> | Exclude the matching files from pre-synth cleanup. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addGitIgnore">addGitIgnore</a></code> | Adds a .gitignore pattern. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPackageIgnore">addPackageIgnore</a></code> | Exclude these files from the bundled package. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPackageIgnore">addPackageIgnore</a></code> | Adds patterns to be ignored by npm. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTask">addTask</a></code> | Adds a new task to this project. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTip">addTip</a></code> | Prints a "tip" message during synthesis. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.annotateGenerated">annotateGenerated</a></code> | Marks the provided file(s) as being generated. |
@@ -183,14 +183,13 @@ The glob pattern to ignore.
 public addPackageIgnore(pattern: string): void
 ```
 
-Exclude these files from the bundled package.
-
-Implemented by project types based on the
-packaging mechanism. For example, `NodeProject` delegates this to `.npmignore`.
+Adds patterns to be ignored by npm.
 
 ###### `pattern`<sup>Required</sup> <a name="pattern" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPackageIgnore.parameter.pattern"></a>
 
 - *Type:* string
+
+The pattern to ignore.
 
 ---
 
@@ -3227,7 +3226,7 @@ public readonly releaseWorkflowName: string;
 ```
 
 - *Type:* string
-- *Default:* "Release"
+- *Default:* "release"
 
 The name of the default release workflow.
 
