@@ -1,6 +1,6 @@
 import {javascript, cdk, TextFile} from 'projen'
 
-const nodeVersion = '16'
+const nodeVersion = '20'
 
 const project = new cdk.JsiiProject({
   author: 'Amin Fazl',
@@ -16,7 +16,8 @@ const project = new cdk.JsiiProject({
   ],
   projenrcTs: true,
   repositoryUrl: 'https://github.com/AminFazlMondo/deployable-awscdk-app-ts.git',
-  packageManager: javascript.NodePackageManager.NPM,
+  packageManager: javascript.NodePackageManager.PNPM,
+  pnpmVersion: '8',
   npmAccess: javascript.NpmAccess.PUBLIC,
   deps: [
     'projen',
@@ -26,10 +27,12 @@ const project = new cdk.JsiiProject({
   ],
   peerDeps: [
     'projen',
+    'constructs',
   ],
   devDeps: [
     'fs-extra',
     '@types/fs-extra',
+    '@types/semver',
     'yaml',
   ],
   workflowNodeVersion: nodeVersion,
