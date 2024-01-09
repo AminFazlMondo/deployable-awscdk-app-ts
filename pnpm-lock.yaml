@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   projen:
-    specifier: ^0.78.11
-    version: 0.78.12(constructs@10.3.0)
+    specifier: ^0.78.13
+    version: 0.78.13(constructs@10.3.0)
   semver:
     specifier: ^7.5.4
     version: 7.5.4
@@ -56,13 +56,13 @@ devDependencies:
     specifier: 5.x
     version: 5.3.3
   jsii-diff:
-    specifier: ^1.93.0
+    specifier: ^1.94.0
     version: 1.94.0
   jsii-docgen:
     specifier: ^9.2.2
     version: 9.2.2(jsii-rosetta@5.3.3)
   jsii-pacmak:
-    specifier: ^1.93.0
+    specifier: ^1.94.0
     version: 1.94.0
   jsii-rosetta:
     specifier: 5.x
@@ -4197,8 +4197,8 @@ packages:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
     dev: true
 
-  /projen@0.78.12(constructs@10.3.0):
-    resolution: {integrity: sha512-KcAK8Eyzuqlhz0vjC5/UTCZtyLmfu/Q8wtxdd1rsmPVwJb/jmJfnJ42sIAELTczn5pV5HTsEQnOt/At1AfLovQ==}
+  /projen@0.78.13(constructs@10.3.0):
+    resolution: {integrity: sha512-ihL1lcfmi7M0EA7qgdXGja2SLLc6vtsQ1Wd2RqqxOuFnchw9/kZubdrxy38J8iI36AEwb0Qucb1uLTuwFhl7Qw==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
