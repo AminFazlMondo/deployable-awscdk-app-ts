@@ -73,7 +73,6 @@
   "bundledDependencies": [
     "semver"
   ],
-  "pnpm": {},
   "keywords": [
     "AWS CDK",
     "Deployment",

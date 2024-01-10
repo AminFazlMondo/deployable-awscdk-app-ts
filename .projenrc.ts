@@ -16,7 +16,7 @@ const project = new cdk.JsiiProject({
   ],
   projenrcTs: true,
   repositoryUrl: 'https://github.com/AminFazlMondo/deployable-awscdk-app-ts.git',
-  packageManager: javascript.NodePackageManager.PNPM,
+  packageManager: javascript.NodePackageManager.NPM,
   pnpmVersion: '8',
   npmAccess: javascript.NpmAccess.PUBLIC,
   deps: [
