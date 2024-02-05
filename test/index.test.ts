@@ -1,11 +1,23 @@
+import * as fs from 'fs'
+import * as os from 'os'
+import * as path from 'path'
 import {CodeArtifactAuthProvider, NodePackageManager} from 'projen/lib/javascript'
 import {SynthOutput, synthSnapshot} from 'projen/lib/util/synth'
 import * as YAML from 'yaml'
 import {DeployableAwsCdkTypeScriptApp} from '../src'
 
+
 const releaseWorkflowFilePath = '.github/workflows/release.yml'
 const tasksFilePath = '.projen/tasks.json'
 const nvmrcFilePath = '.nvmrc'
+
+function mkdtemp() {
+  const tmpdir = fs.mkdtempSync(
+    path.join(os.tmpdir(), 'projen-test-'),
+  )
+
+  return tmpdir
+}
 
 function extractReleaseMatrix(synthOutput: SynthOutput) {
   const releaseWorkflow = YAML.parse(synthOutput[releaseWorkflowFilePath])
@@ -19,6 +31,7 @@ describe('No stack pattern', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     workflowNodeVersion: '14.18.1',
+    outdir: mkdtemp(),
     deployOptions: {
       environments: [
         {
@@ -54,6 +67,7 @@ describe('specific stack', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     generateNvmrc: false,
+    outdir: mkdtemp(),
     deployOptions: {
       stackPattern: 'myStack',
       environments: [
@@ -86,6 +100,7 @@ describe('assume role with default duration', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     generateNvmrc: false,
+    outdir: mkdtemp(),
     deployOptions: {
       environments: [
         {
@@ -114,6 +129,7 @@ describe('assume role with specified duration', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     generateNvmrc: false,
+    outdir: mkdtemp(),
     deployOptions: {
       environments: [
         {
@@ -144,6 +160,7 @@ describe('nvmrc', () => {
       defaultReleaseBranch: 'main',
       cdkVersion: '1.129.0',
       workflowNodeVersion: '14.18.1',
+      outdir: mkdtemp(),
       deployOptions: {
         environments: [
           {
@@ -170,6 +187,7 @@ describe('nvmrc', () => {
       cdkVersion: '1.129.0',
       workflowNodeVersion: '14.18.1',
       generateNvmrc: false,
+      outdir: mkdtemp(),
       deployOptions: {
         environments: [
           {
@@ -194,6 +212,7 @@ describe('nvmrc', () => {
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
       cdkVersion: '1.129.0',
+      outdir: mkdtemp(),
       deployOptions: {
         environments: [
           {
@@ -220,6 +239,7 @@ describe('environment added by invoking the addEnvironments', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     workflowNodeVersion: '14.18.1',
+    outdir: mkdtemp(),
     deployOptions: {
       environments: [
       ],
@@ -256,6 +276,7 @@ describe('update pre/post deploy scripts', () => {
       defaultReleaseBranch: 'main',
       cdkVersion: '1.129.0',
       workflowNodeVersion: '14.18.1',
+      outdir: mkdtemp(),
       deployOptions: {
         environments: [
           {
@@ -328,6 +349,7 @@ describe('npm config set for each environments', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     workflowNodeVersion: '14.18.1',
+    outdir: mkdtemp(),
     deployOptions: {
       npmConfigEnvironment: 'stage',
       environments: [{
@@ -368,6 +390,7 @@ describe('set the checkActiveDeployment flag', () => {
     cdkVersion: '1.129.0',
     workflowNodeVersion: '14.18.1',
     checkActiveDeployment: true,
+    outdir: mkdtemp(),
     deployOptions: {
       environments: [{
         name: 'dev',
@@ -394,6 +417,7 @@ describe('a new task added for deployment in workflow', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     workflowNodeVersion: '14.18.1',
+    outdir: mkdtemp(),
     deployOptions: {
       environments: [{
         name: 'dev',
@@ -420,6 +444,7 @@ describe('deploy option method is specified', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     workflowNodeVersion: '14.18.1',
+    outdir: mkdtemp(),
     deployOptions: {
       method: 'direct',
       environments: [{
@@ -447,6 +472,7 @@ describe('post deployment added in workflow', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     workflowNodeVersion: '14.18.1',
+    outdir: mkdtemp(),
     deployOptions: {
       environments: [
         {
@@ -484,6 +510,7 @@ describe('pre deployment added in workflow', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     workflowNodeVersion: '14.18.1',
+    outdir: mkdtemp(),
     deployOptions: {
       environments: [
         {
@@ -521,6 +548,7 @@ describe('pre install added in workflow', () => {
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
     workflowNodeVersion: '14.18.1',
+    outdir: mkdtemp(),
     deployOptions: {
       taskToRunPreInstall: 'stub-task',
       environments: [
@@ -549,6 +577,7 @@ describe('scoped packages exists', () => {
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
     cdkVersion: '1.129.0',
+    outdir: mkdtemp(),
     scopedPackagesOptions: [
       {
         registryUrl: 'https://my-domain-111122223333.d.codeartifact.us-west-2.amazonaws.com/npm/my_repo/',
@@ -585,6 +614,7 @@ describe('CodeArtifactOptions', () => {
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
       cdkVersion: '1.129.0',
+      outdir: mkdtemp(),
       scopedPackagesOptions: [
         {
           registryUrl: 'https://my-domain-111122223333.d.codeartifact.us-west-2.amazonaws.com/npm/my_repo/',
@@ -623,6 +653,7 @@ describe('node version 18', () => {
       defaultReleaseBranch: 'main',
       workflowNodeVersion: '18',
       cdkVersion: '1.129.0',
+      outdir: mkdtemp(),
       deployOptions: {
         environmentVariableName: 'STAGE',
         environments: [
@@ -651,6 +682,7 @@ describe('node version 18', () => {
         defaultReleaseBranch: 'main',
         workflowNodeVersion: '18',
         cdkVersion: '1.129.0',
+        outdir: mkdtemp(),
         deployOptions: {
           npmConfigEnvironment: 'stack',
           environments: [
