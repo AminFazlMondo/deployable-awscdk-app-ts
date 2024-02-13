@@ -5,7 +5,7 @@ import {CodeArtifactAuthProvider} from 'projen/lib/javascript'
 export function checkoutStep(): JobStep {
   return {
     name: 'Checkout',
-    uses: 'actions/checkout@v3',
+    uses: 'actions/checkout@v4',
     with: {
       ref: '${{ github.sha }}',
     },
@@ -16,7 +16,7 @@ export function setNodeVersionStep(nodeVersion: string, checkActiveDeployment: b
   return {
     ...getSkipIfAlreadyActiveDeploymentCondition(checkActiveDeployment),
     name: 'Setup Node.js',
-    uses: 'actions/setup-node@v3',
+    uses: 'actions/setup-node@v4',
     with: {
       'node-version': nodeVersion,
     },
@@ -92,7 +92,7 @@ function assumeAwsRoleStep(checkActiveDeployment: boolean, authProvider: CodeArt
   return {
     if: condition,
     name: 'Assume AWS Role',
-    uses: 'aws-actions/configure-aws-credentials@v2',
+    uses: 'aws-actions/configure-aws-credentials@v4',
     with: {
       ...secretsParams,
       'role-to-assume': '${{ matrix.roleToAssume }}',
