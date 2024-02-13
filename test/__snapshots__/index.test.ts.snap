@@ -100,7 +100,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: \${{ github.sha }}
       - name: Configure AWS Credentials
@@ -125,7 +125,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -252,7 +252,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: \${{ github.sha }}
       - name: Setup Node.js
@@ -273,7 +273,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -729,7 +729,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: \${{ github.sha }}
       - name: Install dependencies
@@ -746,7 +746,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -871,7 +871,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: \${{ github.sha }}
       - name: Install dependencies
@@ -888,7 +888,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -1028,7 +1028,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: \${{ github.sha }}
       - name: Setup Node.js
@@ -1049,7 +1049,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -1188,7 +1188,7 @@ jobs:
       STAGE: \${{ matrix.environment }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: \${{ github.sha }}
       - name: Setup Node.js
@@ -1209,7 +1209,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -1352,7 +1352,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: \${{ github.sha }}
       - name: Setup Node.js
@@ -1373,7 +1373,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -1514,7 +1514,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: \${{ github.sha }}
       - name: Setup Node.js
@@ -1535,7 +1535,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -1672,7 +1672,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: \${{ github.sha }}
       - name: Setup Node.js
@@ -1693,7 +1693,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -1830,7 +1830,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: \${{ github.sha }}
       - name: stub-task
@@ -1853,7 +1853,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -1986,7 +1986,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: \${{ github.sha }}
       - name: Configure AWS Credentials
@@ -2013,7 +2013,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -2142,7 +2142,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: \${{ github.sha }}
       - name: Setup Node.js
@@ -2169,7 +2169,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
@@ -2293,7 +2293,7 @@ jobs:
     concurrency: \${{ matrix.environment }}-deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: \${{ github.sha }}
       - name: Install dependencies
@@ -2310,7 +2310,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
           aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
