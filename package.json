@@ -60,7 +60,7 @@
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
-    "yaml": "^2.3.4"
+    "yaml": "^2.4.0"
   },
   "peerDependencies": {
     "constructs": "^10.3.0",
