@@ -21,6 +21,8 @@ export interface DeployableAwsCdkTypeScriptAppOptions extends awscdk.AwsCdkTypeS
   readonly checkActiveDeployment?: boolean;
 }
 
+export type DeployMethod = 'direct' | 'change-set' | 'prepare-change-set'
+
 export interface DeployOptions {
   /**
    * Environment settings to deploy to
@@ -64,7 +66,7 @@ export interface DeployOptions {
    * How to perform the deployment. Direct is a bit faster but lacks progress information
    * @default "change-set"
    */
-  readonly method?: 'direct' | 'change-set' | 'prepare-change-set';
+  readonly method?: DeployMethod;
 }
 
 export interface EnvironmentOptions {
