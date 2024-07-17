@@ -68,7 +68,7 @@
   },
   "dependencies": {
     "projen": "^0.84.4",
-    "semver": "^7.6.2"
+    "semver": "^7.6.3"
   },
   "bundledDependencies": [
     "semver"
