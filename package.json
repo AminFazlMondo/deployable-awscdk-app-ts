@@ -55,19 +55,19 @@
     "jsii-docgen": "^10.4.19",
     "jsii-pacmak": "^1.101.0",
     "jsii-rosetta": "5.x",
-    "projen": "^0.84.8",
+    "projen": "^0.84.9",
     "standard-version": "^9",
     "ts-jest": "^29.2.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
-    "yaml": "^2.4.5"
+    "yaml": "^2.5.0"
   },
   "peerDependencies": {
     "constructs": "^10.3.0",
-    "projen": "^0.84.8"
+    "projen": "^0.84.9"
   },
   "dependencies": {
-    "projen": "^0.84.8",
+    "projen": "^0.84.9",
     "semver": "^7.6.3"
   },
   "bundledDependencies": [
