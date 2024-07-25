@@ -7,7 +7,8 @@ export function checkoutStep(): JobStep {
     name: 'Checkout',
     uses: 'actions/checkout@v4',
     with: {
-      ref: '${{ github.sha }}',
+      'ref': '${{ github.sha }}',
+      'fetch-depth': 0,
     },
   }
 }
