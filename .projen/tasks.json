@@ -32,7 +32,8 @@
         "CHANGELOG": "dist/changelog.md",
         "BUMPFILE": "dist/version.txt",
         "RELEASETAG": "dist/releasetag.txt",
-        "RELEASE_TAG_PREFIX": ""
+        "RELEASE_TAG_PREFIX": "",
+        "BUMP_PACKAGE": "commit-and-tag-version@^12"
       },
       "steps": [
         {
@@ -289,7 +290,8 @@
         "CHANGELOG": "dist/changelog.md",
         "BUMPFILE": "dist/version.txt",
         "RELEASETAG": "dist/releasetag.txt",
-        "RELEASE_TAG_PREFIX": ""
+        "RELEASE_TAG_PREFIX": "",
+        "BUMP_PACKAGE": "commit-and-tag-version@^12"
       },
       "steps": [
         {
@@ -305,13 +307,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/fs-extra,@types/jest,@types/semver,eslint-import-resolver-typescript,eslint-plugin-import,fs-extra,jest,jsii-diff,jsii-docgen,jsii-pacmak,projen,ts-jest,ts-node,typescript,yaml,semver,constructs"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/fs-extra,@types/jest,@types/semver,eslint-import-resolver-typescript,eslint-plugin-import,fs-extra,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,typescript,yaml,semver,constructs"
         },
         {
           "exec": "npm install"
         },
         {
-          "exec": "npm update @types/fs-extra @types/jest @types/node @types/semver @typescript-eslint/eslint-plugin @typescript-eslint/parser constructs eslint-import-resolver-typescript eslint-plugin-import eslint fs-extra jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen standard-version ts-jest ts-node typescript yaml semver"
+          "exec": "npm update @types/fs-extra @types/jest @types/node @types/semver @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version constructs eslint-import-resolver-typescript eslint-plugin-import eslint fs-extra jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript yaml semver"
         },
         {
           "exec": "npx projen"
