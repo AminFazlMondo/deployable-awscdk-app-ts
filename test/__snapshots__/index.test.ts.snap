@@ -354,6 +354,7 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
       "description": "Bumps version based on latest git tag and generates a changelog entry",
       "env": {
         "BUMPFILE": "dist/version.txt",
+        "BUMP_PACKAGE": "commit-and-tag-version@^12",
         "CHANGELOG": "dist/changelog.md",
         "OUTFILE": "package.json",
         "RELEASETAG": "dist/releasetag.txt",
@@ -589,6 +590,7 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
       "description": "Restores version to 0.0.0",
       "env": {
         "BUMPFILE": "dist/version.txt",
+        "BUMP_PACKAGE": "commit-and-tag-version@^12",
         "CHANGELOG": "dist/changelog.md",
         "OUTFILE": "package.json",
         "RELEASETAG": "dist/releasetag.txt",
@@ -615,7 +617,7 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
           "exec": "npm install",
         },
         {
-          "exec": "npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk deployable-awscdk-app-ts esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions",
+          "exec": "npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk commit-and-tag-version deployable-awscdk-app-ts esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions",
         },
         {
           "exec": "npx projen",
@@ -2392,6 +2394,7 @@ exports[`specific stack tasks 1`] = `
       "description": "Bumps version based on latest git tag and generates a changelog entry",
       "env": {
         "BUMPFILE": "dist/version.txt",
+        "BUMP_PACKAGE": "commit-and-tag-version@^12",
         "CHANGELOG": "dist/changelog.md",
         "OUTFILE": "package.json",
         "RELEASETAG": "dist/releasetag.txt",
@@ -2627,6 +2630,7 @@ exports[`specific stack tasks 1`] = `
       "description": "Restores version to 0.0.0",
       "env": {
         "BUMPFILE": "dist/version.txt",
+        "BUMP_PACKAGE": "commit-and-tag-version@^12",
         "CHANGELOG": "dist/changelog.md",
         "OUTFILE": "package.json",
         "RELEASETAG": "dist/releasetag.txt",
@@ -2653,7 +2657,7 @@ exports[`specific stack tasks 1`] = `
           "exec": "npm install",
         },
         {
-          "exec": "npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk deployable-awscdk-app-ts esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen standard-version ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions",
+          "exec": "npm update @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk commit-and-tag-version deployable-awscdk-app-ts esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions",
         },
         {
           "exec": "npx projen",
