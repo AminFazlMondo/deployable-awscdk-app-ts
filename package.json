@@ -56,7 +56,7 @@
     "jsii-docgen": "^10.5.0",
     "jsii-pacmak": "^1.103.1",
     "jsii-rosetta": "5.5.x",
-    "projen": "^0.86.10",
+    "projen": "^0.87.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
@@ -64,10 +64,10 @@
   },
   "peerDependencies": {
     "constructs": "^10.3.0",
-    "projen": "^0.86.10"
+    "projen": "^0.87.0"
   },
   "dependencies": {
-    "projen": "^0.86.10",
+    "projen": "^0.87.0",
     "semver": "^7.6.3"
   },
   "bundledDependencies": [
