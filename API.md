@@ -76,7 +76,7 @@ Returns a string representation of this construct.
 ##### `addExcludeFromCleanup` <a name="addExcludeFromCleanup" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addExcludeFromCleanup"></a>
 
 ```typescript
-public addExcludeFromCleanup(globs: string): void
+public addExcludeFromCleanup(globs: ...string[]): void
 ```
 
 Exclude the matching files from pre-synth cleanup.
@@ -86,7 +86,7 @@ source files include the projen marker and we don't want them to be erased durin
 
 ###### `globs`<sup>Required</sup> <a name="globs" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addExcludeFromCleanup.parameter.globs"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 The glob patterns to match.
 
@@ -342,7 +342,7 @@ public addBins(bins: {[ key: string ]: string}): void
 ##### `addBundledDeps` <a name="addBundledDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBundledDeps"></a>
 
 ```typescript
-public addBundledDeps(deps: string): void
+public addBundledDeps(deps: ...string[]): void
 ```
 
 Defines bundled dependencies.
@@ -352,7 +352,7 @@ Bundled dependencies will be added as normal dependencies as well as to the
 
 ###### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBundledDeps.parameter.deps"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 Names modules to install.
 
@@ -367,28 +367,28 @@ add/upgrade`. If you wish to specify a version range use this syntax:
 ##### ~~`addCompileCommand`~~ <a name="addCompileCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCompileCommand"></a>
 
 ```typescript
-public addCompileCommand(commands: string): void
+public addCompileCommand(commands: ...string[]): void
 ```
 
 DEPRECATED.
 
 ###### `commands`<sup>Required</sup> <a name="commands" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCompileCommand.parameter.commands"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 ---
 
 ##### `addDeps` <a name="addDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDeps"></a>
 
 ```typescript
-public addDeps(deps: string): void
+public addDeps(deps: ...string[]): void
 ```
 
 Defines normal dependencies.
 
 ###### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDeps.parameter.deps"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 Names modules to install.
 
@@ -403,14 +403,14 @@ add/upgrade`. If you wish to specify a version range use this syntax:
 ##### `addDevDeps` <a name="addDevDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDevDeps"></a>
 
 ```typescript
-public addDevDeps(deps: string): void
+public addDevDeps(deps: ...string[]): void
 ```
 
 Defines development/test dependencies.
 
 ###### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDevDeps.parameter.deps"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 Names modules to install.
 
@@ -441,14 +441,14 @@ The fields to set.
 ##### `addKeywords` <a name="addKeywords" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addKeywords"></a>
 
 ```typescript
-public addKeywords(keywords: string): void
+public addKeywords(keywords: ...string[]): void
 ```
 
 Adds keywords to package.json (deduplicated).
 
 ###### `keywords`<sup>Required</sup> <a name="keywords" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addKeywords.parameter.keywords"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 The keywords to add.
 
@@ -457,7 +457,7 @@ The keywords to add.
 ##### `addPeerDeps` <a name="addPeerDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPeerDeps"></a>
 
 ```typescript
-public addPeerDeps(deps: string): void
+public addPeerDeps(deps: ...string[]): void
 ```
 
 Defines peer dependencies.
@@ -468,7 +468,7 @@ your code against the minimum version required from your consumers.
 
 ###### `deps`<sup>Required</sup> <a name="deps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPeerDeps.parameter.deps"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 Names modules to install.
 
@@ -499,14 +499,14 @@ The scripts to set.
 ##### ~~`addTestCommand`~~ <a name="addTestCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTestCommand"></a>
 
 ```typescript
-public addTestCommand(commands: string): void
+public addTestCommand(commands: ...string[]): void
 ```
 
 DEPRECATED.
 
 ###### `commands`<sup>Required</sup> <a name="commands" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTestCommand.parameter.commands"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 ---
 
@@ -585,14 +585,14 @@ The command to execute.
 ##### `addCdkDependency` <a name="addCdkDependency" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCdkDependency"></a>
 
 ```typescript
-public addCdkDependency(modules: string): void
+public addCdkDependency(modules: ...string[]): void
 ```
 
 Adds an AWS CDK module dependencies.
 
 ###### `modules`<sup>Required</sup> <a name="modules" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCdkDependency.parameter.modules"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 The list of modules to depend on.
 
@@ -601,14 +601,14 @@ The list of modules to depend on.
 ##### `addEnvironments` <a name="addEnvironments" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments"></a>
 
 ```typescript
-public addEnvironments(items: EnvironmentOptions): void
+public addEnvironments(items: ...EnvironmentOptions[]): void
 ```
 
 Add new environments to the application.
 
 ###### `items`<sup>Required</sup> <a name="items" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments.parameter.items"></a>
 
-- *Type:* <a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>
+- *Type:* ...<a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>[]
 
 list of environment options.
 
