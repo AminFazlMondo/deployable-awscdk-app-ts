@@ -510,6 +510,14 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
     "package": {
       "description": "Creates the distribution package",
       "name": "package",
+      "steps": [
+        {
+          "exec": "mkdir -p dist/js",
+        },
+        {
+          "exec": "npm pack --pack-destination dist/js",
+        },
+      ],
     },
     "post-compile": {
       "description": "Runs after successful compilation",
@@ -2583,6 +2591,14 @@ exports[`specific stack tasks 1`] = `
     "package": {
       "description": "Creates the distribution package",
       "name": "package",
+      "steps": [
+        {
+          "exec": "mkdir -p dist/js",
+        },
+        {
+          "exec": "npm pack --pack-destination dist/js",
+        },
+      ],
     },
     "post-compile": {
       "description": "Runs after successful compilation",
