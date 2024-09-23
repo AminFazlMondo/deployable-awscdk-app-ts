@@ -100,7 +100,9 @@ jobs:
       id-token: write
     environment:
       name: \${{ matrix.environment }}
-    concurrency: \${{ matrix.environment }}-deploy
+    concurrency:
+      group: \${{ matrix.environment }}-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -256,7 +258,9 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: \${{ matrix.environment }}-deploy
+    concurrency:
+      group: \${{ matrix.environment }}-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -747,7 +751,9 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: \${{ matrix.environment }}-deploy
+    concurrency:
+      group: \${{ matrix.environment }}-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -893,7 +899,9 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: \${{ matrix.environment }}-deploy
+    concurrency:
+      group: \${{ matrix.environment }}-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -1054,7 +1062,9 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: \${{ matrix.environment }}-deploy
+    concurrency:
+      group: \${{ matrix.environment }}-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -1216,7 +1226,9 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: \${{ matrix.environment }}-deploy
+    concurrency:
+      group: \${{ matrix.environment }}-deploy
+      cancel-in-progress: false
     env:
       STAGE: \${{ matrix.environment }}
     steps:
@@ -1386,7 +1398,9 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: \${{ matrix.environment }}-deploy
+    concurrency:
+      group: \${{ matrix.environment }}-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -1552,7 +1566,9 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: \${{ matrix.environment }}-deploy
+    concurrency:
+      group: \${{ matrix.environment }}-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -1714,7 +1730,9 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: \${{ matrix.environment }}-deploy
+    concurrency:
+      group: \${{ matrix.environment }}-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -1876,7 +1894,9 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: \${{ matrix.environment }}-deploy
+    concurrency:
+      group: \${{ matrix.environment }}-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -2036,7 +2056,9 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: \${{ matrix.environment }}-deploy
+    concurrency:
+      group: \${{ matrix.environment }}-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -2196,7 +2218,9 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: \${{ matrix.environment }}-deploy
+    concurrency:
+      group: \${{ matrix.environment }}-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -2351,7 +2375,9 @@ jobs:
       deployments: read
     environment:
       name: \${{ matrix.environment }}
-    concurrency: \${{ matrix.environment }}-deploy
+    concurrency:
+      group: \${{ matrix.environment }}-deploy
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
