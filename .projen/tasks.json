@@ -307,7 +307,7 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/fs-extra,@types/jest,@types/semver,eslint-import-resolver-typescript,eslint-plugin-import,fs-extra,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,typescript,yaml,semver,constructs"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/fs-extra,@types/jest,@types/node,@types/semver,eslint-import-resolver-typescript,eslint-plugin-import,fs-extra,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,typescript,yaml,semver,constructs"
         },
         {
           "exec": "npm install"
