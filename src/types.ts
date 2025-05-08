@@ -1,4 +1,4 @@
-import {awscdk} from 'projen'
+import { awscdk } from 'projen';
 
 export interface DeployableAwsCdkTypeScriptAppOptions extends awscdk.AwsCdkTypeScriptAppOptions {
   /**
@@ -21,7 +21,7 @@ export interface DeployableAwsCdkTypeScriptAppOptions extends awscdk.AwsCdkTypeS
   readonly checkActiveDeployment?: boolean;
 }
 
-export type DeployMethod = 'direct' | 'change-set' | 'prepare-change-set'
+export type DeployMethod = 'direct' | 'change-set' | 'prepare-change-set';
 
 export interface DeployOptions {
   /**

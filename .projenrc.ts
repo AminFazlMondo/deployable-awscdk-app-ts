@@ -1,6 +1,6 @@
-import {javascript, cdk, TextFile} from 'projen'
+import { javascript, cdk, TextFile } from 'projen';
 
-const nodeVersion = '20'
+const nodeVersion = '20';
 
 const project = new cdk.JsiiProject({
   author: 'Amin Fazl',
@@ -41,26 +41,12 @@ const project = new cdk.JsiiProject({
     allowedUsernames: ['AminFazlMondo'],
   },
   autoApproveUpgrades: true,
-  jsiiVersion: '5.5.x',
+  jsiiVersion: '5.8.x',
   releaseFailureIssue: true,
-})
+});
 
 new TextFile(project, '.nvmrc', {
   lines: [nodeVersion],
-})
+});
 
-project.eslint?.addRules({
-  'curly': [
-    'error',
-    'multi',
-    'consistent',
-  ],
-  'semi': [
-    'error',
-    'never',
-  ],
-  'object-curly-spacing': 'error',
-  'nonblock-statement-body-position': ['error', 'below'],
-})
-
-project.synth()
+project.synth();
