@@ -104,10 +104,10 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 0
+          ref: \${{ github.sha }}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v5
         with:
@@ -135,12 +135,12 @@ jobs:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Pre Deployment
+      - name: Run Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - name: Deployment
+      - name: Run Deployment
         run: npm run deploy:workflow
-      - name: Post Deployment
+      - name: Run Post Deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -261,10 +261,10 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 0
+          ref: \${{ github.sha }}
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
@@ -285,17 +285,15 @@ jobs:
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Pre Deployment
+      - name: Run Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - name: Deployment
+      - name: Run Deployment
         run: npm run deploy:workflow
-      - name: Post Deployment
+      - name: Run Post Deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -756,10 +754,10 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 0
+          ref: \${{ github.sha }}
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -776,17 +774,15 @@ jobs:
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Pre Deployment
+      - name: Run Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - name: Deployment
+      - name: Run Deployment
         run: npm run deploy:workflow
-      - name: Post Deployment
+      - name: Run Post Deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -903,10 +899,10 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 0
+          ref: \${{ github.sha }}
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -923,17 +919,15 @@ jobs:
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Pre Deployment
+      - name: Run Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - name: Deployment
+      - name: Run Deployment
         run: npm run deploy:workflow
-      - name: Post Deployment
+      - name: Run Post Deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -1065,10 +1059,10 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 0
+          ref: \${{ github.sha }}
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
@@ -1089,17 +1083,15 @@ jobs:
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Pre Deployment
+      - name: Run Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - name: Deployment
+      - name: Run Deployment
         run: npm run deploy:workflow
-      - name: Post Deployment
+      - name: Run Post Deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -1230,10 +1222,10 @@ jobs:
       STAGE: \${{ matrix.environment }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 0
+          ref: \${{ github.sha }}
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
@@ -1254,17 +1246,15 @@ jobs:
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Pre Deployment
+      - name: Run Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - name: Deployment
+      - name: Run Deployment
         run: npm run deploy:workflow
-      - name: Post Deployment
+      - name: Run Post Deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -1399,10 +1389,10 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 0
+          ref: \${{ github.sha }}
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
@@ -1423,8 +1413,6 @@ jobs:
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
@@ -1432,12 +1420,12 @@ jobs:
         env:
           CONFIG_VALUE: \${{ matrix.environment }}
         run: npm config set stage $CONFIG_VALUE
-      - name: Pre Deployment
+      - name: Run Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - name: Deployment
+      - name: Run Deployment
         run: npm run deploy:workflow
-      - name: Post Deployment
+      - name: Run Post Deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -1566,10 +1554,10 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 0
+          ref: \${{ github.sha }}
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
@@ -1590,17 +1578,15 @@ jobs:
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Pre Deployment
+      - name: Run Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - name: Deployment
+      - name: Run Deployment
         run: npm run deploy:workflow
-      - name: Post Deployment
+      - name: Run Post Deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -1729,10 +1715,10 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 0
+          ref: \${{ github.sha }}
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
@@ -1753,17 +1739,15 @@ jobs:
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Pre Deployment
+      - name: Run Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - name: Deployment
+      - name: Run Deployment
         run: npm run deploy:workflow
-      - name: Post Deployment
+      - name: Run Post Deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -1892,10 +1876,10 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 0
+          ref: \${{ github.sha }}
       - name: stub-task
         run: npx projen stub-task
       - name: Setup Node.js
@@ -1918,17 +1902,15 @@ jobs:
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Pre Deployment
+      - name: Run Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - name: Deployment
+      - name: Run Deployment
         run: npm run deploy:workflow
-      - name: Post Deployment
+      - name: Run Post Deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -2053,10 +2035,10 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 0
+          ref: \${{ github.sha }}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v5
         with:
@@ -2083,17 +2065,15 @@ jobs:
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Pre Deployment
+      - name: Run Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - name: Deployment
+      - name: Run Deployment
         run: npm run deploy:workflow
-      - name: Post Deployment
+      - name: Run Post Deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -2214,10 +2194,10 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 0
+          ref: \${{ github.sha }}
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
@@ -2244,18 +2224,16 @@ jobs:
         if: \${{ matrix.assumeRole == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Pre Deployment
+      - name: Run Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - name: Deployment
-        if: \${{ steps.deployment-check.outputs.has_active_deployment != 'true' }}
+      - name: Run Deployment
+        if: steps.deployment-check.outputs.has_active_deployment != 'true'
         run: npm run deploy:workflow
-      - name: Post Deployment
+      - name: Run Post Deployment
         if: \${{ matrix.hasPostDeployTask == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -2370,10 +2348,10 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 0
+          ref: \${{ github.sha }}
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -2390,17 +2368,15 @@ jobs:
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: \${{ secrets[matrix.accessKeyIdSecretName] }}
-          aws-secret-access-key: \${{ secrets[matrix.secretAccessKeySecretName] }}
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
-      - name: Pre Deployment
+      - name: Run Pre Deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
-      - name: Deployment
+      - name: Run Deployment
         run: npm run deploy:workflow
-      - name: Post Deployment
+      - name: Run Post Deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:

@@ -1,6 +1,8 @@
 import { javascript } from 'projen';
-import { JobStep } from 'projen/lib/github/workflows-model';
+import { WorkflowSteps } from 'projen/lib/github';
+import { JobPermission, JobStep, Job } from 'projen/lib/github/workflows-model';
 import { CodeArtifactAuthProvider } from 'projen/lib/javascript';
+import { DeployOptions } from './types';
 
 const checkActiveDeploymentStepId = 'deployment-check';
 const skipIfAlreadyActiveDeploymentCondition= `steps.${checkActiveDeploymentStepId}.outputs.has_active_deployment != 'true'`;
@@ -9,11 +11,9 @@ export interface DeployableAwsCdkTypeScriptAppStepsFactoryProps {
   readonly project: javascript.NodeProject;
   readonly checkActiveDeployment: boolean;
   readonly preInstallTaskName?: string;
-  readonly authProvider: CodeArtifactAuthProvider;
-  readonly npmConfig?: {
-    name: string;
-    value: string;
-  };
+  readonly authProvider?: CodeArtifactAuthProvider;
+  readonly deployOptions: DeployOptions;
+  readonly npmConfigEnvironment?: string;
 }
 /**
  * Factory to create reusable steps for the deployment workflow
@@ -29,6 +29,15 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
    */
   public get skipIfAlreadyActiveDeploymentCondition(): JobStep | undefined {
     return this.props.checkActiveDeployment ? { if: `\${{ ${skipIfAlreadyActiveDeploymentCondition} }}` } : undefined;
+  }
+
+  public get checkoutStep(): JobStep {
+    return WorkflowSteps.checkout({
+      with: {
+        fetchDepth: 0,
+        ref: '${{ github.sha }}',
+      },
+    });
   }
 
   /**
@@ -51,7 +60,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
    * Step to check if there is an active deployment for the environment in the matrix strategy
    * @returns JobStep
    */
-  public get checkActiveDeploymentStepForMatrix(): JobStep {
+  public get checkActiveDeploymentStepForMatrix(): JobStep | undefined {
     return this.getCheckActiveDeploymentStepForEnvironment('${{ matrix.environment }}');
   }
 
@@ -60,7 +69,11 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
    * @param environment The environment to check
    * @returns JobStep
    */
-  public getCheckActiveDeploymentStepForEnvironment(environment: string): JobStep {
+  public getCheckActiveDeploymentStepForEnvironment(environment: string): JobStep | undefined {
+    if (!this.props.checkActiveDeployment) {
+      return undefined;
+    }
+
     return {
       id: checkActiveDeploymentStepId,
       uses: 'AminFazlMondo/check-deployed-environment@v1',
@@ -225,9 +238,13 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
    * Step to setup NPM config if provided
    * @returns JobStep or undefined if no npmConfig is provided
    */
-  public get setupNpmConfig(): JobStep | undefined {
-    const { npmConfig } = this.props;
-    if (!npmConfig) {
+  public get setupNpmConfigForMatrix(): JobStep | undefined {
+    return this.getSetupNpmConfigForEnvironment('${{ matrix.environment }}');
+  }
+
+  public getSetupNpmConfigForEnvironment(environment: string): JobStep | undefined {
+    const { npmConfigEnvironment } = this.props;
+    if (!npmConfigEnvironment) {
       return undefined;
     }
 
@@ -236,15 +253,16 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
       ...this.skipIfAlreadyActiveDeploymentCondition,
       name: 'Setting NPM Config',
       env: {
-        [environmentVariableName]: npmConfig.value,
+        [environmentVariableName]: environment,
       },
-      run: `npm config set ${npmConfig.name} $${environmentVariableName}`,
+      run: `npm config set ${npmConfigEnvironment} $${environmentVariableName}`,
     };
   }
 
   /**
    * Get the step to run a specific script
    * @param scriptName The name of the script to run
+   * @param stepName The name of the step in the workflow
    * @param hasScriptFlag Whether the script should be run
    * @returns The job step to run the script or undefined if not applicable
    * If hasScriptFlag is boolean and false will return undefined
@@ -252,6 +270,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
    */
   public getRunScriptStep(
     scriptName: string,
+    stepName: string,
     hasScriptFlag: boolean | string,
   ): JobStep | undefined {
     function getCondition(factory: DeployableAwsCdkTypeScriptAppStepsFactory) {
@@ -273,7 +292,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
 
     return {
       if: condition,
-      name: `Run ${scriptName}`,
+      name: `Run ${stepName}`,
       run: `${this.props.project.runScriptCommand} ${scriptName}`,
     };
   }
@@ -285,6 +304,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
   public get deploymentStep(): JobStep {
     return this.getRunScriptStep(
       'deploy:workflow',
+      'Deployment',
       true,
     )!;
   }
@@ -315,6 +335,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
 
     return this.getRunScriptStep(
       preDeploymentScript,
+      'Pre Deployment',
       hasPreDeployTaskFlag,
     );
   }
@@ -345,8 +366,121 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
 
     return this.getRunScriptStep(
       postDeploymentScript,
+      'Post Deployment',
       hasPostDeployTaskFlag,
     );
+  }
+
+  /**
+   * Get all deployment jobs whether for matrix strategy or not
+   * @returns Record of jobs
+   */
+  public get deploymentJobs(): Record<string, Job> {
+
+    if (this.props.deployOptions.environments.length === 0) {
+      this.props.project.logger.warn('The project does not have any environment set, make sure this is desired setting');
+    }
+    return this.deploymentJobsForMatrix;
+  }
+
+  /**
+   * Get deployment jobs for matrix strategy
+   * @returns Record of jobs
+   */
+  public get deploymentJobsForMatrix(): Record<string, Job> {
+
+    const { environments, environmentVariableName } = this.props.deployOptions;
+
+    const include = environments.map(environmentOptions => {
+      const { awsCredentials } = environmentOptions;
+
+      const assumeRole = awsCredentials.roleToAssume ? 'true' : 'false';
+
+      const assumeRoleSettings = awsCredentials.roleToAssume ? {
+        roleToAssume: awsCredentials.roleToAssume,
+        assumeRoleDurationSeconds: awsCredentials.assumeRoleDurationSeconds || 900,
+      }: undefined;
+
+      const accessKeyIdSecretName = awsCredentials.accessKeyIdSecretName ?? 'AWS_ACCESS_KEY_ID';
+      const secretAccessKeySecretName = awsCredentials.secretAccessKeySecretName ?? 'AWS_SECRET_ACCESS_KEY';
+
+      const hasPostDeployTask = environmentOptions.postDeployWorkflowScript ? 'true' : 'false';
+      const hasPreDeployTask = environmentOptions.preDeployWorkflowScript ? 'true' : 'false';
+
+      return {
+        environment: environmentOptions.name,
+        accessKeyIdSecretName,
+        secretAccessKeySecretName,
+        region: awsCredentials.region,
+        assumeRole,
+        hasPostDeployTask,
+        postDeploymentScript: environmentOptions.postDeployWorkflowScript || '',
+        hasPreDeployTask,
+        preDeploymentScript: environmentOptions.preDeployWorkflowScript || '',
+        ...assumeRoleSettings,
+      };
+    });
+
+    const deployJobEnv = environmentVariableName ? {
+      [environmentVariableName]: '${{ matrix.environment }}',
+    } : undefined;
+
+    const jobDefinition: Job = {
+      runsOn: ['ubuntu-latest'],
+      concurrency: {
+        'group': '${{ matrix.environment }}-deploy',
+        'cancel-in-progress': false,
+      },
+      needs: [
+        'release_github',
+      ],
+      permissions: {
+        contents: JobPermission.READ,
+        deployments: JobPermission.READ,
+        idToken: this.props.authProvider === CodeArtifactAuthProvider.GITHUB_OIDC ? JobPermission.WRITE : undefined,
+      },
+      strategy: {
+        maxParallel: 1,
+        matrix: {
+          domain: {
+            environment: include.map(e => e.environment),
+          },
+          include,
+        },
+      },
+      environment: {
+        name: '${{ matrix.environment }}',
+      },
+      env: deployJobEnv,
+      steps: [],
+    };
+
+    jobDefinition.steps.push(this.checkoutStep);
+
+    const preInstallDependenciesStep = this.preInstallDependenciesStep;
+    if (preInstallDependenciesStep) {
+      jobDefinition.steps.push(preInstallDependenciesStep);
+    }
+
+    jobDefinition.steps.push(...(this.props.project).renderWorkflowSetup());
+
+    const checkActiveDeploymentStepForMatrix = this.checkActiveDeploymentStepForMatrix;
+    if (checkActiveDeploymentStepForMatrix) {
+      jobDefinition.steps.push(checkActiveDeploymentStepForMatrix);
+    }
+
+    jobDefinition.steps.push(...this.setupAwsCredentialsStepsForMatrix);
+
+    const setupNpmConfigStep = this.setupNpmConfigForMatrix;
+    if (setupNpmConfigStep) {
+      jobDefinition.steps.push(setupNpmConfigStep);
+    }
+
+    jobDefinition.steps.push(this.preDeploymentStepForMatrix);
+    jobDefinition.steps.push(this.deploymentStep);
+    jobDefinition.steps.push(this.postDeploymentStepForMatrix);
+
+    return { deploy: jobDefinition };
   }
 
 }
