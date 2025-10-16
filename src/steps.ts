@@ -47,6 +47,7 @@ export interface DeployableAwsCdkTypeScriptAppStepsFactoryProps {
 
 /**
  * Factory to create reusable steps for the deployment workflow
+ * @experimental
  */
 export class DeployableAwsCdkTypeScriptAppStepsFactory {
   constructor(
