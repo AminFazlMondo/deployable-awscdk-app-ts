@@ -556,7 +556,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
   public getDeploymentJobPrerequisiteJobIds(environmentName: string): string[] {
     const result = ['release_github'];
     const index = this.props.deployOptions.environments.findIndex(env => env.name === environmentName);
-    const prerequisiteEnvironment = index > 1 ? this.props.deployOptions.environments[index - 1] : undefined;
+    const prerequisiteEnvironment = index > 0 ? this.props.deployOptions.environments[index - 1] : undefined;
     if (prerequisiteEnvironment) {
       result.push(getDeployJobId(prerequisiteEnvironment.name));
     }

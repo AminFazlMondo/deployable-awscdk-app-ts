@@ -4,7 +4,7 @@ import * as path from 'path';
 import { CodeArtifactAuthProvider, NodePackageManager } from 'projen/lib/javascript';
 import { SynthOutput, synthSnapshot } from 'projen/lib/util/synth';
 import * as YAML from 'yaml';
-import { DeployableAwsCdkTypeScriptApp } from '../src';
+import { DeployableAwsCdkTypeScriptApp, DeployJobStrategy } from '../src';
 
 
 const releaseWorkflowFilePath = '.github/workflows/release.yml';
@@ -696,6 +696,81 @@ describe('node version 18', () => {
           ],
         },
       })).toThrow();
+    });
+  });
+});
+
+describe('deployment strategy', () => {
+  describe('matrix', () => {
+    const project = new DeployableAwsCdkTypeScriptApp({
+      packageManager: NodePackageManager.NPM,
+      name: 'my-test-app',
+      defaultReleaseBranch: 'main',
+      cdkVersion: '1.129.0',
+      workflowNodeVersion: '14.18.1',
+      outdir: mkdtemp(),
+      deployOptions: {
+        jobStrategy: DeployJobStrategy.MATRIX,
+        environments: [
+          {
+            name: 'dev',
+            awsCredentials: {
+              accessKeyIdSecretName: 'dev-secret-1',
+              secretAccessKeySecretName: 'dev-secret-2',
+              region: 'dev-aws-region-1',
+            },
+          },
+          {
+            name: 'staging',
+            awsCredentials: {
+              accessKeyIdSecretName: 'staging-secret-1',
+              secretAccessKeySecretName: 'staging-secret-2',
+              region: 'staging-aws-region-1',
+            },
+          },
+        ],
+      },
+    });
+    const synthOutput = synthSnapshot(project);
+
+    test('release workflow', () => {
+      expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot();
+    });
+  });
+
+  describe('multiple jobs synchronous', () => {
+    const project = new DeployableAwsCdkTypeScriptApp({
+      packageManager: NodePackageManager.NPM,
+      name: 'my-test-app',
+      defaultReleaseBranch: 'main',
+      cdkVersion: '1.129.0',
+      workflowNodeVersion: '14.18.1',
+      outdir: mkdtemp(),
+      deployOptions: {
+        jobStrategy: DeployJobStrategy.MULTI_JOB,
+        environments: [
+          {
+            name: 'dev',
+            awsCredentials: {
+              accessKeyIdSecretName: 'dev-secret-1',
+              secretAccessKeySecretName: 'dev-secret-2',
+              region: 'dev-aws-region-1',
+            },
+          },
+          {
+            name: 'staging',
+            awsCredentials: {
+              roleToAssume: 'staging-role',
+              region: 'staging-aws-region-1',
+            },
+          },
+        ],
+      },
+    });
+    const synthOutput = synthSnapshot(project);
+
+    test('release workflow', () => {
+      expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot();
     });
   });
 });
