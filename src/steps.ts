@@ -2,7 +2,7 @@ import { javascript } from 'projen';
 import { WorkflowSteps } from 'projen/lib/github';
 import { JobPermission, JobStep, Job } from 'projen/lib/github/workflows-model';
 import { CodeArtifactAuthProvider } from 'projen/lib/javascript';
-import { DeployJobStrategy, DeployOptions } from './types';
+import { DeployJobStrategy, DeployOptions, EnvironmentOptions } from './types';
 
 const checkActiveDeploymentStepId = 'deployment-check';
 const skipIfAlreadyActiveDeploymentCondition= `steps.${checkActiveDeploymentStepId}.outputs.has_active_deployment != 'true'`;
@@ -125,6 +125,41 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
       this.setupAwsCredentialsInEnvironmentForMatrix,
       this.assumeAwsRoleStepForMatrix,
     ];
+  }
+
+  /**
+   * Get the steps to setup AWS credentials for a specific environment
+   * @param environmentOptions The environment options
+   * @returns JobStep[]
+   */
+  public getSetupAwsCredentialsStepsForEnvironment(environmentOptions: EnvironmentOptions): JobStep[] {
+    const steps: JobStep[] = [];
+
+    const fromEnvVariableStep = this.getSetupAwsCredentialsInEnvironmentForEnvironment(
+      environmentOptions.awsCredentials.roleToAssume ? true : false,
+      environmentOptions.awsCredentials.accessKeyIdSecretName ?? 'AWS_ACCESS_KEY_ID',
+      environmentOptions.awsCredentials.secretAccessKeySecretName ?? 'AWS_SECRET_ACCESS_KEY',
+      environmentOptions.awsCredentials.region,
+    );
+
+    if (fromEnvVariableStep) {
+      steps.push(fromEnvVariableStep);
+    }
+
+    const assumeRoleStep = this.getAssumeAwsRoleStepForEnvironment(
+      environmentOptions.awsCredentials.roleToAssume ? true : false,
+      environmentOptions.awsCredentials.accessKeyIdSecretName ?? 'AWS_ACCESS_KEY_ID',
+      environmentOptions.awsCredentials.secretAccessKeySecretName ?? 'AWS_SECRET_ACCESS_KEY',
+      environmentOptions.awsCredentials.region,
+      environmentOptions.awsCredentials.roleToAssume ?? '',
+      environmentOptions.awsCredentials.assumeRoleDurationSeconds ?? 900,
+    );
+
+    if (assumeRoleStep) {
+      steps.push(assumeRoleStep);
+    }
+
+    return steps;
   }
 
   /**
@@ -410,7 +445,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
     if (this.props.deployOptions.environments.length === 0) {
       this.props.project.logger.warn('The project does not have any environment set, make sure this is desired setting');
     }
-    return this.deploymentJobsForMatrix;
+    return this.props.jobStrategy === DeployJobStrategy.MATRIX ? this.deploymentJobsForMatrix : this.getDeploymentJobsForMultiJob();
   }
 
   /**
@@ -513,4 +548,111 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
     return { deploy: jobDefinition };
   }
 
+  /**
+   * Get the IDs of the jobs that must be completed before the specified environment's deployment job
+   * @param environmentName The name of the environment
+   * @returns An array of job IDs
+   */
+  public getDeploymentJobPrerequisiteJobIds(environmentName: string): string[] {
+    const result = ['release_github'];
+    const index = this.props.deployOptions.environments.findIndex(env => env.name === environmentName);
+    const prerequisiteEnvironment = index > 1 ? this.props.deployOptions.environments[index - 1] : undefined;
+    if (prerequisiteEnvironment) {
+      result.push(getDeployJobId(prerequisiteEnvironment.name));
+    }
+    return result;
+  }
+
+  /**
+   * Get deployment jobs for multi-job strategy
+   * @returns Record of jobs
+   */
+  public getDeploymentJobsForMultiJob(): Record<string, Job> {
+    const { environmentVariableName, environments } = this.props.deployOptions;
+    const jobs = environments.map((environmentOptions): [string, Job] => {
+      return [getDeployJobId(environmentOptions.name), this.getJobForEnvironment(environmentOptions, environmentVariableName)];
+    });
+    return Object.fromEntries(jobs);
+  }
+
+  /**
+   * Get the job definition for a specific environment
+   * @param environmentOptions The environment options
+   * @param environmentVariableName The name of the environment variable to set with the environment name, if any
+   * @returns The job definition for the environment
+   */
+  public getJobForEnvironment(
+    environmentOptions: EnvironmentOptions,
+    environmentVariableName: string | undefined,
+  ): Job {
+    const { name } = environmentOptions;
+    const deployJobEnv = environmentVariableName ? {
+      [environmentVariableName]: name,
+    } : undefined;
+
+    const jobDefinition: Job = {
+      runsOn: ['ubuntu-latest'],
+      concurrency: {
+        'group': `${name}-deploy`,
+        'cancel-in-progress': false,
+      },
+      needs: this.getDeploymentJobPrerequisiteJobIds(name),
+      permissions: {
+        contents: JobPermission.READ,
+        deployments: JobPermission.READ,
+        idToken: this.props.authProvider === CodeArtifactAuthProvider.GITHUB_OIDC ? JobPermission.WRITE : undefined,
+      },
+      environment: {
+        name: name,
+      },
+      env: deployJobEnv,
+      steps: [],
+    };
+
+    jobDefinition.steps.push(this.checkoutStep);
+
+    const preInstallDependenciesStep = this.preInstallDependenciesStep;
+    if (preInstallDependenciesStep) {
+      jobDefinition.steps.push(preInstallDependenciesStep);
+    }
+
+    jobDefinition.steps.push(...(this.props.project).renderWorkflowSetup());
+
+    const checkActiveDeploymentStep = this.getCheckActiveDeploymentStepForEnvironment(name);
+    if (checkActiveDeploymentStep) {
+      jobDefinition.steps.push(checkActiveDeploymentStep);
+    }
+
+    jobDefinition.steps.push(...this.getSetupAwsCredentialsStepsForEnvironment(environmentOptions));
+
+    const setupNpmConfigStep = this.getSetupNpmConfigForEnvironment(name);
+    if (setupNpmConfigStep) {
+      jobDefinition.steps.push(setupNpmConfigStep);
+    }
+
+    const preDeploymentStep = this.getPreDeploymentStepForEnvironment(
+      environmentOptions.preDeployWorkflowScript ? true : false,
+      environmentOptions.preDeployWorkflowScript || '',
+    );
+    if (preDeploymentStep) {
+      jobDefinition.steps.push(preDeploymentStep);
+    }
+
+    jobDefinition.steps.push(this.deploymentStep);
+
+    const postDeploymentStep = this.getPostDeploymentStepForEnvironment(
+      environmentOptions.postDeployWorkflowScript ? true : false,
+      environmentOptions.postDeployWorkflowScript || '',
+    );
+    if (postDeploymentStep) {
+      jobDefinition.steps.push(postDeploymentStep);
+    }
+
+    return jobDefinition;
+  }
+
+}
+
+function getDeployJobId(environmentName: string): string {
+  return `Deploy-${environmentName}`;
 }
