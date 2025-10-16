@@ -1,7 +1,7 @@
 import { awscdk, Task, TextFile } from 'projen';
 import { CodeArtifactOptions } from 'projen/lib/javascript';
 import { DeployableAwsCdkTypeScriptAppStepsFactory } from './steps';
-import { DeployableAwsCdkTypeScriptAppOptions, DeployOptions, EnvironmentOptions } from './types';
+import { DeployableAwsCdkTypeScriptAppOptions, DeployJobStrategy, DeployOptions, EnvironmentOptions } from './types';
 import { getMajorNodeVersion } from './utils';
 
 export * from './types';
@@ -20,6 +20,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
   private readonly workflowNodeVersion?: string;
   protected deployOptions: DeployOptions;
   private readonly codeArtifactOptions?: CodeArtifactOptions;
+  private readonly deployJobStrategy: DeployJobStrategy;
 
   constructor(options: DeployableAwsCdkTypeScriptAppOptions) {
     const deployable = options.release ?? true;
@@ -33,6 +34,8 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     this.workflowNodeVersion = options.workflowNodeVersion;
     this.deployOptions = options.deployOptions ?? { environments: [] };
     this.codeArtifactOptions = options.codeArtifactOptions;
+    this.deployJobStrategy = this.deployOptions.jobStrategy ?? DeployJobStrategy.MATRIX;
+
     this.addDevDeps('deployable-awscdk-app-ts');
 
     if (!deployable) {this.logger.warn('The project is explicitly set to not release, make sure this is desired setting');}
@@ -136,6 +139,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       deployOptions: this.deployOptions,
       preInstallTaskName: this.deployOptions.taskToRunPreInstall,
       npmConfigEnvironment: this.deployOptions.npmConfigEnvironment,
+      jobStrategy: this.deployJobStrategy,
     });
 
     this.release?.addJobs(stepFactory.deploymentJobs);

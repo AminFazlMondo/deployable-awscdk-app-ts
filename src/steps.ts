@@ -2,19 +2,49 @@ import { javascript } from 'projen';
 import { WorkflowSteps } from 'projen/lib/github';
 import { JobPermission, JobStep, Job } from 'projen/lib/github/workflows-model';
 import { CodeArtifactAuthProvider } from 'projen/lib/javascript';
-import { DeployOptions } from './types';
+import { DeployJobStrategy, DeployOptions } from './types';
 
 const checkActiveDeploymentStepId = 'deployment-check';
 const skipIfAlreadyActiveDeploymentCondition= `steps.${checkActiveDeploymentStepId}.outputs.has_active_deployment != 'true'`;
 
 export interface DeployableAwsCdkTypeScriptAppStepsFactoryProps {
+  /**
+   * The project instance
+   */
   readonly project: javascript.NodeProject;
-  readonly checkActiveDeployment: boolean;
-  readonly preInstallTaskName?: string;
-  readonly authProvider?: CodeArtifactAuthProvider;
+
+  /**
+   * Deployment options
+   */
   readonly deployOptions: DeployOptions;
+
+  /**
+   * Whether to check for active deployments before proceeding with deployment
+   */
+  readonly checkActiveDeployment: boolean;
+
+  /**
+   * The name of the task to run before installing dependencies, if any
+   */
+  readonly preInstallTaskName?: string;
+
+  /**
+   * The authentication provider for CodeArtifact, if any
+   */
+  readonly authProvider?: CodeArtifactAuthProvider;
+
+  /**
+   * The npm config to set with the environment that is being deployed, if any
+   * Note: This is not supported for node versions above 18
+   */
   readonly npmConfigEnvironment?: string;
+
+  /**
+   * Deployment job strategy, whether to use a matrix job or multiple jobs for each environment
+   */
+  readonly jobStrategy: DeployJobStrategy;
 }
+
 /**
  * Factory to create reusable steps for the deployment workflow
  */
