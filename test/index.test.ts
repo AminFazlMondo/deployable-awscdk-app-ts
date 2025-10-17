@@ -773,4 +773,88 @@ describe('deployment strategy', () => {
       expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot();
     });
   });
+
+  describe('multiple jobs with dependencies', () => {
+    const project = new DeployableAwsCdkTypeScriptApp({
+      packageManager: NodePackageManager.NPM,
+      name: 'my-test-app',
+      defaultReleaseBranch: 'main',
+      cdkVersion: '1.129.0',
+      workflowNodeVersion: '14.18.1',
+      outdir: mkdtemp(),
+      deployOptions: {
+        jobStrategy: DeployJobStrategy.MULTI_JOB,
+        environments: [
+          {
+            name: 'dev',
+            awsCredentials: {
+              accessKeyIdSecretName: 'dev-secret-1',
+              secretAccessKeySecretName: 'dev-secret-2',
+              region: 'dev-aws-region-1',
+            },
+          },
+          {
+            name: 'stagingRegion1',
+            awsCredentials: {
+              roleToAssume: 'staging-role',
+              region: 'staging-aws-region-1',
+            },
+          },
+          {
+            name: 'prodRegion1',
+            awsCredentials: {
+              roleToAssume: 'prod-role',
+              region: 'prod-aws-region-1',
+            },
+            postDeployWorkflowScript: 'post-deploy-prod',
+          },
+          {
+            name: 'stagingRegion2',
+            awsCredentials: {
+              roleToAssume: 'staging-role',
+              region: 'staging-aws-region-2',
+            },
+          },
+          {
+            name: 'prodRegion2',
+            awsCredentials: {
+              roleToAssume: 'prod-role',
+              region: 'prod-aws-region-2',
+            },
+            preDeployWorkflowScript: 'pre-deploy-prod',
+          },
+        ],
+      },
+    });
+
+    test('Should fail when deploy dependencies are not part of the environments', () => {
+      expect(() => {
+        project.updateEnvironmentDeploymentDependencies({
+          stagingRegion1: ['dev'],
+          prodRegion1: ['stagingRegion1'],
+          nonExistentEnv: [],
+        });
+      }).toThrow('Environment "nonExistentEnv" defined in dependencies does not exist in deployOptions.environments');
+    });
+
+    test('Should fail when deploy dependencies list are not part of the environments', () => {
+      expect(() => {
+        project.updateEnvironmentDeploymentDependencies({
+          stagingRegion1: ['dev'],
+          prodRegion1: ['nonExistentEnv'],
+        });
+      }).toThrow('Dependency environment "nonExistentEnv" for environment "prodRegion1" does not exist in deployOptions.environments');
+    });
+
+    test('Should generate correct workflow with valid dependencies', () => {
+      project.updateEnvironmentDeploymentDependencies({
+        stagingRegion1: ['dev'],
+        prodRegion1: ['stagingRegion1'],
+        stagingRegion2: ['dev'],
+        prodRegion2: ['stagingRegion2'],
+      });
+      const synthOutput = synthSnapshot(project);
+      expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot();
+    });
+  });
 });

@@ -2,7 +2,7 @@ import { javascript } from 'projen';
 import { WorkflowSteps } from 'projen/lib/github';
 import { JobPermission, JobStep, Job } from 'projen/lib/github/workflows-model';
 import { CodeArtifactAuthProvider } from 'projen/lib/javascript';
-import { DeployJobStrategy, DeployOptions, EnvironmentOptions } from './types';
+import { DeployJobStrategy, DeployOptions, EnvironmentDeploymentDependencies, EnvironmentOptions } from './types';
 
 const checkActiveDeploymentStepId = 'deployment-check';
 const skipIfAlreadyActiveDeploymentCondition= `steps.${checkActiveDeploymentStepId}.outputs.has_active_deployment != 'true'`;
@@ -38,6 +38,11 @@ export interface DeployableAwsCdkTypeScriptAppStepsFactoryProps {
    * Deployment job strategy, whether to use a matrix job or multiple jobs for each environment
    */
   readonly jobStrategy: DeployJobStrategy;
+
+  /**
+   * Environment deployment dependencies, if any
+   */
+  readonly environmentDependencies?: EnvironmentDeploymentDependencies;
 }
 
 /**
@@ -45,6 +50,35 @@ export interface DeployableAwsCdkTypeScriptAppStepsFactoryProps {
  * @experimental
  */
 export class DeployableAwsCdkTypeScriptAppStepsFactory {
+
+  /**
+   * Validate that the provided environment deployment dependencies are valid
+   * @param deployOptions The deployment options
+   * @param environmentDependencies The environment deployment dependencies to validate
+   */
+  public static validateEnvironmentDeploymentDependencies(
+    deployOptions: DeployOptions,
+    environmentDependencies: EnvironmentDeploymentDependencies,
+  ): void {
+
+    if (deployOptions.jobStrategy !== DeployJobStrategy.MULTI_JOB) {
+      throw new Error('Environment deployment dependencies are only supported for MULTI_JOB strategy');
+    }
+
+    Object.entries(environmentDependencies).forEach(([env, deps]) => {
+      const hasEnvironment = deployOptions.environments.some(e => e.name === env);
+      if (!hasEnvironment) {
+        throw new Error(`Environment "${env}" defined in dependencies does not exist in deployOptions.environments`);
+      }
+      deps.forEach(dep => {
+        const hasDepEnvironment = deployOptions.environments.some(e => e.name === dep);
+        if (!hasDepEnvironment) {
+          throw new Error(`Dependency environment "${dep}" for environment "${env}" does not exist in deployOptions.environments`);
+        }
+      });
+    });
+  }
+
   /**
    * Create a new DeployableAwsCdkTypeScriptAppStepsFactory
    * @param project The project
@@ -557,10 +591,19 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
    */
   public getDeploymentJobPrerequisiteJobIds(environmentName: string): string[] {
     const result = ['release_github'];
-    const index = this.props.deployOptions.environments.findIndex(env => env.name === environmentName);
-    const prerequisiteEnvironment = index > 0 ? this.props.deployOptions.environments[index - 1] : undefined;
-    if (prerequisiteEnvironment) {
-      result.push(getDeployJobId(prerequisiteEnvironment.name));
+    if (!this.props.environmentDependencies) {
+      const index = this.props.deployOptions.environments.findIndex(env => env.name === environmentName);
+      const prerequisiteEnvironment = index > 0 ? this.props.deployOptions.environments[index - 1] : undefined;
+      if (prerequisiteEnvironment) {
+        result.push(getDeployJobId(prerequisiteEnvironment.name));
+      }
+    } else {
+      const dependencies = this.props.environmentDependencies[environmentName];
+      if (dependencies) {
+        dependencies.forEach(dep => {
+          result.push(getDeployJobId(dep));
+        });
+      }
     }
     return result;
   }

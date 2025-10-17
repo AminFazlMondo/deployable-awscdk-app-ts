@@ -138,3 +138,8 @@ export interface AWSCredentials {
    */
   readonly region: string;
 }
+
+/**
+ * A map of environment names to the list of environment names they depend on for deployment
+ */
+export type EnvironmentDeploymentDependencies = Record<string, string[]>;

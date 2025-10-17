@@ -1,7 +1,7 @@
 import { awscdk, Task, TextFile } from 'projen';
 import { CodeArtifactOptions } from 'projen/lib/javascript';
 import { DeployableAwsCdkTypeScriptAppStepsFactory } from './steps';
-import { DeployableAwsCdkTypeScriptAppOptions, DeployJobStrategy, DeployOptions, EnvironmentOptions } from './types';
+import { DeployableAwsCdkTypeScriptAppOptions, DeployJobStrategy, DeployOptions, EnvironmentDeploymentDependencies, EnvironmentOptions } from './types';
 import { getMajorNodeVersion } from './utils';
 
 export * from './types';
@@ -21,6 +21,8 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
   protected deployOptions: DeployOptions;
   private readonly codeArtifactOptions?: CodeArtifactOptions;
   private readonly deployJobStrategy: DeployJobStrategy;
+
+  private environmentDependencies: EnvironmentDeploymentDependencies | undefined;
 
   constructor(options: DeployableAwsCdkTypeScriptAppOptions) {
     const deployable = options.release ?? true;
@@ -139,8 +141,22 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       preInstallTaskName: this.deployOptions.taskToRunPreInstall,
       npmConfigEnvironment: this.deployOptions.npmConfigEnvironment,
       jobStrategy: this.deployJobStrategy,
+      environmentDependencies: this.environmentDependencies,
     });
 
     this.release?.addJobs(stepFactory.deploymentJobs);
+  }
+
+  /**
+   * Update environment deployment dependencies
+   * @param environmentDependencies an object defining dependencies between environments
+   */
+  public updateEnvironmentDeploymentDependencies(environmentDependencies: EnvironmentDeploymentDependencies) {
+    DeployableAwsCdkTypeScriptAppStepsFactory.validateEnvironmentDeploymentDependencies(
+      this.deployOptions,
+      environmentDependencies,
+    );
+
+    this.environmentDependencies = environmentDependencies;
   }
 }

@@ -60,6 +60,7 @@ new DeployableAwsCdkTypeScriptApp(options: DeployableAwsCdkTypeScriptAppOptions)
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.setScript">setScript</a></code> | Replaces the contents of an npm package.json script. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCdkDependency">addCdkDependency</a></code> | Adds an AWS CDK module dependencies. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments">addEnvironments</a></code> | Add new environments to the application. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updateEnvironmentDeploymentDependencies">updateEnvironmentDeploymentDependencies</a></code> | Update environment deployment dependencies. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments">updatePostDeployWorkflowScriptToEnvironments</a></code> | Updates the postDeployWorkflowScript for environments. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePreDeployWorkflowScriptToEnvironments">updatePreDeployWorkflowScriptToEnvironments</a></code> | Updates the preDeployWorkflowScript for environments. |
 
@@ -611,6 +612,22 @@ Add new environments to the application.
 - *Type:* ...<a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>[]
 
 list of environment options.
+
+---
+
+##### `updateEnvironmentDeploymentDependencies` <a name="updateEnvironmentDeploymentDependencies" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updateEnvironmentDeploymentDependencies"></a>
+
+```typescript
+public updateEnvironmentDeploymentDependencies(environmentDependencies: {[ key: string ]: string[]}): void
+```
+
+Update environment deployment dependencies.
+
+###### `environmentDependencies`<sup>Required</sup> <a name="environmentDependencies" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updateEnvironmentDeploymentDependencies.parameter.environmentDependencies"></a>
+
+- *Type:* {[ key: string ]: string[]}
+
+an object defining dependencies between environments.
 
 ---
 
