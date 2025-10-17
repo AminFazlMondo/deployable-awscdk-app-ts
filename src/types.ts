@@ -23,6 +23,11 @@ export interface DeployableAwsCdkTypeScriptAppOptions extends awscdk.AwsCdkTypeS
 
 export type DeployMethod = 'direct' | 'change-set' | 'prepare-change-set';
 
+export enum DeployJobStrategy {
+  MATRIX = 'matrix',
+  MULTI_JOB = 'multi-job',
+}
+
 export interface DeployOptions {
   /**
    * Environment settings to deploy to
@@ -67,6 +72,12 @@ export interface DeployOptions {
    * @default "change-set"
    */
   readonly method?: DeployMethod;
+
+  /**
+   * Deployment job strategy, whether to use a matrix job or multiple jobs for each environment
+   * @default "matrix"
+   */
+  readonly jobStrategy?: DeployJobStrategy;
 }
 
 export interface EnvironmentOptions {

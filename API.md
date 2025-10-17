@@ -4588,6 +4588,7 @@ const deployOptions: DeployOptions = { ... }
 | --- | --- | --- |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.environments">environments</a></code> | <code><a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>[]</code> | Environment settings to deploy to. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.environmentVariableName">environmentVariableName</a></code> | <code>string</code> | Name of the environment variable used to set the deploy environment name. |
+| <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.jobStrategy">jobStrategy</a></code> | <code><a href="#deployable-awscdk-app-ts.DeployJobStrategy">DeployJobStrategy</a></code> | Deployment job strategy, whether to use a matrix job or multiple jobs for each environment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.method">method</a></code> | <code>string</code> | How to perform the deployment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.npmConfigEnvironment">npmConfigEnvironment</a></code> | <code>string</code> | npm config name to set as the environment name This might be useful in deployment process. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.stackPattern">stackPattern</a></code> | <code>string</code> | Regex for stacks to be deployed. |
@@ -4617,6 +4618,19 @@ public readonly environmentVariableName: string;
 - *Default:* undefined
 
 Name of the environment variable used to set the deploy environment name.
+
+---
+
+##### `jobStrategy`<sup>Optional</sup> <a name="jobStrategy" id="deployable-awscdk-app-ts.DeployOptions.property.jobStrategy"></a>
+
+```typescript
+public readonly jobStrategy: DeployJobStrategy;
+```
+
+- *Type:* <a href="#deployable-awscdk-app-ts.DeployJobStrategy">DeployJobStrategy</a>
+- *Default:* "matrix"
+
+Deployment job strategy, whether to use a matrix job or multiple jobs for each environment.
 
 ---
 
@@ -4764,4 +4778,26 @@ The script/task to run before deployment of the environment in the workflow If n
 
 
 
+
+## Enums <a name="Enums" id="Enums"></a>
+
+### DeployJobStrategy <a name="DeployJobStrategy" id="deployable-awscdk-app-ts.DeployJobStrategy"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#deployable-awscdk-app-ts.DeployJobStrategy.MATRIX">MATRIX</a></code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployJobStrategy.MULTI_JOB">MULTI_JOB</a></code> | *No description.* |
+
+---
+
+##### `MATRIX` <a name="MATRIX" id="deployable-awscdk-app-ts.DeployJobStrategy.MATRIX"></a>
+
+---
+
+
+##### `MULTI_JOB` <a name="MULTI_JOB" id="deployable-awscdk-app-ts.DeployJobStrategy.MULTI_JOB"></a>
+
+---
 
