@@ -9,11 +9,6 @@ const skipIfAlreadyActiveDeploymentCondition= `steps.${checkActiveDeploymentStep
 
 export interface DeployableAwsCdkTypeScriptAppStepsFactoryProps {
   /**
-   * The project instance
-   */
-  readonly project: javascript.NodeProject;
-
-  /**
    * Deployment options
    */
   readonly deployOptions: DeployOptions;
@@ -50,7 +45,13 @@ export interface DeployableAwsCdkTypeScriptAppStepsFactoryProps {
  * @experimental
  */
 export class DeployableAwsCdkTypeScriptAppStepsFactory {
+  /**
+   * Create a new DeployableAwsCdkTypeScriptAppStepsFactory
+   * @param project The project
+   * @param props The factory properties
+   */
   constructor(
+    private readonly project: javascript.NodeProject,
     private readonly props: DeployableAwsCdkTypeScriptAppStepsFactoryProps,
   ) {}
 
@@ -359,7 +360,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
     return {
       if: condition,
       name: `Run ${stepName}`,
-      run: `${this.props.project.runScriptCommand} ${scriptName}`,
+      run: `${this.project.runScriptCommand} ${scriptName}`,
     };
   }
 
@@ -444,7 +445,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
   public get deploymentJobs(): Record<string, Job> {
 
     if (this.props.deployOptions.environments.length === 0) {
-      this.props.project.logger.warn('The project does not have any environment set, make sure this is desired setting');
+      this.project.logger.warn('The project does not have any environment set, make sure this is desired setting');
     }
     return this.props.jobStrategy === DeployJobStrategy.MATRIX ? this.deploymentJobsForMatrix : this.getDeploymentJobsForMultiJob();
   }
@@ -528,7 +529,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
       jobDefinition.steps.push(preInstallDependenciesStep);
     }
 
-    jobDefinition.steps.push(...(this.props.project).renderWorkflowSetup());
+    jobDefinition.steps.push(...(this.project).renderWorkflowSetup());
 
     const checkActiveDeploymentStepForMatrix = this.checkActiveDeploymentStepForMatrix;
     if (checkActiveDeploymentStepForMatrix) {
@@ -617,7 +618,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
       jobDefinition.steps.push(preInstallDependenciesStep);
     }
 
-    jobDefinition.steps.push(...(this.props.project).renderWorkflowSetup());
+    jobDefinition.steps.push(...(this.project).renderWorkflowSetup());
 
     const checkActiveDeploymentStep = this.getCheckActiveDeploymentStepForEnvironment(name);
     if (checkActiveDeploymentStep) {

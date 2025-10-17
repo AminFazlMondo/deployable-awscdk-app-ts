@@ -132,8 +132,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
   private addDeployJobs() {
 
-    const stepFactory = new DeployableAwsCdkTypeScriptAppStepsFactory({
-      project: this,
+    const stepFactory = new DeployableAwsCdkTypeScriptAppStepsFactory(this, {
       authProvider: this.codeArtifactOptions?.authProvider,
       checkActiveDeployment: this.checkActiveDeployment,
       deployOptions: this.deployOptions,
