@@ -1,6 +1,6 @@
 import { javascript, cdk, TextFile } from 'projen';
 
-const nodeVersion = '20';
+const workflowNodeVersion = '24';
 
 const project = new cdk.JsiiProject({
   author: 'Amin Fazl',
@@ -17,7 +17,7 @@ const project = new cdk.JsiiProject({
   projenrcTs: true,
   repositoryUrl: 'https://github.com/AminFazlMondo/deployable-awscdk-app-ts.git',
   packageManager: javascript.NodePackageManager.NPM,
-  pnpmVersion: '8',
+  npmTrustedPublishing: true,
   npmAccess: javascript.NpmAccess.PUBLIC,
   deps: [
     'projen',
@@ -35,18 +35,19 @@ const project = new cdk.JsiiProject({
     '@types/semver',
     'yaml',
   ],
-  workflowNodeVersion: nodeVersion,
+  workflowNodeVersion,
+  minNodeVersion: '20.0.0',
   publishTasks: true,
   autoApproveOptions: {
     allowedUsernames: ['AminFazlMondo'],
   },
   autoApproveUpgrades: true,
-  jsiiVersion: '5.8.x',
+  jsiiVersion: '5.9.x',
   releaseFailureIssue: true,
 });
 
 new TextFile(project, '.nvmrc', {
-  lines: [nodeVersion],
+  lines: [workflowNodeVersion],
 });
 
 project.synth();
