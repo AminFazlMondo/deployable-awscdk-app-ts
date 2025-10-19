@@ -224,11 +224,9 @@
       "env": {
         "NPM_DIST_TAG": "latest",
         "NPM_REGISTRY": "registry.npmjs.org",
-        "NPM_CONFIG_PROVENANCE": "true"
+        "NPM_CONFIG_PROVENANCE": "true",
+        "NPM_TRUSTED_PUBLISHER": "true"
       },
-      "requiredEnv": [
-        "NPM_TOKEN"
-      ],
       "steps": [
         {
           "exec": "test \"$(git branch --show-current)\" = \"main\""
@@ -309,7 +307,7 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/fs-extra,@types/jest,@types/node,@types/semver,eslint-import-resolver-typescript,eslint-plugin-import,fs-extra,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,typescript,yaml,semver,constructs"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/fs-extra,@types/jest,@types/semver,eslint-import-resolver-typescript,eslint-plugin-import,fs-extra,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,typescript,yaml,semver,constructs"
         },
         {
           "exec": "npm install"
