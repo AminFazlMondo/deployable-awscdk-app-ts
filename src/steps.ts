@@ -481,7 +481,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
     if (this.props.deployOptions.environments.length === 0) {
       this.project.logger.warn('The project does not have any environment set, make sure this is desired setting');
     }
-    return this.props.jobStrategy === DeployJobStrategy.MATRIX ? this.deploymentJobsForMatrix : this.getDeploymentJobsForMultiJob();
+    return this.props.jobStrategy === DeployJobStrategy.MATRIX ? this.deploymentJobsForMatrix : this.deploymentJobsForMultiJob;
   }
 
   /**
@@ -612,7 +612,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
    * Get deployment jobs for multi-job strategy
    * @returns Record of jobs
    */
-  public getDeploymentJobsForMultiJob(): Record<string, Job> {
+  public get deploymentJobsForMultiJob(): Record<string, Job> {
     const { environmentVariableName, environments } = this.props.deployOptions;
     const jobs = environments.map((environmentOptions): [string, Job] => {
       return [getDeployJobId(environmentOptions.name), this.getJobForEnvironment(environmentOptions, environmentVariableName)];
