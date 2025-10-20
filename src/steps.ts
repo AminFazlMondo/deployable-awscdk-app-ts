@@ -698,6 +698,11 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
 
 }
 
-function getDeployJobId(environmentName: string): string {
+/**
+ * Get the deploy job ID for a specific environment
+ * @param environmentName The name of the environment
+ * @returns The deploy job ID
+ */
+export function getDeployJobId(environmentName: string): string {
   return `Deploy-${environmentName}`;
 }
