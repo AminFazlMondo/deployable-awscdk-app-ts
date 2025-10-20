@@ -4589,6 +4589,114 @@ Whether to generate nvmrc file for the node version of the project if set to tru
 
 ---
 
+### DeployableAwsCdkTypeScriptAppStepsFactoryProps <a name="DeployableAwsCdkTypeScriptAppStepsFactoryProps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps"></a>
+
+#### Initializer <a name="Initializer" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.Initializer"></a>
+
+```typescript
+import { DeployableAwsCdkTypeScriptAppStepsFactoryProps } from 'deployable-awscdk-app-ts'
+
+const deployableAwsCdkTypeScriptAppStepsFactoryProps: DeployableAwsCdkTypeScriptAppStepsFactoryProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.checkActiveDeployment">checkActiveDeployment</a></code> | <code>boolean</code> | Whether to check for active deployments before proceeding with deployment. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.deployOptions">deployOptions</a></code> | <code><a href="#deployable-awscdk-app-ts.DeployOptions">DeployOptions</a></code> | Deployment options. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.jobStrategy">jobStrategy</a></code> | <code><a href="#deployable-awscdk-app-ts.DeployJobStrategy">DeployJobStrategy</a></code> | Deployment job strategy, whether to use a matrix job or multiple jobs for each environment. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.authProvider">authProvider</a></code> | <code>projen.javascript.CodeArtifactAuthProvider</code> | The authentication provider for CodeArtifact, if any. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.environmentDependencies">environmentDependencies</a></code> | <code>{[ key: string ]: string[]}</code> | Environment deployment dependencies, if any. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.npmConfigEnvironment">npmConfigEnvironment</a></code> | <code>string</code> | The npm config to set with the environment that is being deployed, if any Note: This is not supported for node versions above 18. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.preInstallTaskName">preInstallTaskName</a></code> | <code>string</code> | The name of the task to run before installing dependencies, if any. |
+
+---
+
+##### `checkActiveDeployment`<sup>Required</sup> <a name="checkActiveDeployment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.checkActiveDeployment"></a>
+
+```typescript
+public readonly checkActiveDeployment: boolean;
+```
+
+- *Type:* boolean
+
+Whether to check for active deployments before proceeding with deployment.
+
+---
+
+##### `deployOptions`<sup>Required</sup> <a name="deployOptions" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.deployOptions"></a>
+
+```typescript
+public readonly deployOptions: DeployOptions;
+```
+
+- *Type:* <a href="#deployable-awscdk-app-ts.DeployOptions">DeployOptions</a>
+
+Deployment options.
+
+---
+
+##### `jobStrategy`<sup>Required</sup> <a name="jobStrategy" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.jobStrategy"></a>
+
+```typescript
+public readonly jobStrategy: DeployJobStrategy;
+```
+
+- *Type:* <a href="#deployable-awscdk-app-ts.DeployJobStrategy">DeployJobStrategy</a>
+
+Deployment job strategy, whether to use a matrix job or multiple jobs for each environment.
+
+---
+
+##### `authProvider`<sup>Optional</sup> <a name="authProvider" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.authProvider"></a>
+
+```typescript
+public readonly authProvider: CodeArtifactAuthProvider;
+```
+
+- *Type:* projen.javascript.CodeArtifactAuthProvider
+
+The authentication provider for CodeArtifact, if any.
+
+---
+
+##### `environmentDependencies`<sup>Optional</sup> <a name="environmentDependencies" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.environmentDependencies"></a>
+
+```typescript
+public readonly environmentDependencies: {[ key: string ]: string[]};
+```
+
+- *Type:* {[ key: string ]: string[]}
+
+Environment deployment dependencies, if any.
+
+---
+
+##### `npmConfigEnvironment`<sup>Optional</sup> <a name="npmConfigEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.npmConfigEnvironment"></a>
+
+```typescript
+public readonly npmConfigEnvironment: string;
+```
+
+- *Type:* string
+
+The npm config to set with the environment that is being deployed, if any Note: This is not supported for node versions above 18.
+
+---
+
+##### `preInstallTaskName`<sup>Optional</sup> <a name="preInstallTaskName" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps.property.preInstallTaskName"></a>
+
+```typescript
+public readonly preInstallTaskName: string;
+```
+
+- *Type:* string
+
+The name of the task to run before installing dependencies, if any.
+
+---
+
 ### DeployOptions <a name="DeployOptions" id="deployable-awscdk-app-ts.DeployOptions"></a>
 
 #### Initializer <a name="Initializer" id="deployable-awscdk-app-ts.DeployOptions.Initializer"></a>
@@ -4793,6 +4901,541 @@ The script/task to run before deployment of the environment in the workflow If n
 "pre:deploy"
 ```
 
+
+## Classes <a name="Classes" id="Classes"></a>
+
+### DeployableAwsCdkTypeScriptAppStepsFactory <a name="DeployableAwsCdkTypeScriptAppStepsFactory" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory"></a>
+
+Factory to create reusable steps for the deployment workflow.
+
+#### Initializers <a name="Initializers" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.Initializer"></a>
+
+```typescript
+import { DeployableAwsCdkTypeScriptAppStepsFactory } from 'deployable-awscdk-app-ts'
+
+new DeployableAwsCdkTypeScriptAppStepsFactory(project: NodeProject, props: DeployableAwsCdkTypeScriptAppStepsFactoryProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.Initializer.parameter.project">project</a></code> | <code>projen.javascript.NodeProject</code> | The project. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.Initializer.parameter.props">props</a></code> | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps">DeployableAwsCdkTypeScriptAppStepsFactoryProps</a></code> | The factory properties. |
+
+---
+
+##### `project`<sup>Required</sup> <a name="project" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.Initializer.parameter.project"></a>
+
+- *Type:* projen.javascript.NodeProject
+
+The project.
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactoryProps">DeployableAwsCdkTypeScriptAppStepsFactoryProps</a>
+
+The factory properties.
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAssumeAwsRoleStepForEnvironment">getAssumeAwsRoleStepForEnvironment</a></code> | Step to assume an AWS role for a specific environment. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getCheckActiveDeploymentStepForEnvironment">getCheckActiveDeploymentStepForEnvironment</a></code> | Step to check if there is an active deployment for a specific environment. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getDeploymentJobPrerequisiteJobIds">getDeploymentJobPrerequisiteJobIds</a></code> | Get the IDs of the jobs that must be completed before the specified environment's deployment job. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getJobForEnvironment">getJobForEnvironment</a></code> | Get the job definition for a specific environment. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getPostDeploymentStepForEnvironment">getPostDeploymentStepForEnvironment</a></code> | Get the post-deployment step for a specific environment. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getPreDeploymentStepForEnvironment">getPreDeploymentStepForEnvironment</a></code> | Get the pre-deployment step for a specific environment. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getRunScriptStep">getRunScriptStep</a></code> | Get the step to run a specific script. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupAwsCredentialsInEnvironmentForEnvironment">getSetupAwsCredentialsInEnvironmentForEnvironment</a></code> | Step to setup AWS credentials in the environment for a specific environment. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupAwsCredentialsStepsForEnvironment">getSetupAwsCredentialsStepsForEnvironment</a></code> | Get the steps to setup AWS credentials for a specific environment. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupNpmConfigForEnvironment">getSetupNpmConfigForEnvironment</a></code> | *No description.* |
+
+---
+
+##### `getAssumeAwsRoleStepForEnvironment` <a name="getAssumeAwsRoleStepForEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAssumeAwsRoleStepForEnvironment"></a>
+
+```typescript
+public getAssumeAwsRoleStepForEnvironment(assumeRoleFlag: string | boolean, accessKeyIdSecretName: string, secretAccessKeySecretName: string, region: string, roleToAssume: string, assumeRoleDurationSeconds?: string | number): JobStep
+```
+
+Step to assume an AWS role for a specific environment.
+
+###### `assumeRoleFlag`<sup>Required</sup> <a name="assumeRoleFlag" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAssumeAwsRoleStepForEnvironment.parameter.assumeRoleFlag"></a>
+
+- *Type:* string | boolean
+
+Whether to assume a role, can be a boolean or a string for matrix strategy.
+
+---
+
+###### `accessKeyIdSecretName`<sup>Required</sup> <a name="accessKeyIdSecretName" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAssumeAwsRoleStepForEnvironment.parameter.accessKeyIdSecretName"></a>
+
+- *Type:* string
+
+The GitHub secret name for the access key ID.
+
+---
+
+###### `secretAccessKeySecretName`<sup>Required</sup> <a name="secretAccessKeySecretName" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAssumeAwsRoleStepForEnvironment.parameter.secretAccessKeySecretName"></a>
+
+- *Type:* string
+
+The GitHub secret name for the secret access key.
+
+---
+
+###### `region`<sup>Required</sup> <a name="region" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAssumeAwsRoleStepForEnvironment.parameter.region"></a>
+
+- *Type:* string
+
+The region.
+
+---
+
+###### `roleToAssume`<sup>Required</sup> <a name="roleToAssume" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAssumeAwsRoleStepForEnvironment.parameter.roleToAssume"></a>
+
+- *Type:* string
+
+The role to assume.
+
+---
+
+###### `assumeRoleDurationSeconds`<sup>Optional</sup> <a name="assumeRoleDurationSeconds" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAssumeAwsRoleStepForEnvironment.parameter.assumeRoleDurationSeconds"></a>
+
+- *Type:* string | number
+
+The duration for assuming the role.
+
+---
+
+##### `getCheckActiveDeploymentStepForEnvironment` <a name="getCheckActiveDeploymentStepForEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getCheckActiveDeploymentStepForEnvironment"></a>
+
+```typescript
+public getCheckActiveDeploymentStepForEnvironment(environment: string): JobStep
+```
+
+Step to check if there is an active deployment for a specific environment.
+
+###### `environment`<sup>Required</sup> <a name="environment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getCheckActiveDeploymentStepForEnvironment.parameter.environment"></a>
+
+- *Type:* string
+
+The environment to check.
+
+---
+
+##### `getDeploymentJobPrerequisiteJobIds` <a name="getDeploymentJobPrerequisiteJobIds" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getDeploymentJobPrerequisiteJobIds"></a>
+
+```typescript
+public getDeploymentJobPrerequisiteJobIds(environmentName: string): string[]
+```
+
+Get the IDs of the jobs that must be completed before the specified environment's deployment job.
+
+###### `environmentName`<sup>Required</sup> <a name="environmentName" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getDeploymentJobPrerequisiteJobIds.parameter.environmentName"></a>
+
+- *Type:* string
+
+The name of the environment.
+
+---
+
+##### `getJobForEnvironment` <a name="getJobForEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getJobForEnvironment"></a>
+
+```typescript
+public getJobForEnvironment(environmentOptions: EnvironmentOptions, environmentVariableName?: string): Job
+```
+
+Get the job definition for a specific environment.
+
+###### `environmentOptions`<sup>Required</sup> <a name="environmentOptions" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getJobForEnvironment.parameter.environmentOptions"></a>
+
+- *Type:* <a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>
+
+The environment options.
+
+---
+
+###### `environmentVariableName`<sup>Optional</sup> <a name="environmentVariableName" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getJobForEnvironment.parameter.environmentVariableName"></a>
+
+- *Type:* string
+
+The name of the environment variable to set with the environment name, if any.
+
+---
+
+##### `getPostDeploymentStepForEnvironment` <a name="getPostDeploymentStepForEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getPostDeploymentStepForEnvironment"></a>
+
+```typescript
+public getPostDeploymentStepForEnvironment(hasPostDeployTaskFlag: string | boolean, postDeploymentScript: string): JobStep
+```
+
+Get the post-deployment step for a specific environment.
+
+###### `hasPostDeployTaskFlag`<sup>Required</sup> <a name="hasPostDeployTaskFlag" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getPostDeploymentStepForEnvironment.parameter.hasPostDeployTaskFlag"></a>
+
+- *Type:* string | boolean
+
+Whether the post-deployment task should be run.
+
+---
+
+###### `postDeploymentScript`<sup>Required</sup> <a name="postDeploymentScript" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getPostDeploymentStepForEnvironment.parameter.postDeploymentScript"></a>
+
+- *Type:* string
+
+The script to run.
+
+---
+
+##### `getPreDeploymentStepForEnvironment` <a name="getPreDeploymentStepForEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getPreDeploymentStepForEnvironment"></a>
+
+```typescript
+public getPreDeploymentStepForEnvironment(hasPreDeployTaskFlag: string | boolean, preDeploymentScript: string): JobStep
+```
+
+Get the pre-deployment step for a specific environment.
+
+###### `hasPreDeployTaskFlag`<sup>Required</sup> <a name="hasPreDeployTaskFlag" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getPreDeploymentStepForEnvironment.parameter.hasPreDeployTaskFlag"></a>
+
+- *Type:* string | boolean
+
+Whether the pre-deployment task should be run.
+
+---
+
+###### `preDeploymentScript`<sup>Required</sup> <a name="preDeploymentScript" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getPreDeploymentStepForEnvironment.parameter.preDeploymentScript"></a>
+
+- *Type:* string
+
+The script to run.
+
+---
+
+##### `getRunScriptStep` <a name="getRunScriptStep" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getRunScriptStep"></a>
+
+```typescript
+public getRunScriptStep(scriptName: string, stepName: string, hasScriptFlag: string | boolean): JobStep
+```
+
+Get the step to run a specific script.
+
+###### `scriptName`<sup>Required</sup> <a name="scriptName" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getRunScriptStep.parameter.scriptName"></a>
+
+- *Type:* string
+
+The name of the script to run.
+
+---
+
+###### `stepName`<sup>Required</sup> <a name="stepName" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getRunScriptStep.parameter.stepName"></a>
+
+- *Type:* string
+
+The name of the step in the workflow.
+
+---
+
+###### `hasScriptFlag`<sup>Required</sup> <a name="hasScriptFlag" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getRunScriptStep.parameter.hasScriptFlag"></a>
+
+- *Type:* string | boolean
+
+Whether the script should be run.
+
+---
+
+##### `getSetupAwsCredentialsInEnvironmentForEnvironment` <a name="getSetupAwsCredentialsInEnvironmentForEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupAwsCredentialsInEnvironmentForEnvironment"></a>
+
+```typescript
+public getSetupAwsCredentialsInEnvironmentForEnvironment(assumeRoleFlag: string | boolean, accessKeyIdSecretName: string, secretAccessKeySecretName: string, region: string): JobStep
+```
+
+Step to setup AWS credentials in the environment for a specific environment.
+
+###### `assumeRoleFlag`<sup>Required</sup> <a name="assumeRoleFlag" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupAwsCredentialsInEnvironmentForEnvironment.parameter.assumeRoleFlag"></a>
+
+- *Type:* string | boolean
+
+Whether to assume a role, can be a boolean or a string for matrix strategy.
+
+---
+
+###### `accessKeyIdSecretName`<sup>Required</sup> <a name="accessKeyIdSecretName" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupAwsCredentialsInEnvironmentForEnvironment.parameter.accessKeyIdSecretName"></a>
+
+- *Type:* string
+
+The GitHub secret name for the access key ID.
+
+---
+
+###### `secretAccessKeySecretName`<sup>Required</sup> <a name="secretAccessKeySecretName" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupAwsCredentialsInEnvironmentForEnvironment.parameter.secretAccessKeySecretName"></a>
+
+- *Type:* string
+
+The GitHub secret name for the secret access key.
+
+---
+
+###### `region`<sup>Required</sup> <a name="region" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupAwsCredentialsInEnvironmentForEnvironment.parameter.region"></a>
+
+- *Type:* string
+
+The region.
+
+---
+
+##### `getSetupAwsCredentialsStepsForEnvironment` <a name="getSetupAwsCredentialsStepsForEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupAwsCredentialsStepsForEnvironment"></a>
+
+```typescript
+public getSetupAwsCredentialsStepsForEnvironment(environmentOptions: EnvironmentOptions): JobStep[]
+```
+
+Get the steps to setup AWS credentials for a specific environment.
+
+###### `environmentOptions`<sup>Required</sup> <a name="environmentOptions" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupAwsCredentialsStepsForEnvironment.parameter.environmentOptions"></a>
+
+- *Type:* <a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>
+
+The environment options.
+
+---
+
+##### `getSetupNpmConfigForEnvironment` <a name="getSetupNpmConfigForEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupNpmConfigForEnvironment"></a>
+
+```typescript
+public getSetupNpmConfigForEnvironment(environment: string): JobStep
+```
+
+###### `environment`<sup>Required</sup> <a name="environment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupNpmConfigForEnvironment.parameter.environment"></a>
+
+- *Type:* string
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.validateEnvironmentDeploymentDependencies">validateEnvironmentDeploymentDependencies</a></code> | Validate that the provided environment deployment dependencies are valid. |
+
+---
+
+##### `validateEnvironmentDeploymentDependencies` <a name="validateEnvironmentDeploymentDependencies" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.validateEnvironmentDeploymentDependencies"></a>
+
+```typescript
+import { DeployableAwsCdkTypeScriptAppStepsFactory } from 'deployable-awscdk-app-ts'
+
+DeployableAwsCdkTypeScriptAppStepsFactory.validateEnvironmentDeploymentDependencies(deployOptions: DeployOptions, environmentDependencies: {[ key: string ]: string[]})
+```
+
+Validate that the provided environment deployment dependencies are valid.
+
+###### `deployOptions`<sup>Required</sup> <a name="deployOptions" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.validateEnvironmentDeploymentDependencies.parameter.deployOptions"></a>
+
+- *Type:* <a href="#deployable-awscdk-app-ts.DeployOptions">DeployOptions</a>
+
+The deployment options.
+
+---
+
+###### `environmentDependencies`<sup>Required</sup> <a name="environmentDependencies" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.validateEnvironmentDeploymentDependencies.parameter.environmentDependencies"></a>
+
+- *Type:* {[ key: string ]: string[]}
+
+The environment deployment dependencies to validate.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.assumeAwsRoleStepForMatrix">assumeAwsRoleStepForMatrix</a></code> | <code>projen.github.workflows.JobStep</code> | Step to assume an AWS role for the matrix strategy. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.checkoutStep">checkoutStep</a></code> | <code>projen.github.workflows.JobStep</code> | *No description.* |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.deploymentJobs">deploymentJobs</a></code> | <code>{[ key: string ]: projen.github.workflows.Job}</code> | Get all deployment jobs whether for matrix strategy or not. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.deploymentJobsForMatrix">deploymentJobsForMatrix</a></code> | <code>{[ key: string ]: projen.github.workflows.Job}</code> | Get deployment jobs for matrix strategy. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.deploymentJobsForMultiJob">deploymentJobsForMultiJob</a></code> | <code>{[ key: string ]: projen.github.workflows.Job}</code> | Get deployment jobs for multi-job strategy. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.deploymentStep">deploymentStep</a></code> | <code>projen.github.workflows.JobStep</code> | Step to deploy the workflow. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.postDeploymentStepForMatrix">postDeploymentStepForMatrix</a></code> | <code>projen.github.workflows.JobStep</code> | Step to run post deployment script in matrix strategy. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.preDeploymentStepForMatrix">preDeploymentStepForMatrix</a></code> | <code>projen.github.workflows.JobStep</code> | Step to run post deployment script in matrix strategy. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.setupAwsCredentialsInEnvironmentForMatrix">setupAwsCredentialsInEnvironmentForMatrix</a></code> | <code>projen.github.workflows.JobStep</code> | Step to setup AWS credentials in the environment for the matrix strategy. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.setupAwsCredentialsStepsForMatrix">setupAwsCredentialsStepsForMatrix</a></code> | <code>projen.github.workflows.JobStep[]</code> | Step to setup AWS credentials in the environment for the matrix strategy. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.checkActiveDeploymentStepForMatrix">checkActiveDeploymentStepForMatrix</a></code> | <code>projen.github.workflows.JobStep</code> | Step to check if there is an active deployment for the environment in the matrix strategy. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.preInstallDependenciesStep">preInstallDependenciesStep</a></code> | <code>projen.github.workflows.JobStep</code> | Step to run before installing dependencies if exists. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.setupNpmConfigForMatrix">setupNpmConfigForMatrix</a></code> | <code>projen.github.workflows.JobStep</code> | Step to setup NPM config if provided. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.skipIfAlreadyActiveDeploymentCondition">skipIfAlreadyActiveDeploymentCondition</a></code> | <code>projen.github.workflows.JobStep</code> | Condition to skip a step if an active deployment is already present. |
+
+---
+
+##### `assumeAwsRoleStepForMatrix`<sup>Required</sup> <a name="assumeAwsRoleStepForMatrix" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.assumeAwsRoleStepForMatrix"></a>
+
+```typescript
+public readonly assumeAwsRoleStepForMatrix: JobStep;
+```
+
+- *Type:* projen.github.workflows.JobStep
+
+Step to assume an AWS role for the matrix strategy.
+
+---
+
+##### `checkoutStep`<sup>Required</sup> <a name="checkoutStep" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.checkoutStep"></a>
+
+```typescript
+public readonly checkoutStep: JobStep;
+```
+
+- *Type:* projen.github.workflows.JobStep
+
+---
+
+##### `deploymentJobs`<sup>Required</sup> <a name="deploymentJobs" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.deploymentJobs"></a>
+
+```typescript
+public readonly deploymentJobs: {[ key: string ]: Job};
+```
+
+- *Type:* {[ key: string ]: projen.github.workflows.Job}
+
+Get all deployment jobs whether for matrix strategy or not.
+
+---
+
+##### `deploymentJobsForMatrix`<sup>Required</sup> <a name="deploymentJobsForMatrix" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.deploymentJobsForMatrix"></a>
+
+```typescript
+public readonly deploymentJobsForMatrix: {[ key: string ]: Job};
+```
+
+- *Type:* {[ key: string ]: projen.github.workflows.Job}
+
+Get deployment jobs for matrix strategy.
+
+---
+
+##### `deploymentJobsForMultiJob`<sup>Required</sup> <a name="deploymentJobsForMultiJob" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.deploymentJobsForMultiJob"></a>
+
+```typescript
+public readonly deploymentJobsForMultiJob: {[ key: string ]: Job};
+```
+
+- *Type:* {[ key: string ]: projen.github.workflows.Job}
+
+Get deployment jobs for multi-job strategy.
+
+---
+
+##### `deploymentStep`<sup>Required</sup> <a name="deploymentStep" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.deploymentStep"></a>
+
+```typescript
+public readonly deploymentStep: JobStep;
+```
+
+- *Type:* projen.github.workflows.JobStep
+
+Step to deploy the workflow.
+
+---
+
+##### `postDeploymentStepForMatrix`<sup>Required</sup> <a name="postDeploymentStepForMatrix" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.postDeploymentStepForMatrix"></a>
+
+```typescript
+public readonly postDeploymentStepForMatrix: JobStep;
+```
+
+- *Type:* projen.github.workflows.JobStep
+
+Step to run post deployment script in matrix strategy.
+
+---
+
+##### `preDeploymentStepForMatrix`<sup>Required</sup> <a name="preDeploymentStepForMatrix" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.preDeploymentStepForMatrix"></a>
+
+```typescript
+public readonly preDeploymentStepForMatrix: JobStep;
+```
+
+- *Type:* projen.github.workflows.JobStep
+
+Step to run post deployment script in matrix strategy.
+
+---
+
+##### `setupAwsCredentialsInEnvironmentForMatrix`<sup>Required</sup> <a name="setupAwsCredentialsInEnvironmentForMatrix" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.setupAwsCredentialsInEnvironmentForMatrix"></a>
+
+```typescript
+public readonly setupAwsCredentialsInEnvironmentForMatrix: JobStep;
+```
+
+- *Type:* projen.github.workflows.JobStep
+
+Step to setup AWS credentials in the environment for the matrix strategy.
+
+---
+
+##### `setupAwsCredentialsStepsForMatrix`<sup>Required</sup> <a name="setupAwsCredentialsStepsForMatrix" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.setupAwsCredentialsStepsForMatrix"></a>
+
+```typescript
+public readonly setupAwsCredentialsStepsForMatrix: JobStep[];
+```
+
+- *Type:* projen.github.workflows.JobStep[]
+
+Step to setup AWS credentials in the environment for the matrix strategy.
+
+---
+
+##### `checkActiveDeploymentStepForMatrix`<sup>Optional</sup> <a name="checkActiveDeploymentStepForMatrix" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.checkActiveDeploymentStepForMatrix"></a>
+
+```typescript
+public readonly checkActiveDeploymentStepForMatrix: JobStep;
+```
+
+- *Type:* projen.github.workflows.JobStep
+
+Step to check if there is an active deployment for the environment in the matrix strategy.
+
+---
+
+##### `preInstallDependenciesStep`<sup>Optional</sup> <a name="preInstallDependenciesStep" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.preInstallDependenciesStep"></a>
+
+```typescript
+public readonly preInstallDependenciesStep: JobStep;
+```
+
+- *Type:* projen.github.workflows.JobStep
+
+Step to run before installing dependencies if exists.
+
+---
+
+##### `setupNpmConfigForMatrix`<sup>Optional</sup> <a name="setupNpmConfigForMatrix" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.setupNpmConfigForMatrix"></a>
+
+```typescript
+public readonly setupNpmConfigForMatrix: JobStep;
+```
+
+- *Type:* projen.github.workflows.JobStep
+
+Step to setup NPM config if provided.
+
+---
+
+##### `skipIfAlreadyActiveDeploymentCondition`<sup>Optional</sup> <a name="skipIfAlreadyActiveDeploymentCondition" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.skipIfAlreadyActiveDeploymentCondition"></a>
+
+```typescript
+public readonly skipIfAlreadyActiveDeploymentCondition: JobStep;
+```
+
+- *Type:* projen.github.workflows.JobStep
+
+Condition to skip a step if an active deployment is already present.
+
+---
 
 
 
