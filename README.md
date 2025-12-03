@@ -13,7 +13,7 @@ To create a new project, run the following command and follow the instructions:
 $ mkdir my-project
 $ cd my-project
 $ git init
-$ npx projen new --from deployable-awscdk-app-ts --projenrc-ts
+$ pnpm dlx projen new --from deployable-awscdk-app-ts --projenrc-ts
 🤖 Synthesizing project...
 ...
 ```
@@ -26,7 +26,7 @@ This will initialize a projen project and will create `.projenrc.ts` file for ca
 $ mkdir my-project
 $ cd my-project
 $ git init
-$ npx projen new --from deployable-awscdk-app-ts
+$ pnpm dlx projen new --from deployable-awscdk-app-ts
 🤖 Synthesizing project...
 ...
 ```

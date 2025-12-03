@@ -68,12 +68,12 @@
     "projen": "^0.98.26"
   },
   "dependencies": {
-    "projen": "^0.98.26",
     "semver": "^7.7.3"
   },
   "bundledDependencies": [
     "semver"
   ],
+  "pnpm": {},
   "keywords": [
     "AWS CDK",
     "Deployment",

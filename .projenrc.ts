@@ -16,12 +16,11 @@ const project = new cdk.JsiiProject({
   ],
   projenrcTs: true,
   repositoryUrl: 'https://github.com/AminFazlMondo/deployable-awscdk-app-ts.git',
-  packageManager: javascript.NodePackageManager.NPM,
+  packageManager: javascript.NodePackageManager.PNPM,
+  pnpmVersion: '9',
   npmTrustedPublishing: true,
   npmAccess: javascript.NpmAccess.PUBLIC,
-  deps: [
-    'projen',
-  ],
+  deps: [],
   bundledDeps: [
     'semver',
   ],
@@ -45,6 +44,9 @@ const project = new cdk.JsiiProject({
   jsiiVersion: '5.9.x',
   releaseFailureIssue: true,
 });
+
+project.npmrc.addConfig('node-linker', 'hoisted');
+project.npmrc.addConfig('strict-peer-dependencies', 'false');
 
 new TextFile(project, '.nvmrc', {
   lines: [workflowNodeVersion],
