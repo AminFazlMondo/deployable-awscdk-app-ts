@@ -537,7 +537,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
       ],
       permissions: {
         contents: JobPermission.READ,
-        deployments: JobPermission.READ,
+        deployments: JobPermission.WRITE,
         idToken: this.props.authProvider === CodeArtifactAuthProvider.GITHUB_OIDC ? JobPermission.WRITE : undefined,
       },
       strategy: {
@@ -644,7 +644,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
       needs: this.getDeploymentJobPrerequisiteJobIds(name),
       permissions: {
         contents: JobPermission.READ,
-        deployments: JobPermission.READ,
+        deployments: JobPermission.WRITE,
         idToken: this.props.authProvider === CodeArtifactAuthProvider.GITHUB_OIDC ? JobPermission.WRITE : undefined,
       },
       environment: {

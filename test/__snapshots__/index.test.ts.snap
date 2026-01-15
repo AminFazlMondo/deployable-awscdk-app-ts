@@ -95,7 +95,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
       id-token: write
     environment:
       name: \${{ matrix.environment }}
@@ -253,7 +253,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: \${{ matrix.environment }}
     concurrency:
@@ -747,7 +747,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: \${{ matrix.environment }}
     concurrency:
@@ -892,7 +892,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: \${{ matrix.environment }}
     concurrency:
@@ -1052,7 +1052,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: \${{ matrix.environment }}
     concurrency:
@@ -1213,7 +1213,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: dev
     concurrency:
@@ -1249,7 +1249,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: staging
     concurrency:
@@ -1368,7 +1368,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: dev
     concurrency:
@@ -1404,7 +1404,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: stagingRegion1
     concurrency:
@@ -1437,7 +1437,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: prodRegion1
     concurrency:
@@ -1472,7 +1472,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: stagingRegion2
     concurrency:
@@ -1505,7 +1505,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: prodRegion2
     concurrency:
@@ -1626,7 +1626,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: \${{ matrix.environment }}
     concurrency:
@@ -1787,7 +1787,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: \${{ matrix.environment }}
     concurrency:
@@ -1956,7 +1956,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: \${{ matrix.environment }}
     concurrency:
@@ -2121,7 +2121,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: \${{ matrix.environment }}
     concurrency:
@@ -2282,7 +2282,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: \${{ matrix.environment }}
     concurrency:
@@ -2443,7 +2443,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: \${{ matrix.environment }}
     concurrency:
@@ -2602,7 +2602,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: \${{ matrix.environment }}
     concurrency:
@@ -2761,7 +2761,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: \${{ matrix.environment }}
     concurrency:
@@ -2915,7 +2915,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: read
+      deployments: write
     environment:
       name: \${{ matrix.environment }}
     concurrency:
