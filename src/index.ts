@@ -19,11 +19,11 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
   private readonly generateNvmrc: boolean;
   private readonly checkActiveDeployment: boolean;
   private readonly workflowNodeVersion?: string;
-  protected deployOptions: DeployOptions;
   private readonly codeArtifactOptions?: CodeArtifactOptions;
   private readonly deployJobStrategy: DeployJobStrategy;
 
-  private environmentDependencies: EnvironmentDeploymentDependencies | undefined;
+  protected deployOptions: DeployOptions;
+  protected environmentDependencies: EnvironmentDeploymentDependencies | undefined;
 
   constructor(options: DeployableAwsCdkTypeScriptAppOptions) {
     const deployable = options.release ?? true;
