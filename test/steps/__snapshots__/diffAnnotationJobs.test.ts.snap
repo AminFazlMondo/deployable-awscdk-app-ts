@@ -1,0 +1,405 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should generate diff annotation jobs When Auth provider and npm config set 1`] = `
+{
+  "Diff-Annotation-Dev": {
+    "env": {
+      "STACK_ENV": "Dev",
+    },
+    "needs": [
+      "build",
+    ],
+    "permissions": {
+      "contents": "read",
+      "idToken": "write",
+      "pullRequests": "write",
+    },
+    "runsOn": [
+      "ubuntu-latest",
+    ],
+    "steps": [
+      {
+        "continueOnError": undefined,
+        "env": undefined,
+        "id": undefined,
+        "if": undefined,
+        "name": "Checkout",
+        "timeoutMinutes": undefined,
+        "uses": "actions/checkout@v5",
+        "with": {
+          "fetch-depth": 0,
+          "ref": "\${{ github.sha }}",
+        },
+        "workingDirectory": undefined,
+      },
+      {
+        "name": "Setup pnpm",
+        "uses": "pnpm/action-setup@v4",
+        "with": {
+          "version": "10",
+        },
+      },
+      {
+        "name": "Setup Node.js",
+        "uses": "actions/setup-node@v5",
+        "with": {
+          "node-version": "20.0.0",
+        },
+      },
+      {
+        "name": "Install dependencies",
+        "run": "pnpm i --frozen-lockfile",
+      },
+      {
+        "env": {
+          "accessKeyId": "\${{ secrets[AWS_ACCESS_KEY_ID] }}",
+          "region": "us-east-1",
+          "secretAccessKey": "\${{ secrets[AWS_SECRET_ACCESS_KEY] }}",
+        },
+        "if": undefined,
+        "name": "Configure AWS Credentials",
+        "run": "echo "AWS_ACCESS_KEY_ID=$accessKeyId" >> $GITHUB_ENV
+echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
+echo "AWS_REGION=$region" >> $GITHUB_ENV",
+      },
+      {
+        "env": {
+          "CONFIG_VALUE": "Dev",
+        },
+        "name": "Setting NPM Config",
+        "run": "npm config set TEST_CONFIG_ENV $CONFIG_VALUE",
+      },
+      {
+        "if": undefined,
+        "name": "Run Generate Diff Output",
+        "run": "pnpm run diff:output",
+      },
+      {
+        "id": "formatted_diff_annotation_comment",
+        "name": "Get formatted diff annotation comment",
+        "run": "echo "data<<EOF" >> $GITHUB_OUTPUT
+echo "### Changes for environment Dev" >> $GITHUB_OUTPUT
+echo "" >> $GITHUB_OUTPUT
+echo "<details>" >> $GITHUB_OUTPUT
+echo "<summary>Show diff</summary>" >> $GITHUB_OUTPUT
+echo "" >> $GITHUB_OUTPUT
+echo \`\`\` >> $GITHUB_OUTPUT
+for file in ./diff/*.log; do
+  echo "========== $file ==========" >> $GITHUB_OUTPUT
+  sed 's/\\x1B\\[[0-9;]*[mGKHF]//g' "$file" >> $GITHUB_OUTPUT
+  echo "" >> $GITHUB_OUTPUT
+done
+echo \`\`\` >> $GITHUB_OUTPUT
+echo "</details>" >> $GITHUB_OUTPUT
+echo "EOF" >> $GITHUB_OUTPUT",
+      },
+      {
+        "name": "Annotate PR with Diff Output",
+        "uses": "mshick/add-pr-comment@v3",
+        "with": {
+          "message": "\${{ steps.formatted_diff_annotation_comment.outputs.data }}",
+          "message-id": "diff-output-Dev",
+          "refresh-message-position": true,
+        },
+      },
+    ],
+  },
+  "Diff-Annotation-Prod": {
+    "env": {
+      "STACK_ENV": "Prod",
+    },
+    "needs": [
+      "build",
+    ],
+    "permissions": {
+      "contents": "read",
+      "idToken": "write",
+      "pullRequests": "write",
+    },
+    "runsOn": [
+      "ubuntu-latest",
+    ],
+    "steps": [
+      {
+        "continueOnError": undefined,
+        "env": undefined,
+        "id": undefined,
+        "if": undefined,
+        "name": "Checkout",
+        "timeoutMinutes": undefined,
+        "uses": "actions/checkout@v5",
+        "with": {
+          "fetch-depth": 0,
+          "ref": "\${{ github.sha }}",
+        },
+        "workingDirectory": undefined,
+      },
+      {
+        "name": "Setup pnpm",
+        "uses": "pnpm/action-setup@v4",
+        "with": {
+          "version": "10",
+        },
+      },
+      {
+        "name": "Setup Node.js",
+        "uses": "actions/setup-node@v5",
+        "with": {
+          "node-version": "20.0.0",
+        },
+      },
+      {
+        "name": "Install dependencies",
+        "run": "pnpm i --frozen-lockfile",
+      },
+      {
+        "env": {
+          "accessKeyId": "\${{ secrets[AWS_ACCESS_KEY_ID] }}",
+          "region": "us-east-2",
+          "secretAccessKey": "\${{ secrets[AWS_SECRET_ACCESS_KEY] }}",
+        },
+        "if": undefined,
+        "name": "Configure AWS Credentials",
+        "run": "echo "AWS_ACCESS_KEY_ID=$accessKeyId" >> $GITHUB_ENV
+echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
+echo "AWS_REGION=$region" >> $GITHUB_ENV",
+      },
+      {
+        "env": {
+          "CONFIG_VALUE": "Prod",
+        },
+        "name": "Setting NPM Config",
+        "run": "npm config set TEST_CONFIG_ENV $CONFIG_VALUE",
+      },
+      {
+        "if": undefined,
+        "name": "Run Generate Diff Output",
+        "run": "pnpm run diff:output",
+      },
+      {
+        "id": "formatted_diff_annotation_comment",
+        "name": "Get formatted diff annotation comment",
+        "run": "echo "data<<EOF" >> $GITHUB_OUTPUT
+echo "### Changes for environment Prod" >> $GITHUB_OUTPUT
+echo "" >> $GITHUB_OUTPUT
+echo "<details>" >> $GITHUB_OUTPUT
+echo "<summary>Show diff</summary>" >> $GITHUB_OUTPUT
+echo "" >> $GITHUB_OUTPUT
+echo \`\`\` >> $GITHUB_OUTPUT
+for file in ./diff/*.log; do
+  echo "========== $file ==========" >> $GITHUB_OUTPUT
+  sed 's/\\x1B\\[[0-9;]*[mGKHF]//g' "$file" >> $GITHUB_OUTPUT
+  echo "" >> $GITHUB_OUTPUT
+done
+echo \`\`\` >> $GITHUB_OUTPUT
+echo "</details>" >> $GITHUB_OUTPUT
+echo "EOF" >> $GITHUB_OUTPUT",
+      },
+      {
+        "name": "Annotate PR with Diff Output",
+        "uses": "mshick/add-pr-comment@v3",
+        "with": {
+          "message": "\${{ steps.formatted_diff_annotation_comment.outputs.data }}",
+          "message-id": "diff-output-Prod",
+          "refresh-message-position": true,
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should generate diff annotation jobs When No Auth provider and npm config set 1`] = `
+{
+  "Diff-Annotation-Dev": {
+    "env": {
+      "STACK_ENV": "Dev",
+    },
+    "needs": [
+      "build",
+    ],
+    "permissions": {
+      "contents": "read",
+      "idToken": undefined,
+      "pullRequests": "write",
+    },
+    "runsOn": [
+      "ubuntu-latest",
+    ],
+    "steps": [
+      {
+        "continueOnError": undefined,
+        "env": undefined,
+        "id": undefined,
+        "if": undefined,
+        "name": "Checkout",
+        "timeoutMinutes": undefined,
+        "uses": "actions/checkout@v5",
+        "with": {
+          "fetch-depth": 0,
+          "ref": "\${{ github.sha }}",
+        },
+        "workingDirectory": undefined,
+      },
+      {
+        "name": "Setup pnpm",
+        "uses": "pnpm/action-setup@v4",
+        "with": {
+          "version": "10",
+        },
+      },
+      {
+        "name": "Setup Node.js",
+        "uses": "actions/setup-node@v5",
+        "with": {
+          "node-version": "20.0.0",
+        },
+      },
+      {
+        "name": "Install dependencies",
+        "run": "pnpm i --frozen-lockfile",
+      },
+      {
+        "env": {
+          "accessKeyId": "\${{ secrets[AWS_ACCESS_KEY_ID] }}",
+          "region": "us-east-1",
+          "secretAccessKey": "\${{ secrets[AWS_SECRET_ACCESS_KEY] }}",
+        },
+        "if": undefined,
+        "name": "Configure AWS Credentials",
+        "run": "echo "AWS_ACCESS_KEY_ID=$accessKeyId" >> $GITHUB_ENV
+echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
+echo "AWS_REGION=$region" >> $GITHUB_ENV",
+      },
+      {
+        "if": undefined,
+        "name": "Run Generate Diff Output",
+        "run": "pnpm run diff:output",
+      },
+      {
+        "id": "formatted_diff_annotation_comment",
+        "name": "Get formatted diff annotation comment",
+        "run": "echo "data<<EOF" >> $GITHUB_OUTPUT
+echo "### Changes for environment Dev" >> $GITHUB_OUTPUT
+echo "" >> $GITHUB_OUTPUT
+echo "<details>" >> $GITHUB_OUTPUT
+echo "<summary>Show diff</summary>" >> $GITHUB_OUTPUT
+echo "" >> $GITHUB_OUTPUT
+echo \`\`\` >> $GITHUB_OUTPUT
+for file in ./diff/*.log; do
+  echo "========== $file ==========" >> $GITHUB_OUTPUT
+  sed 's/\\x1B\\[[0-9;]*[mGKHF]//g' "$file" >> $GITHUB_OUTPUT
+  echo "" >> $GITHUB_OUTPUT
+done
+echo \`\`\` >> $GITHUB_OUTPUT
+echo "</details>" >> $GITHUB_OUTPUT
+echo "EOF" >> $GITHUB_OUTPUT",
+      },
+      {
+        "name": "Annotate PR with Diff Output",
+        "uses": "mshick/add-pr-comment@v3",
+        "with": {
+          "message": "\${{ steps.formatted_diff_annotation_comment.outputs.data }}",
+          "message-id": "diff-output-Dev",
+          "refresh-message-position": true,
+        },
+      },
+    ],
+  },
+  "Diff-Annotation-Prod": {
+    "env": {
+      "STACK_ENV": "Prod",
+    },
+    "needs": [
+      "build",
+    ],
+    "permissions": {
+      "contents": "read",
+      "idToken": undefined,
+      "pullRequests": "write",
+    },
+    "runsOn": [
+      "ubuntu-latest",
+    ],
+    "steps": [
+      {
+        "continueOnError": undefined,
+        "env": undefined,
+        "id": undefined,
+        "if": undefined,
+        "name": "Checkout",
+        "timeoutMinutes": undefined,
+        "uses": "actions/checkout@v5",
+        "with": {
+          "fetch-depth": 0,
+          "ref": "\${{ github.sha }}",
+        },
+        "workingDirectory": undefined,
+      },
+      {
+        "name": "Setup pnpm",
+        "uses": "pnpm/action-setup@v4",
+        "with": {
+          "version": "10",
+        },
+      },
+      {
+        "name": "Setup Node.js",
+        "uses": "actions/setup-node@v5",
+        "with": {
+          "node-version": "20.0.0",
+        },
+      },
+      {
+        "name": "Install dependencies",
+        "run": "pnpm i --frozen-lockfile",
+      },
+      {
+        "env": {
+          "accessKeyId": "\${{ secrets[AWS_ACCESS_KEY_ID] }}",
+          "region": "us-east-2",
+          "secretAccessKey": "\${{ secrets[AWS_SECRET_ACCESS_KEY] }}",
+        },
+        "if": undefined,
+        "name": "Configure AWS Credentials",
+        "run": "echo "AWS_ACCESS_KEY_ID=$accessKeyId" >> $GITHUB_ENV
+echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
+echo "AWS_REGION=$region" >> $GITHUB_ENV",
+      },
+      {
+        "if": undefined,
+        "name": "Run Generate Diff Output",
+        "run": "pnpm run diff:output",
+      },
+      {
+        "id": "formatted_diff_annotation_comment",
+        "name": "Get formatted diff annotation comment",
+        "run": "echo "data<<EOF" >> $GITHUB_OUTPUT
+echo "### Changes for environment Prod" >> $GITHUB_OUTPUT
+echo "" >> $GITHUB_OUTPUT
+echo "<details>" >> $GITHUB_OUTPUT
+echo "<summary>Show diff</summary>" >> $GITHUB_OUTPUT
+echo "" >> $GITHUB_OUTPUT
+echo \`\`\` >> $GITHUB_OUTPUT
+for file in ./diff/*.log; do
+  echo "========== $file ==========" >> $GITHUB_OUTPUT
+  sed 's/\\x1B\\[[0-9;]*[mGKHF]//g' "$file" >> $GITHUB_OUTPUT
+  echo "" >> $GITHUB_OUTPUT
+done
+echo \`\`\` >> $GITHUB_OUTPUT
+echo "</details>" >> $GITHUB_OUTPUT
+echo "EOF" >> $GITHUB_OUTPUT",
+      },
+      {
+        "name": "Annotate PR with Diff Output",
+        "uses": "mshick/add-pr-comment@v3",
+        "with": {
+          "message": "\${{ steps.formatted_diff_annotation_comment.outputs.data }}",
+          "message-id": "diff-output-Prod",
+          "refresh-message-position": true,
+        },
+      },
+    ],
+  },
+}
+`;
