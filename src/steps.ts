@@ -743,7 +743,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
         'echo "<summary>Show diff</summary>" >> $GITHUB_OUTPUT',
         'echo "" >> $GITHUB_OUTPUT',
         'echo \`\`\` >> $GITHUB_OUTPUT',
-        'for file in ./diff/*.log; do',
+        'for file in ./*/cdk.out/diff.log; do',
         '  echo "========== $file ==========" >> $GITHUB_OUTPUT',
         '  sed \'s/\\x1B\\[[0-9;]*[mGKHF]//g\' "$file" >> $GITHUB_OUTPUT',
         '  echo "" >> $GITHUB_OUTPUT',
