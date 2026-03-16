@@ -6,8 +6,8 @@ import { SynthOutput, synthSnapshot } from 'projen/lib/util/synth';
 import * as YAML from 'yaml';
 import { DeployableAwsCdkTypeScriptApp, DeployJobStrategy } from '../src';
 
-
 const releaseWorkflowFilePath = '.github/workflows/release.yml';
+const buildWorkflowFilePath = '.github/workflows/build.yml';
 const tasksFilePath = '.projen/tasks.json';
 const nvmrcFilePath = '.nvmrc';
 
@@ -855,6 +855,137 @@ describe('deployment strategy', () => {
       });
       const synthOutput = synthSnapshot(project);
       expect(synthOutput[releaseWorkflowFilePath]).toMatchSnapshot();
+    });
+  });
+});
+
+describe('diff output and annotation', () => {
+  describe('When diff output is disabled', () => {
+    const project = new DeployableAwsCdkTypeScriptApp({
+      packageManager: NodePackageManager.NPM,
+      name: 'my-test-app',
+      defaultReleaseBranch: 'main',
+      cdkVersion: '1.129.0',
+      workflowNodeVersion: '14.18.1',
+      outdir: mkdtemp(),
+      deployOptions: {
+        environments: [
+          {
+            name: 'dev',
+            awsCredentials: {
+              accessKeyIdSecretName: 'dev-secret-1',
+              secretAccessKeySecretName: 'dev-secret-2',
+              region: 'dev-aws-region-1',
+            },
+          },
+          {
+            name: 'staging',
+            awsCredentials: {
+              accessKeyIdSecretName: 'staging-secret-1',
+              secretAccessKeySecretName: 'staging-secret-2',
+              region: 'staging-aws-region-1',
+            },
+          },
+        ],
+      },
+    });
+    const synthOutput = synthSnapshot(project);
+
+    test('Should not generate the diff script', () => {
+      expect(synthOutput[tasksFilePath]).not.toHaveProperty('tasks.diff:output');
+    });
+
+    test('Should not include diff annotation steps', () => {
+      expect(synthOutput[buildWorkflowFilePath]).not.toContain('Diff-Annotation-');
+    });
+  });
+
+  describe('When diff output is enabled without annotation', () => {
+    const project = new DeployableAwsCdkTypeScriptApp({
+      packageManager: NodePackageManager.NPM,
+      name: 'my-test-app',
+      defaultReleaseBranch: 'main',
+      cdkVersion: '1.129.0',
+      workflowNodeVersion: '14.18.1',
+      outdir: mkdtemp(),
+      diffOutput: {
+        enable: true,
+      },
+      deployOptions: {
+        environments: [
+          {
+            name: 'dev',
+            awsCredentials: {
+              accessKeyIdSecretName: 'dev-secret-1',
+              secretAccessKeySecretName: 'dev-secret-2',
+              region: 'dev-aws-region-1',
+            },
+          },
+          {
+            name: 'staging',
+            awsCredentials: {
+              accessKeyIdSecretName: 'staging-secret-1',
+              secretAccessKeySecretName: 'staging-secret-2',
+              region: 'staging-aws-region-1',
+            },
+          },
+        ],
+      },
+    });
+    const synthOutput = synthSnapshot(project);
+
+    test('Should not generate the diff script', () => {
+      expect(synthOutput[tasksFilePath]).toHaveProperty('tasks.diff:output');
+    });
+
+    test('Should not include diff annotation steps', () => {
+      expect(synthOutput[buildWorkflowFilePath]).not.toContain('Diff-Annotation-');
+    });
+  });
+
+  describe('When diff output is enabled with annotation', () => {
+    const project = new DeployableAwsCdkTypeScriptApp({
+      packageManager: NodePackageManager.NPM,
+      name: 'my-test-app',
+      defaultReleaseBranch: 'main',
+      cdkVersion: '1.129.0',
+      workflowNodeVersion: '14.18.1',
+      outdir: mkdtemp(),
+      diffOutput: {
+        enable: true,
+        annotateOnBuild: true,
+      },
+      deployOptions: {
+        environments: [
+          {
+            name: 'dev',
+            awsCredentials: {
+              accessKeyIdSecretName: 'dev-secret-1',
+              secretAccessKeySecretName: 'dev-secret-2',
+              region: 'dev-aws-region-1',
+            },
+          },
+          {
+            name: 'staging',
+            awsCredentials: {
+              accessKeyIdSecretName: 'staging-secret-1',
+              secretAccessKeySecretName: 'staging-secret-2',
+              region: 'staging-aws-region-1',
+            },
+          },
+        ],
+      },
+    });
+    const synthOutput = synthSnapshot(project);
+
+    test('Should not generate the diff script', () => {
+      expect(synthOutput[tasksFilePath]).toHaveProperty('tasks.diff:output');
+    });
+
+    test('Should not include diff annotation steps', () => {
+      expect(synthOutput[buildWorkflowFilePath]).toContain('Diff-Annotation-dev');
+      expect(synthOutput[buildWorkflowFilePath]).toContain('Diff-Annotation-staging');
+      expect(synthOutput[buildWorkflowFilePath]).toMatchSnapshot();
     });
   });
 });
