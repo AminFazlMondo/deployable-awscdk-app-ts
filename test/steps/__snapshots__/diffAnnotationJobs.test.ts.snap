@@ -2,6 +2,31 @@
 
 exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should generate diff annotation jobs When Auth provider and npm config set 1`] = `
 {
+  "Diff-Annotation-Comment": {
+    "needs": [
+      "Diff-Annotation-Dev",
+      "Diff-Annotation-Prod",
+    ],
+    "permissions": {
+      "contents": "read",
+      "pullRequests": "write",
+    },
+    "runsOn": [
+      "ubuntu-latest",
+    ],
+    "steps": [
+      {
+        "name": "Annotate PR with Diff Output",
+        "uses": "mshick/add-pr-comment@v3",
+        "with": {
+          "message": "\${{ steps.Diff-Annotation-Dev.outputs.formatted_diff_annotation_comment }}
+\${{ steps.Diff-Annotation-Prod.outputs.formatted_diff_annotation_comment }}",
+          "message-id": "diff-output",
+          "refresh-message-position": true,
+        },
+      },
+    ],
+  },
   "Diff-Annotation-Dev": {
     "env": {
       "STACK_ENV": "Dev",
@@ -9,10 +34,15 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
     "needs": [
       "build",
     ],
+    "outputs": {
+      "formatted_diff_annotation_comment": {
+        "outputName": "data",
+        "stepId": "formatted_diff_annotation_comment",
+      },
+    },
     "permissions": {
       "contents": "read",
       "idToken": "write",
-      "pullRequests": "write",
     },
     "runsOn": [
       "ubuntu-latest",
@@ -91,16 +121,8 @@ for file in $(find . -path "**/cdk.out/diff.log" 2>/dev/null); do
 done
 echo '\`\`\`' >> $GITHUB_OUTPUT
 echo "</details>" >> $GITHUB_OUTPUT
+echo "" >> $GITHUB_OUTPUT
 echo "EOF" >> $GITHUB_OUTPUT",
-      },
-      {
-        "name": "Annotate PR with Diff Output",
-        "uses": "mshick/add-pr-comment@v3",
-        "with": {
-          "message": "\${{ steps.formatted_diff_annotation_comment.outputs.data }}",
-          "message-id": "diff-output-Dev",
-          "refresh-message-position": true,
-        },
       },
     ],
   },
@@ -111,10 +133,15 @@ echo "EOF" >> $GITHUB_OUTPUT",
     "needs": [
       "build",
     ],
+    "outputs": {
+      "formatted_diff_annotation_comment": {
+        "outputName": "data",
+        "stepId": "formatted_diff_annotation_comment",
+      },
+    },
     "permissions": {
       "contents": "read",
       "idToken": "write",
-      "pullRequests": "write",
     },
     "runsOn": [
       "ubuntu-latest",
@@ -193,16 +220,8 @@ for file in $(find . -path "**/cdk.out/diff.log" 2>/dev/null); do
 done
 echo '\`\`\`' >> $GITHUB_OUTPUT
 echo "</details>" >> $GITHUB_OUTPUT
+echo "" >> $GITHUB_OUTPUT
 echo "EOF" >> $GITHUB_OUTPUT",
-      },
-      {
-        "name": "Annotate PR with Diff Output",
-        "uses": "mshick/add-pr-comment@v3",
-        "with": {
-          "message": "\${{ steps.formatted_diff_annotation_comment.outputs.data }}",
-          "message-id": "diff-output-Prod",
-          "refresh-message-position": true,
-        },
       },
     ],
   },
@@ -211,6 +230,31 @@ echo "EOF" >> $GITHUB_OUTPUT",
 
 exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should generate diff annotation jobs When No Auth provider and npm config set 1`] = `
 {
+  "Diff-Annotation-Comment": {
+    "needs": [
+      "Diff-Annotation-Dev",
+      "Diff-Annotation-Prod",
+    ],
+    "permissions": {
+      "contents": "read",
+      "pullRequests": "write",
+    },
+    "runsOn": [
+      "ubuntu-latest",
+    ],
+    "steps": [
+      {
+        "name": "Annotate PR with Diff Output",
+        "uses": "mshick/add-pr-comment@v3",
+        "with": {
+          "message": "\${{ steps.Diff-Annotation-Dev.outputs.formatted_diff_annotation_comment }}
+\${{ steps.Diff-Annotation-Prod.outputs.formatted_diff_annotation_comment }}",
+          "message-id": "diff-output",
+          "refresh-message-position": true,
+        },
+      },
+    ],
+  },
   "Diff-Annotation-Dev": {
     "env": {
       "STACK_ENV": "Dev",
@@ -218,10 +262,15 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
     "needs": [
       "build",
     ],
+    "outputs": {
+      "formatted_diff_annotation_comment": {
+        "outputName": "data",
+        "stepId": "formatted_diff_annotation_comment",
+      },
+    },
     "permissions": {
       "contents": "read",
       "idToken": undefined,
-      "pullRequests": "write",
     },
     "runsOn": [
       "ubuntu-latest",
@@ -293,16 +342,8 @@ for file in $(find . -path "**/cdk.out/diff.log" 2>/dev/null); do
 done
 echo '\`\`\`' >> $GITHUB_OUTPUT
 echo "</details>" >> $GITHUB_OUTPUT
+echo "" >> $GITHUB_OUTPUT
 echo "EOF" >> $GITHUB_OUTPUT",
-      },
-      {
-        "name": "Annotate PR with Diff Output",
-        "uses": "mshick/add-pr-comment@v3",
-        "with": {
-          "message": "\${{ steps.formatted_diff_annotation_comment.outputs.data }}",
-          "message-id": "diff-output-Dev",
-          "refresh-message-position": true,
-        },
       },
     ],
   },
@@ -313,10 +354,15 @@ echo "EOF" >> $GITHUB_OUTPUT",
     "needs": [
       "build",
     ],
+    "outputs": {
+      "formatted_diff_annotation_comment": {
+        "outputName": "data",
+        "stepId": "formatted_diff_annotation_comment",
+      },
+    },
     "permissions": {
       "contents": "read",
       "idToken": undefined,
-      "pullRequests": "write",
     },
     "runsOn": [
       "ubuntu-latest",
@@ -388,16 +434,8 @@ for file in $(find . -path "**/cdk.out/diff.log" 2>/dev/null); do
 done
 echo '\`\`\`' >> $GITHUB_OUTPUT
 echo "</details>" >> $GITHUB_OUTPUT
+echo "" >> $GITHUB_OUTPUT
 echo "EOF" >> $GITHUB_OUTPUT",
-      },
-      {
-        "name": "Annotate PR with Diff Output",
-        "uses": "mshick/add-pr-comment@v3",
-        "with": {
-          "message": "\${{ steps.formatted_diff_annotation_comment.outputs.data }}",
-          "message-id": "diff-output-Prod",
-          "refresh-message-position": true,
-        },
       },
     ],
   },
