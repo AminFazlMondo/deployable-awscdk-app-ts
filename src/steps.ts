@@ -729,20 +729,11 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
           with: {
             'message-id': 'diff-output',
             'refresh-message-position': true,
-            'message': dependentJobNames.map(jobName => `\${{ steps.${jobName}.outputs.${formattedDiffAnnotationCommentStepId} }}`).join('\n'),
+            'message': dependentJobNames.map(jobName => `\${{ needs.${jobName}.outputs.${formattedDiffAnnotationCommentStepId} }}`).join('\n'),
           },
         },
       ],
     };
-    // return {
-    //   name: 'Annotate PR with Diff Output',
-    //   uses: 'mshick/add-pr-comment@v3',
-    //   with: {
-    //     'message-id': `diff-output-${environment}`,
-    //     'refresh-message-position': true,
-    //     'message': `\${{ steps.${formattedDiffAnnotationCommentStepId}.outputs.data }}`,
-    //   },
-    // };
   }
 
   /**

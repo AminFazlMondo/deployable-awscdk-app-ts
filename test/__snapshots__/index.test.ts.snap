@@ -1789,8 +1789,8 @@ jobs:
           message-id: diff-output
           refresh-message-position: true
           message: |-
-            \${{ steps.Diff-Annotation-dev.outputs.formatted_diff_annotation_comment }}
-            \${{ steps.Diff-Annotation-staging.outputs.formatted_diff_annotation_comment }}
+            \${{ needs.Diff-Annotation-dev.outputs.formatted_diff_annotation_comment }}
+            \${{ needs.Diff-Annotation-staging.outputs.formatted_diff_annotation_comment }}
 "
 `;
 

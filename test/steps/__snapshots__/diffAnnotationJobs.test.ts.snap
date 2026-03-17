@@ -19,8 +19,8 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
         "name": "Annotate PR with Diff Output",
         "uses": "mshick/add-pr-comment@v3",
         "with": {
-          "message": "\${{ steps.Diff-Annotation-Dev.outputs.formatted_diff_annotation_comment }}
-\${{ steps.Diff-Annotation-Prod.outputs.formatted_diff_annotation_comment }}",
+          "message": "\${{ needs.Diff-Annotation-Dev.outputs.formatted_diff_annotation_comment }}
+\${{ needs.Diff-Annotation-Prod.outputs.formatted_diff_annotation_comment }}",
           "message-id": "diff-output",
           "refresh-message-position": true,
         },
@@ -247,8 +247,8 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
         "name": "Annotate PR with Diff Output",
         "uses": "mshick/add-pr-comment@v3",
         "with": {
-          "message": "\${{ steps.Diff-Annotation-Dev.outputs.formatted_diff_annotation_comment }}
-\${{ steps.Diff-Annotation-Prod.outputs.formatted_diff_annotation_comment }}",
+          "message": "\${{ needs.Diff-Annotation-Dev.outputs.formatted_diff_annotation_comment }}
+\${{ needs.Diff-Annotation-Prod.outputs.formatted_diff_annotation_comment }}",
           "message-id": "diff-output",
           "refresh-message-position": true,
         },
