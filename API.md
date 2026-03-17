@@ -5069,7 +5069,7 @@ The factory properties.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAnnotateDiffStepForEnvironment">getAnnotateDiffStepForEnvironment</a></code> | Step to check if there is an active deployment for a specific environment. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAnnotateDiffJob">getAnnotateDiffJob</a></code> | Get the job to annotate the PR with the diff output for all environments. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAssumeAwsRoleStepForEnvironment">getAssumeAwsRoleStepForEnvironment</a></code> | Step to assume an AWS role for a specific environment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getCheckActiveDeploymentStepForEnvironment">getCheckActiveDeploymentStepForEnvironment</a></code> | Step to check if there is an active deployment for a specific environment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getDeploymentJobPrerequisiteJobIds">getDeploymentJobPrerequisiteJobIds</a></code> | Get the IDs of the jobs that must be completed before the specified environment's deployment job. |
@@ -5085,19 +5085,19 @@ The factory properties.
 
 ---
 
-##### `getAnnotateDiffStepForEnvironment` <a name="getAnnotateDiffStepForEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAnnotateDiffStepForEnvironment"></a>
+##### `getAnnotateDiffJob` <a name="getAnnotateDiffJob" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAnnotateDiffJob"></a>
 
 ```typescript
-public getAnnotateDiffStepForEnvironment(environment: string): JobStep
+public getAnnotateDiffJob(dependentJobNames: string[]): Job
 ```
 
-Step to check if there is an active deployment for a specific environment.
+Get the job to annotate the PR with the diff output for all environments.
 
-###### `environment`<sup>Required</sup> <a name="environment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAnnotateDiffStepForEnvironment.parameter.environment"></a>
+###### `dependentJobNames`<sup>Required</sup> <a name="dependentJobNames" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAnnotateDiffJob.parameter.dependentJobNames"></a>
 
-- *Type:* string
+- *Type:* string[]
 
-The environment to check.
+The names of the jobs that the annotation job depends on.
 
 ---
 
