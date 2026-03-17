@@ -103,8 +103,8 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     sourceCode.line('const diffs = await cdk.diff(cx, {});');
     sourceCode.line("const stream = createWriteStream('./cdk.out/diff.log');");
     sourceCode.open('Object.entries(diffs).forEach(([stackName, diff]) => {');
-    sourceCode.line('stream.write(`Difference for stack ${stackName}:\n`);');
-    sourceCode.line('stream.write(`Difference for stack ${stackName}:\n`);');
+    sourceCode.line('stream.write(`Difference for stack ${stackName}:\\n`);');
+    sourceCode.line('formatDifferences(stream, diff);');
     sourceCode.close('});');
     sourceCode.close('}');
     sourceCode.line('');
