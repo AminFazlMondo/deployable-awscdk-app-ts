@@ -6,6 +6,7 @@ import { DeployJobStrategy, DeployOptions, EnvironmentDeploymentDependencies, En
 
 const checkActiveDeploymentStepId = 'deployment-check';
 const skipIfAlreadyActiveDeploymentCondition= `steps.${checkActiveDeploymentStepId}.outputs.has_active_deployment != 'true'`;
+const formattedDiffAnnotationCommentStepId = 'formatted_diff_annotation_comment';
 
 export interface DeployableAwsCdkTypeScriptAppStepsFactoryProps {
   /**
@@ -696,6 +697,124 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
     return jobDefinition;
   }
 
+  /**
+   * Step to generate the diff output
+   * @returns JobStep
+   */
+  public get generateDiffStep(): JobStep {
+    return this.getRunScriptStep(
+      'diff:output',
+      'Generate Diff Output',
+      true,
+    )!;
+  }
+
+  /**
+   * Step to check if there is an active deployment for a specific environment
+   * @param environment The environment to check
+   * @returns JobStep
+   */
+  public getAnnotateDiffStepForEnvironment(environment: string): JobStep {
+    return {
+      name: 'Annotate PR with Diff Output',
+      uses: 'mshick/add-pr-comment@v3',
+      with: {
+        'message-id': `diff-output-${environment}`,
+        'refresh-message-position': true,
+        'message': `\${{ steps.${formattedDiffAnnotationCommentStepId}.outputs.data }}`,
+      },
+    };
+  }
+
+  /**
+   * Get the step to format the diff output into a GitHub annotation comment for a specific environment
+   * @param environment The environment to format the diff for
+   * @returns JobStep
+   */
+  public getFormattedDiffAnnotationCommentStepForEnvironment(environment: string): JobStep {
+    return {
+      name: 'Get formatted diff annotation comment',
+      id: formattedDiffAnnotationCommentStepId,
+      run: [
+        'echo "data<<EOF" >> $GITHUB_OUTPUT',
+        `echo "### Changes for environment ${environment}" >> $GITHUB_OUTPUT`,
+        'echo "" >> $GITHUB_OUTPUT',
+        'echo "<details>" >> $GITHUB_OUTPUT',
+        'echo "<summary>Show diff</summary>" >> $GITHUB_OUTPUT',
+        'echo "" >> $GITHUB_OUTPUT',
+        'echo \`\`\` >> $GITHUB_OUTPUT',
+        'for file in ./**/cdk.out/diff.log; do',
+        '  echo "========== $file ==========" >> $GITHUB_OUTPUT',
+        '  sed \'s/\\x1B\\[[0-9;]*[mGKHF]//g\' "$file" >> $GITHUB_OUTPUT',
+        '  echo "" >> $GITHUB_OUTPUT',
+        'done',
+        'echo \`\`\` >> $GITHUB_OUTPUT',
+        'echo "</details>" >> $GITHUB_OUTPUT',
+        'echo "EOF" >> $GITHUB_OUTPUT',
+      ].join('\n'),
+    };
+  }
+
+  /**
+   * Get the deployment method argument for the deploy command
+   * @param environmentOptions The environment options
+   * @param environmentVariableName The name of the environment variable to set with the environment name, if any
+   * @returns The diff annotation job for the environment
+   */
+  public getDiffAnnotationJobForEnvironment(
+    environmentOptions: EnvironmentOptions,
+    environmentVariableName: string | undefined,
+  ): Job {
+    const { name } = environmentOptions;
+    const deployJobEnv = environmentVariableName ? {
+      [environmentVariableName]: name,
+    } : undefined;
+
+    const jobDefinition: Job = {
+      runsOn: ['ubuntu-latest'],
+      needs: ['build'],
+      permissions: {
+        contents: JobPermission.READ,
+        idToken: this.props.authProvider === CodeArtifactAuthProvider.GITHUB_OIDC ? JobPermission.WRITE : undefined,
+        pullRequests: JobPermission.WRITE,
+      },
+      env: deployJobEnv,
+      steps: [],
+    };
+    jobDefinition.steps.push(this.checkoutStep);
+
+    const preInstallDependenciesStep = this.preInstallDependenciesStep;
+    if (preInstallDependenciesStep) {
+      jobDefinition.steps.push(preInstallDependenciesStep);
+    }
+
+    jobDefinition.steps.push(...(this.project).renderWorkflowSetup());
+    jobDefinition.steps.push(...this.getSetupAwsCredentialsStepsForEnvironment(environmentOptions));
+
+    const setupNpmConfigStep = this.getSetupNpmConfigForEnvironment(name);
+    if (setupNpmConfigStep) {
+      jobDefinition.steps.push(setupNpmConfigStep);
+    }
+
+    jobDefinition.steps.push(this.generateDiffStep);
+    jobDefinition.steps.push(this.getFormattedDiffAnnotationCommentStepForEnvironment(name));
+    jobDefinition.steps.push(this.getAnnotateDiffStepForEnvironment(name));
+
+    return jobDefinition;
+  }
+
+  /**
+   * Get diff annotation jobs for all environments
+   * @returns Record of jobs
+   */
+  get diffAnnotationJobs(): Record<string, Job> {
+    const { environmentVariableName, environments } = this.props.deployOptions;
+    const jobs = environments.map((environmentOptions): [string, Job] => {
+      return [getDiffAnnotationJobId(environmentOptions.name), this.getDiffAnnotationJobForEnvironment(environmentOptions, environmentVariableName)];
+    });
+    return Object.fromEntries(jobs);
+  }
+
 }
 
 /**
@@ -705,4 +824,13 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
  */
 export function getDeployJobId(environmentName: string): string {
   return `Deploy-${environmentName}`;
+}
+
+/**
+ * Get the diff annotation job ID for a specific environment
+ * @param environmentName The name of the environment
+ * @returns The diff annotation job ID
+ */
+export function getDiffAnnotationJobId(environmentName: string): string {
+  return `Diff-Annotation-${environmentName}`;
 }

@@ -1,5 +1,19 @@
 import { awscdk } from 'projen';
 
+export interface DeployableAwsCdkTypeScriptAppDiffOutputOptions {
+  /**
+   * Whether to enable the diff output to a file in cdk.out
+   */
+  readonly enable: boolean;
+
+  /**
+   * Whether to annotate the diff output in the GitHub PR as well
+   * This cannot be set to true if the diff output is not enabled
+   * @default true if the diff is enabled, false otherwise
+   */
+  readonly annotateOnBuild?: boolean;
+}
+
 export interface DeployableAwsCdkTypeScriptAppOptions extends awscdk.AwsCdkTypeScriptAppOptions {
   /**
    * Deployment options
@@ -19,6 +33,12 @@ export interface DeployableAwsCdkTypeScriptAppOptions extends awscdk.AwsCdkTypeS
    * @default false
    */
   readonly checkActiveDeployment?: boolean;
+
+  /**
+   * CDK diff output options
+   * @default diff output disabled
+   */
+  readonly diffOutput?: DeployableAwsCdkTypeScriptAppDiffOutputOptions;
 }
 
 export type DeployMethod = 'direct' | 'change-set' | 'prepare-change-set';

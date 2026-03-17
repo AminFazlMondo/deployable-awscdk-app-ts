@@ -1825,6 +1825,50 @@ GitHub Secret name for AWS Secret Access Key.
 
 ---
 
+### DeployableAwsCdkTypeScriptAppDiffOutputOptions <a name="DeployableAwsCdkTypeScriptAppDiffOutputOptions" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppDiffOutputOptions"></a>
+
+#### Initializer <a name="Initializer" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppDiffOutputOptions.Initializer"></a>
+
+```typescript
+import { DeployableAwsCdkTypeScriptAppDiffOutputOptions } from 'deployable-awscdk-app-ts'
+
+const deployableAwsCdkTypeScriptAppDiffOutputOptions: DeployableAwsCdkTypeScriptAppDiffOutputOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppDiffOutputOptions.property.enable">enable</a></code> | <code>boolean</code> | Whether to enable the diff output to a file in cdk.out. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppDiffOutputOptions.property.annotateOnBuild">annotateOnBuild</a></code> | <code>boolean</code> | Whether to annotate the diff output in the GitHub PR as well This cannot be set to true if the diff output is not enabled. |
+
+---
+
+##### `enable`<sup>Required</sup> <a name="enable" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppDiffOutputOptions.property.enable"></a>
+
+```typescript
+public readonly enable: boolean;
+```
+
+- *Type:* boolean
+
+Whether to enable the diff output to a file in cdk.out.
+
+---
+
+##### `annotateOnBuild`<sup>Optional</sup> <a name="annotateOnBuild" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppDiffOutputOptions.property.annotateOnBuild"></a>
+
+```typescript
+public readonly annotateOnBuild: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true if the diff is enabled, false otherwise
+
+Whether to annotate the diff output in the GitHub PR as well This cannot be set to true if the diff output is not enabled.
+
+---
+
 ### DeployableAwsCdkTypeScriptAppOptions <a name="DeployableAwsCdkTypeScriptAppOptions" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions"></a>
 
 #### Initializer <a name="Initializer" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.Initializer"></a>
@@ -2021,6 +2065,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.lambdaOptions">lambdaOptions</a></code> | <code>projen.awscdk.LambdaFunctionCommonOptions</code> | Common options for all AWS Lambda functions. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.checkActiveDeployment">checkActiveDeployment</a></code> | <code>boolean</code> | Whether to check and skip the deployment for environments that have active deployment of the same commit. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.deployOptions">deployOptions</a></code> | <code><a href="#deployable-awscdk-app-ts.DeployOptions">DeployOptions</a></code> | Deployment options. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.diffOutput">diffOutput</a></code> | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppDiffOutputOptions">DeployableAwsCdkTypeScriptAppDiffOutputOptions</a></code> | CDK diff output options. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.generateNvmrc">generateNvmrc</a></code> | <code>boolean</code> | Whether to generate nvmrc file for the node version of the project if set to true, and no "workflowNodeVersion" is specified will use version 14.18.1. |
 
 ---
@@ -4644,6 +4689,19 @@ Deployment options.
 
 ---
 
+##### `diffOutput`<sup>Optional</sup> <a name="diffOutput" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.diffOutput"></a>
+
+```typescript
+public readonly diffOutput: DeployableAwsCdkTypeScriptAppDiffOutputOptions;
+```
+
+- *Type:* <a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppDiffOutputOptions">DeployableAwsCdkTypeScriptAppDiffOutputOptions</a>
+- *Default:* diff output disabled
+
+CDK diff output options.
+
+---
+
 ##### `generateNvmrc`<sup>Optional</sup> <a name="generateNvmrc" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.generateNvmrc"></a>
 
 ```typescript
@@ -5011,9 +5069,12 @@ The factory properties.
 
 | **Name** | **Description** |
 | --- | --- |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAnnotateDiffStepForEnvironment">getAnnotateDiffStepForEnvironment</a></code> | Step to check if there is an active deployment for a specific environment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAssumeAwsRoleStepForEnvironment">getAssumeAwsRoleStepForEnvironment</a></code> | Step to assume an AWS role for a specific environment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getCheckActiveDeploymentStepForEnvironment">getCheckActiveDeploymentStepForEnvironment</a></code> | Step to check if there is an active deployment for a specific environment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getDeploymentJobPrerequisiteJobIds">getDeploymentJobPrerequisiteJobIds</a></code> | Get the IDs of the jobs that must be completed before the specified environment's deployment job. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getDiffAnnotationJobForEnvironment">getDiffAnnotationJobForEnvironment</a></code> | Get the deployment method argument for the deploy command. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getFormattedDiffAnnotationCommentStepForEnvironment">getFormattedDiffAnnotationCommentStepForEnvironment</a></code> | Get the step to format the diff output into a GitHub annotation comment for a specific environment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getJobForEnvironment">getJobForEnvironment</a></code> | Get the job definition for a specific environment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getPostDeploymentStepForEnvironment">getPostDeploymentStepForEnvironment</a></code> | Get the post-deployment step for a specific environment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getPreDeploymentStepForEnvironment">getPreDeploymentStepForEnvironment</a></code> | Get the pre-deployment step for a specific environment. |
@@ -5021,6 +5082,22 @@ The factory properties.
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupAwsCredentialsInEnvironmentForEnvironment">getSetupAwsCredentialsInEnvironmentForEnvironment</a></code> | Step to setup AWS credentials in the environment for a specific environment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupAwsCredentialsStepsForEnvironment">getSetupAwsCredentialsStepsForEnvironment</a></code> | Get the steps to setup AWS credentials for a specific environment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getSetupNpmConfigForEnvironment">getSetupNpmConfigForEnvironment</a></code> | *No description.* |
+
+---
+
+##### `getAnnotateDiffStepForEnvironment` <a name="getAnnotateDiffStepForEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAnnotateDiffStepForEnvironment"></a>
+
+```typescript
+public getAnnotateDiffStepForEnvironment(environment: string): JobStep
+```
+
+Step to check if there is an active deployment for a specific environment.
+
+###### `environment`<sup>Required</sup> <a name="environment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getAnnotateDiffStepForEnvironment.parameter.environment"></a>
+
+- *Type:* string
+
+The environment to check.
 
 ---
 
@@ -5109,6 +5186,46 @@ Get the IDs of the jobs that must be completed before the specified environment'
 - *Type:* string
 
 The name of the environment.
+
+---
+
+##### `getDiffAnnotationJobForEnvironment` <a name="getDiffAnnotationJobForEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getDiffAnnotationJobForEnvironment"></a>
+
+```typescript
+public getDiffAnnotationJobForEnvironment(environmentOptions: EnvironmentOptions, environmentVariableName?: string): Job
+```
+
+Get the deployment method argument for the deploy command.
+
+###### `environmentOptions`<sup>Required</sup> <a name="environmentOptions" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getDiffAnnotationJobForEnvironment.parameter.environmentOptions"></a>
+
+- *Type:* <a href="#deployable-awscdk-app-ts.EnvironmentOptions">EnvironmentOptions</a>
+
+The environment options.
+
+---
+
+###### `environmentVariableName`<sup>Optional</sup> <a name="environmentVariableName" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getDiffAnnotationJobForEnvironment.parameter.environmentVariableName"></a>
+
+- *Type:* string
+
+The name of the environment variable to set with the environment name, if any.
+
+---
+
+##### `getFormattedDiffAnnotationCommentStepForEnvironment` <a name="getFormattedDiffAnnotationCommentStepForEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getFormattedDiffAnnotationCommentStepForEnvironment"></a>
+
+```typescript
+public getFormattedDiffAnnotationCommentStepForEnvironment(environment: string): JobStep
+```
+
+Get the step to format the diff output into a GitHub annotation comment for a specific environment.
+
+###### `environment`<sup>Required</sup> <a name="environment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getFormattedDiffAnnotationCommentStepForEnvironment.parameter.environment"></a>
+
+- *Type:* string
+
+The environment to format the diff for.
 
 ---
 
@@ -5328,6 +5445,8 @@ The environment deployment dependencies to validate.
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.deploymentJobsForMatrix">deploymentJobsForMatrix</a></code> | <code>{[ key: string ]: projen.github.workflows.Job}</code> | Get deployment jobs for matrix strategy. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.deploymentJobsForMultiJob">deploymentJobsForMultiJob</a></code> | <code>{[ key: string ]: projen.github.workflows.Job}</code> | Get deployment jobs for multi-job strategy. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.deploymentStep">deploymentStep</a></code> | <code>projen.github.workflows.JobStep</code> | Step to deploy the workflow. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.diffAnnotationJobs">diffAnnotationJobs</a></code> | <code>{[ key: string ]: projen.github.workflows.Job}</code> | Get diff annotation jobs for all environments. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.generateDiffStep">generateDiffStep</a></code> | <code>projen.github.workflows.JobStep</code> | Step to generate the diff output. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.postDeploymentStepForMatrix">postDeploymentStepForMatrix</a></code> | <code>projen.github.workflows.JobStep</code> | Step to run post deployment script in matrix strategy. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.preDeploymentStepForMatrix">preDeploymentStepForMatrix</a></code> | <code>projen.github.workflows.JobStep</code> | Step to run post deployment script in matrix strategy. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.setupAwsCredentialsInEnvironmentForMatrix">setupAwsCredentialsInEnvironmentForMatrix</a></code> | <code>projen.github.workflows.JobStep</code> | Step to setup AWS credentials in the environment for the matrix strategy. |
@@ -5406,6 +5525,30 @@ public readonly deploymentStep: JobStep;
 - *Type:* projen.github.workflows.JobStep
 
 Step to deploy the workflow.
+
+---
+
+##### `diffAnnotationJobs`<sup>Required</sup> <a name="diffAnnotationJobs" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.diffAnnotationJobs"></a>
+
+```typescript
+public readonly diffAnnotationJobs: {[ key: string ]: Job};
+```
+
+- *Type:* {[ key: string ]: projen.github.workflows.Job}
+
+Get diff annotation jobs for all environments.
+
+---
+
+##### `generateDiffStep`<sup>Required</sup> <a name="generateDiffStep" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.property.generateDiffStep"></a>
+
+```typescript
+public readonly generateDiffStep: JobStep;
+```
+
+- *Type:* projen.github.workflows.JobStep
+
+Step to generate the diff output.
 
 ---
 
