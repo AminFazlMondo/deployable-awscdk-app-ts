@@ -42,7 +42,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     this.deployJobStrategy = this.deployOptions.jobStrategy ?? DeployJobStrategy.MATRIX;
     this.diffOutputOptions = {
       enable: options.diffOutput?.enable ?? false,
-      annotateOnBuild: (options.diffOutput?.annotateOnBuild ?? false) && options.diffOutput?.enable,
+      annotateOnBuild: (options.diffOutput?.annotateOnBuild ?? options.diffOutput?.enable ?? false),
     };
 
     this.addDevDeps('deployable-awscdk-app-ts');

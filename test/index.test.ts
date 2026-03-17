@@ -910,6 +910,7 @@ describe('diff output and annotation', () => {
       outdir: mkdtemp(),
       diffOutput: {
         enable: true,
+        annotateOnBuild: false,
       },
       deployOptions: {
         environments: [
@@ -953,7 +954,6 @@ describe('diff output and annotation', () => {
       outdir: mkdtemp(),
       diffOutput: {
         enable: true,
-        annotateOnBuild: true,
       },
       deployOptions: {
         environments: [
