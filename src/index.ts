@@ -135,6 +135,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       npmConfigEnvironment: this.deployOptions.npmConfigEnvironment,
       jobStrategy: this.deployJobStrategy,
       environmentDependencies: this.environmentDependencies,
+      authProvider: this.codeArtifactOptions?.authProvider,
     });
 
     Object.entries(stepFactory.diffAnnotationJobs).forEach(([name, job]) => {
