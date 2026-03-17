@@ -10,6 +10,7 @@ const releaseWorkflowFilePath = '.github/workflows/release.yml';
 const buildWorkflowFilePath = '.github/workflows/build.yml';
 const tasksFilePath = '.projen/tasks.json';
 const nvmrcFilePath = '.nvmrc';
+const generateDiffOutputScriptPath = 'scripts/generateDiffOutput.ts';
 
 function mkdtemp() {
   const tmpdir = fs.mkdtempSync(
@@ -893,6 +894,7 @@ describe('diff output and annotation', () => {
 
     test('Should not generate the diff script', () => {
       expect(synthOutput[tasksFilePath]).not.toHaveProperty('tasks.diff:output');
+      expect(synthOutput[generateDiffOutputScriptPath]).toBeUndefined();
     });
 
     test('Should not include diff annotation steps', () => {
@@ -937,6 +939,7 @@ describe('diff output and annotation', () => {
 
     test('Should not generate the diff script', () => {
       expect(synthOutput[tasksFilePath]).toHaveProperty('tasks.diff:output');
+      expect(synthOutput[generateDiffOutputScriptPath]).toBeDefined();
     });
 
     test('Should not include diff annotation steps', () => {
@@ -980,6 +983,7 @@ describe('diff output and annotation', () => {
 
     test('Should not generate the diff script', () => {
       expect(synthOutput[tasksFilePath]).toHaveProperty('tasks.diff:output');
+      expect(synthOutput[generateDiffOutputScriptPath]).toMatchSnapshot();
     });
 
     test('Should not include diff annotation steps', () => {
