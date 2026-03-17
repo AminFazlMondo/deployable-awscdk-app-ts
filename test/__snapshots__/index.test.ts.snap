@@ -1548,10 +1548,8 @@ async function main() {
   const diffs = await cdk.diff(cx, {});
   const stream = createWriteStream('./cdk.out/diff.log');
   Object.entries(diffs).forEach(([stackName, diff]) => {
-    stream.write(\`Difference for stack \${stackName}:
-\`);
-    stream.write(\`Difference for stack \${stackName}:
-\`);
+    stream.write(\`Difference for stack \${stackName}:\\n\`);
+    formatDifferences(stream, diff);
   });
 }
 
