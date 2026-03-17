@@ -710,20 +710,39 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
   }
 
   /**
-   * Step to check if there is an active deployment for a specific environment
-   * @param environment The environment to check
-   * @returns JobStep
+   * Get the job to annotate the PR with the diff output for all environments
+   * @param dependentJobNames The names of the jobs that the annotation job depends on
+   * @returns The job definition for annotating the PR with the diff output
    */
-  public getAnnotateDiffStepForEnvironment(environment: string): JobStep {
+  public getAnnotateDiffJob(dependentJobNames: string[]): Job {
     return {
-      name: 'Annotate PR with Diff Output',
-      uses: 'mshick/add-pr-comment@v3',
-      with: {
-        'message-id': `diff-output-${environment}`,
-        'refresh-message-position': true,
-        'message': `\${{ steps.${formattedDiffAnnotationCommentStepId}.outputs.data }}`,
+      runsOn: ['ubuntu-latest'],
+      needs: dependentJobNames,
+      permissions: {
+        contents: JobPermission.READ,
+        pullRequests: JobPermission.WRITE,
       },
+      steps: [
+        {
+          name: 'Annotate PR with Diff Output',
+          uses: 'mshick/add-pr-comment@v3',
+          with: {
+            'message-id': 'diff-output',
+            'refresh-message-position': true,
+            'message': dependentJobNames.map(jobName => `\${{ steps.${jobName}.outputs.${formattedDiffAnnotationCommentStepId} }}`).join('\n'),
+          },
+        },
+      ],
     };
+    // return {
+    //   name: 'Annotate PR with Diff Output',
+    //   uses: 'mshick/add-pr-comment@v3',
+    //   with: {
+    //     'message-id': `diff-output-${environment}`,
+    //     'refresh-message-position': true,
+    //     'message': `\${{ steps.${formattedDiffAnnotationCommentStepId}.outputs.data }}`,
+    //   },
+    // };
   }
 
   /**
@@ -750,6 +769,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
         'done',
         "echo '\`\`\`' >> $GITHUB_OUTPUT",
         'echo "</details>" >> $GITHUB_OUTPUT',
+        'echo "" >> $GITHUB_OUTPUT',
         'echo "EOF" >> $GITHUB_OUTPUT',
       ].join('\n'),
     };
@@ -776,10 +796,15 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
       permissions: {
         contents: JobPermission.READ,
         idToken: this.props.authProvider === CodeArtifactAuthProvider.GITHUB_OIDC ? JobPermission.WRITE : undefined,
-        pullRequests: JobPermission.WRITE,
       },
       env: deployJobEnv,
       steps: [],
+      outputs: {
+        [formattedDiffAnnotationCommentStepId]: {
+          stepId: formattedDiffAnnotationCommentStepId,
+          outputName: 'data',
+        },
+      },
     };
     jobDefinition.steps.push(this.checkoutStep);
 
@@ -798,7 +823,6 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
 
     jobDefinition.steps.push(this.generateDiffStep);
     jobDefinition.steps.push(this.getFormattedDiffAnnotationCommentStepForEnvironment(name));
-    jobDefinition.steps.push(this.getAnnotateDiffStepForEnvironment(name));
 
     return jobDefinition;
   }
@@ -809,10 +833,12 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
    */
   get diffAnnotationJobs(): Record<string, Job> {
     const { environmentVariableName, environments } = this.props.deployOptions;
-    const jobs = environments.map((environmentOptions): [string, Job] => {
+    const jobEntries = environments.map((environmentOptions): [string, Job] => {
       return [getDiffAnnotationJobId(environmentOptions.name), this.getDiffAnnotationJobForEnvironment(environmentOptions, environmentVariableName)];
     });
-    return Object.fromEntries(jobs);
+    const jobs = Object.fromEntries(jobEntries);
+    jobs['Diff-Annotation-Comment'] = this.getAnnotateDiffJob(Object.keys(jobs));
+    return jobs;
   }
 
 }

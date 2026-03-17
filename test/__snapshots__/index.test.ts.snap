@@ -1654,7 +1654,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write
+    outputs:
+      formatted_diff_annotation_comment: \${{ steps.formatted_diff_annotation_comment.outputs.data }}
     if: \${{ !needs.build.outputs.self_mutation_happened }}
     steps:
       - name: Download build artifacts
@@ -1704,19 +1705,15 @@ jobs:
           done
           echo '\`\`\`' >> $GITHUB_OUTPUT
           echo "</details>" >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-      - name: Annotate PR with Diff Output
-        uses: mshick/add-pr-comment@v3
-        with:
-          message-id: diff-output-dev
-          refresh-message-position: true
-          message: \${{ steps.formatted_diff_annotation_comment.outputs.data }}
   Diff-Annotation-staging:
     needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write
+    outputs:
+      formatted_diff_annotation_comment: \${{ steps.formatted_diff_annotation_comment.outputs.data }}
     if: \${{ !needs.build.outputs.self_mutation_happened }}
     steps:
       - name: Download build artifacts
@@ -1766,13 +1763,34 @@ jobs:
           done
           echo '\`\`\`' >> $GITHUB_OUTPUT
           echo "</details>" >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
+  Diff-Annotation-Comment:
+    needs:
+      - Diff-Annotation-dev
+      - Diff-Annotation-staging
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    if: \${{ !needs.build.outputs.self_mutation_happened }}
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v5
+        with:
+          name: build-artifact
+          path: dist
+      - name: Restore build artifact permissions
+        run: cd dist && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
       - name: Annotate PR with Diff Output
         uses: mshick/add-pr-comment@v3
         with:
-          message-id: diff-output-staging
+          message-id: diff-output
           refresh-message-position: true
-          message: \${{ steps.formatted_diff_annotation_comment.outputs.data }}
+          message: |-
+            \${{ steps.Diff-Annotation-dev.outputs.formatted_diff_annotation_comment }}
+            \${{ steps.Diff-Annotation-staging.outputs.formatted_diff_annotation_comment }}
 "
 `;
 
