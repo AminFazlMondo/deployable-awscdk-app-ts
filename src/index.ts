@@ -91,7 +91,9 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
       '@aws-cdk/cloudformation-diff',
     );
 
-    const sourceCode = new SourceCode(this, 'scripts/generateDiffOutput.ts');
+    const filePath = path.posix.join('scripts', 'generateDiffOutput.ts');
+
+    const sourceCode = new SourceCode(this, filePath);
     sourceCode.line("import {createWriteStream} from 'fs'");
     sourceCode.line("import {formatDifferences} from '@aws-cdk/cloudformation-diff';");
     sourceCode.line("import {Toolkit} from '@aws-cdk/toolkit-lib';");
@@ -114,7 +116,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     sourceCode.close('});');
 
     this.addTask('diff:output', {
-      exec: 'ts-node --transpile-only scripts/generateDiff.ts',
+      exec: `ts-node --transpile-only ${filePath}`,
     });
   }
 
