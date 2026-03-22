@@ -708,6 +708,7 @@ the name of environments to add the scripts to, if not provided or empty will up
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.isProject">isProject</a></code> | Test whether the given construct is a project. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.of">of</a></code> | Find the closest ancestor project for given construct. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDiffOutputScript">addDiffOutputScript</a></code> | If the diff output is enabled, adds a script and a job step to generate the CDK diff output to a file in cdk.out. |
 
 ---
 
@@ -774,6 +775,22 @@ When given a project, this it the project itself.
 ###### `construct`<sup>Required</sup> <a name="construct" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.of.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
+
+---
+
+##### `addDiffOutputScript` <a name="addDiffOutputScript" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDiffOutputScript"></a>
+
+```typescript
+import { DeployableAwsCdkTypeScriptApp } from 'deployable-awscdk-app-ts'
+
+DeployableAwsCdkTypeScriptApp.addDiffOutputScript(project: AwsCdkTypeScriptApp)
+```
+
+If the diff output is enabled, adds a script and a job step to generate the CDK diff output to a file in cdk.out.
+
+###### `project`<sup>Required</sup> <a name="project" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDiffOutputScript.parameter.project"></a>
+
+- *Type:* projen.awscdk.AwsCdkTypeScriptApp
 
 ---
 

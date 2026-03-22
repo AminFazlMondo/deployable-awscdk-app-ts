@@ -12,6 +12,45 @@ export * from './steps';
 export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
   /**
+   * If the diff output is enabled, adds a script and a job step to generate the CDK diff output to a file in cdk.out
+   * @returns void
+   */
+  public static addDiffOutputScript(project: awscdk.AwsCdkTypeScriptApp) {
+    project.addDevDeps(
+      '@aws-cdk/toolkit-lib',
+      '@aws-cdk/cloudformation-diff',
+    );
+
+    const filePath = path.posix.join('scripts', 'generateDiffOutput.ts');
+
+    const sourceCode = new SourceCode(project, filePath);
+    sourceCode.line("import {createWriteStream} from 'fs'");
+    sourceCode.line("import {formatDifferences} from '@aws-cdk/cloudformation-diff';");
+    sourceCode.line("import {Toolkit} from '@aws-cdk/toolkit-lib';");
+    sourceCode.line('');
+    sourceCode.line('const cdk = new Toolkit({});');
+    sourceCode.line('');
+    sourceCode.open('async function main() {');
+    sourceCode.line(`const cx = await cdk.fromCdkApp('ts-node-transpile-only ${path.posix.join(project.srcdir, project.appEntrypoint)}');`);
+    sourceCode.line('const diffs = await cdk.diff(cx, {});');
+    sourceCode.line("const stream = createWriteStream('./cdk.out/diff.log');");
+    sourceCode.open('Object.entries(diffs).forEach(([stackName, diff]) => {');
+    sourceCode.line('stream.write(`Difference for stack ${stackName}:\\n`);');
+    sourceCode.line('formatDifferences(stream, diff);');
+    sourceCode.close('});');
+    sourceCode.close('}');
+    sourceCode.line('');
+    sourceCode.open('main().catch((err) => {');
+    sourceCode.line('console.error(err);');
+    sourceCode.line('process.exit(1);');
+    sourceCode.close('});');
+
+    project.addTask('diff:output', {
+      exec: `ts-node --transpile-only ${filePath}`,
+    });
+  }
+
+  /**
    * Task to deploy your app.
    */
   public readonly deployWorkflowTask: Task;
@@ -86,38 +125,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
   private addDiffOutputScript() {
     if (!this.diffOutputOptions.enable) {return;}
 
-    this.addDevDeps(
-      '@aws-cdk/toolkit-lib',
-      '@aws-cdk/cloudformation-diff',
-    );
-
-    const filePath = path.posix.join('scripts', 'generateDiffOutput.ts');
-
-    const sourceCode = new SourceCode(this, filePath);
-    sourceCode.line("import {createWriteStream} from 'fs'");
-    sourceCode.line("import {formatDifferences} from '@aws-cdk/cloudformation-diff';");
-    sourceCode.line("import {Toolkit} from '@aws-cdk/toolkit-lib';");
-    sourceCode.line('');
-    sourceCode.line('const cdk = new Toolkit({});');
-    sourceCode.line('');
-    sourceCode.open('async function main() {');
-    sourceCode.line(`const cx = await cdk.fromCdkApp('ts-node-transpile-only ${path.posix.join(this.srcdir, this.appEntrypoint)}');`);
-    sourceCode.line('const diffs = await cdk.diff(cx, {});');
-    sourceCode.line("const stream = createWriteStream('./cdk.out/diff.log');");
-    sourceCode.open('Object.entries(diffs).forEach(([stackName, diff]) => {');
-    sourceCode.line('stream.write(`Difference for stack ${stackName}:\\n`);');
-    sourceCode.line('formatDifferences(stream, diff);');
-    sourceCode.close('});');
-    sourceCode.close('}');
-    sourceCode.line('');
-    sourceCode.open('main().catch((err) => {');
-    sourceCode.line('console.error(err);');
-    sourceCode.line('process.exit(1);');
-    sourceCode.close('});');
-
-    this.addTask('diff:output', {
-      exec: `ts-node --transpile-only ${filePath}`,
-    });
+    DeployableAwsCdkTypeScriptApp.addDiffOutputScript(this);
   }
 
   /**
