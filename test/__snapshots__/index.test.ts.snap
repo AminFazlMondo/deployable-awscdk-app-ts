@@ -1243,9 +1243,7 @@ jobs:
       - name: Run Deployment
         run: npm run deploy:workflow
   Deploy-staging:
-    needs:
-      - release_github
-      - Deploy-dev
+    needs: Deploy-dev
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -1398,9 +1396,7 @@ jobs:
       - name: Run Deployment
         run: npm run deploy:workflow
   Deploy-stagingRegion1:
-    needs:
-      - release_github
-      - Deploy-dev
+    needs: Deploy-dev
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -1431,9 +1427,7 @@ jobs:
       - name: Run Deployment
         run: npm run deploy:workflow
   Deploy-prodRegion1:
-    needs:
-      - release_github
-      - Deploy-stagingRegion1
+    needs: Deploy-stagingRegion1
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -1466,9 +1460,7 @@ jobs:
       - name: Run Post Deployment
         run: npm run post-deploy-prod
   Deploy-stagingRegion2:
-    needs:
-      - release_github
-      - Deploy-dev
+    needs: Deploy-dev
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -1499,9 +1491,7 @@ jobs:
       - name: Run Deployment
         run: npm run deploy:workflow
   Deploy-prodRegion2:
-    needs:
-      - release_github
-      - Deploy-stagingRegion2
+    needs: Deploy-stagingRegion2
     runs-on: ubuntu-latest
     permissions:
       contents: read

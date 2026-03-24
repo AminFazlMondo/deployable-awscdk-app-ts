@@ -591,7 +591,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
    * @returns An array of job IDs
    */
   public getDeploymentJobPrerequisiteJobIds(environmentName: string): string[] {
-    const result = ['release_github'];
+    const result = [];
     if (!this.props.environmentDependencies) {
       const index = this.props.deployOptions.environments.findIndex(env => env.name === environmentName);
       const prerequisiteEnvironment = index > 0 ? this.props.deployOptions.environments[index - 1] : undefined;
@@ -605,6 +605,9 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
           result.push(getDeployJobId(dep));
         });
       }
+    }
+    if (result.length === 0) {
+      result.push('release_github');
     }
     return result;
   }
