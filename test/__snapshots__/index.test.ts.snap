@@ -25,7 +25,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -33,7 +33,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v5
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-region: us-east-2
           role-to-assume: stub-role-1
@@ -75,9 +75,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: lts/*
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -104,12 +105,12 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v5
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-region: us-east-2
           role-to-assume: stub-role-1
@@ -187,7 +188,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -195,9 +196,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: release
@@ -233,9 +235,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -261,14 +264,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -685,7 +689,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -727,9 +731,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: lts/*
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -755,7 +760,7 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
@@ -830,7 +835,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -872,9 +877,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: lts/*
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -900,7 +906,7 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
@@ -986,7 +992,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -994,9 +1000,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: release
@@ -1032,9 +1039,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -1060,14 +1068,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -1147,7 +1156,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -1155,9 +1164,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: release
@@ -1193,9 +1203,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -1221,14 +1232,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -1255,14 +1267,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Assume AWS Role
@@ -1300,7 +1313,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -1308,9 +1321,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: release
@@ -1346,9 +1360,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -1374,14 +1389,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -1408,14 +1424,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Assume AWS Role
@@ -1439,14 +1456,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Assume AWS Role
@@ -1472,14 +1490,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Assume AWS Role
@@ -1503,14 +1522,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Assume AWS Role
@@ -1567,14 +1587,15 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: \${{ github.event.pull_request.head.ref }}
           repository: \${{ github.event.pull_request.head.repo.full_name }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm install
       - name: build
@@ -1616,7 +1637,7 @@ jobs:
     if: always() && needs.build.outputs.self_mutation_happened && !(github.event.pull_request.head.repo.full_name != github.repository)
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           token: \${{ secrets.PROJEN_GITHUB_TOKEN }}
           ref: \${{ github.event.pull_request.head.ref }}
@@ -1657,14 +1678,15 @@ jobs:
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -1715,14 +1737,15 @@ jobs:
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -1808,7 +1831,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -1816,9 +1839,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: release
@@ -1854,9 +1878,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -1882,14 +1907,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -1969,7 +1995,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -1977,9 +2003,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: "18"
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: release
@@ -2015,9 +2042,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: "18"
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -2045,14 +2073,15 @@ jobs:
       STAGE: \${{ matrix.environment }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: "18"
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -2138,7 +2167,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -2146,9 +2175,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: release
@@ -2184,9 +2214,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -2212,14 +2243,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -2303,7 +2335,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -2311,9 +2343,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: release
@@ -2349,9 +2382,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -2377,14 +2411,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -2464,7 +2499,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -2472,9 +2507,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: release
@@ -2510,9 +2546,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -2538,14 +2575,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -2625,7 +2663,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -2633,9 +2671,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: release
@@ -2671,9 +2710,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -2699,16 +2739,17 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: stub-task
         run: npx projen stub-task
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -2778,7 +2819,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -2786,7 +2827,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v5
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-access-key-id: \${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -2830,9 +2871,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: lts/*
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -2858,12 +2900,12 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v5
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-access-key-id: \${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -2943,7 +2985,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -2951,9 +2993,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - name: release
@@ -2989,9 +3032,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -3017,14 +3061,15 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
+          package-manager-cache: false
       - name: Install dependencies
         run: npm ci
       - id: deployment-check
@@ -3101,7 +3146,7 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
@@ -3143,9 +3188,10 @@ jobs:
       contents: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: lts/*
+          package-manager-cache: "false"
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
@@ -3171,7 +3217,7 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
