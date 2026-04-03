@@ -55,7 +55,7 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
         "if": undefined,
         "name": "Checkout",
         "timeoutMinutes": undefined,
-        "uses": "actions/checkout@v5",
+        "uses": "actions/checkout@v6",
         "with": {
           "fetch-depth": 0,
           "ref": "\${{ github.sha }}",
@@ -64,16 +64,17 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
       },
       {
         "name": "Setup pnpm",
-        "uses": "pnpm/action-setup@v4",
+        "uses": "pnpm/action-setup@v5",
         "with": {
           "version": "10",
         },
       },
       {
         "name": "Setup Node.js",
-        "uses": "actions/setup-node@v5",
+        "uses": "actions/setup-node@v6",
         "with": {
           "node-version": "20.0.0",
+          "package-manager-cache": false,
         },
       },
       {
@@ -154,7 +155,7 @@ echo "EOF" >> $GITHUB_OUTPUT",
         "if": undefined,
         "name": "Checkout",
         "timeoutMinutes": undefined,
-        "uses": "actions/checkout@v5",
+        "uses": "actions/checkout@v6",
         "with": {
           "fetch-depth": 0,
           "ref": "\${{ github.sha }}",
@@ -163,16 +164,17 @@ echo "EOF" >> $GITHUB_OUTPUT",
       },
       {
         "name": "Setup pnpm",
-        "uses": "pnpm/action-setup@v4",
+        "uses": "pnpm/action-setup@v5",
         "with": {
           "version": "10",
         },
       },
       {
         "name": "Setup Node.js",
-        "uses": "actions/setup-node@v5",
+        "uses": "actions/setup-node@v6",
         "with": {
           "node-version": "20.0.0",
+          "package-manager-cache": false,
         },
       },
       {
@@ -283,7 +285,7 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
         "if": undefined,
         "name": "Checkout",
         "timeoutMinutes": undefined,
-        "uses": "actions/checkout@v5",
+        "uses": "actions/checkout@v6",
         "with": {
           "fetch-depth": 0,
           "ref": "\${{ github.sha }}",
@@ -292,16 +294,17 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
       },
       {
         "name": "Setup pnpm",
-        "uses": "pnpm/action-setup@v4",
+        "uses": "pnpm/action-setup@v5",
         "with": {
           "version": "10",
         },
       },
       {
         "name": "Setup Node.js",
-        "uses": "actions/setup-node@v5",
+        "uses": "actions/setup-node@v6",
         "with": {
           "node-version": "20.0.0",
+          "package-manager-cache": false,
         },
       },
       {
@@ -375,7 +378,7 @@ echo "EOF" >> $GITHUB_OUTPUT",
         "if": undefined,
         "name": "Checkout",
         "timeoutMinutes": undefined,
-        "uses": "actions/checkout@v5",
+        "uses": "actions/checkout@v6",
         "with": {
           "fetch-depth": 0,
           "ref": "\${{ github.sha }}",
@@ -384,16 +387,17 @@ echo "EOF" >> $GITHUB_OUTPUT",
       },
       {
         "name": "Setup pnpm",
-        "uses": "pnpm/action-setup@v4",
+        "uses": "pnpm/action-setup@v5",
         "with": {
           "version": "10",
         },
       },
       {
         "name": "Setup Node.js",
-        "uses": "actions/setup-node@v5",
+        "uses": "actions/setup-node@v6",
         "with": {
           "node-version": "20.0.0",
+          "package-manager-cache": false,
         },
       },
       {
