@@ -50,4 +50,11 @@ new TextFile(project, '.nvmrc', {
   lines: [workflowNodeVersion],
 });
 
+new TextFile(project, 'mise.toml', {
+  lines: [
+    '[tools]',
+    `node = "${workflowNodeVersion}"`,
+  ],
+});
+
 project.synth();
