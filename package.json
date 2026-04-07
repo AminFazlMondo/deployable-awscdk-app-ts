@@ -74,6 +74,7 @@
   "bundledDependencies": [
     "semver"
   ],
+  "pnpm": {},
   "keywords": [
     "AWS CDK",
     "Deployment",
@@ -85,7 +86,7 @@
   },
   "devEngines": {
     "packageManager": {
-      "name": "npm",
+      "name": "pnpm",
       "onFail": "ignore"
     }
   },

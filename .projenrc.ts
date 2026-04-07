@@ -16,7 +16,7 @@ const project = new cdk.JsiiProject({
   ],
   projenrcTs: true,
   repositoryUrl: 'https://github.com/AminFazlMondo/deployable-awscdk-app-ts.git',
-  packageManager: javascript.NodePackageManager.NPM,
+  packageManager: javascript.NodePackageManager.PNPM,
   npmTrustedPublishing: true,
   npmAccess: javascript.NpmAccess.PUBLIC,
   deps: [
@@ -49,5 +49,6 @@ const project = new cdk.JsiiProject({
 new TextFile(project, '.nvmrc', {
   lines: [workflowNodeVersion],
 });
+project.npmrc.addConfig('node-linker', 'hoisted');
 
 project.synth();
