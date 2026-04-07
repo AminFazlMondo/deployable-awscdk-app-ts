@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { awscdk, SourceCode, Task, TextFile } from 'projen';
-import { CodeArtifactOptions } from 'projen/lib/javascript';
+import { CodeArtifactOptions, NodePackageManager } from 'projen/lib/javascript';
 import { DeployableAwsCdkTypeScriptAppStepsFactory } from './steps';
 import { DeployableAwsCdkTypeScriptAppDiffOutputOptions, DeployableAwsCdkTypeScriptAppOptions, DeployJobStrategy, DeployOptions, EnvironmentDeploymentDependencies, EnvironmentOptions } from './types';
 import { getMajorNodeVersion } from './utils';
@@ -57,6 +57,8 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
 
   private readonly deployable: boolean;
   private readonly generateNvmrc: boolean;
+  private readonly generateMise: boolean;
+
   private readonly checkActiveDeployment: boolean;
   private readonly workflowNodeVersion?: string;
   private readonly codeArtifactOptions?: CodeArtifactOptions;
@@ -74,6 +76,7 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     });
     this.deployable = deployable;
     this.generateNvmrc = options.generateNvmrc ?? true;
+    this.generateMise = options.generateMise ?? true;
     this.checkActiveDeployment = options.checkActiveDeployment ?? false;
     this.workflowNodeVersion = options.workflowNodeVersion;
     this.deployOptions = options.deployOptions ?? { environments: [] };
@@ -157,6 +160,19 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     if (this.generateNvmrc) {
       new TextFile(this, '.nvmrc', {
         lines: [this.workflowNodeVersion ?? ''],
+      });
+    }
+
+    if (this.generateMise) {
+      const lines = ['[tools]'];
+      lines.push(`node = "${this.workflowNodeVersion ?? '14.18.1'}"`);
+
+      if (this.package.packageManager === NodePackageManager.PNPM) {
+        lines.push(`pnpm = "${this.package.pnpmVersion ?? '10'}"`);
+      }
+
+      new TextFile(this, 'mise.toml', {
+        lines,
       });
     }
 

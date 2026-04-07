@@ -29,6 +29,15 @@ export interface DeployableAwsCdkTypeScriptAppOptions extends awscdk.AwsCdkTypeS
   readonly generateNvmrc?: boolean;
 
   /**
+   * Whether to generate mise file for the node version of the project
+   * if set to true, and no "workflowNodeVersion" is specified will use version 14.18.1
+   * if pnpm is set as package manager, will also add pnpm version to the mise file and it will default to 10 if not specified in the project package configuration
+   * @default true
+   */
+  readonly generateMise?: boolean;
+
+
+  /**
    * Whether to check and skip the deployment for environments that have active deployment of the same commit
    * @default false
    */
