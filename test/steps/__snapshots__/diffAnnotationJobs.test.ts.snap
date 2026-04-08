@@ -16,12 +16,26 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
     ],
     "steps": [
       {
+        "continueOnError": undefined,
+        "env": undefined,
+        "id": undefined,
+        "if": undefined,
+        "name": "Download all diff artifacts",
+        "timeoutMinutes": undefined,
+        "uses": "actions/download-artifact@v8",
+        "with": {
+          "merge-multiple": true,
+          "path": "diff-outputs",
+          "pattern": "diff-output-*",
+        },
+        "workingDirectory": undefined,
+      },
+      {
         "name": "Annotate PR with Diff Output",
         "uses": "mshick/add-pr-comment@v3",
         "with": {
-          "message": "\${{ needs.Diff-Annotation-Dev.outputs.formatted_diff_annotation_comment }}
-\${{ needs.Diff-Annotation-Prod.outputs.formatted_diff_annotation_comment }}",
           "message-id": "diff-output",
+          "message-path": "diff-outputs/*.md",
           "refresh-message-position": true,
         },
       },
@@ -34,12 +48,6 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
     "needs": [
       "build",
     ],
-    "outputs": {
-      "formatted_diff_annotation_comment": {
-        "outputName": "data",
-        "stepId": "formatted_diff_annotation_comment",
-      },
-    },
     "permissions": {
       "contents": "read",
       "idToken": "write",
@@ -106,24 +114,42 @@ echo "AWS_REGION=$region" >> $GITHUB_ENV",
         "run": "pnpm run diff:output",
       },
       {
+        "env": {
+          "environment": "Dev",
+        },
         "id": "formatted_diff_annotation_comment",
         "name": "Get formatted diff annotation comment",
-        "run": "echo "data<<EOF" >> $GITHUB_OUTPUT
-echo "### Changes for environment Dev" >> $GITHUB_OUTPUT
-echo "" >> $GITHUB_OUTPUT
-echo "<details>" >> $GITHUB_OUTPUT
-echo "<summary>Show diff</summary>" >> $GITHUB_OUTPUT
-echo "" >> $GITHUB_OUTPUT
-echo '\`\`\`' >> $GITHUB_OUTPUT
+        "run": "mkdir -p diff-output
+echo "### Changes for environment Dev" > diff-output/diff-Dev.md
+echo "" >> diff-output/diff-\${environment}.md
+echo "<details>" >> diff-output/diff-\${environment}.md
+echo "<summary>Show diff</summary>" >> diff-output/diff-\${environment}.md
+echo "" >> diff-output/diff-\${environment}.md
+echo '\`\`\`' >> diff-output/diff-\${environment}.md
 for file in $(find . -path "**/cdk.out/diff.log" 2>/dev/null); do
-  echo "========== $file ==========" >> $GITHUB_OUTPUT
-  sed 's/\\x1B\\[[0-9;]*[mGKHF]//g' "$file" >> $GITHUB_OUTPUT
-  echo "" >> $GITHUB_OUTPUT
+  echo "========== $file ==========" >> diff-output/diff-\${environment}.md
+  sed 's/\\x1B\\[[0-9;]*[mGKHF]//g' "$file" >> diff-output/diff-\${environment}.md
+  echo "" >> diff-output/diff-\${environment}.md
 done
-echo '\`\`\`' >> $GITHUB_OUTPUT
-echo "</details>" >> $GITHUB_OUTPUT
-echo "" >> $GITHUB_OUTPUT
-echo "EOF" >> $GITHUB_OUTPUT",
+echo '\`\`\`' >> diff-output/diff-\${environment}.md
+echo "</details>" >> diff-output/diff-\${environment}.md
+echo "" >> diff-output/diff-\${environment}.md",
+      },
+      {
+        "continueOnError": undefined,
+        "env": undefined,
+        "id": undefined,
+        "if": undefined,
+        "name": "Upload diff output",
+        "timeoutMinutes": undefined,
+        "uses": "actions/upload-artifact@v7",
+        "with": {
+          "name": "diff-output-Dev",
+          "overwrite": true,
+          "path": "diff-output/",
+          "retention-days": 1,
+        },
+        "workingDirectory": undefined,
       },
     ],
   },
@@ -134,12 +160,6 @@ echo "EOF" >> $GITHUB_OUTPUT",
     "needs": [
       "build",
     ],
-    "outputs": {
-      "formatted_diff_annotation_comment": {
-        "outputName": "data",
-        "stepId": "formatted_diff_annotation_comment",
-      },
-    },
     "permissions": {
       "contents": "read",
       "idToken": "write",
@@ -206,24 +226,42 @@ echo "AWS_REGION=$region" >> $GITHUB_ENV",
         "run": "pnpm run diff:output",
       },
       {
+        "env": {
+          "environment": "Prod",
+        },
         "id": "formatted_diff_annotation_comment",
         "name": "Get formatted diff annotation comment",
-        "run": "echo "data<<EOF" >> $GITHUB_OUTPUT
-echo "### Changes for environment Prod" >> $GITHUB_OUTPUT
-echo "" >> $GITHUB_OUTPUT
-echo "<details>" >> $GITHUB_OUTPUT
-echo "<summary>Show diff</summary>" >> $GITHUB_OUTPUT
-echo "" >> $GITHUB_OUTPUT
-echo '\`\`\`' >> $GITHUB_OUTPUT
+        "run": "mkdir -p diff-output
+echo "### Changes for environment Prod" > diff-output/diff-Prod.md
+echo "" >> diff-output/diff-\${environment}.md
+echo "<details>" >> diff-output/diff-\${environment}.md
+echo "<summary>Show diff</summary>" >> diff-output/diff-\${environment}.md
+echo "" >> diff-output/diff-\${environment}.md
+echo '\`\`\`' >> diff-output/diff-\${environment}.md
 for file in $(find . -path "**/cdk.out/diff.log" 2>/dev/null); do
-  echo "========== $file ==========" >> $GITHUB_OUTPUT
-  sed 's/\\x1B\\[[0-9;]*[mGKHF]//g' "$file" >> $GITHUB_OUTPUT
-  echo "" >> $GITHUB_OUTPUT
+  echo "========== $file ==========" >> diff-output/diff-\${environment}.md
+  sed 's/\\x1B\\[[0-9;]*[mGKHF]//g' "$file" >> diff-output/diff-\${environment}.md
+  echo "" >> diff-output/diff-\${environment}.md
 done
-echo '\`\`\`' >> $GITHUB_OUTPUT
-echo "</details>" >> $GITHUB_OUTPUT
-echo "" >> $GITHUB_OUTPUT
-echo "EOF" >> $GITHUB_OUTPUT",
+echo '\`\`\`' >> diff-output/diff-\${environment}.md
+echo "</details>" >> diff-output/diff-\${environment}.md
+echo "" >> diff-output/diff-\${environment}.md",
+      },
+      {
+        "continueOnError": undefined,
+        "env": undefined,
+        "id": undefined,
+        "if": undefined,
+        "name": "Upload diff output",
+        "timeoutMinutes": undefined,
+        "uses": "actions/upload-artifact@v7",
+        "with": {
+          "name": "diff-output-Prod",
+          "overwrite": true,
+          "path": "diff-output/",
+          "retention-days": 1,
+        },
+        "workingDirectory": undefined,
       },
     ],
   },
@@ -246,12 +284,26 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
     ],
     "steps": [
       {
+        "continueOnError": undefined,
+        "env": undefined,
+        "id": undefined,
+        "if": undefined,
+        "name": "Download all diff artifacts",
+        "timeoutMinutes": undefined,
+        "uses": "actions/download-artifact@v8",
+        "with": {
+          "merge-multiple": true,
+          "path": "diff-outputs",
+          "pattern": "diff-output-*",
+        },
+        "workingDirectory": undefined,
+      },
+      {
         "name": "Annotate PR with Diff Output",
         "uses": "mshick/add-pr-comment@v3",
         "with": {
-          "message": "\${{ needs.Diff-Annotation-Dev.outputs.formatted_diff_annotation_comment }}
-\${{ needs.Diff-Annotation-Prod.outputs.formatted_diff_annotation_comment }}",
           "message-id": "diff-output",
+          "message-path": "diff-outputs/*.md",
           "refresh-message-position": true,
         },
       },
@@ -264,12 +316,6 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
     "needs": [
       "build",
     ],
-    "outputs": {
-      "formatted_diff_annotation_comment": {
-        "outputName": "data",
-        "stepId": "formatted_diff_annotation_comment",
-      },
-    },
     "permissions": {
       "contents": "read",
       "idToken": undefined,
@@ -329,24 +375,42 @@ echo "AWS_REGION=$region" >> $GITHUB_ENV",
         "run": "pnpm run diff:output",
       },
       {
+        "env": {
+          "environment": "Dev",
+        },
         "id": "formatted_diff_annotation_comment",
         "name": "Get formatted diff annotation comment",
-        "run": "echo "data<<EOF" >> $GITHUB_OUTPUT
-echo "### Changes for environment Dev" >> $GITHUB_OUTPUT
-echo "" >> $GITHUB_OUTPUT
-echo "<details>" >> $GITHUB_OUTPUT
-echo "<summary>Show diff</summary>" >> $GITHUB_OUTPUT
-echo "" >> $GITHUB_OUTPUT
-echo '\`\`\`' >> $GITHUB_OUTPUT
+        "run": "mkdir -p diff-output
+echo "### Changes for environment Dev" > diff-output/diff-Dev.md
+echo "" >> diff-output/diff-\${environment}.md
+echo "<details>" >> diff-output/diff-\${environment}.md
+echo "<summary>Show diff</summary>" >> diff-output/diff-\${environment}.md
+echo "" >> diff-output/diff-\${environment}.md
+echo '\`\`\`' >> diff-output/diff-\${environment}.md
 for file in $(find . -path "**/cdk.out/diff.log" 2>/dev/null); do
-  echo "========== $file ==========" >> $GITHUB_OUTPUT
-  sed 's/\\x1B\\[[0-9;]*[mGKHF]//g' "$file" >> $GITHUB_OUTPUT
-  echo "" >> $GITHUB_OUTPUT
+  echo "========== $file ==========" >> diff-output/diff-\${environment}.md
+  sed 's/\\x1B\\[[0-9;]*[mGKHF]//g' "$file" >> diff-output/diff-\${environment}.md
+  echo "" >> diff-output/diff-\${environment}.md
 done
-echo '\`\`\`' >> $GITHUB_OUTPUT
-echo "</details>" >> $GITHUB_OUTPUT
-echo "" >> $GITHUB_OUTPUT
-echo "EOF" >> $GITHUB_OUTPUT",
+echo '\`\`\`' >> diff-output/diff-\${environment}.md
+echo "</details>" >> diff-output/diff-\${environment}.md
+echo "" >> diff-output/diff-\${environment}.md",
+      },
+      {
+        "continueOnError": undefined,
+        "env": undefined,
+        "id": undefined,
+        "if": undefined,
+        "name": "Upload diff output",
+        "timeoutMinutes": undefined,
+        "uses": "actions/upload-artifact@v7",
+        "with": {
+          "name": "diff-output-Dev",
+          "overwrite": true,
+          "path": "diff-output/",
+          "retention-days": 1,
+        },
+        "workingDirectory": undefined,
       },
     ],
   },
@@ -357,12 +421,6 @@ echo "EOF" >> $GITHUB_OUTPUT",
     "needs": [
       "build",
     ],
-    "outputs": {
-      "formatted_diff_annotation_comment": {
-        "outputName": "data",
-        "stepId": "formatted_diff_annotation_comment",
-      },
-    },
     "permissions": {
       "contents": "read",
       "idToken": undefined,
@@ -422,24 +480,42 @@ echo "AWS_REGION=$region" >> $GITHUB_ENV",
         "run": "pnpm run diff:output",
       },
       {
+        "env": {
+          "environment": "Prod",
+        },
         "id": "formatted_diff_annotation_comment",
         "name": "Get formatted diff annotation comment",
-        "run": "echo "data<<EOF" >> $GITHUB_OUTPUT
-echo "### Changes for environment Prod" >> $GITHUB_OUTPUT
-echo "" >> $GITHUB_OUTPUT
-echo "<details>" >> $GITHUB_OUTPUT
-echo "<summary>Show diff</summary>" >> $GITHUB_OUTPUT
-echo "" >> $GITHUB_OUTPUT
-echo '\`\`\`' >> $GITHUB_OUTPUT
+        "run": "mkdir -p diff-output
+echo "### Changes for environment Prod" > diff-output/diff-Prod.md
+echo "" >> diff-output/diff-\${environment}.md
+echo "<details>" >> diff-output/diff-\${environment}.md
+echo "<summary>Show diff</summary>" >> diff-output/diff-\${environment}.md
+echo "" >> diff-output/diff-\${environment}.md
+echo '\`\`\`' >> diff-output/diff-\${environment}.md
 for file in $(find . -path "**/cdk.out/diff.log" 2>/dev/null); do
-  echo "========== $file ==========" >> $GITHUB_OUTPUT
-  sed 's/\\x1B\\[[0-9;]*[mGKHF]//g' "$file" >> $GITHUB_OUTPUT
-  echo "" >> $GITHUB_OUTPUT
+  echo "========== $file ==========" >> diff-output/diff-\${environment}.md
+  sed 's/\\x1B\\[[0-9;]*[mGKHF]//g' "$file" >> diff-output/diff-\${environment}.md
+  echo "" >> diff-output/diff-\${environment}.md
 done
-echo '\`\`\`' >> $GITHUB_OUTPUT
-echo "</details>" >> $GITHUB_OUTPUT
-echo "" >> $GITHUB_OUTPUT
-echo "EOF" >> $GITHUB_OUTPUT",
+echo '\`\`\`' >> diff-output/diff-\${environment}.md
+echo "</details>" >> diff-output/diff-\${environment}.md
+echo "" >> diff-output/diff-\${environment}.md",
+      },
+      {
+        "continueOnError": undefined,
+        "env": undefined,
+        "id": undefined,
+        "if": undefined,
+        "name": "Upload diff output",
+        "timeoutMinutes": undefined,
+        "uses": "actions/upload-artifact@v7",
+        "with": {
+          "name": "diff-output-Prod",
+          "overwrite": true,
+          "path": "diff-output/",
+          "retention-days": 1,
+        },
+        "workingDirectory": undefined,
       },
     ],
   },

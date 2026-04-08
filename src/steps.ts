@@ -1,4 +1,4 @@
-import { javascript } from 'projen';
+import { javascript, github } from 'projen';
 import { WorkflowSteps } from 'projen/lib/github';
 import { JobPermission, JobStep, Job } from 'projen/lib/github/workflows-model';
 import { CodeArtifactAuthProvider } from 'projen/lib/javascript';
@@ -726,13 +726,21 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
         pullRequests: JobPermission.WRITE,
       },
       steps: [
+        github.WorkflowSteps.downloadArtifact({
+          name: 'Download all diff artifacts',
+          with: {
+            pattern: 'diff-output-*',
+            path: 'diff-outputs',
+            mergeMultiple: true,
+          },
+        }),
         {
           name: 'Annotate PR with Diff Output',
           uses: 'mshick/add-pr-comment@v3',
           with: {
             'message-id': 'diff-output',
             'refresh-message-position': true,
-            'message': dependentJobNames.map(jobName => `\${{ needs.${jobName}.outputs.${formattedDiffAnnotationCommentStepId} }}`).join('\n'),
+            'message-path': 'diff-outputs/*.md',
           },
         },
       ],
@@ -749,23 +757,25 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
       name: 'Get formatted diff annotation comment',
       id: formattedDiffAnnotationCommentStepId,
       run: [
-        'echo "data<<EOF" >> $GITHUB_OUTPUT',
-        `echo "### Changes for environment ${environment}" >> $GITHUB_OUTPUT`,
-        'echo "" >> $GITHUB_OUTPUT',
-        'echo "<details>" >> $GITHUB_OUTPUT',
-        'echo "<summary>Show diff</summary>" >> $GITHUB_OUTPUT',
-        'echo "" >> $GITHUB_OUTPUT',
-        "echo '\`\`\`' >> $GITHUB_OUTPUT",
+        'mkdir -p diff-output',
+        `echo "### Changes for environment ${environment}" > diff-output/diff-${environment}.md`,
+        'echo "" >> diff-output/diff-${environment}.md',
+        'echo "<details>" >> diff-output/diff-${environment}.md',
+        'echo "<summary>Show diff</summary>" >> diff-output/diff-${environment}.md',
+        'echo "" >> diff-output/diff-${environment}.md',
+        "echo '\`\`\`' >> diff-output/diff-${environment}.md",
         'for file in $(find . -path "**/cdk.out/diff.log" 2>/dev/null); do',
-        '  echo "========== $file ==========" >> $GITHUB_OUTPUT',
-        '  sed \'s/\\x1B\\[[0-9;]*[mGKHF]//g\' "$file" >> $GITHUB_OUTPUT',
-        '  echo "" >> $GITHUB_OUTPUT',
+        '  echo "========== $file ==========" >> diff-output/diff-${environment}.md',
+        '  sed \'s/\\x1B\\[[0-9;]*[mGKHF]//g\' "$file" >> diff-output/diff-${environment}.md',
+        '  echo "" >> diff-output/diff-${environment}.md',
         'done',
-        "echo '\`\`\`' >> $GITHUB_OUTPUT",
-        'echo "</details>" >> $GITHUB_OUTPUT',
-        'echo "" >> $GITHUB_OUTPUT',
-        'echo "EOF" >> $GITHUB_OUTPUT',
+        "echo '\`\`\`' >> diff-output/diff-${environment}.md",
+        'echo "</details>" >> diff-output/diff-${environment}.md',
+        'echo "" >> diff-output/diff-${environment}.md',
       ].join('\n'),
+      env: {
+        environment: environment,
+      },
     };
   }
 
@@ -793,12 +803,6 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
       },
       env: deployJobEnv,
       steps: [],
-      outputs: {
-        [formattedDiffAnnotationCommentStepId]: {
-          stepId: formattedDiffAnnotationCommentStepId,
-          outputName: 'data',
-        },
-      },
     };
     jobDefinition.steps.push(this.checkoutStep);
 
@@ -817,6 +821,18 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
 
     jobDefinition.steps.push(this.generateDiffStep);
     jobDefinition.steps.push(this.getFormattedDiffAnnotationCommentStepForEnvironment(name));
+
+    // Upload the diff output as an artifact
+    jobDefinition.steps.push(
+      github.WorkflowSteps.uploadArtifact({
+        name: 'Upload diff output',
+        with: {
+          name: `diff-output-${name}`,
+          path: 'diff-output/',
+          retentionDays: 1,
+        },
+      }),
+    );
 
     return jobDefinition;
   }
