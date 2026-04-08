@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { awscdk, SourceCode, Task, TextFile } from 'projen';
+import { awscdk, SourceCode, Task, TextFile, TomlFile } from 'projen';
 import { CodeArtifactOptions, NodePackageManager } from 'projen/lib/javascript';
 import { DeployableAwsCdkTypeScriptAppStepsFactory } from './steps';
 import { DeployableAwsCdkTypeScriptAppDiffOutputOptions, DeployableAwsCdkTypeScriptAppOptions, DeployJobStrategy, DeployOptions, EnvironmentDeploymentDependencies, EnvironmentOptions } from './types';
@@ -164,15 +164,16 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     }
 
     if (this.generateMise) {
-      const lines = ['[tools]'];
-      lines.push(`node = "${this.workflowNodeVersion ?? '14.18.1'}"`);
+      const tools: Record<string, string> = {
+        node: this.workflowNodeVersion ?? '14.18.1',
+      };
 
       if (this.package.packageManager === NodePackageManager.PNPM) {
-        lines.push(`pnpm = "${this.package.pnpmVersion ?? '10'}"`);
+        tools.pnpm = this.package.pnpmVersion ?? '10';
       }
 
-      new TextFile(this, 'mise.toml', {
-        lines,
+      new TomlFile(this, 'mise.toml', {
+        obj: { tools },
       });
     }
 
