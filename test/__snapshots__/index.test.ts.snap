@@ -39,7 +39,7 @@ jobs:
           role-to-assume: stub-role-1
           role-duration-seconds: 900
       - name: AWS CodeArtifact Login
-        run: npm run ca:login
+        run: npx projen ca:login
       - name: Install dependencies
         run: npm ci
       - name: release
@@ -116,7 +116,7 @@ jobs:
           role-to-assume: stub-role-1
           role-duration-seconds: 900
       - name: AWS CodeArtifact Login
-        run: npm run ca:login
+        run: npx projen ca:login
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
@@ -2851,7 +2851,7 @@ jobs:
           role-to-assume: stub-role-1
           role-duration-seconds: 900
       - name: AWS CodeArtifact Login
-        run: npm run ca:login
+        run: npx projen ca:login
       - name: Install dependencies
         run: npm ci
       - name: release
@@ -2929,7 +2929,7 @@ jobs:
           role-to-assume: stub-role-1
           role-duration-seconds: 900
       - name: AWS CodeArtifact Login
-        run: npm run ca:login
+        run: npx projen ca:login
       - name: Install dependencies
         run: npm ci
       - name: Configure AWS Credentials
