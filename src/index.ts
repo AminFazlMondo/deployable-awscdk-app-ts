@@ -26,13 +26,13 @@ export class DeployableAwsCdkTypeScriptApp extends awscdk.AwsCdkTypeScriptApp {
     const sourceCode = new SourceCode(project, filePath);
     sourceCode.line("import {createWriteStream} from 'fs'");
     sourceCode.line("import {formatDifferences} from '@aws-cdk/cloudformation-diff';");
-    sourceCode.line("import {Toolkit} from '@aws-cdk/toolkit-lib';");
+    sourceCode.line("import {DiffMethod, Toolkit} from '@aws-cdk/toolkit-lib';");
     sourceCode.line('');
     sourceCode.line('const cdk = new Toolkit({});');
     sourceCode.line('');
     sourceCode.open('async function main() {');
     sourceCode.line(`const cx = await cdk.fromCdkApp('ts-node-transpile-only ${path.posix.join(project.srcdir, project.appEntrypoint)}');`);
-    sourceCode.line('const diffs = await cdk.diff(cx, {});');
+    sourceCode.line('const diffs = await cdk.diff(cx, {method: DiffMethod.TemplateOnly()});');
     sourceCode.line("const stream = createWriteStream('./cdk.out/diff.log');");
     sourceCode.open('Object.entries(diffs).forEach(([stackName, diff]) => {');
     sourceCode.line('stream.write(`Difference for stack ${stackName}:\\n`);');

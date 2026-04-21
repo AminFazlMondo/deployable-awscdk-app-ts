@@ -1549,13 +1549,13 @@ jobs:
 exports[`diff output and annotation When diff output is enabled with annotation Should not generate the diff script 1`] = `
 "import {createWriteStream} from 'fs'
 import {formatDifferences} from '@aws-cdk/cloudformation-diff';
-import {Toolkit} from '@aws-cdk/toolkit-lib';
+import {DiffMethod, Toolkit} from '@aws-cdk/toolkit-lib';
 
 const cdk = new Toolkit({});
 
 async function main() {
   const cx = await cdk.fromCdkApp('ts-node-transpile-only src/main.ts');
-  const diffs = await cdk.diff(cx, {});
+  const diffs = await cdk.diff(cx, {method: DiffMethod.TemplateOnly()});
   const stream = createWriteStream('./cdk.out/diff.log');
   Object.entries(diffs).forEach(([stackName, diff]) => {
     stream.write(\`Difference for stack \${stackName}:\\n\`);
