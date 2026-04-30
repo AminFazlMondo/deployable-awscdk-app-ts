@@ -46,7 +46,7 @@ const project = new cdk.JsiiProject({
   releaseFailureIssue: true,
   githubOptions: {
     dependencyReview: true,
-  }
+  },
 });
 
 new TextFile(project, '.nvmrc', {
