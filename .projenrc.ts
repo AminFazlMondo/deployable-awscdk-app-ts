@@ -44,6 +44,9 @@ const project = new cdk.JsiiProject({
   autoApproveUpgrades: true,
   jsiiVersion: '5.9.x',
   releaseFailureIssue: true,
+  githubOptions: {
+    dependencyReview: true,
+  },
 });
 
 new TextFile(project, '.nvmrc', {
