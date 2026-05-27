@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       projen:
-        specifier: ^0.99.65
-        version: 0.99.65(constructs@10.6.0)
+        specifier: ^0.99.66
+        version: 0.99.66(constructs@10.6.0)
       semver:
         specifier: ^7.8.1
         version: 7.8.1
@@ -2365,8 +2365,8 @@ packages:
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
 
-  projen@0.99.65:
-    resolution: {integrity: sha512-S3SSo0zQLhy8afUAWohhjunMRqaFlN9GfySP1OrW1PsgxfBSjYS8SFvc3RgFK3smFomauKaHlVQwvH2Ea9DkWw==}
+  projen@0.99.66:
+    resolution: {integrity: sha512-B0zDIYCG7wZ5SP4unIFhxqiz4+66SSxk5sCdxu3Py6O8aIlc38MAVqafpgZL6ov7xv1qJ1YItAH/ZK6MiJ6U0Q==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
@@ -5760,7 +5760,7 @@ snapshots:
 
   process-nextick-args@2.0.1: {}
 
-  projen@0.99.65(constructs@10.6.0):
+  projen@0.99.66(constructs@10.6.0):
     dependencies:
       constructs: 10.6.0
 
