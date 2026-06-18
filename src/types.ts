@@ -1,4 +1,4 @@
-import { awscdk } from 'projen';
+import { awscdk, GroupRunnerOptions } from 'projen';
 
 export interface DeployableAwsCdkTypeScriptAppDiffOutputOptions {
   /**
@@ -126,6 +126,21 @@ export interface EnvironmentOptions {
    * @example "pre:deploy"
    */
   readonly preDeployWorkflowScript?: string;
+
+  /**
+   * The type of runner to use for the deployment jobs in the workflow
+   * This is not supported in Matrix job strategy and will be ignored if the job strategy is set to Matrix
+   * @default "ubuntu-latest"
+   */
+  readonly runsOn?: string;
+
+  /**
+   * Github Runner Group selection options
+   * This is not supported in Matrix job strategy and will be ignored if the job strategy is set to Matrix
+   * @description Defines a target Runner Group by name and/or labels
+   * @throws {Error} if both `runsOn` and `runsOnGroup` are specified
+   */
+  readonly runsOnGroup?: GroupRunnerOptions;
 }
 
 export interface AWSCredentials {

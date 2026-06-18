@@ -1,4 +1,4 @@
-import { javascript, github } from 'projen';
+import { javascript, github, GroupRunnerOptions } from 'projen';
 import { WorkflowSteps } from 'projen/lib/github';
 import { JobPermission, JobStep, Job } from 'projen/lib/github/workflows-model';
 import { CodeArtifactAuthProvider } from 'projen/lib/javascript';
@@ -634,13 +634,18 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
     environmentOptions: EnvironmentOptions,
     environmentVariableName: string | undefined,
   ): Job {
-    const { name } = environmentOptions;
+    const { name, runsOn, runsOnGroup } = environmentOptions;
     const deployJobEnv = environmentVariableName ? {
       [environmentVariableName]: name,
     } : undefined;
 
+    if (runsOn && runsOnGroup) {
+      throw new Error('Both `runsOn` and `runsOnGroup` cannot be specified simultaneously.');
+    }
+
     const jobDefinition: Job = {
-      runsOn: ['ubuntu-latest'],
+      runsOn: runsOnGroup ? undefined : [runsOn ?? 'ubuntu-latest'],
+      runsOnGroup: runsOnGroup,
       concurrency: {
         'group': `${name}-deploy`,
         'cancel-in-progress': false,
@@ -783,19 +788,28 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
    * Get the deployment method argument for the deploy command
    * @param environmentOptions The environment options
    * @param environmentVariableName The name of the environment variable to set with the environment name, if any
+   * @param runsOn The type of runner to use for the deployment job, if any
+   * @param runsOnGroup The group of runners to use for the deployment job, if any
    * @returns The diff annotation job for the environment
    */
   public getDiffAnnotationJobForEnvironment(
     environmentOptions: EnvironmentOptions,
     environmentVariableName: string | undefined,
+    runsOn?: string,
+    runsOnGroup?: GroupRunnerOptions,
   ): Job {
     const { name } = environmentOptions;
     const deployJobEnv = environmentVariableName ? {
       [environmentVariableName]: name,
     } : undefined;
 
+    if (runsOn && runsOnGroup) {
+      throw new Error('Both `runsOn` and `runsOnGroup` cannot be specified simultaneously.');
+    }
+
     const jobDefinition: Job = {
-      runsOn: ['ubuntu-latest'],
+      runsOn: runsOnGroup ? undefined : [runsOn ?? 'ubuntu-latest'],
+      runsOnGroup: runsOnGroup,
       needs: ['build'],
       permissions: {
         contents: JobPermission.READ,
