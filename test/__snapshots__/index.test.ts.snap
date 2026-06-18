@@ -140,7 +140,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -305,7 +305,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -805,7 +805,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -960,7 +960,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -1136,7 +1136,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -1333,7 +1333,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Assume AWS Role
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: staging-role
           aws-region: staging-aws-region-1
@@ -1499,7 +1499,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Assume AWS Role
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: staging-role
           aws-region: staging-aws-region-1
@@ -1531,7 +1531,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Assume AWS Role
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: prod-role
           aws-region: prod-aws-region-1
@@ -1565,7 +1565,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Assume AWS Role
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: staging-role
           aws-region: staging-aws-region-2
@@ -1597,7 +1597,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Assume AWS Role
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: prod-role
           aws-region: prod-aws-region-2
@@ -2020,7 +2020,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -2195,7 +2195,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -2374,7 +2374,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -2551,7 +2551,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -2724,7 +2724,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -2899,7 +2899,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -3072,7 +3072,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -3243,7 +3243,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
@@ -3397,7 +3397,7 @@ jobs:
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
         if: \${{ matrix.assumeRole == 'true' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: \${{ matrix.roleToAssume }}
           aws-region: \${{ matrix.region }}
