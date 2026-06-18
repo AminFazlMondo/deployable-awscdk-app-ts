@@ -326,7 +326,7 @@ export class DeployableAwsCdkTypeScriptAppStepsFactory {
     return {
       if: condition,
       name: 'Assume AWS Role',
-      uses: 'aws-actions/configure-aws-credentials@v4',
+      uses: 'aws-actions/configure-aws-credentials@v6',
       with: {
         ...secretsParams,
         'role-to-assume': roleToAssume,
