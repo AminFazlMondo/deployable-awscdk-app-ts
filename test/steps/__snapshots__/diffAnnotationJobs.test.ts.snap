@@ -55,6 +55,7 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
     "runsOn": [
       "ubuntu-latest",
     ],
+    "runsOnGroup": undefined,
     "steps": [
       {
         "continueOnError": undefined,
@@ -167,6 +168,7 @@ echo "" >> diff-output/diff-\${environment}.md",
     "runsOn": [
       "ubuntu-latest",
     ],
+    "runsOnGroup": undefined,
     "steps": [
       {
         "continueOnError": undefined,
@@ -323,6 +325,7 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
     "runsOn": [
       "ubuntu-latest",
     ],
+    "runsOnGroup": undefined,
     "steps": [
       {
         "continueOnError": undefined,
@@ -428,6 +431,7 @@ echo "" >> diff-output/diff-\${environment}.md",
     "runsOn": [
       "ubuntu-latest",
     ],
+    "runsOnGroup": undefined,
     "steps": [
       {
         "continueOnError": undefined,

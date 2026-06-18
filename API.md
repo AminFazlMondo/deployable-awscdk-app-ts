@@ -4925,6 +4925,7 @@ const deployOptions: DeployOptions = { ... }
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.jobStrategy">jobStrategy</a></code> | <code><a href="#deployable-awscdk-app-ts.DeployJobStrategy">DeployJobStrategy</a></code> | Deployment job strategy, whether to use a matrix job or multiple jobs for each environment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.method">method</a></code> | <code>string</code> | How to perform the deployment. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.npmConfigEnvironment">npmConfigEnvironment</a></code> | <code>string</code> | npm config name to set as the environment name This might be useful in deployment process. |
+| <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.runsOn">runsOn</a></code> | <code>string</code> | The type of runner to use for the deployment jobs in the workflow. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.stackPattern">stackPattern</a></code> | <code>string</code> | Regex for stacks to be deployed. |
 | <code><a href="#deployable-awscdk-app-ts.DeployOptions.property.taskToRunPreInstall">taskToRunPreInstall</a></code> | <code>string</code> | task name to run prior to installation in deploy job of workflow if not provided will not add to workflow. |
 
@@ -4997,6 +4998,19 @@ npm config name to set as the environment name This might be useful in deploymen
 Does not support node versions above 18.
 
 if not provided will not set
+
+---
+
+##### `runsOn`<sup>Optional</sup> <a name="runsOn" id="deployable-awscdk-app-ts.DeployOptions.property.runsOn"></a>
+
+```typescript
+public readonly runsOn: string;
+```
+
+- *Type:* string
+- *Default:* "ubuntu-latest"
+
+The type of runner to use for the deployment jobs in the workflow.
 
 ---
 
@@ -5315,7 +5329,7 @@ The environment to format the diff for.
 ##### `getJobForEnvironment` <a name="getJobForEnvironment" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getJobForEnvironment"></a>
 
 ```typescript
-public getJobForEnvironment(environmentOptions: EnvironmentOptions, environmentVariableName?: string): Job
+public getJobForEnvironment(environmentOptions: EnvironmentOptions, environmentVariableName?: string, runsOn?: string): Job
 ```
 
 Get the job definition for a specific environment.
@@ -5333,6 +5347,14 @@ The environment options.
 - *Type:* string
 
 The name of the environment variable to set with the environment name, if any.
+
+---
+
+###### `runsOn`<sup>Optional</sup> <a name="runsOn" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppStepsFactory.getJobForEnvironment.parameter.runsOn"></a>
+
+- *Type:* string
+
+The type of runner to use for the deployment job, if any.
 
 ---
 
