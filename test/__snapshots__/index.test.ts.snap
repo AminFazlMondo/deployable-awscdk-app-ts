@@ -352,6 +352,7 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
   "env": {
     "PATH": "$(npx -c "node --print process.env.PATH")",
   },
+  "manifestVersion": 1,
   "tasks": {
     "build": {
       "description": "Full release build",
@@ -657,7 +658,7 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
           "exec": "npm install",
         },
         {
-          "exec": "npm update @stylistic/eslint-plugin @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk commit-and-tag-version deployable-awscdk-app-ts esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions",
+          "exec": "npm update @stylistic/eslint-plugin @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk commit-and-tag-version deployable-awscdk-app-ts esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript aws-cdk-lib constructs",
         },
         {
           "exec": "npx projen",
@@ -3434,6 +3435,7 @@ exports[`specific stack tasks 1`] = `
   "env": {
     "PATH": "$(npx -c "node --print process.env.PATH")",
   },
+  "manifestVersion": 1,
   "tasks": {
     "build": {
       "description": "Full release build",
@@ -3739,7 +3741,7 @@ exports[`specific stack tasks 1`] = `
           "exec": "npm install",
         },
         {
-          "exec": "npm update @stylistic/eslint-plugin @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk commit-and-tag-version deployable-awscdk-app-ts esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript @aws-cdk/core constructs @aws-cdk/assert @aws-cdk/assertions",
+          "exec": "npm update @stylistic/eslint-plugin @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk commit-and-tag-version deployable-awscdk-app-ts esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript aws-cdk-lib constructs",
         },
         {
           "exec": "npx projen",

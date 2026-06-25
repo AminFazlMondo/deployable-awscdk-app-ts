@@ -34,7 +34,6 @@ new DeployableAwsCdkTypeScriptApp(options: DeployableAwsCdkTypeScriptAppOptions)
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addGitIgnore">addGitIgnore</a></code> | Adds a .gitignore pattern. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPackageIgnore">addPackageIgnore</a></code> | Adds patterns to be ignored by npm. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTask">addTask</a></code> | Adds a new task to this project. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTip">addTip</a></code> | Prints a "tip" message during synthesis. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.annotateGenerated">annotateGenerated</a></code> | Marks the provided file(s) as being generated. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.postSynthesize">postSynthesize</a></code> | Called after all components are synthesized. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.preSynthesize">preSynthesize</a></code> | Called before all components are synthesized. |
@@ -42,24 +41,19 @@ new DeployableAwsCdkTypeScriptApp(options: DeployableAwsCdkTypeScriptAppOptions)
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.runTaskCommand">runTaskCommand</a></code> | Returns the shell command to execute in order to run a task. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.synth">synth</a></code> | Synthesize all project files into `outdir`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindFile">tryFindFile</a></code> | Finds a file at the specified relative path within this project and all its subprojects. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindJsonFile">tryFindJsonFile</a></code> | Finds a json file by name. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindObjectFile">tryFindObjectFile</a></code> | Finds an object file (like JsonFile, YamlFile, etc.) by name. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryRemoveFile">tryRemoveFile</a></code> | Finds a file at the specified relative path within this project and removes it. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBins">addBins</a></code> | *No description.* |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addBundledDeps">addBundledDeps</a></code> | Defines bundled dependencies. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCompileCommand">addCompileCommand</a></code> | DEPRECATED. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDeps">addDeps</a></code> | Defines normal dependencies. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addDevDeps">addDevDeps</a></code> | Defines development/test dependencies. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addFields">addFields</a></code> | Directly set fields in `package.json`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addKeywords">addKeywords</a></code> | Adds keywords to package.json (deduplicated). |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addPeerDeps">addPeerDeps</a></code> | Defines peer dependencies. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addScripts">addScripts</a></code> | Replaces the contents of multiple npm package.json scripts. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTestCommand">addTestCommand</a></code> | DEPRECATED. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.hasScript">hasScript</a></code> | Indicates if a script by the name name is defined. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeScript">removeScript</a></code> | Removes the npm script (always successful). |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.renderWorkflowSetup">renderWorkflowSetup</a></code> | Returns the set of workflow steps which should be executed to bootstrap a workflow. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.setScript">setScript</a></code> | Replaces the contents of an npm package.json script. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCdkDependency">addCdkDependency</a></code> | Adds an AWS CDK module dependencies. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addEnvironments">addEnvironments</a></code> | Add new environments to the application. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updateEnvironmentDeploymentDependencies">updateEnvironmentDeploymentDependencies</a></code> | Update environment deployment dependencies. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.updatePostDeployWorkflowScriptToEnvironments">updatePostDeployWorkflowScriptToEnvironments</a></code> | Updates the postDeployWorkflowScript for environments. |
@@ -174,22 +168,6 @@ Task properties.
 
 ---
 
-##### ~~`addTip`~~ <a name="addTip" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTip"></a>
-
-```typescript
-public addTip(message: string): void
-```
-
-Prints a "tip" message during synthesis.
-
-###### `message`<sup>Required</sup> <a name="message" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTip.parameter.message"></a>
-
-- *Type:* string
-
-The message.
-
----
-
 ##### `annotateGenerated` <a name="annotateGenerated" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.annotateGenerated"></a>
 
 ```typescript
@@ -299,22 +277,6 @@ from the root of _this_ project.
 
 ---
 
-##### ~~`tryFindJsonFile`~~ <a name="tryFindJsonFile" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindJsonFile"></a>
-
-```typescript
-public tryFindJsonFile(filePath: string): JsonFile
-```
-
-Finds a json file by name.
-
-###### `filePath`<sup>Required</sup> <a name="filePath" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindJsonFile.parameter.filePath"></a>
-
-- *Type:* string
-
-The file path.
-
----
-
 ##### `tryFindObjectFile` <a name="tryFindObjectFile" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.tryFindObjectFile"></a>
 
 ```typescript
@@ -384,20 +346,6 @@ be installed in the next `pnpm projen` run and the version will be recorded
 in your `package.json` file. You can upgrade manually or using `pnpm
 add/update`. If you wish to specify a version range use this syntax:
 `module@^7`.
-
----
-
-##### ~~`addCompileCommand`~~ <a name="addCompileCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCompileCommand"></a>
-
-```typescript
-public addCompileCommand(commands: ...string[]): void
-```
-
-DEPRECATED.
-
-###### `commands`<sup>Required</sup> <a name="commands" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCompileCommand.parameter.commands"></a>
-
-- *Type:* ...string[]
 
 ---
 
@@ -519,36 +467,6 @@ The scripts to set.
 
 ---
 
-##### ~~`addTestCommand`~~ <a name="addTestCommand" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTestCommand"></a>
-
-```typescript
-public addTestCommand(commands: ...string[]): void
-```
-
-DEPRECATED.
-
-###### `commands`<sup>Required</sup> <a name="commands" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addTestCommand.parameter.commands"></a>
-
-- *Type:* ...string[]
-
----
-
-##### ~~`hasScript`~~ <a name="hasScript" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.hasScript"></a>
-
-```typescript
-public hasScript(name: string): boolean
-```
-
-Indicates if a script by the name name is defined.
-
-###### `name`<sup>Required</sup> <a name="name" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.hasScript.parameter.name"></a>
-
-- *Type:* string
-
-The name of the script.
-
----
-
 ##### `removeScript` <a name="removeScript" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.removeScript"></a>
 
 ```typescript
@@ -602,22 +520,6 @@ The script name.
 - *Type:* string
 
 The command to execute.
-
----
-
-##### `addCdkDependency` <a name="addCdkDependency" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCdkDependency"></a>
-
-```typescript
-public addCdkDependency(modules: ...string[]): void
-```
-
-Adds an AWS CDK module dependencies.
-
-###### `modules`<sup>Required</sup> <a name="modules" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.addCdkDependency.parameter.modules"></a>
-
-- *Type:* ...string[]
-
-The list of modules to depend on.
 
 ---
 
@@ -823,21 +725,16 @@ If the diff output is enabled, adds a script and a job step to generate the CDK 
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.defaultTask">defaultTask</a></code> | <code>projen.Task</code> | This is the "default" task, the one that executes "projen". |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.initProject">initProject</a></code> | <code>projen.InitProject</code> | The options used when this project is bootstrapped via `projen new`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.parent">parent</a></code> | <code>projen.Project</code> | A parent project. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projectType">projectType</a></code> | <code>projen.ProjectType</code> | *No description.* |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.autoApprove">autoApprove</a></code> | <code>projen.github.AutoApprove</code> | Auto approve set up for this project. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.devContainer">devContainer</a></code> | <code>projen.vscode.DevContainer</code> | Access for .devcontainer.json (used for GitHub Codespaces). |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.github">github</a></code> | <code>projen.github.GitHub</code> | Access all github components. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.gitpod">gitpod</a></code> | <code>projen.Gitpod</code> | Access for Gitpod. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.vscode">vscode</a></code> | <code>projen.vscode.VsCode</code> | Access all VSCode components. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.allowLibraryDependencies">allowLibraryDependencies</a></code> | <code>boolean</code> | *No description.* |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | The build output directory. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.artifactsJavascriptDirectory">artifactsJavascriptDirectory</a></code> | <code>string</code> | The location of the npm tarball after build (`${artifactsDirectory}/js`). |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.bundler">bundler</a></code> | <code>projen.javascript.Bundler</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.entrypoint">entrypoint</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.manifest">manifest</a></code> | <code>any</code> | *No description.* |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.npmrc">npmrc</a></code> | <code>projen.javascript.NpmConfig</code> | The .npmrc file. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.package">package</a></code> | <code>projen.javascript.NodePackage</code> | API for managing the node package. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.packageManager">packageManager</a></code> | <code>projen.javascript.NodePackageManager</code> | The package manager to use. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.runScriptCommand">runScriptCommand</a></code> | <code>string</code> | The command to use to run scripts (e.g. `yarn run` or `npm run` depends on the package manager). |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.autoMerge">autoMerge</a></code> | <code>projen.github.AutoMerge</code> | Component that sets up mergify for merging approved pull requests. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.biome">biome</a></code> | <code>projen.javascript.Biome</code> | *No description.* |
@@ -848,7 +745,6 @@ If the diff output is enabled, adds a script and a job step to generate the CDK 
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | The minimum node version required by this package to function. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.npmignore">npmignore</a></code> | <code>projen.IgnoreFile</code> | The .npmignore file. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.prettier">prettier</a></code> | <code>projen.javascript.Prettier</code> | *No description.* |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.publisher">publisher</a></code> | <code>projen.release.Publisher</code> | Package publisher. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.release">release</a></code> | <code>projen.release.Release</code> | Release management. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.upgradeWorkflow">upgradeWorkflow</a></code> | <code>projen.javascript.UpgradeDependencies</code> | The upgrade workflow. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.docsDirectory">docsDirectory</a></code> | <code>string</code> | *No description.* |
@@ -1168,16 +1064,6 @@ If undefined, this is the root project.
 
 ---
 
-##### `projectType`<sup>Required</sup> <a name="projectType" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.projectType"></a>
-
-```typescript
-public readonly projectType: ProjectType;
-```
-
-- *Type:* projen.ProjectType
-
----
-
 ##### `autoApprove`<sup>Optional</sup> <a name="autoApprove" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.autoApprove"></a>
 
 ```typescript
@@ -1246,18 +1132,6 @@ This will be `undefined` for subprojects.
 
 ---
 
-##### ~~`allowLibraryDependencies`~~<sup>Required</sup> <a name="allowLibraryDependencies" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.allowLibraryDependencies"></a>
-
-- *Deprecated:* use `package.allowLibraryDependencies`
-
-```typescript
-public readonly allowLibraryDependencies: boolean;
-```
-
-- *Type:* boolean
-
----
-
 ##### `artifactsDirectory`<sup>Required</sup> <a name="artifactsDirectory" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.artifactsDirectory"></a>
 
 ```typescript
@@ -1296,30 +1170,6 @@ public readonly bundler: Bundler;
 
 ---
 
-##### ~~`entrypoint`~~<sup>Required</sup> <a name="entrypoint" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.entrypoint"></a>
-
-- *Deprecated:* use `package.entrypoint`
-
-```typescript
-public readonly entrypoint: string;
-```
-
-- *Type:* string
-
----
-
-##### ~~`manifest`~~<sup>Required</sup> <a name="manifest" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.manifest"></a>
-
-- *Deprecated:* use `package.addField(x, y)`
-
-```typescript
-public readonly manifest: any;
-```
-
-- *Type:* any
-
----
-
 ##### `npmrc`<sup>Required</sup> <a name="npmrc" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.npmrc"></a>
 
 ```typescript
@@ -1341,20 +1191,6 @@ public readonly package: NodePackage;
 - *Type:* projen.javascript.NodePackage
 
 API for managing the node package.
-
----
-
-##### ~~`packageManager`~~<sup>Required</sup> <a name="packageManager" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.packageManager"></a>
-
-- *Deprecated:* use `package.packageManager`
-
-```typescript
-public readonly packageManager: NodePackageManager;
-```
-
-- *Type:* projen.javascript.NodePackageManager
-
-The package manager to use.
 
 ---
 
@@ -1477,23 +1313,6 @@ public readonly prettier: Prettier;
 ```
 
 - *Type:* projen.javascript.Prettier
-
----
-
-##### ~~`publisher`~~<sup>Optional</sup> <a name="publisher" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.publisher"></a>
-
-- *Deprecated:* use `release.publisher`.
-
-```typescript
-public readonly publisher: Publisher;
-```
-
-- *Type:* projen.release.Publisher
-
-Package publisher.
-
-This will be `undefined` if the project does not have a
-release workflow.
 
 ---
 
@@ -1921,11 +1740,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.github">github</a></code> | <code>boolean</code> | Enable GitHub integration. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.githubOptions">githubOptions</a></code> | <code>projen.github.GitHubOptions</code> | Options for GitHub integration. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.gitpod">gitpod</a></code> | <code>boolean</code> | Add a Gitpod development environment. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.mergify">mergify</a></code> | <code>boolean</code> | Whether mergify should be enabled on this repository or not. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.mergifyOptions">mergifyOptions</a></code> | <code>projen.github.MergifyOptions</code> | Options for mergify. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projectType">projectType</a></code> | <code>projen.ProjectType</code> | Which type of project this is (library/app). |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenCredentials">projenCredentials</a></code> | <code>projen.github.GithubCredentials</code> | Choose a method of providing GitHub API access for projen workflows. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenTokenSecret">projenTokenSecret</a></code> | <code>string</code> | The name of a secret which includes a GitHub Personal Access Token to be used by projen workflows. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.readme">readme</a></code> | <code>projen.SampleReadmeProps</code> | The README setup. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.stale">stale</a></code> | <code>boolean</code> | Auto-close of stale issues and pull request. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.staleOptions">staleOptions</a></code> | <code>projen.github.StaleOptions</code> | Auto-close stale issues and pull requests. |
@@ -1957,7 +1772,6 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | The minimum node version required by this package to function. Most projects should not use this option. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmAccess">npmAccess</a></code> | <code>projen.javascript.NpmAccess</code> | Access level of the npm package. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmProvenance">npmProvenance</a></code> | <code>boolean</code> | Should provenance statements be generated when the package is published. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmRegistry">npmRegistry</a></code> | <code>string</code> | The host name of the npm registry to publish to. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmRegistryUrl">npmRegistryUrl</a></code> | <code>string</code> | The base URL of the npm package registry. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmTokenSecret">npmTokenSecret</a></code> | <code>string</code> | GitHub secret which contains the NPM token to use when publishing packages. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmTrustedPublishing">npmTrustedPublishing</a></code> | <code>boolean</code> | Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work. |
@@ -1969,7 +1783,6 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.repository">repository</a></code> | <code>string</code> | The repository is the location where the actual code for your package lives. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.repositoryDirectory">repositoryDirectory</a></code> | <code>string</code> | If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.scopedPackagesOptions">scopedPackagesOptions</a></code> | <code>projen.javascript.ScopedPackagesOptions[]</code> | Options for privately hosted scoped packages. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.scripts">scripts</a></code> | <code>{[ key: string ]: string}</code> | npm scripts to include. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.stability">stability</a></code> | <code>string</code> | Package's Stability. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.yarnBerryOptions">yarnBerryOptions</a></code> | <code>projen.javascript.YarnBerryOptions</code> | Options for Yarn Berry. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.bumpPackage">bumpPackage</a></code> | <code>string</code> | The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string. |
@@ -1985,10 +1798,8 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releasableCommits">releasableCommits</a></code> | <code>projen.ReleasableCommits</code> | Find commits that should be considered releasable Used to decide if a release is required. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseBranches">releaseBranches</a></code> | <code>{[ key: string ]: projen.release.BranchOptions}</code> | Defines additional release branches. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseEnvironment">releaseEnvironment</a></code> | <code>string</code> | The GitHub Actions environment used for the release. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseEveryCommit">releaseEveryCommit</a></code> | <code>boolean</code> | Automatically release new versions every commit to one of branches in `releaseBranches`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseFailureIssue">releaseFailureIssue</a></code> | <code>boolean</code> | Create a github issue on every failed publishing task. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseFailureIssueLabel">releaseFailureIssueLabel</a></code> | <code>string</code> | The label to apply to issues indicating publish failures. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseSchedule">releaseSchedule</a></code> | <code>string</code> | CRON schedule to trigger new releases. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseTagPrefix">releaseTagPrefix</a></code> | <code>string</code> | Automatically add the given prefix to release tags. Useful if you are releasing on multiple branches with overlapping version numbers. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseTrigger">releaseTrigger</a></code> | <code>projen.release.ReleaseTrigger</code> | The release trigger to use. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseWorkflowEnv">releaseWorkflowEnv</a></code> | <code>{[ key: string ]: string}</code> | Build environment variables for release workflows. |
@@ -1998,7 +1809,6 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowContainerImage">workflowContainerImage</a></code> | <code>string</code> | Container image to use for GitHub workflows. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowRunsOn">workflowRunsOn</a></code> | <code>string[]</code> | Github Runner selection labels. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowRunsOnGroup">workflowRunsOnGroup</a></code> | <code>projen.GroupRunnerOptions</code> | Github Runner Group selection options. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.defaultReleaseBranch">defaultReleaseBranch</a></code> | <code>string</code> | The name of the main release branch. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | A directory which will contain build artifacts. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.auditDeps">auditDeps</a></code> | <code>boolean</code> | Run security audit on dependencies. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.auditDepsOptions">auditDepsOptions</a></code> | <code>projen.javascript.AuditOptions</code> | Security audit options. |
@@ -2007,13 +1817,13 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.biomeOptions">biomeOptions</a></code> | <code>projen.javascript.BiomeOptions</code> | Biome options. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.buildWorkflow">buildWorkflow</a></code> | <code>boolean</code> | Define a GitHub workflow for building PRs. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.buildWorkflowOptions">buildWorkflowOptions</a></code> | <code>projen.javascript.BuildWorkflowOptions</code> | Options for PR build workflow. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.buildWorkflowTriggers">buildWorkflowTriggers</a></code> | <code>projen.github.workflows.Triggers</code> | Build workflow triggers. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.bundlerOptions">bundlerOptions</a></code> | <code>projen.javascript.BundlerOptions</code> | Options for `Bundler`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.checkLicenses">checkLicenses</a></code> | <code>projen.javascript.LicenseCheckerOptions</code> | Configure which licenses should be deemed acceptable for use by dependencies. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v5 By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.codeCovTokenSecret">codeCovTokenSecret</a></code> | <code>string</code> | Define the secret name for a specified https://codecov.io/ token. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.copyrightOwner">copyrightOwner</a></code> | <code>string</code> | License copyright owner. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.copyrightPeriod">copyrightPeriod</a></code> | <code>string</code> | The copyright years to put in the LICENSE file. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.defaultReleaseBranch">defaultReleaseBranch</a></code> | <code>string</code> | The name of the main release branch. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.dependabot">dependabot</a></code> | <code>boolean</code> | Use dependabot to handle dependency upgrades. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.dependabotOptions">dependabotOptions</a></code> | <code>projen.github.DependabotOptions</code> | Options for dependabot. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.depsUpgrade">depsUpgrade</a></code> | <code>boolean</code> | Use tasks and github workflows to handle dependency upgrades. |
@@ -2021,8 +1831,6 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.gitignore">gitignore</a></code> | <code>string[]</code> | Additional entries to .gitignore. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.jest">jest</a></code> | <code>boolean</code> | Setup jest unit tests. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.jestOptions">jestOptions</a></code> | <code>projen.javascript.JestOptions</code> | Jest options. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.mutableBuild">mutableBuild</a></code> | <code>boolean</code> | Automatically update files modified during builds to pull-request branches. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmignore">npmignore</a></code> | <code>string[]</code> | Additional entries to .npmignore. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmignoreEnabled">npmignoreEnabled</a></code> | <code>boolean</code> | Defines an .npmignore file. Normally this is only needed for libraries that are packaged as tarballs. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmIgnoreOptions">npmIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .npmignore file. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.package">package</a></code> | <code>boolean</code> | Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`). |
@@ -2036,13 +1844,12 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.pullRequestTemplateContents">pullRequestTemplateContents</a></code> | <code>string[]</code> | The contents of the pull request template. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.release">release</a></code> | <code>boolean</code> | Add release management to this project. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseToNpm">releaseToNpm</a></code> | <code>boolean</code> | Automatically release to npm when new versions are introduced. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseWorkflow">releaseWorkflow</a></code> | <code>boolean</code> | DEPRECATED: renamed to `release`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowBootstrapSteps">workflowBootstrapSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | Workflow steps to use in order to bootstrap this repo. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowGitIdentity">workflowGitIdentity</a></code> | <code>projen.github.GitIdentity</code> | The git identity to use in workflows. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowNodeVersion">workflowNodeVersion</a></code> | <code>string</code> | The node version used in GitHub Actions workflows. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowPackageCache">workflowPackageCache</a></code> | <code>boolean</code> | Enable Node.js package cache in GitHub workflows. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.disableTsconfig">disableTsconfig</a></code> | <code>boolean</code> | Do not generate a `tsconfig.json` file (used by jsii projects since tsconfig.json is generated by the jsii compiler). |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.disableTsconfigDev">disableTsconfigDev</a></code> | <code>boolean</code> | Do not generate a `tsconfig.dev.json` file. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.disableTsconfigDev">disableTsconfigDev</a></code> | <code>boolean</code> | Do not generate a development tsconfig file. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.docgen">docgen</a></code> | <code>boolean</code> | Docgen by Typedoc. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.docsDirectory">docsDirectory</a></code> | <code>string</code> | Docs directory. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.entrypointTypes">entrypointTypes</a></code> | <code>string</code> | The .d.ts file that includes the type declarations for this module. |
@@ -2056,7 +1863,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.testdir">testdir</a></code> | <code>string</code> | Jest tests directory. Tests files should be named `xxx.test.ts`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.tsconfig">tsconfig</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom TSConfig. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom tsconfig options for the development tsconfig.json file (used for testing). |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.tsconfigDevFile">tsconfigDevFile</a></code> | <code>string</code> | The name of the development tsconfig.json file. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.tsconfigDevFile">tsconfigDevFile</a></code> | <code>string</code> | The name (and path) of the development tsconfig file. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.tsJestOptions">tsJestOptions</a></code> | <code>projen.typescript.TsJestOptions</code> | Options for ts-jest. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.typescriptVersion">typescriptVersion</a></code> | <code>string</code> | TypeScript version to use. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.buildCommand">buildCommand</a></code> | <code>string</code> | A command to execute before synthesis. |
@@ -2067,12 +1874,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.watchExcludes">watchExcludes</a></code> | <code>string[]</code> | Glob patterns to exclude from `cdk watch`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.watchIncludes">watchIncludes</a></code> | <code>string[]</code> | Glob patterns to include in `cdk watch`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkVersion">cdkVersion</a></code> | <code>string</code> | Minimum version of the AWS CDK to depend on. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkAssert">cdkAssert</a></code> | <code>boolean</code> | Warning: NodeJS only. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkAssertions">cdkAssertions</a></code> | <code>boolean</code> | Install the assertions library? |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkCliVersion">cdkCliVersion</a></code> | <code>string</code> | Version range of the AWS CDK CLI to depend on. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkDependencies">cdkDependencies</a></code> | <code>string[]</code> | Which AWS CDKv1 modules this project requires. |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkDependenciesAsDeps">cdkDependenciesAsDeps</a></code> | <code>boolean</code> | If this is enabled (default), all modules declared in `cdkDependencies` will be also added as normal `dependencies` (as well as `peerDependencies`). |
-| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkTestDependencies">cdkTestDependencies</a></code> | <code>string[]</code> | AWS CDK modules required for testing. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkVersionPinning">cdkVersionPinning</a></code> | <code>boolean</code> | Use pinned version instead of caret version for CDK. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.constructsVersion">constructsVersion</a></code> | <code>string</code> | Minimum version of the `constructs` library to depend on. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.app">app</a></code> | <code>string</code> | The command line to execute in order to synthesize the CDK application (language specific). |
@@ -2377,51 +2179,6 @@ Add a Gitpod development environment.
 
 ---
 
-##### ~~`mergify`~~<sup>Optional</sup> <a name="mergify" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.mergify"></a>
-
-- *Deprecated:* use `githubOptions.mergify` instead
-
-```typescript
-public readonly mergify: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Whether mergify should be enabled on this repository or not.
-
----
-
-##### ~~`mergifyOptions`~~<sup>Optional</sup> <a name="mergifyOptions" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.mergifyOptions"></a>
-
-- *Deprecated:* use `githubOptions.mergifyOptions` instead
-
-```typescript
-public readonly mergifyOptions: MergifyOptions;
-```
-
-- *Type:* projen.github.MergifyOptions
-- *Default:* default options
-
-Options for mergify.
-
----
-
-##### ~~`projectType`~~<sup>Optional</sup> <a name="projectType" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projectType"></a>
-
-- *Deprecated:* no longer supported at the base project level
-
-```typescript
-public readonly projectType: ProjectType;
-```
-
-- *Type:* projen.ProjectType
-- *Default:* ProjectType.UNKNOWN
-
-Which type of project this is (library/app).
-
----
-
 ##### `projenCredentials`<sup>Optional</sup> <a name="projenCredentials" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenCredentials"></a>
 
 ```typescript
@@ -2432,24 +2189,6 @@ public readonly projenCredentials: GithubCredentials;
 - *Default:* use a personal access token named PROJEN_GITHUB_TOKEN
 
 Choose a method of providing GitHub API access for projen workflows.
-
----
-
-##### ~~`projenTokenSecret`~~<sup>Optional</sup> <a name="projenTokenSecret" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenTokenSecret"></a>
-
-- *Deprecated:* use `projenCredentials`
-
-```typescript
-public readonly projenTokenSecret: string;
-```
-
-- *Type:* string
-- *Default:* "PROJEN_GITHUB_TOKEN"
-
-The name of a secret which includes a GitHub Personal Access Token to be used by projen workflows.
-
-This token needs to have the `repo`, `workflows`
-and `packages` scope.
 
 ---
 
@@ -2952,22 +2691,6 @@ which is using npm internally and supports provenance statements independently o
 
 ---
 
-##### ~~`npmRegistry`~~<sup>Optional</sup> <a name="npmRegistry" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmRegistry"></a>
-
-- *Deprecated:* use `npmRegistryUrl` instead
-
-```typescript
-public readonly npmRegistry: string;
-```
-
-- *Type:* string
-
-The host name of the npm registry to publish to.
-
-Cannot be set together with `npmRegistryUrl`.
-
----
-
 ##### `npmRegistryUrl`<sup>Optional</sup> <a name="npmRegistryUrl" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmRegistryUrl"></a>
 
 ```typescript
@@ -3123,25 +2846,6 @@ public readonly scopedPackagesOptions: ScopedPackagesOptions[];
 - *Default:* fetch all scoped packages from the public npm registry
 
 Options for privately hosted scoped packages.
-
----
-
-##### ~~`scripts`~~<sup>Optional</sup> <a name="scripts" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.scripts"></a>
-
-- *Deprecated:* use `project.addTask()` or `package.setScript()`
-
-```typescript
-public readonly scripts: {[ key: string ]: string};
-```
-
-- *Type:* {[ key: string ]: string}
-- *Default:* {}
-
-npm scripts to include.
-
-If a script has the same name as a standard script,
-the standard script will be overwritten.
-Also adds the script as a task.
 
 ---
 
@@ -3387,21 +3091,6 @@ on a per artifact basis.
 
 ---
 
-##### ~~`releaseEveryCommit`~~<sup>Optional</sup> <a name="releaseEveryCommit" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseEveryCommit"></a>
-
-- *Deprecated:* Use `releaseTrigger: ReleaseTrigger.continuous()` instead
-
-```typescript
-public readonly releaseEveryCommit: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Automatically release new versions every commit to one of branches in `releaseBranches`.
-
----
-
 ##### `releaseFailureIssue`<sup>Optional</sup> <a name="releaseFailureIssue" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseFailureIssue"></a>
 
 ```typescript
@@ -3427,21 +3116,6 @@ public readonly releaseFailureIssueLabel: string;
 The label to apply to issues indicating publish failures.
 
 Only applies if `releaseFailureIssue` is true.
-
----
-
-##### ~~`releaseSchedule`~~<sup>Optional</sup> <a name="releaseSchedule" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseSchedule"></a>
-
-- *Deprecated:* Use `releaseTrigger: ReleaseTrigger.scheduled()` instead
-
-```typescript
-public readonly releaseSchedule: string;
-```
-
-- *Type:* string
-- *Default:* no scheduled releases
-
-CRON schedule to trigger new releases.
 
 ---
 
@@ -3567,19 +3241,6 @@ Github Runner Group selection options.
 
 ---
 
-##### `defaultReleaseBranch`<sup>Required</sup> <a name="defaultReleaseBranch" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.defaultReleaseBranch"></a>
-
-```typescript
-public readonly defaultReleaseBranch: string;
-```
-
-- *Type:* string
-- *Default:* "main"
-
-The name of the main release branch.
-
----
-
 ##### `artifactsDirectory`<sup>Optional</sup> <a name="artifactsDirectory" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.artifactsDirectory"></a>
 
 ```typescript
@@ -3689,21 +3350,6 @@ Options for PR build workflow.
 
 ---
 
-##### ~~`buildWorkflowTriggers`~~<sup>Optional</sup> <a name="buildWorkflowTriggers" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.buildWorkflowTriggers"></a>
-
-- *Deprecated:* - Use `buildWorkflowOptions.workflowTriggers`
-
-```typescript
-public readonly buildWorkflowTriggers: Triggers;
-```
-
-- *Type:* projen.github.workflows.Triggers
-- *Default:* "{ pullRequest: {}, workflowDispatch: {} }"
-
-Build workflow triggers.
-
----
-
 ##### `bundlerOptions`<sup>Optional</sup> <a name="bundlerOptions" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.bundlerOptions"></a>
 
 ```typescript
@@ -3780,6 +3426,19 @@ public readonly copyrightPeriod: string;
 - *Default:* current year
 
 The copyright years to put in the LICENSE file.
+
+---
+
+##### `defaultReleaseBranch`<sup>Optional</sup> <a name="defaultReleaseBranch" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.defaultReleaseBranch"></a>
+
+```typescript
+public readonly defaultReleaseBranch: string;
+```
+
+- *Type:* string
+- *Default:* "main"
+
+The name of the main release branch.
 
 ---
 
@@ -3874,41 +3533,6 @@ public readonly jestOptions: JestOptions;
 - *Default:* default options
 
 Jest options.
-
----
-
-##### ~~`mutableBuild`~~<sup>Optional</sup> <a name="mutableBuild" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.mutableBuild"></a>
-
-- *Deprecated:* - Use `buildWorkflowOptions.mutableBuild`
-
-```typescript
-public readonly mutableBuild: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Automatically update files modified during builds to pull-request branches.
-
-This means
-that any files synthesized by projen or e.g. test snapshots will always be up-to-date
-before a PR is merged.
-
-Implies that PR builds do not have anti-tamper checks.
-
----
-
-##### ~~`npmignore`~~<sup>Optional</sup> <a name="npmignore" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.npmignore"></a>
-
-- *Deprecated:* - use `project.addPackageIgnore`
-
-```typescript
-public readonly npmignore: string[];
-```
-
-- *Type:* string[]
-
-Additional entries to .npmignore.
 
 ---
 
@@ -4080,21 +3704,6 @@ Automatically release to npm when new versions are introduced.
 
 ---
 
-##### ~~`releaseWorkflow`~~<sup>Optional</sup> <a name="releaseWorkflow" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.releaseWorkflow"></a>
-
-- *Deprecated:* see `release`.
-
-```typescript
-public readonly releaseWorkflow: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true if not a subproject
-
-DEPRECATED: renamed to `release`.
-
----
-
 ##### `workflowBootstrapSteps`<sup>Optional</sup> <a name="workflowBootstrapSteps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.workflowBootstrapSteps"></a>
 
 ```typescript
@@ -4171,7 +3780,7 @@ public readonly disableTsconfigDev: boolean;
 - *Type:* boolean
 - *Default:* false
 
-Do not generate a `tsconfig.dev.json` file.
+Do not generate a development tsconfig file.
 
 ---
 
@@ -4355,9 +3964,13 @@ public readonly tsconfigDevFile: string;
 ```
 
 - *Type:* string
-- *Default:* "tsconfig.dev.json"
+- *Default:* "{testdir}/tsconfig.json"
 
-The name of the development tsconfig.json file.
+The name (and path) of the development tsconfig file.
+
+By default this lives inside the test directory (e.g. `test/tsconfig.json`)
+so that the TypeScript language service resolves it as the nearest config
+for test files.
 
 ---
 
@@ -4501,39 +4114,6 @@ Minimum version of the AWS CDK to depend on.
 
 ---
 
-##### ~~`cdkAssert`~~<sup>Optional</sup> <a name="cdkAssert" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkAssert"></a>
-
-- *Deprecated:* The
-
-```typescript
-public readonly cdkAssert: boolean;
-```
-
-- *Type:* boolean
-- *Default:* will be included by default for AWS CDK >= 1.0.0 < 2.0.0
-
-Warning: NodeJS only.
-
-Install the
-
----
-
-##### `cdkAssertions`<sup>Optional</sup> <a name="cdkAssertions" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkAssertions"></a>
-
-```typescript
-public readonly cdkAssertions: boolean;
-```
-
-- *Type:* boolean
-- *Default:* will be included by default for AWS CDK >= 1.111.0 < 2.0.0
-
-Install the assertions library?
-
-Only needed for CDK 1.x. If using CDK 2.x then
-assertions is already included in 'aws-cdk-lib'
-
----
-
 ##### `cdkCliVersion`<sup>Optional</sup> <a name="cdkCliVersion" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkCliVersion"></a>
 
 ```typescript
@@ -4549,56 +4129,6 @@ Can be either a specific version, or an NPM version range.
 
 By default, the latest 2.x version will be installed; you can use this
 option to restrict it to a specific version or version range.
-
----
-
-##### ~~`cdkDependencies`~~<sup>Optional</sup> <a name="cdkDependencies" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkDependencies"></a>
-
-- *Deprecated:* For CDK 2.x use "deps" instead. (or "peerDeps" if you're building a library)
-
-```typescript
-public readonly cdkDependencies: string[];
-```
-
-- *Type:* string[]
-
-Which AWS CDKv1 modules this project requires.
-
----
-
-##### ~~`cdkDependenciesAsDeps`~~<sup>Optional</sup> <a name="cdkDependenciesAsDeps" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkDependenciesAsDeps"></a>
-
-- *Deprecated:* Not supported in CDK v2.
-
-```typescript
-public readonly cdkDependenciesAsDeps: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-If this is enabled (default), all modules declared in `cdkDependencies` will be also added as normal `dependencies` (as well as `peerDependencies`).
-
-This is to ensure that downstream consumers actually have your CDK dependencies installed
-when using npm < 7 or yarn, where peer dependencies are not automatically installed.
-If this is disabled, `cdkDependencies` will be added to `devDependencies` to ensure
-they are present during development.
-
-Note: this setting only applies to construct library projects
-
----
-
-##### ~~`cdkTestDependencies`~~<sup>Optional</sup> <a name="cdkTestDependencies" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkTestDependencies"></a>
-
-- *Deprecated:* For CDK 2.x use 'devDeps' (in node.js projects) or 'testDeps' (in java projects) instead
-
-```typescript
-public readonly cdkTestDependencies: string[];
-```
-
-- *Type:* string[]
-
-AWS CDK modules required for testing.
 
 ---
 
