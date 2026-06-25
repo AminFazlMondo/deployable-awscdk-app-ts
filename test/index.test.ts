@@ -30,7 +30,7 @@ describe('No stack pattern', () => {
     packageManager: NodePackageManager.NPM,
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
-    cdkVersion: '1.129.0',
+    cdkVersion: '2.129.0',
     workflowNodeVersion: '14.18.1',
     outdir: mkdtemp(),
     deployOptions: {
@@ -66,7 +66,7 @@ describe('specific stack', () => {
     packageManager: NodePackageManager.NPM,
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
-    cdkVersion: '1.129.0',
+    cdkVersion: '2.129.0',
     generateNvmrc: false,
     outdir: mkdtemp(),
     deployOptions: {
@@ -99,7 +99,7 @@ describe('assume role with default duration', () => {
     packageManager: NodePackageManager.NPM,
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
-    cdkVersion: '1.129.0',
+    cdkVersion: '2.129.0',
     generateNvmrc: false,
     outdir: mkdtemp(),
     deployOptions: {
@@ -128,7 +128,7 @@ describe('assume role with specified duration', () => {
     packageManager: NodePackageManager.NPM,
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
-    cdkVersion: '1.129.0',
+    cdkVersion: '2.129.0',
     generateNvmrc: false,
     outdir: mkdtemp(),
     deployOptions: {
@@ -159,7 +159,7 @@ describe('nvmrc', () => {
       packageManager: NodePackageManager.NPM,
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
-      cdkVersion: '1.129.0',
+      cdkVersion: '2.129.0',
       workflowNodeVersion: '14.18.1',
       outdir: mkdtemp(),
       deployOptions: {
@@ -185,7 +185,7 @@ describe('nvmrc', () => {
       packageManager: NodePackageManager.NPM,
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
-      cdkVersion: '1.129.0',
+      cdkVersion: '2.129.0',
       workflowNodeVersion: '14.18.1',
       generateNvmrc: false,
       outdir: mkdtemp(),
@@ -212,7 +212,7 @@ describe('nvmrc', () => {
       packageManager: NodePackageManager.NPM,
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
-      cdkVersion: '1.129.0',
+      cdkVersion: '2.129.0',
       outdir: mkdtemp(),
       deployOptions: {
         environments: [
@@ -238,7 +238,7 @@ describe('environment added by invoking the addEnvironments', () => {
     packageManager: NodePackageManager.NPM,
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
-    cdkVersion: '1.129.0',
+    cdkVersion: '2.129.0',
     workflowNodeVersion: '14.18.1',
     outdir: mkdtemp(),
     deployOptions: {
@@ -275,7 +275,7 @@ describe('update pre/post deploy scripts', () => {
       packageManager: NodePackageManager.NPM,
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
-      cdkVersion: '1.129.0',
+      cdkVersion: '2.129.0',
       workflowNodeVersion: '14.18.1',
       outdir: mkdtemp(),
       deployOptions: {
@@ -348,7 +348,7 @@ describe('npm config set for each environments', () => {
     packageManager: NodePackageManager.NPM,
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
-    cdkVersion: '1.129.0',
+    cdkVersion: '2.129.0',
     workflowNodeVersion: '14.18.1',
     outdir: mkdtemp(),
     deployOptions: {
@@ -388,7 +388,7 @@ describe('set the checkActiveDeployment flag', () => {
     packageManager: NodePackageManager.NPM,
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
-    cdkVersion: '1.129.0',
+    cdkVersion: '2.129.0',
     workflowNodeVersion: '14.18.1',
     checkActiveDeployment: true,
     outdir: mkdtemp(),
@@ -416,7 +416,7 @@ describe('a new task added for deployment in workflow', () => {
     packageManager: NodePackageManager.NPM,
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
-    cdkVersion: '1.129.0',
+    cdkVersion: '2.129.0',
     workflowNodeVersion: '14.18.1',
     outdir: mkdtemp(),
     deployOptions: {
@@ -443,7 +443,7 @@ describe('deploy option method is specified', () => {
     packageManager: NodePackageManager.NPM,
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
-    cdkVersion: '1.129.0',
+    cdkVersion: '2.129.0',
     workflowNodeVersion: '14.18.1',
     outdir: mkdtemp(),
     deployOptions: {
@@ -471,7 +471,7 @@ describe('post deployment added in workflow', () => {
     packageManager: NodePackageManager.NPM,
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
-    cdkVersion: '1.129.0',
+    cdkVersion: '2.129.0',
     workflowNodeVersion: '14.18.1',
     outdir: mkdtemp(),
     deployOptions: {
@@ -509,7 +509,7 @@ describe('pre deployment added in workflow', () => {
     packageManager: NodePackageManager.NPM,
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
-    cdkVersion: '1.129.0',
+    cdkVersion: '2.129.0',
     workflowNodeVersion: '14.18.1',
     outdir: mkdtemp(),
     deployOptions: {
@@ -547,7 +547,7 @@ describe('pre install added in workflow', () => {
     packageManager: NodePackageManager.NPM,
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
-    cdkVersion: '1.129.0',
+    cdkVersion: '2.129.0',
     workflowNodeVersion: '14.18.1',
     outdir: mkdtemp(),
     deployOptions: {
@@ -577,7 +577,7 @@ describe('scoped packages exists', () => {
     packageManager: NodePackageManager.NPM,
     name: 'my-test-app',
     defaultReleaseBranch: 'main',
-    cdkVersion: '1.129.0',
+    cdkVersion: '2.129.0',
     outdir: mkdtemp(),
     scopedPackagesOptions: [
       {
@@ -614,7 +614,7 @@ describe('CodeArtifactOptions', () => {
       packageManager: NodePackageManager.NPM,
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
-      cdkVersion: '1.129.0',
+      cdkVersion: '2.129.0',
       outdir: mkdtemp(),
       scopedPackagesOptions: [
         {
@@ -653,7 +653,7 @@ describe('node version 18', () => {
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
       workflowNodeVersion: '18',
-      cdkVersion: '1.129.0',
+      cdkVersion: '2.129.0',
       outdir: mkdtemp(),
       deployOptions: {
         environmentVariableName: 'STAGE',
@@ -682,7 +682,7 @@ describe('node version 18', () => {
         name: 'my-test-app',
         defaultReleaseBranch: 'main',
         workflowNodeVersion: '18',
-        cdkVersion: '1.129.0',
+        cdkVersion: '2.129.0',
         outdir: mkdtemp(),
         deployOptions: {
           npmConfigEnvironment: 'stack',
@@ -707,7 +707,7 @@ describe('deployment strategy', () => {
       packageManager: NodePackageManager.NPM,
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
-      cdkVersion: '1.129.0',
+      cdkVersion: '2.129.0',
       workflowNodeVersion: '14.18.1',
       outdir: mkdtemp(),
       deployOptions: {
@@ -744,7 +744,7 @@ describe('deployment strategy', () => {
       packageManager: NodePackageManager.NPM,
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
-      cdkVersion: '1.129.0',
+      cdkVersion: '2.129.0',
       workflowNodeVersion: '14.18.1',
       outdir: mkdtemp(),
       deployOptions: {
@@ -780,7 +780,7 @@ describe('deployment strategy', () => {
       packageManager: NodePackageManager.NPM,
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
-      cdkVersion: '1.129.0',
+      cdkVersion: '2.129.0',
       workflowNodeVersion: '14.18.1',
       outdir: mkdtemp(),
       deployOptions: {
@@ -866,7 +866,7 @@ describe('diff output and annotation', () => {
       packageManager: NodePackageManager.NPM,
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
-      cdkVersion: '1.129.0',
+      cdkVersion: '2.129.0',
       workflowNodeVersion: '14.18.1',
       outdir: mkdtemp(),
       deployOptions: {
@@ -907,7 +907,7 @@ describe('diff output and annotation', () => {
       packageManager: NodePackageManager.NPM,
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
-      cdkVersion: '1.129.0',
+      cdkVersion: '2.129.0',
       workflowNodeVersion: '14.18.1',
       outdir: mkdtemp(),
       diffOutput: {
@@ -952,7 +952,7 @@ describe('diff output and annotation', () => {
       packageManager: NodePackageManager.NPM,
       name: 'my-test-app',
       defaultReleaseBranch: 'main',
-      cdkVersion: '1.129.0',
+      cdkVersion: '2.129.0',
       workflowNodeVersion: '14.18.1',
       outdir: mkdtemp(),
       diffOutput: {
