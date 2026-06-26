@@ -352,7 +352,7 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
   "env": {
     "PATH": "$(npx -c "node --print process.env.PATH")",
   },
-  "manifestVersion": 1,
+  "manifestVersion": 2,
   "tasks": {
     "build": {
       "description": "Full release build",
@@ -441,7 +441,10 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
       "name": "default",
       "steps": [
         {
-          "exec": "node .projenrc.js",
+          "execArgs": [
+            "node",
+            ".projenrc.js",
+          ],
         },
       ],
     },
@@ -450,7 +453,10 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
       "name": "deploy",
       "steps": [
         {
-          "exec": "cdk deploy",
+          "execArgs": [
+            "cdk",
+            "deploy",
+          ],
           "receiveArgs": true,
         },
       ],
@@ -476,7 +482,10 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
       "name": "destroy",
       "steps": [
         {
-          "exec": "cdk destroy",
+          "execArgs": [
+            "cdk",
+            "destroy",
+          ],
           "receiveArgs": true,
         },
       ],
@@ -486,7 +495,10 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
       "name": "diff",
       "steps": [
         {
-          "exec": "cdk diff",
+          "execArgs": [
+            "cdk",
+            "diff",
+          ],
         },
       ],
     },
@@ -539,10 +551,19 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
       "name": "package",
       "steps": [
         {
-          "exec": "mkdir -p dist/js",
+          "execArgs": [
+            "mkdir",
+            "-p",
+            "dist/js",
+          ],
         },
         {
-          "exec": "npm pack --pack-destination dist/js",
+          "execArgs": [
+            "npm",
+            "pack",
+            "--pack-destination",
+            "dist/js",
+          ],
         },
       ],
     },
@@ -592,7 +613,10 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
       "name": "synth",
       "steps": [
         {
-          "exec": "cdk synth",
+          "execArgs": [
+            "cdk",
+            "synth",
+          ],
         },
       ],
     },
@@ -601,7 +625,11 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
       "name": "synth:silent",
       "steps": [
         {
-          "exec": "cdk synth -q",
+          "execArgs": [
+            "cdk",
+            "synth",
+            "-q",
+          ],
         },
       ],
     },
@@ -673,10 +701,17 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
       "name": "watch",
       "steps": [
         {
-          "exec": "cdk deploy --hotswap",
+          "execArgs": [
+            "cdk",
+            "deploy",
+            "--hotswap",
+          ],
         },
         {
-          "exec": "cdk watch",
+          "execArgs": [
+            "cdk",
+            "watch",
+          ],
         },
       ],
     },
@@ -3435,7 +3470,7 @@ exports[`specific stack tasks 1`] = `
   "env": {
     "PATH": "$(npx -c "node --print process.env.PATH")",
   },
-  "manifestVersion": 1,
+  "manifestVersion": 2,
   "tasks": {
     "build": {
       "description": "Full release build",
@@ -3524,7 +3559,10 @@ exports[`specific stack tasks 1`] = `
       "name": "default",
       "steps": [
         {
-          "exec": "node .projenrc.js",
+          "execArgs": [
+            "node",
+            ".projenrc.js",
+          ],
         },
       ],
     },
@@ -3533,7 +3571,10 @@ exports[`specific stack tasks 1`] = `
       "name": "deploy",
       "steps": [
         {
-          "exec": "cdk deploy",
+          "execArgs": [
+            "cdk",
+            "deploy",
+          ],
           "receiveArgs": true,
         },
       ],
@@ -3559,7 +3600,10 @@ exports[`specific stack tasks 1`] = `
       "name": "destroy",
       "steps": [
         {
-          "exec": "cdk destroy",
+          "execArgs": [
+            "cdk",
+            "destroy",
+          ],
           "receiveArgs": true,
         },
       ],
@@ -3569,7 +3613,10 @@ exports[`specific stack tasks 1`] = `
       "name": "diff",
       "steps": [
         {
-          "exec": "cdk diff",
+          "execArgs": [
+            "cdk",
+            "diff",
+          ],
         },
       ],
     },
@@ -3622,10 +3669,19 @@ exports[`specific stack tasks 1`] = `
       "name": "package",
       "steps": [
         {
-          "exec": "mkdir -p dist/js",
+          "execArgs": [
+            "mkdir",
+            "-p",
+            "dist/js",
+          ],
         },
         {
-          "exec": "npm pack --pack-destination dist/js",
+          "execArgs": [
+            "npm",
+            "pack",
+            "--pack-destination",
+            "dist/js",
+          ],
         },
       ],
     },
@@ -3675,7 +3731,10 @@ exports[`specific stack tasks 1`] = `
       "name": "synth",
       "steps": [
         {
-          "exec": "cdk synth",
+          "execArgs": [
+            "cdk",
+            "synth",
+          ],
         },
       ],
     },
@@ -3684,7 +3743,11 @@ exports[`specific stack tasks 1`] = `
       "name": "synth:silent",
       "steps": [
         {
-          "exec": "cdk synth -q",
+          "execArgs": [
+            "cdk",
+            "synth",
+            "-q",
+          ],
         },
       ],
     },
@@ -3756,10 +3819,17 @@ exports[`specific stack tasks 1`] = `
       "name": "watch",
       "steps": [
         {
-          "exec": "cdk deploy --hotswap",
+          "execArgs": [
+            "cdk",
+            "deploy",
+            "--hotswap",
+          ],
         },
         {
-          "exec": "cdk watch",
+          "execArgs": [
+            "cdk",
+            "watch",
+          ],
         },
       ],
     },
