@@ -749,6 +749,7 @@ If the diff output is enabled, adds a script and a job step to generate the CDK 
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.upgradeWorkflow">upgradeWorkflow</a></code> | <code>projen.javascript.UpgradeDependencies</code> | The upgrade workflow. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.docsDirectory">docsDirectory</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.libdir">libdir</a></code> | <code>string</code> | The directory in which compiled .js files reside. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.runner">runner</a></code> | <code>projen.typescript.TypeScriptRunner</code> | The TypeScript runner used for executing TypeScript files. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.srcdir">srcdir</a></code> | <code>string</code> | The directory in which the .ts sources reside. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.testdir">testdir</a></code> | <code>string</code> | The directory in which tests reside. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfig</code> | A typescript configuration file which covers all files (sources, tests, projen). |
@@ -1362,6 +1363,18 @@ The directory in which compiled .js files reside.
 
 ---
 
+##### `runner`<sup>Required</sup> <a name="runner" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.runner"></a>
+
+```typescript
+public readonly runner: TypeScriptRunner;
+```
+
+- *Type:* projen.typescript.TypeScriptRunner
+
+The TypeScript runner used for executing TypeScript files.
+
+---
+
 ##### `srcdir`<sup>Required</sup> <a name="srcdir" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.property.srcdir"></a>
 
 ```typescript
@@ -1858,6 +1871,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.libdir">libdir</a></code> | <code>string</code> | Typescript  artifacts output directory. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcTs">projenrcTs</a></code> | <code>boolean</code> | Use TypeScript for your projenrc file (`.projenrc.ts`). |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.projenrcTsOptions">projenrcTsOptions</a></code> | <code>projen.typescript.ProjenrcOptions</code> | Options for .projenrc.ts. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.runner">runner</a></code> | <code>projen.typescript.TypeScriptRunner</code> | The TypeScript runner to use for executing TypeScript files. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.sampleCode">sampleCode</a></code> | <code>boolean</code> | Generate one-time sample in `src/` and `test/` if there are no files there. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.srcdir">srcdir</a></code> | <code>string</code> | Typescript sources directory. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.testdir">testdir</a></code> | <code>string</code> | Jest tests directory. Tests files should be named `xxx.test.ts`. |
@@ -3884,6 +3898,22 @@ public readonly projenrcTsOptions: ProjenrcOptions;
 - *Type:* projen.typescript.ProjenrcOptions
 
 Options for .projenrc.ts.
+
+---
+
+##### `runner`<sup>Optional</sup> <a name="runner" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.runner"></a>
+
+```typescript
+public readonly runner: TypeScriptRunner;
+```
+
+- *Type:* projen.typescript.TypeScriptRunner
+- *Default:* TypeScriptRunner.tsNode()
+
+The TypeScript runner to use for executing TypeScript files.
+
+This is a project-level setting that components (e.g. projenrc) will
+use as their default runner.
 
 ---
 
