@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       projen:
-        specifier: ^0.101.14
-        version: 0.101.14(constructs@10.6.0)
+        specifier: ^0.101.15
+        version: 0.101.15(constructs@10.7.0)
       semver:
         specifier: ^7.8.5
         version: 7.8.5
@@ -40,8 +40,8 @@ importers:
         specifier: ^12
         version: 12.7.3
       constructs:
-        specifier: ^10.6.0
-        version: 10.6.0
+        specifier: ^10.7.0
+        version: 10.7.0
       eslint:
         specifier: ^9
         version: 9.39.5
@@ -983,8 +983,8 @@ packages:
     resolution: {integrity: sha512-MWufYdFw53ccGjCA+Ol7XJYpAlW6/prSMzuPOTRnJGcGzuhLn4Scrz7qf6o8bROZ514ltazcIFJZevcfbo0x7A==}
     engines: {'0': node >= 6.0}
 
-  constructs@10.6.0:
-    resolution: {integrity: sha512-TxHOnBO5zMo/G76ykzGF/wMpEHu257TbWiIxP9K0Yv/+t70UzgBQiTqjkAsWOPC6jW91DzJI0+ehQV6xDRNBuQ==}
+  constructs@10.7.0:
+    resolution: {integrity: sha512-Vzwc30bMywc7DCzX8XOyuZbsBmfXTCrn6HHmhhELZK1J5dnUWwJ5uL7hBXGGq7xFPVOOO6cs9FwaxOshAxgcWQ==}
 
   conventional-changelog-angular@6.0.0:
     resolution: {integrity: sha512-6qLgrBF4gueoC7AFVHu51nHL9pF9FRjXrH+ceVf7WmAfH3gs+gEYOkvxhjMPjZu57I4AGUGoNTY8V7Hrgf1uqg==}
@@ -2373,8 +2373,8 @@ packages:
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
 
-  projen@0.101.14:
-    resolution: {integrity: sha512-rg0tDLVwRmZJOoKdY9y6OBTuSJauCVHC+X5jq3RNHqneSxP7W97gPIknQn1yj4tmTvv8P4kXufIGH7/wXx7LTg==}
+  projen@0.101.15:
+    resolution: {integrity: sha512-EsPU9BO8RrRuU1mEnRZwvcsAs6ok4pZ8tSTXWXaFTYYghBAL7RJLlOfvBpQbeRc0QsCM9V8NPpCvfl918MZ5dQ==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
@@ -4078,7 +4078,7 @@ snapshots:
       readable-stream: 3.6.2
       typedarray: 0.0.6
 
-  constructs@10.6.0: {}
+  constructs@10.7.0: {}
 
   conventional-changelog-angular@6.0.0:
     dependencies:
@@ -5772,9 +5772,9 @@ snapshots:
 
   process-nextick-args@2.0.1: {}
 
-  projen@0.101.14(constructs@10.6.0):
+  projen@0.101.15(constructs@10.7.0):
     dependencies:
-      constructs: 10.6.0
+      constructs: 10.7.0
 
   prompts@2.4.2:
     dependencies:
