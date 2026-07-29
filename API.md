@@ -3485,6 +3485,10 @@ public readonly copyrightOwner: string;
 
 License copyright owner.
 
+This value is only used if the selected license text contains the
+`$copyright_owner` placeholder. For example, it has no effect on the
+MPL-2.0 license text.
+
 ---
 
 ##### `copyrightPeriod`<sup>Optional</sup> <a name="copyrightPeriod" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.copyrightPeriod"></a>
@@ -3497,6 +3501,10 @@ public readonly copyrightPeriod: string;
 - *Default:* current year
 
 The copyright years to put in the LICENSE file.
+
+This value is only used if the selected license text contains the
+`$copyright_period` placeholder. For example, it has no effect on the
+MPL-2.0 license text.
 
 ---
 
