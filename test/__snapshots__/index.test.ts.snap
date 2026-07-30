@@ -32,24 +32,30 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-region: us-east-2
           role-to-assume: stub-role-1
           role-duration-seconds: 900
       - name: AWS CodeArtifact Login
+        id: aws_codeartifact_login
         run: npx projen ca:login
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -66,6 +72,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -90,14 +97,17 @@ jobs:
           node-version: lts/*
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -116,21 +126,26 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-region: us-east-2
           role-to-assume: stub-role-1
           role-duration-seconds: 900
       - name: AWS CodeArtifact Login
+        id: aws_codeartifact_login
         run: npx projen ca:login
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials_2
         if: \${{ matrix.assumeRole == 'false' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -141,6 +156,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -148,11 +164,14 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -206,21 +225,26 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -237,6 +261,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -261,14 +286,17 @@ jobs:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -286,18 +314,22 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -308,6 +340,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -315,11 +348,14 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -808,16 +844,20 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -834,6 +874,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -858,14 +899,17 @@ jobs:
           node-version: lts/*
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -883,13 +927,16 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -900,6 +947,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -907,11 +955,14 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -965,16 +1016,20 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -991,6 +1046,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -1015,14 +1071,17 @@ jobs:
           node-version: lts/*
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -1040,13 +1099,16 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -1057,6 +1119,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -1064,11 +1127,14 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -1133,21 +1199,26 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -1164,6 +1235,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -1188,14 +1260,17 @@ jobs:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -1213,18 +1288,22 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -1235,6 +1314,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -1242,11 +1322,14 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -1308,21 +1391,26 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -1339,6 +1427,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -1363,14 +1452,17 @@ jobs:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -1388,18 +1480,22 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         env:
           accessKeyId: \${{ secrets[dev-secret-1] }}
           secretAccessKey: \${{ secrets[dev-secret-2] }}
@@ -1409,6 +1505,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
   Deploy-staging:
     needs: Deploy-dev
@@ -1423,24 +1520,29 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Assume AWS Role
+        id: assume_aws_role
         uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: staging-role
           aws-region: staging-aws-region-1
           role-duration-seconds: 900
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
 "
 `;
@@ -1476,21 +1578,26 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -1507,6 +1614,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -1531,14 +1639,17 @@ jobs:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -1556,18 +1667,22 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         env:
           accessKeyId: \${{ secrets[dev-secret-1] }}
           secretAccessKey: \${{ secrets[dev-secret-2] }}
@@ -1577,6 +1692,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
   Deploy-stagingRegion1:
     needs: Deploy-dev
@@ -1591,24 +1707,29 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Assume AWS Role
+        id: assume_aws_role
         uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: staging-role
           aws-region: staging-aws-region-1
           role-duration-seconds: 900
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
   Deploy-prodRegion1:
     needs: Deploy-stagingRegion1
@@ -1623,26 +1744,32 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Assume AWS Role
+        id: assume_aws_role
         uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: prod-role
           aws-region: prod-aws-region-1
           role-duration-seconds: 900
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         run: npm run post-deploy-prod
   Deploy-stagingRegion2:
     needs: Deploy-dev
@@ -1657,24 +1784,29 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Assume AWS Role
+        id: assume_aws_role
         uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: staging-role
           aws-region: staging-aws-region-2
           role-duration-seconds: 900
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
   Deploy-prodRegion2:
     needs: Deploy-stagingRegion2
@@ -1689,26 +1821,32 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Assume AWS Role
+        id: assume_aws_role
         uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: prod-role
           aws-region: prod-aws-region-2
           role-duration-seconds: 900
       - name: Run Pre Deployment
+        id: run_pre_deployment
         run: npm run pre-deploy-prod
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
 "
 `;
@@ -1806,23 +1944,28 @@ jobs:
     if: always() && needs.build.outputs.self_mutation_happened && !(github.event.pull_request.head.repo.full_name != github.repository)
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           token: \${{ secrets.PROJEN_GITHUB_TOKEN }}
           ref: \${{ github.event.pull_request.head.ref }}
           repository: \${{ github.event.pull_request.head.repo.full_name }}
       - name: Download patch
+        id: download_patch
         uses: actions/download-artifact@v8
         with:
           name: repo.patch
           path: \${{ runner.temp }}
       - name: Apply patch
+        id: apply_patch
         run: '[ -s \${{ runner.temp }}/repo.patch ] && git apply \${{ runner.temp }}/repo.patch || echo "Empty patch. Skipping."'
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Push changes
+        id: push_changes
         env:
           PULL_REQUEST_REF: \${{ github.event.pull_request.head.ref }}
         run: |-
@@ -1837,26 +1980,32 @@ jobs:
     if: \${{ !needs.build.outputs.self_mutation_happened }}
     steps:
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.build.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         env:
           accessKeyId: \${{ secrets[dev-secret-1] }}
           secretAccessKey: \${{ secrets[dev-secret-2] }}
@@ -1866,6 +2015,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Run Generate Diff Output
+        id: run_generate_diff_output
         run: npm run diff:output
       - name: Get formatted diff annotation comment
         id: formatted_diff_annotation_comment
@@ -1888,6 +2038,7 @@ jobs:
           echo "</details>" >> diff-output/diff-\${environment}.md
           echo "" >> diff-output/diff-\${environment}.md
       - name: Upload diff output
+        id: upload_diff_output
         uses: actions/upload-artifact@v7
         with:
           name: diff-output-dev
@@ -1902,26 +2053,32 @@ jobs:
     if: \${{ !needs.build.outputs.self_mutation_happened }}
     steps:
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.build.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         env:
           accessKeyId: \${{ secrets[staging-secret-1] }}
           secretAccessKey: \${{ secrets[staging-secret-2] }}
@@ -1931,6 +2088,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Run Generate Diff Output
+        id: run_generate_diff_output
         run: npm run diff:output
       - name: Get formatted diff annotation comment
         id: formatted_diff_annotation_comment
@@ -1953,6 +2111,7 @@ jobs:
           echo "</details>" >> diff-output/diff-\${environment}.md
           echo "" >> diff-output/diff-\${environment}.md
       - name: Upload diff output
+        id: upload_diff_output
         uses: actions/upload-artifact@v7
         with:
           name: diff-output-staging
@@ -1970,20 +2129,24 @@ jobs:
     if: \${{ !needs.build.outputs.self_mutation_happened }}
     steps:
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.build.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Download all diff artifacts
+        id: download_all_diff_artifacts
         uses: actions/download-artifact@v8
         with:
           path: diff-outputs
           pattern: diff-output-*
           merge-multiple: true
       - name: Annotate PR with Diff Output
+        id: annotate_pr_with_diff_output
         uses: mshick/add-pr-comment@v3
         with:
           message-id: diff-output
@@ -2023,21 +2186,26 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -2054,6 +2222,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -2078,14 +2247,17 @@ jobs:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -2103,18 +2275,22 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -2125,6 +2301,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -2132,11 +2309,14 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -2198,21 +2378,26 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: "18"
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -2229,6 +2414,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -2253,14 +2439,17 @@ jobs:
           node-version: "18"
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -2280,18 +2469,22 @@ jobs:
       STAGE: \${{ matrix.environment }}
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: "18"
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -2302,6 +2495,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -2309,11 +2503,14 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -2381,21 +2578,26 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -2412,6 +2614,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -2436,14 +2639,17 @@ jobs:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -2461,18 +2667,22 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -2483,6 +2693,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -2490,15 +2701,19 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Setting NPM Config
+        id: setting_npm_config
         env:
           CONFIG_VALUE: \${{ matrix.environment }}
         run: npm config set stage $CONFIG_VALUE
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -2560,21 +2775,26 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -2591,6 +2811,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -2615,14 +2836,17 @@ jobs:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -2640,18 +2864,22 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -2662,6 +2890,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -2669,11 +2898,14 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -2735,21 +2967,26 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -2766,6 +3003,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -2790,14 +3028,17 @@ jobs:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -2815,18 +3056,22 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -2837,6 +3082,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -2844,11 +3090,14 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -2910,21 +3159,26 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -2941,6 +3195,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -2965,14 +3220,17 @@ jobs:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -2990,20 +3248,25 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: stub-task
+        id: stub-task
         run: npx projen stub-task
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -3014,6 +3277,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -3021,11 +3285,14 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -3077,14 +3344,17 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-access-key-id: \${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -3093,10 +3363,13 @@ jobs:
           role-to-assume: stub-role-1
           role-duration-seconds: 900
       - name: AWS CodeArtifact Login
+        id: aws_codeartifact_login
         run: npx projen ca:login
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -3113,6 +3386,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -3137,14 +3411,17 @@ jobs:
           node-version: lts/*
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -3162,11 +3439,13 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-access-key-id: \${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -3175,10 +3454,13 @@ jobs:
           role-to-assume: stub-role-1
           role-duration-seconds: 900
       - name: AWS CodeArtifact Login
+        id: aws_codeartifact_login
         run: npx projen ca:login
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials_2
         if: \${{ matrix.assumeRole == 'false' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -3189,6 +3471,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -3196,11 +3479,14 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -3254,21 +3540,26 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -3285,6 +3576,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -3309,14 +3601,17 @@ jobs:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -3334,16 +3629,19 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Setup Node.js
+        id: setup_node_js
         uses: actions/setup-node@v6
         with:
           node-version: 14.18.1
           package-manager-cache: false
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - id: deployment-check
         uses: AminFazlMondo/check-deployed-environment@v1
@@ -3352,6 +3650,7 @@ jobs:
         with:
           environment: \${{ matrix.environment }}
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         if: \${{ matrix.assumeRole == 'false' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -3362,6 +3661,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -3369,12 +3669,15 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         if: steps.deployment-check.outputs.has_active_deployment != 'true'
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' && steps.deployment-check.outputs.has_active_deployment != 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
@@ -3426,16 +3729,20 @@ jobs:
       CI: "true"
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set git identity
+        id: set_git_identity
         run: |-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: release
+        id: release
         run: npx projen release
       - name: Check if version has already been tagged
         id: check_tag_exists
@@ -3452,6 +3759,7 @@ jobs:
           cat $GITHUB_OUTPUT
         shell: bash
       - name: Backup artifact permissions
+        id: backup_artifact_permissions
         if: \${{ steps.git_remote.outputs.latest_commit == github.sha }}
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
@@ -3476,14 +3784,17 @@ jobs:
           node-version: lts/*
           package-manager-cache: false
       - name: Download build artifacts
+        id: download_build_artifacts
         uses: actions/download-artifact@v8
         with:
           artifact-ids: \${{ needs.release.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
+        id: restore_build_artifact_permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Release
+        id: release
         if: \${{ !inputs.dry_run }}
         env:
           GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
@@ -3501,13 +3812,16 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: \${{ github.sha }}
       - name: Install dependencies
+        id: install_dependencies
         run: npm ci
       - name: Configure AWS Credentials
+        id: configure_aws_credentials
         if: \${{ matrix.assumeRole == 'false' }}
         env:
           accessKeyId: \${{ secrets[matrix.accessKeyIdSecretName] }}
@@ -3518,6 +3832,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=$secretAccessKey" >> $GITHUB_ENV
           echo "AWS_REGION=$region" >> $GITHUB_ENV
       - name: Assume AWS Role
+        id: assume_aws_role
         if: \${{ matrix.assumeRole == 'true' }}
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -3525,11 +3840,14 @@ jobs:
           aws-region: \${{ matrix.region }}
           role-duration-seconds: \${{ matrix.assumeRoleDurationSeconds }}
       - name: Run Pre Deployment
+        id: run_pre_deployment
         if: \${{ matrix.hasPreDeployTask == 'true' }}
         run: npm run \${{ matrix.preDeploymentScript }}
       - name: Run Deployment
+        id: run_deployment
         run: npm run deploy:workflow
       - name: Run Post Deployment
+        id: run_post_deployment
         if: \${{ matrix.hasPostDeployTask == 'true' }}
         run: npm run \${{ matrix.postDeploymentScript }}
     strategy:
