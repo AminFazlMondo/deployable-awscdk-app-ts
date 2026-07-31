@@ -10,7 +10,7 @@ importers:
     dependencies:
       projen:
         specifier: ^0.101.22
-        version: 0.101.22(constructs@10.7.2)
+        version: 0.101.22(constructs@10.8.0)
       semver:
         specifier: ^7.8.5
         version: 7.8.5
@@ -40,8 +40,8 @@ importers:
         specifier: ^12
         version: 12.7.3
       constructs:
-        specifier: ^10.7.2
-        version: 10.7.2
+        specifier: ^10.8.0
+        version: 10.8.0
       eslint:
         specifier: ^9
         version: 9.39.5
@@ -975,8 +975,8 @@ packages:
     resolution: {integrity: sha512-MWufYdFw53ccGjCA+Ol7XJYpAlW6/prSMzuPOTRnJGcGzuhLn4Scrz7qf6o8bROZ514ltazcIFJZevcfbo0x7A==}
     engines: {'0': node >= 6.0}
 
-  constructs@10.7.2:
-    resolution: {integrity: sha512-vA7JOqvO/xwq2HBCuq3qc6V2R9mHZCxJ8HPoucUcUWJY88YULe7bzMcsdBy27/gJJIphZi73U1oIXDY2Eqg6nA==}
+  constructs@10.8.0:
+    resolution: {integrity: sha512-pJHp2CxvTG0ttp52rZvQfkbspPLZzttWPooIRLBwlZK8rV7ZhkjIkyZWJhIfBDC4YdcwIDmXyUFr1ieJaqjBbg==}
 
   conventional-changelog-angular@6.0.0:
     resolution: {integrity: sha512-6qLgrBF4gueoC7AFVHu51nHL9pF9FRjXrH+ceVf7WmAfH3gs+gEYOkvxhjMPjZu57I4AGUGoNTY8V7Hrgf1uqg==}
@@ -4067,7 +4067,7 @@ snapshots:
       readable-stream: 3.6.2
       typedarray: 0.0.6
 
-  constructs@10.7.2: {}
+  constructs@10.8.0: {}
 
   conventional-changelog-angular@6.0.0:
     dependencies:
@@ -5761,9 +5761,9 @@ snapshots:
 
   process-nextick-args@2.0.1: {}
 
-  projen@0.101.22(constructs@10.7.2):
+  projen@0.101.22(constructs@10.8.0):
     dependencies:
-      constructs: 10.7.2
+      constructs: 10.8.0
 
   prompts@2.4.2:
     dependencies:
