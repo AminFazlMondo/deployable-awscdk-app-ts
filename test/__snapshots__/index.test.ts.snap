@@ -681,6 +681,7 @@ exports[`a new task added for deployment in workflow tasks 1`] = `
       "name": "pre-compile",
     },
     "release": {
+      "condition": "git log --oneline -1 | grep -v "chore(release):" > /dev/null",
       "description": "Prepare a release from "main" branch",
       "env": {
         "RELEASE": "true",
@@ -4268,6 +4269,7 @@ exports[`specific stack tasks 1`] = `
       "name": "pre-compile",
     },
     "release": {
+      "condition": "git log --oneline -1 | grep -v "chore(release):" > /dev/null",
       "description": "Prepare a release from "main" branch",
       "env": {
         "RELEASE": "true",
