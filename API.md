@@ -1898,6 +1898,7 @@ const deployableAwsCdkTypeScriptAppOptions: DeployableAwsCdkTypeScriptAppOptions
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.context">context</a></code> | <code>{[ key: string ]: any}</code> | Additional context to include in `cdk.json`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.featureFlags">featureFlags</a></code> | <code>projen.awscdk.ICdkFeatureFlags</code> | Feature flags that should be enabled in `cdk.json`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.requireApproval">requireApproval</a></code> | <code>projen.awscdk.ApprovalLevel</code> | To protect you against unintended changes that affect your security posture, the AWS CDK Toolkit prompts you to approve security-related changes before deploying them. |
+| <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.versionReporting">versionReporting</a></code> | <code>boolean</code> | Enable AWS CDK library version reporting. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.watchExcludes">watchExcludes</a></code> | <code>string[]</code> | Glob patterns to exclude from `cdk watch`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.watchIncludes">watchIncludes</a></code> | <code>string[]</code> | Glob patterns to include in `cdk watch`. |
 | <code><a href="#deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.cdkVersion">cdkVersion</a></code> | <code>string</code> | Minimum version of the AWS CDK to depend on. |
@@ -4323,6 +4324,21 @@ public readonly requireApproval: ApprovalLevel;
 - *Default:* ApprovalLevel.BROADENING
 
 To protect you against unintended changes that affect your security posture, the AWS CDK Toolkit prompts you to approve security-related changes before deploying them.
+
+---
+
+##### `versionReporting`<sup>Optional</sup> <a name="versionReporting" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptAppOptions.property.versionReporting"></a>
+
+```typescript
+public readonly versionReporting: boolean;
+```
+
+- *Type:* boolean
+- *Default:* use the AWS CDK default
+
+Enable AWS CDK library version reporting.
+
+> [https://docs.aws.amazon.com/cdk/v2/guide/usage-data.html](https://docs.aws.amazon.com/cdk/v2/guide/usage-data.html)
 
 ---
 
