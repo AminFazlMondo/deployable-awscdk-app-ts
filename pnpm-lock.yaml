@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       projen:
-        specifier: ^0.104.25
-        version: 0.104.25(constructs@10.8.1)
+        specifier: ^0.104.27
+        version: 0.104.27(constructs@10.8.1)
       semver:
         specifier: ^7.8.6
         version: 7.8.6
@@ -2148,8 +2148,8 @@ packages:
     resolution: {integrity: sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
-  projen@0.104.25:
-    resolution: {integrity: sha512-HmeK997sqh95aVSFNJR6WShSlZ2yzRrzL8D8EsXsmF5TKO3Zk84glesW2ntgPnznaI0bXuNAEZteQ1tl/Nptjw==}
+  projen@0.104.27:
+    resolution: {integrity: sha512-L02IpJLrgNUTs06ssI256E+E0uaFQ5QZG3VaPntMqXVlvnuDaCVJHPx6JGt6pM/fxgvy0ZAKaLYxY3sSGXEOgg==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
@@ -5221,7 +5221,7 @@ snapshots:
       ansi-styles: 5.2.0
       react-is: 18.3.1
 
-  projen@0.104.25(constructs@10.8.1):
+  projen@0.104.27(constructs@10.8.1):
     dependencies:
       constructs: 10.8.1
 
