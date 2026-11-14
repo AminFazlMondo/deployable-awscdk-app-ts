@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       projen:
-        specifier: ^0.104.27
-        version: 0.104.27(constructs@10.8.1)
+        specifier: ^0.104.31
+        version: 0.104.31(constructs@10.8.1)
       semver:
         specifier: ^7.8.6
         version: 7.8.6
@@ -62,19 +62,19 @@ importers:
         version: 17.0.0
       jsii:
         specifier: 5.9.x
-        version: 5.9.57
+        version: 5.9.58
       jsii-diff:
         specifier: ^1.142.0
         version: 1.142.0
       jsii-docgen:
         specifier: ^10.5.0
-        version: 10.12.9(jsii-rosetta@5.9.73)
+        version: 10.12.9(jsii-rosetta@5.9.74)
       jsii-pacmak:
         specifier: ^1.142.0
-        version: 1.142.0(jsii-rosetta@5.9.73)
+        version: 1.142.0(jsii-rosetta@5.9.74)
       jsii-rosetta:
         specifier: 5.9.x
-        version: 5.9.73
+        version: 5.9.74
       ts-jest:
         specifier: ^29.4.15
         version: 29.4.15(@babel/core@7.29.0)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.29.0))(jest-util@29.7.0)(jest@29.7.0(@types/node@20.19.43)(ts-node@10.9.2(@types/node@20.19.43)(typescript@5.9.3)))(typescript@5.9.3)
@@ -1852,13 +1852,13 @@ packages:
     engines: {node: '>= 14.17.0'}
     hasBin: true
 
-  jsii-rosetta@5.9.73:
-    resolution: {integrity: sha512-C8XEWdV+RnVATI9FHgiM3Htymb1I+ksCp4hGau09aZLcnMTy7jEWCSTCdbGvbU5GLP79I/zJm7L9N9GX++hRDg==}
+  jsii-rosetta@5.9.74:
+    resolution: {integrity: sha512-qbc/bSxJTjKcFiAS0fdb4RbAbDXwwquxRx0/BlT0v3yPDlRxRKKwKWksXhgqEX8qSfcubkHz/Q6EcaeXBx+dvw==}
     engines: {node: '>= 20.16.0'}
     hasBin: true
 
-  jsii@5.9.57:
-    resolution: {integrity: sha512-+6t5k7zCn7kndIBHj2vhEHGG37aVIZxq2JVcG8md15vyQ67sLu3rqRkXTo4Y56yzcD/Pd9gcHEq99gpRHjpUIw==}
+  jsii@5.9.58:
+    resolution: {integrity: sha512-fZ9Adyw2QpzTOB225pa60wlWhI5SAiaYp9v3D0fHc26qCYm1JyG/CFp/hompOXv/FqHIIK6nMpzcMKe6Bcfo/g==}
     engines: {node: '>= 20.16.0'}
     hasBin: true
 
@@ -2148,8 +2148,8 @@ packages:
     resolution: {integrity: sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
-  projen@0.104.27:
-    resolution: {integrity: sha512-L02IpJLrgNUTs06ssI256E+E0uaFQ5QZG3VaPntMqXVlvnuDaCVJHPx6JGt6pM/fxgvy0ZAKaLYxY3sSGXEOgg==}
+  projen@0.104.31:
+    resolution: {integrity: sha512-yXAKvZxey2Gb3LVFv3prf+sNWXcDmOPlCD8YcK2BcNCleIhVj/xr2fWhkXqsNUX8KUKT8Z2leP+vMh98DOlReQ==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
@@ -4882,19 +4882,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii-docgen@10.12.9(jsii-rosetta@5.9.73):
+  jsii-docgen@10.12.9(jsii-rosetta@5.9.74):
     dependencies:
       '@jsii/spec': 1.142.0
       case: 1.6.3
       fast-glob: 3.3.3
       fs-extra: 10.1.0
       jsii-reflect: 1.142.0
-      jsii-rosetta: 5.9.73
+      jsii-rosetta: 5.9.74
       json-stream-stringify: 3.1.7
       semver: 7.8.6
       yargs: 16.2.2
 
-  jsii-pacmak@1.142.0(jsii-rosetta@5.9.73):
+  jsii-pacmak@1.142.0(jsii-rosetta@5.9.74):
     dependencies:
       '@jsii/check-node': 1.142.0
       '@jsii/spec': 1.142.0
@@ -4904,7 +4904,7 @@ snapshots:
       escape-string-regexp: 4.0.0
       fs-extra: 10.1.0
       jsii-reflect: 1.142.0
-      jsii-rosetta: 5.9.73
+      jsii-rosetta: 5.9.74
       semver: 7.8.6
       spdx-license-list: 6.12.0
       xmlbuilder: 15.1.1
@@ -4919,7 +4919,7 @@ snapshots:
       oo-ascii-tree: 1.142.0
       yargs: 17.7.3
 
-  jsii-rosetta@5.9.73:
+  jsii-rosetta@5.9.74:
     dependencies:
       '@jsii/check-node': 1.142.0
       '@jsii/spec': 1.142.0
@@ -4927,7 +4927,7 @@ snapshots:
       chalk: 4.1.2
       commonmark: 0.31.2
       fast-glob: 3.3.3
-      jsii: 5.9.57
+      jsii: 5.9.58
       semver: 7.8.6
       semver-intersect: 1.5.0
       stream-json: 3.9.0
@@ -4937,7 +4937,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii@5.9.57:
+  jsii@5.9.58:
     dependencies:
       '@jsii/check-node': 1.142.0
       '@jsii/spec': 1.142.0
@@ -5220,7 +5220,7 @@ snapshots:
       ansi-styles: 5.2.0
       react-is: 18.3.1
 
-  projen@0.104.27(constructs@10.8.1):
+  projen@0.104.31(constructs@10.8.1):
     dependencies:
       constructs: 10.8.1
 
