@@ -42,10 +42,14 @@ const project = new cdk.JsiiProject({
     allowedUsernames: ['AminFazlMondo'],
   },
   autoApproveUpgrades: true,
-  jsiiVersion: '5.9.x',
+  jsiiVersion: '~6.0.0',
   releaseFailureIssue: true,
   githubOptions: {
     dependencyReview: true,
+  },
+  jestOptions: {
+    // projen's dependency dax is ESM-only
+    experimentalVmModules: true,
   },
 });
 
