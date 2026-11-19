@@ -4,6 +4,8 @@
 
 ### DeployableAwsCdkTypeScriptApp <a name="DeployableAwsCdkTypeScriptApp" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp"></a>
 
+- *Implements:* constructs.IConstruct, constructs.IDependable
+
 #### Initializers <a name="Initializers" id="deployable-awscdk-app-ts.DeployableAwsCdkTypeScriptApp.Initializer"></a>
 
 ```typescript

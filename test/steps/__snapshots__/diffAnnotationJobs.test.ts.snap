@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should generate diff annotation jobs When Auth provider and npm config set 1`] = `
 {
@@ -22,7 +22,7 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
         "if": undefined,
         "name": "Download all diff artifacts",
         "timeoutMinutes": undefined,
-        "uses": "actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c",
+        "uses": "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",
         "with": {
           "merge-multiple": true,
           "path": "diff-outputs",
@@ -73,14 +73,14 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
       },
       {
         "name": "Setup pnpm",
-        "uses": "pnpm/action-setup@v6.0.10",
+        "uses": "pnpm/action-setup@v6.1.1",
         "with": {
           "version": "10.33.0",
         },
       },
       {
         "name": "Setup Node.js",
-        "uses": "actions/setup-node@v7.0.0",
+        "uses": "actions/setup-node@v7.1.0",
         "with": {
           "node-version": "20.0.0",
           "package-manager-cache": false,
@@ -143,7 +143,7 @@ echo "" >> diff-output/diff-\${environment}.md",
         "if": undefined,
         "name": "Upload diff output",
         "timeoutMinutes": undefined,
-        "uses": "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+        "uses": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
         "with": {
           "name": "diff-output-Dev",
           "overwrite": true,
@@ -186,14 +186,14 @@ echo "" >> diff-output/diff-\${environment}.md",
       },
       {
         "name": "Setup pnpm",
-        "uses": "pnpm/action-setup@v6.0.10",
+        "uses": "pnpm/action-setup@v6.1.1",
         "with": {
           "version": "10.33.0",
         },
       },
       {
         "name": "Setup Node.js",
-        "uses": "actions/setup-node@v7.0.0",
+        "uses": "actions/setup-node@v7.1.0",
         "with": {
           "node-version": "20.0.0",
           "package-manager-cache": false,
@@ -256,7 +256,7 @@ echo "" >> diff-output/diff-\${environment}.md",
         "if": undefined,
         "name": "Upload diff output",
         "timeoutMinutes": undefined,
-        "uses": "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+        "uses": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
         "with": {
           "name": "diff-output-Prod",
           "overwrite": true,
@@ -292,7 +292,7 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
         "if": undefined,
         "name": "Download all diff artifacts",
         "timeoutMinutes": undefined,
-        "uses": "actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c",
+        "uses": "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",
         "with": {
           "merge-multiple": true,
           "path": "diff-outputs",
@@ -343,14 +343,14 @@ exports[`DeployableAwsCdkTypeScriptAppStepsFactory diffAnnotationJobs Should gen
       },
       {
         "name": "Setup pnpm",
-        "uses": "pnpm/action-setup@v6.0.10",
+        "uses": "pnpm/action-setup@v6.1.1",
         "with": {
           "version": "10.33.0",
         },
       },
       {
         "name": "Setup Node.js",
-        "uses": "actions/setup-node@v7.0.0",
+        "uses": "actions/setup-node@v7.1.0",
         "with": {
           "node-version": "20.0.0",
           "package-manager-cache": false,
@@ -406,7 +406,7 @@ echo "" >> diff-output/diff-\${environment}.md",
         "if": undefined,
         "name": "Upload diff output",
         "timeoutMinutes": undefined,
-        "uses": "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+        "uses": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
         "with": {
           "name": "diff-output-Dev",
           "overwrite": true,
@@ -449,14 +449,14 @@ echo "" >> diff-output/diff-\${environment}.md",
       },
       {
         "name": "Setup pnpm",
-        "uses": "pnpm/action-setup@v6.0.10",
+        "uses": "pnpm/action-setup@v6.1.1",
         "with": {
           "version": "10.33.0",
         },
       },
       {
         "name": "Setup Node.js",
-        "uses": "actions/setup-node@v7.0.0",
+        "uses": "actions/setup-node@v7.1.0",
         "with": {
           "node-version": "20.0.0",
           "package-manager-cache": false,
@@ -512,7 +512,7 @@ echo "" >> diff-output/diff-\${environment}.md",
         "if": undefined,
         "name": "Upload diff output",
         "timeoutMinutes": undefined,
-        "uses": "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+        "uses": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
         "with": {
           "name": "diff-output-Prod",
           "overwrite": true,
