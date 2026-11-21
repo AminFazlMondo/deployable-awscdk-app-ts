@@ -62,13 +62,13 @@ importers:
         version: 17.0.0
       jsii:
         specifier: ~6.0.0
-        version: 6.0.24
+        version: 6.0.25
       jsii-diff:
         specifier: ^1.143.0
         version: 1.143.0
       jsii-docgen:
         specifier: ^10.5.0
-        version: 10.13.0(jsii-rosetta@6.0.25)
+        version: 10.13.4(jsii-rosetta@6.0.25)
       jsii-pacmak:
         specifier: ^1.143.0
         version: 1.143.0(jsii-rosetta@6.0.25)
@@ -453,10 +453,6 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
-
-  '@jsii/check-node@1.142.0':
-    resolution: {integrity: sha512-viMnVpg4vfa22vYawtQqjkuOsLa5eYRpKfs1aTxBE7/WsXLCfvqCX0XNgi27NmIHUtUzXUpzzS+gmY1731h1tQ==}
-    engines: {node: '>= 14.17.0'}
 
   '@jsii/check-node@1.143.0':
     resolution: {integrity: sha512-4BawLEyDtjSteM7PRamldWBpLv6yJ1hW6JTBSFMN1Z2fcE2UbN19r+UQ6IvpIRlYapiI1ILYUGhIK39YvqE04Q==}
@@ -2070,8 +2066,8 @@ packages:
     engines: {node: '>= 14.17.0'}
     hasBin: true
 
-  jsii-docgen@10.13.0:
-    resolution: {integrity: sha512-s7kqscmTW1GSU02EfaCZ/xP0OqZn8Duchp18K5548YXm4J+BHqGezJPfsZ7HksEEjyb+xqPxU1/6oDnYnfOoEA==}
+  jsii-docgen@10.13.4:
+    resolution: {integrity: sha512-xj8fh9pqlthZg22RA6YEqVcdUhHgYkwThBSDNump3gFs4mvVWlf5Lu+hV5CV08ptGiT7FA1EaicP3UpYT2I59A==}
     hasBin: true
     peerDependencies:
       jsii-rosetta: ^1.85.0 || ~5.0.14 || ~5.1.2 || ~5.2.0 || ~5.3.0 || ~5.4.0 || ~5.5.0 || ~5.6.0 || ~5.7.0 || ~5.8.0 || ~5.9.1 || ~6.0.0
@@ -2093,8 +2089,8 @@ packages:
     engines: {node: '>= 20.16.0'}
     hasBin: true
 
-  jsii@6.0.24:
-    resolution: {integrity: sha512-9V6br5rQDpDNUtIBaNG0mv1gxulkRQMbYbJj0tAHWnnf0Ebr7noYpeD9s63fHzPjwlaYo8QSZLPjFs+H68Mn3w==}
+  jsii@6.0.25:
+    resolution: {integrity: sha512-wkpb5ZIWpw4GhmEqEsDSQfkGBkTcJSF0Uy4zP8oNInww1UfPlSlNCdGQfA1pPtlBW1FHbUyAhyzh41r5R0NYJw==}
     engines: {node: '>= 20.16.0'}
     hasBin: true
 
@@ -3413,11 +3409,6 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
-
-  '@jsii/check-node@1.142.0':
-    dependencies:
-      chalk: 4.1.2
-      semver: 7.8.6
 
   '@jsii/check-node@1.143.0':
     dependencies:
@@ -5293,7 +5284,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii-docgen@10.13.0(jsii-rosetta@6.0.25):
+  jsii-docgen@10.13.4(jsii-rosetta@6.0.25):
     dependencies:
       '@jsii/spec': 1.143.0
       case: 1.6.3
@@ -5338,7 +5329,7 @@ snapshots:
       chalk: 4.1.2
       commonmark: 0.31.2
       fast-glob: 3.3.3
-      jsii: 6.0.24
+      jsii: 6.0.25
       semver: 7.8.6
       semver-intersect: 1.5.0
       stream-json: 3.9.0
@@ -5348,9 +5339,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii@6.0.24:
+  jsii@6.0.25:
     dependencies:
-      '@jsii/check-node': 1.142.0
+      '@jsii/check-node': 1.143.0
       '@jsii/spec': 1.143.0
       case: 1.6.3
       chalk: 4.1.2
