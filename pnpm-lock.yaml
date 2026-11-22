@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       projen:
-        specifier: ^0.105.6
-        version: 0.105.6(constructs@10.8.1)
+        specifier: ^0.105.7
+        version: 0.105.7(constructs@10.8.1)
       semver:
         specifier: ^7.8.6
         version: 7.8.6
@@ -2404,8 +2404,8 @@ packages:
     resolution: {integrity: sha512-byhRAPguVKMQIj4kjJwJ5lAskVhfuiSdiYl/aLTWpgkGEmic2jYhJh1yE9ih8Ox44Xg9ccCT11/S6QrzSJuNrg==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
-  projen@0.105.6:
-    resolution: {integrity: sha512-GChhH8h8xxNNfPKXlKJMhRiPpsJ9AyW4KYvQ21Z9R7VIKkvSU7SjaOz4X/qjq449sgwuXHWZoDAEQf0TgA9HNA==}
+  projen@0.105.7:
+    resolution: {integrity: sha512-+c5gggJq7lbv613359vMJhAJyoLNBkwTfVhrx82O6uUvCTaaj8k3SGzpfDeqXoSzSGayOkPqE088F4TBzHIi/w==}
     engines: {node: '>= 22.13.0'}
     hasBin: true
     peerDependencies:
@@ -5642,7 +5642,7 @@ snapshots:
       '@jest/schemas': 30.5.0
       ansi-styles: 5.2.0
 
-  projen@0.105.6(constructs@10.8.1):
+  projen@0.105.7(constructs@10.8.1):
     dependencies:
       constructs: 10.8.1
 
