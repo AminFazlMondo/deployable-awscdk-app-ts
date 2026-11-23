@@ -68,13 +68,13 @@ importers:
         version: 1.143.0
       jsii-docgen:
         specifier: ^10.5.0
-        version: 10.13.4(jsii-rosetta@6.0.25)
+        version: 10.13.4(jsii-rosetta@6.0.26)
       jsii-pacmak:
         specifier: ^1.143.0
-        version: 1.143.0(jsii-rosetta@6.0.25)
+        version: 1.143.0(jsii-rosetta@6.0.26)
       jsii-rosetta:
         specifier: ~6.0.0
-        version: 6.0.25
+        version: 6.0.26
       ts-jest:
         specifier: ^29.4.15
         version: 29.4.15(@babel/core@7.29.0)(@jest/transform@30.5.2)(@jest/types@30.5.1)(babel-jest@30.5.2(@babel/core@7.29.0))(jest-util@30.5.1)(jest@30.5.2(@types/node@20.19.43)(ts-node@10.9.2(@types/node@20.19.43)(typescript@5.9.3)))(typescript@5.9.3)
@@ -2084,9 +2084,9 @@ packages:
     engines: {node: '>= 14.17.0'}
     hasBin: true
 
-  jsii-rosetta@6.0.25:
-    resolution: {integrity: sha512-RHTnW4yiodm5UMd14tQivs4arSDZ7i9adLqtzMnSn1ApJjOH04UPgLyDJ/7o05H5TDF4TCH1uGUxALfHsBuheA==}
-    engines: {node: '>= 20.16.0'}
+  jsii-rosetta@6.0.26:
+    resolution: {integrity: sha512-m2TEWN85n8MJQln9dF9SojBREb2goOhG3McWK4pzrC5q2iHEiP5PK5Y7B7lTfgAYoUO5MJI6dxvVVImEH171uw==}
+    engines: {node: '>= 22.13.0'}
     hasBin: true
 
   jsii@6.0.25:
@@ -5284,19 +5284,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii-docgen@10.13.4(jsii-rosetta@6.0.25):
+  jsii-docgen@10.13.4(jsii-rosetta@6.0.26):
     dependencies:
       '@jsii/spec': 1.143.0
       case: 1.6.3
       fast-glob: 3.3.3
       fs-extra: 10.1.0
       jsii-reflect: 1.143.0
-      jsii-rosetta: 6.0.25
+      jsii-rosetta: 6.0.26
       json-stream-stringify: 3.1.7
       semver: 7.8.6
       yargs: 16.2.2
 
-  jsii-pacmak@1.143.0(jsii-rosetta@6.0.25):
+  jsii-pacmak@1.143.0(jsii-rosetta@6.0.26):
     dependencies:
       '@jsii/check-node': 1.143.0
       '@jsii/spec': 1.143.0
@@ -5306,7 +5306,7 @@ snapshots:
       escape-string-regexp: 4.0.0
       fs-extra: 10.1.0
       jsii-reflect: 1.143.0
-      jsii-rosetta: 6.0.25
+      jsii-rosetta: 6.0.26
       semver: 7.8.6
       spdx-license-list: 6.12.0
       xmlbuilder: 15.1.1
@@ -5321,7 +5321,7 @@ snapshots:
       oo-ascii-tree: 1.143.0
       yargs: 17.7.3
 
-  jsii-rosetta@6.0.25:
+  jsii-rosetta@6.0.26:
     dependencies:
       '@jsii/check-node': 1.143.0
       '@jsii/spec': 1.143.0
